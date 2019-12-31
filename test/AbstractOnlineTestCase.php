@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap;
+use Laminas\Ldap;
 
 /**
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 abstract class AbstractOnlineTestCase extends AbstractTestCase
 {
@@ -36,36 +35,36 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
 
     protected function setUp()
     {
-        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
-            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
+        if (!constant('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
         }
 
         $options = array(
-            'host'     => TESTS_ZEND_LDAP_HOST,
-            'username' => TESTS_ZEND_LDAP_USERNAME,
-            'password' => TESTS_ZEND_LDAP_PASSWORD,
-            'baseDn'   => TESTS_ZEND_LDAP_WRITEABLE_SUBTREE,
+            'host'     => TESTS_LAMINAS_LDAP_HOST,
+            'username' => TESTS_LAMINAS_LDAP_USERNAME,
+            'password' => TESTS_LAMINAS_LDAP_PASSWORD,
+            'baseDn'   => TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE,
         );
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
-            $options['port'] = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_LAMINAS_LDAP_PORT') && TESTS_LAMINAS_LDAP_PORT != 389) {
+            $options['port'] = TESTS_LAMINAS_LDAP_PORT;
         }
-        if (defined('TESTS_ZEND_LDAP_USE_START_TLS')) {
-            $options['useStartTls'] = TESTS_ZEND_LDAP_USE_START_TLS;
+        if (defined('TESTS_LAMINAS_LDAP_USE_START_TLS')) {
+            $options['useStartTls'] = TESTS_LAMINAS_LDAP_USE_START_TLS;
         }
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $options['useSsl'] = TESTS_LAMINAS_LDAP_USE_SSL;
         }
-        if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN')) {
-            $options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
+        if (defined('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')) {
+            $options['bindRequiresDn'] = TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN;
         }
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT')) {
-            $options['accountFilterFormat'] = TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT;
+        if (defined('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')) {
+            $options['accountFilterFormat'] = TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT;
         }
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
-            $options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
+        if (defined('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')) {
+            $options['accountDomainName'] = TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME;
         }
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
-            $options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
+        if (defined('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
+            $options['accountDomainNameShort'] = TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
         }
 
         $this->ldap = new Ldap\Ldap($options);
@@ -85,7 +84,7 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
         if (substr($dn, -1) !== ',') {
             $dn .= ',';
         }
-        $dn = $dn . TESTS_ZEND_LDAP_WRITEABLE_SUBTREE;
+        $dn = $dn . TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE;
 
         return Ldap\Dn::fromString($dn)->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
     }
@@ -133,7 +132,7 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
 
     protected function cleanupLDAPServer()
     {
-        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+        if (!constant('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             return;
         }
         $ldap = $this->ldap->getResource();
