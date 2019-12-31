@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Converter;
+namespace LaminasTest\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
-use Zend\Ldap\Converter\Converter;
+use Laminas\Ldap\Converter\Converter;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 class ConverterTest extends \PHPUnit_Framework_TestCase
 {
@@ -247,7 +245,7 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
             array(true, 'TRUE', 0, true),
             array(false, 'FALSE', 0, true),
             array('123456789', '123456789', 0, true),
-            // ZF-11639
+            // Laminas-11639
             array('+123456789', '+123456789', 0, true),
         );
     }
