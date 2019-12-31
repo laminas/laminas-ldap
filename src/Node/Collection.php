@@ -1,22 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node;
+namespace Laminas\Ldap\Node;
 
-use Zend\Ldap;
+use Laminas\Ldap;
 
 /**
- * Zend\Ldap\Node\Collection provides a collection of nodes.
+ * Laminas\Ldap\Node\Collection provides a collection of nodes.
  *
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage Node
  */
 class Collection extends Ldap\Collection
@@ -25,7 +23,7 @@ class Collection extends Ldap\Collection
      * Creates the data structure for the given entry data
      *
      * @param  array $data
-     * @return \Zend\Ldap\Node
+     * @return \Laminas\Ldap\Node
      */
     protected function createEntry(array $data)
     {
