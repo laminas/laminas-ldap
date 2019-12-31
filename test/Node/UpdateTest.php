@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Node;
+namespace LaminasTest\Ldap\Node;
 
-use Zend\Ldap;
-use ZendTest\Ldap as TestLdap;
+use Laminas\Ldap;
+use LaminasTest\Ldap as TestLdap;
 
 /**
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Node
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Node
  */
 class UpdateTest extends TestLdap\AbstractOnlineTestCase
 {
@@ -26,7 +25,7 @@ class UpdateTest extends TestLdap\AbstractOnlineTestCase
 
     protected function tearDown()
     {
-        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
+        if (!constant('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             return;
         }
 

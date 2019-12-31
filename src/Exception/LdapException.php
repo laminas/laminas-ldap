@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Exception;
+namespace Laminas\Ldap\Exception;
 
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 class LdapException extends \Exception implements ExceptionInterface
 {
@@ -96,7 +95,7 @@ class LdapException extends \Exception implements ExceptionInterface
     const LDAP_X_EXTENSION_NOT_LOADED = 0x7002;
 
     /**
-     * @param Ldap   $ldap Zend\Ldap\Ldap object
+     * @param Ldap   $ldap Laminas\Ldap\Ldap object
      * @param string $str  Informative exception message
      * @param int    $code LDAP error code
      */
