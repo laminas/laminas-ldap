@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap;
+namespace Laminas\Ldap;
 
-use Zend\EventManager\EventManager;
+use Laminas\EventManager\EventManager;
 
 /**
- * Zend\Ldap\Node provides an object oriented view into a LDAP node.
+ * Laminas\Ldap\Node provides an object oriented view into a LDAP node.
  */
 class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
 {
@@ -196,7 +195,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     protected function triggerEvent($event, $argv = array())
     {
         if (null === $this->events) {
-            if (class_exists('\Zend\EventManager\EventManager')) {
+            if (class_exists('\Laminas\EventManager\EventManager')) {
                 $this->events = new EventManager(__CLASS__);
             } else {
                 return;
@@ -224,7 +223,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Factory method to create a new detached Zend\Ldap\Node for a given DN.
+     * Factory method to create a new detached Laminas\Ldap\Node for a given DN.
      *
      * @param  string|array|Dn $dn
      * @param  array           $objectClass
@@ -248,7 +247,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Factory method to create an attached Zend\Ldap\Node for a given DN.
+     * Factory method to create an attached Laminas\Ldap\Node for a given DN.
      *
      * @param  string|array|Dn $dn
      * @param  Ldap            $ldap
@@ -274,7 +273,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Factory method to create a detached Zend\Ldap\Node from array data.
+     * Factory method to create a detached Laminas\Ldap\Node from array data.
      *
      * @param  array   $data
      * @param  bool $fromDataSource
@@ -464,7 +463,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Gets the DN of the current node as a Zend\Ldap\Dn.
+     * Gets the DN of the current node as a Laminas\Ldap\Dn.
      *
      * This is an offline method.
      *
@@ -476,7 +475,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     }
 
     /**
-     * Gets the current DN of the current node as a Zend\Ldap\Dn.
+     * Gets the current DN of the current node as a Laminas\Ldap\Dn.
      * The method returns a clone of the node's DN to prohibit modification.
      *
      * This is an offline method.
@@ -588,7 +587,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
      * Gets changed node data.
      *
      * The array contains all changed attributes.
-     * This format can be used in {@link Zend\Ldap\Ldap::add()} and {@link Zend\Ldap\Ldap::update()}.
+     * This format can be used in {@link Laminas\Ldap\Ldap::add()} and {@link Laminas\Ldap\Ldap::update()}.
      *
      * This is an offline method.
      *
@@ -929,7 +928,7 @@ class Node extends Node\AbstractNode implements \Iterator, \RecursiveIterator
     {
         return $this->getLdap()->search(
             $filter, $this->_getDn(), $scope, array('*', '+'), $sort,
-            'Zend\Ldap\Node\Collection'
+            'Laminas\Ldap\Node\Collection'
         );
     }
 
