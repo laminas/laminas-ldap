@@ -1,37 +1,37 @@
 # Introduction
 
-zend-ldap lets you perform LDAP operations, including, but not limited to,
+laminas-ldap lets you perform LDAP operations, including, but not limited to,
 binding, searching and modifying entries in an LDAP directory.
 
 ## Theory of operation
 
-This component currently consists of the main `Zend\Ldap\Ldap` class, which
+This component currently consists of the main `Laminas\Ldap\Ldap` class, which
 conceptually represents a binding to a single LDAP server and allows for
 executing operations against a LDAP server such as OpenLDAP or ActiveDirectory
 (AD) servers. The parameters for binding may be provided explicitly or in the
-form of an options array. `Zend\Ldap\Node` provides an object-oriented interface
+form of an options array. `Laminas\Ldap\Node` provides an object-oriented interface
 for single LDAP nodes and can be used to form a basis for an active-record-like
 interface for a LDAP-based domain model.
 
 The component provides several helper classes to perform operations on LDAP
-entries (`Zend\Ldap\Attribute`) such as setting and retrieving attributes (date
+entries (`Laminas\Ldap\Attribute`) such as setting and retrieving attributes (date
 values, passwords, boolean values, ...), to create and modify LDAP filter
-strings (`Zend\Ldap\Filter`) and to manipulate LDAP distinguished names (DN)
-(`Zend\Ldap\Dn`).
+strings (`Laminas\Ldap\Filter`) and to manipulate LDAP distinguished names (DN)
+(`Laminas\Ldap\Dn`).
 
 Additionally the component abstracts LDAP schema browsing for OpenLDAP and
-ActiveDirectory servers `Zend\Ldap\Node\Schema` and server information retrieval
+ActiveDirectory servers `Laminas\Ldap\Node\Schema` and server information retrieval
 for OpenLDAP-, ActiveDirectory- and Novell eDirectory servers
-(`Zend\Ldap\Node\RootDse`).
+(`Laminas\Ldap\Node\RootDse`).
 
-Usage of zend-ldap depends on the type of LDAP server, and is best summarized with
+Usage of laminas-ldap depends on the type of LDAP server, and is best summarized with
 some examples.
 
 If you are using OpenLDAP, consider the following example (note that the
 `bindRequiresDn` option is important if you are **not** using AD):
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [
     'host'              => 's0.foo.net',
@@ -50,7 +50,7 @@ echo "$acctname\n";
 If you are using Microsoft AD:
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [
     'host'                   => 'dc1.w.net',
@@ -76,17 +76,17 @@ currently present in this class.
 If `bind()` is called with a non-DN username but `bindRequiresDN` is `true`
 and no username in DN form was supplied as an option, the bind will fail.
 However, if a username in DN form is supplied in the options array,
-`Zend\Ldap\Ldap` will first bind with that username, retrieve the account DN for
+`Laminas\Ldap\Ldap` will first bind with that username, retrieve the account DN for
 the username supplied to `bind()` and then re-bind with that DN.
 
-This behavior is critical to [Zend\\Authentication\\Adapter\\Ldap](http://zendframework.github.io/zend-authentication/adapter/ldap/),
+This behavior is critical to [Laminas\\Authentication\\Adapter\\Ldap](http://docs.laminas.dev/laminas-authentication/adapter/ldap/),
 which passes the username supplied by the user directly to `bind()`.
 
 The following example illustrates how the non-DN username 'abaker' can be used
 with `bind()`:
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [
     'host'              => 's0.foo.net',
@@ -129,8 +129,8 @@ would be `EXAMPLE\\abaker`.
 
 ### Multi-domain Authentication and Failover
 
-The `Zend\Ldap\Ldap` component by itself makes no attempt to authenticate with
-multiple servers.  However, `Zend\Ldap\Ldap` is specifically designed to handle
+The `Laminas\Ldap\Ldap` component by itself makes no attempt to authenticate with
+multiple servers.  However, `Laminas\Ldap\Ldap` is specifically designed to handle
 this scenario gracefully. The required technique is to simply iterate over an
 array of arrays of serve options and attempt to bind with each server. As
 described above `bind()` will automatically canonicalize each name, so it does
@@ -142,8 +142,8 @@ Consider the following example that illustrates the technique required to
 implement multi-domain authentication and failover:
 
 ```php
-use Zend\Ldap\Exception\LdapException;
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Exception\LdapException;
+use Laminas\Ldap\Ldap;
 
 $acctname = 'W\\user2';
 $password = 'pass2';
@@ -210,6 +210,6 @@ handling and debugging purposes, you will probably want to check for
 `LDAP_INVALID_CREDENTIALS`.
 
 The above code is very similar to code used within
-[Zend\\Authentication\\Adapter\\Ldap](http://zendframework.github.io/zend-authentication/adapter/ldap/).
+[Laminas\\Authentication\\Adapter\\Ldap](http://docs.laminas.dev/laminas-authentication/adapter/ldap/).
 In fact,we recommend that you use that authentication adapter for multi-domain +
 failover LDAP based authentication (or copy the code).

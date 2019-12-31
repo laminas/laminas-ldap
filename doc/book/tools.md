@@ -7,7 +7,7 @@
 ### Create simple LDAP filters
 
 ```php
-use Zend\Ldap\Filter;
+use Laminas\Ldap\Filter;
 
 $f1  = Filter::equals('name', 'value');         // (name=value)
 $f2  = Filter::begins('name', 'value');         // (name=value*)
@@ -24,7 +24,7 @@ $f10 = Filter::any('name');                     // (name=*)
 ### Create more complex LDAP filters
 
 ```php
-use Zend\Ldap\Filter;
+use Laminas\Ldap\Filter;
 
 $f1 = Filter::ends('name', 'value')->negate(); // (!(name=*value))
 

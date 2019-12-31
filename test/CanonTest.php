@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -19,7 +18,7 @@ use Zend\Ldap\Exception;
  */
 
 /**
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 class CanonTest extends \PHPUnit_Framework_TestCase
 {
@@ -30,36 +29,36 @@ class CanonTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (! getenv('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
-            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
+        if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
         }
 
         $this->options = [
-            'host'     => getenv('TESTS_ZEND_LDAP_HOST'),
-            'username' => getenv('TESTS_ZEND_LDAP_USERNAME'),
-            'password' => getenv('TESTS_ZEND_LDAP_PASSWORD'),
-            'baseDn'   => getenv('TESTS_ZEND_LDAP_BASE_DN'),
+            'host'     => getenv('TESTS_LAMINAS_LDAP_HOST'),
+            'username' => getenv('TESTS_LAMINAS_LDAP_USERNAME'),
+            'password' => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
+            'baseDn'   => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
         ];
-        if (getenv('TESTS_ZEND_LDAP_PORT')) {
-            $this->options['port'] = getenv('TESTS_ZEND_LDAP_PORT');
+        if (getenv('TESTS_LAMINAS_LDAP_PORT')) {
+            $this->options['port'] = getenv('TESTS_LAMINAS_LDAP_PORT');
         }
-        if (getenv('TESTS_ZEND_LDAP_USE_START_TLS')) {
-            $this->options['useStartTls'] = getenv('TESTS_ZEND_LDAP_USE_START_TLS');
+        if (getenv('TESTS_LAMINAS_LDAP_USE_START_TLS')) {
+            $this->options['useStartTls'] = getenv('TESTS_LAMINAS_LDAP_USE_START_TLS');
         }
-        if (getenv('TESTS_ZEND_LDAP_USE_SSL')) {
-            $this->options['useSsl'] = getenv('TESTS_ZEND_LDAP_USE_SSL');
+        if (getenv('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $this->options['useSsl'] = getenv('TESTS_LAMINAS_LDAP_USE_SSL');
         }
-        if (getenv('TESTS_ZEND_LDAP_BIND_REQUIRES_DN')) {
-            $this->options['bindRequiresDn'] = getenv('TESTS_ZEND_LDAP_BIND_REQUIRES_DN');
+        if (getenv('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')) {
+            $this->options['bindRequiresDn'] = getenv('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN');
         }
-        if (getenv('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT')) {
-            $this->options['accountFilterFormat'] = getenv('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT');
+        if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')) {
+            $this->options['accountFilterFormat'] = getenv('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT');
         }
-        if (getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
-            $this->options['accountDomainName'] = getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME');
+        if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')) {
+            $this->options['accountDomainName'] = getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME');
         }
-        if (getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
-            $this->options['accountDomainNameShort'] = getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT');
+        if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
+            $this->options['accountDomainNameShort'] = getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT');
         }
     }
 
@@ -70,16 +69,16 @@ class CanonTest extends \PHPUnit_Framework_TestCase
          * EXAMPLE\uname) to each of the 3 forms (username, principal and backslash)
          * for a total of canonicalizations.
          */
-        if (getenv('TESTS_ZEND_LDAP_ALT_USERNAME')) {
-            $names[Ldap\Ldap::ACCTNAME_FORM_USERNAME] = getenv('TESTS_ZEND_LDAP_ALT_USERNAME');
-            if (getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
+        if (getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')) {
+            $names[Ldap\Ldap::ACCTNAME_FORM_USERNAME] = getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME');
+            if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')) {
                 $names[Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL]
-                    = getenv('TESTS_ZEND_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME');
+                    = getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME');
             }
-            if (getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
+            if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
                 $names[Ldap\Ldap::ACCTNAME_FORM_BACKSLASH]
-                    = getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\'
-                    . getenv('TESTS_ZEND_LDAP_ALT_USERNAME');
+                    = getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\'
+                    . getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME');
             }
         }
 
@@ -106,8 +105,8 @@ class CanonTest extends \PHPUnit_Framework_TestCase
     public function testDnCanon()
     {
         $ldap = new Ldap\Ldap($this->options);
-        $name = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'), Ldap\Ldap::ACCTNAME_FORM_DN);
-        $this->assertEquals(getenv('TESTS_ZEND_LDAP_ALT_DN'), $name);
+        $name = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'), Ldap\Ldap::ACCTNAME_FORM_DN);
+        $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_ALT_DN'), $name);
     }
 
     public function testMismatchDomainBind()
@@ -127,50 +126,50 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         $ldap    = new Ldap\Ldap($options);
 
         $canonDn = $ldap->getCanonicalAccountName(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             Ldap\Ldap::ACCTNAME_FORM_DN
         );
-        $this->assertEquals(getenv('TESTS_ZEND_LDAP_ALT_DN'), $canonDn);
+        $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_ALT_DN'), $canonDn);
         $canonUsername = $ldap->getCanonicalAccountName(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             Ldap\Ldap::ACCTNAME_FORM_USERNAME
         );
-        $this->assertEquals(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'), $canonUsername);
+        $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'), $canonUsername);
         $canonBackslash = $ldap->getCanonicalAccountName(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             Ldap\Ldap::ACCTNAME_FORM_BACKSLASH
         );
         $this->assertEquals(
-            getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\' . getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\' . getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             $canonBackslash
         );
         $canonPrincipal = $ldap->getCanonicalAccountName(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL
         );
         $this->assertEquals(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
             $canonPrincipal
         );
 
         $options['accountCanonicalForm'] = Ldap\Ldap::ACCTNAME_FORM_USERNAME;
         $ldap->setOptions($options);
-        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'));
-        $this->assertEquals(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'), $canon);
+        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'));
+        $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'), $canon);
 
         $options['accountCanonicalForm'] = Ldap\Ldap::ACCTNAME_FORM_BACKSLASH;
         $ldap->setOptions($options);
-        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'));
+        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'));
         $this->assertEquals(
-            getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\' . getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\' . getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             $canon
         );
 
         $options['accountCanonicalForm'] = Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL;
         $ldap->setOptions($options);
-        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'));
+        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'));
         $this->assertEquals(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
             $canon
         );
 
@@ -178,22 +177,22 @@ class CanonTest extends \PHPUnit_Framework_TestCase
 
         unset($options['accountDomainName']);
         $ldap->setOptions($options);
-        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'));
+        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'));
         $this->assertEquals(
-            getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\' . getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+            getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\' . getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
             $canon
         );
 
         unset($options['accountDomainNameShort']);
         $ldap->setOptions($options);
-        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'));
-        $this->assertEquals(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'), $canon);
+        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'));
+        $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'), $canon);
 
-        $options['accountDomainName'] = getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME');
+        $options['accountDomainName'] = getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME');
         $ldap->setOptions($options);
-        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'));
+        $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'));
         $this->assertEquals(
-            getenv('TESTS_ZEND_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+            getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
             $canon
         );
     }
@@ -254,43 +253,43 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         unset($options['accountDomainName']);
         $ldap  = new Ldap\Ldap($options);
         $canon = $ldap->getCanonicalAccountName(
-            getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
+            getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
             Ldap\Ldap::ACCTNAME_FORM_USERNAME
         );
         $this->assertEquals('invalid', $canon);
         try {
             $canon = $ldap->getCanonicalAccountName(
-                'invalid@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+                'invalid@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 Ldap\Ldap::ACCTNAME_FORM_USERNAME
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertContains(
                 'Binding domain is not an authority for user: invalid@' .
-                    getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 $zle->getMessage()
             );
         }
 
         unset($options['accountDomainNameShort']);
-        $options['accountDomainName'] = getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME');
+        $options['accountDomainName'] = getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME');
         $ldap                         = new Ldap\Ldap($options);
         try {
             $canon = $ldap->getCanonicalAccountName(
-                getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
+                getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
                 Ldap\Ldap::ACCTNAME_FORM_USERNAME
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertContains(
                 'Binding domain is not an authority for user: ' .
-                    getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
+                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
                 $zle->getMessage()
             );
         }
 
         $canon = $ldap->getCanonicalAccountName(
-            'invalid@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+            'invalid@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
             Ldap\Ldap::ACCTNAME_FORM_USERNAME
         );
         $this->assertEquals('invalid', $canon);
@@ -298,12 +297,12 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         unset($options['accountDomainName']);
         $ldap  = new Ldap\Ldap($options);
         $canon = $ldap->getCanonicalAccountName(
-            getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
+            getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
             Ldap\Ldap::ACCTNAME_FORM_USERNAME
         );
         $this->assertEquals('invalid', $canon);
         $canon = $ldap->getCanonicalAccountName(
-            'invalid@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+            'invalid@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
             Ldap\Ldap::ACCTNAME_FORM_USERNAME
         );
         $this->assertEquals('invalid', $canon);
@@ -316,28 +315,28 @@ class CanonTest extends \PHPUnit_Framework_TestCase
 
         try {
             $canon = $ldap->getCanonicalAccountName(
-                '0@' . getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+                '0@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 Ldap\Ldap::ACCTNAME_FORM_USERNAME
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertContains(
                 'Invalid account name syntax: 0@' .
-                    getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME'),
+                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 $zle->getMessage()
             );
         }
 
         try {
             $canon = $ldap->getCanonicalAccountName(
-                getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
+                getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
                 Ldap\Ldap::ACCTNAME_FORM_USERNAME
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertContains(
                 'Invalid account name syntax: ' .
-                    getenv('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
+                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
                 $zle->getMessage()
             );
         }
@@ -349,7 +348,7 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         $ldap    = new Ldap\Ldap($options);
 
         try {
-            $canon = $ldap->getCanonicalAccountName(getenv('TESTS_ZEND_LDAP_ALT_USERNAME'), 99);
+            $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'), 99);
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertContains(
@@ -366,7 +365,7 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         $ldap = new Ldap\Ldap($options);
         try {
             $canon = $ldap->getCanonicalAccountName(
-                getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+                getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
                 Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL
             );
             $this->fail('Expected exception not thrown');
@@ -381,7 +380,7 @@ class CanonTest extends \PHPUnit_Framework_TestCase
         $ldap = new Ldap\Ldap($options);
         try {
             $canon = $ldap->getCanonicalAccountName(
-                getenv('TESTS_ZEND_LDAP_ALT_USERNAME'),
+                getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'),
                 Ldap\Ldap::ACCTNAME_FORM_BACKSLASH
             );
             $this->fail('Expected exception not thrown');
@@ -430,7 +429,7 @@ class CanonTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * ZF-4495
+     * Laminas-4495
      */
     public function testSpecialCharacterInUsername()
     {
