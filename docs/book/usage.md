@@ -17,7 +17,7 @@
 #### Getting an entry by its DN
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -39,7 +39,7 @@ $hm is an array of the following structure:
 #### Check for the existence of a given DN
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -50,7 +50,7 @@ $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
 #### Count children of a given DN
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -61,7 +61,7 @@ $childrenCount = $ldap->countChildren('cn=Hugo Müller,ou=People,dc=my,dc=local'
 #### Searching the LDAP tree
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -82,8 +82,8 @@ foreach ($result as $item) {
 #### Add a new entry to the LDAP
 
 ```php
-use Zend\Ldap\Attribute;
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Attribute;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -102,7 +102,7 @@ $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
 #### Delete an existing entry from the LDAP
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -115,8 +115,8 @@ $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
 #### Update an existing entry on the LDAP
 
 ```php
-use Zend\Ldap\Attribute;
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Attribute;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -136,7 +136,7 @@ $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
 #### Copy a LDAP entry recursively with all its descendants
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -151,7 +151,7 @@ $ldap->copy(
 #### Move a LDAP entry recursively with all its descendants to a different subtree
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);

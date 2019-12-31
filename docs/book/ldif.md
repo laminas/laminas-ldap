@@ -3,7 +3,7 @@
 ## Serialize a LDAP entry to LDIF
 
 ```php
-use Zend\Ldap\Ldif\Encoder;
+use Laminas\Ldap\Ldif\Encoder;
 
 $data = [
     'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',
@@ -68,7 +68,7 @@ title;lang-en: Sales, Director
 ## Deserialize a LDIF string into a LDAP entry
 
 ```php
-use Zend\Ldap\Ldif\Encoder;
+use Laminas\Ldap\Ldif\Encoder;
 
 $ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
 objectclass: top

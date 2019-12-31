@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Dn;
+namespace LaminasTest\Ldap\Dn;
 
+use Laminas\Ldap;
 use PHPUnit\Framework\TestCase;
-use Zend\Ldap;
 
 /**
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Dn
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Dn
  */
 class ExplodingTest extends TestCase
 {
@@ -194,7 +193,7 @@ class ExplodingTest extends TestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testCreateDnArrayIllegalDn()
     {
