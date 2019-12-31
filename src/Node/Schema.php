@@ -1,22 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node;
+namespace Laminas\Ldap\Node;
 
-use Zend\Ldap;
+use Laminas\Ldap;
 
 /**
- * Zend\Ldap\Node\Schema provides a simple data-container for the Schema node.
+ * Laminas\Ldap\Node\Schema provides a simple data-container for the Schema node.
  *
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage Schema
  */
 class Schema extends AbstractNode
@@ -29,7 +27,7 @@ class Schema extends AbstractNode
     /**
      * Factory method to create the Schema node.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  \Laminas\Ldap\Ldap $ldap
      * @return Schema
      */
     public static function create(Ldap\Ldap $ldap)
@@ -52,9 +50,9 @@ class Schema extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn   $dn
+     * @param  \Laminas\Ldap\Dn   $dn
      * @param  array           $data
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  \Laminas\Ldap\Ldap $ldap
      */
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
@@ -65,8 +63,8 @@ class Schema extends AbstractNode
     /**
      * Parses the schema
      *
-     * @param  \Zend\Ldap\Dn   $dn
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  \Laminas\Ldap\Dn   $dn
+     * @param  \Laminas\Ldap\Ldap $ldap
      * @return Schema Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)

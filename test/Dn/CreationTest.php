@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Dn;
+namespace LaminasTest\Ldap\Dn;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Dn
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Dn
  */
 class CreationTest extends \PHPUnit_Framework_TestCase
 {
@@ -101,7 +99,7 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             Ldap\Dn::factory(1);
-            $this->fail('Expected Zend\Ldap\Exception not thrown');
+            $this->fail('Expected Laminas\Ldap\Exception not thrown');
         } catch (Exception\LdapException $e) {
             $this->assertEquals('Invalid argument type for $dn', $e->getMessage());
         }
@@ -179,13 +177,13 @@ class CreationTest extends \PHPUnit_Framework_TestCase
 
         try {
             $dn->getParentDn(0)->toString();
-            $this->fail('Expected Zend\Ldap\Exception not thrown');
+            $this->fail('Expected Laminas\Ldap\Exception not thrown');
         } catch (Exception\LdapException $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }
         try {
             $dn->getParentDn(4)->toString();
-            $this->fail('Expected Zend\Ldap\Exception not thrown');
+            $this->fail('Expected Laminas\Ldap\Exception not thrown');
         } catch (Exception\LdapException $e) {
             $this->assertEquals('Cannot retrieve parent DN with given $levelUp', $e->getMessage());
         }

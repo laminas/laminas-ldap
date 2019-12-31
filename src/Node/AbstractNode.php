@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node;
+namespace Laminas\Ldap\Node;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 
 /**
  * This class provides a base implementation for LDAP nodes
  *
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage Node
  */
 abstract class AbstractNode implements \ArrayAccess, \Countable
@@ -32,7 +30,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     /**
      * Holds the node's DN.
      *
-     * @var \Zend\Ldap\Dn
+     * @var \Laminas\Ldap\Dn
      */
     protected $dn;
 
@@ -48,7 +46,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Zend\Ldap\Dn $dn
+     * @param  \Laminas\Ldap\Dn $dn
      * @param  array         $data
      * @param  boolean       $fromDataSource
      */
@@ -76,7 +74,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * This is an online method.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  \Laminas\Ldap\Ldap $ldap
      * @return AbstractNode Provides a fluid interface
      */
     public function reload(Ldap\Ldap $ldap = null)
@@ -90,11 +88,11 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     }
 
     /**
-     * Gets the DN of the current node as a Zend\Ldap\Dn.
+     * Gets the DN of the current node as a Laminas\Ldap\Dn.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return \Laminas\Ldap\Dn
      */
     protected function _getDn()
     {
@@ -102,12 +100,12 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
     }
 
     /**
-     * Gets the DN of the current node as a Zend\Ldap\Dn.
+     * Gets the DN of the current node as a Laminas\Ldap\Dn.
      * The method returns a clone of the node's DN to prohibit modification.
      *
      * This is an offline method.
      *
-     * @return \Zend\Ldap\Dn
+     * @return \Laminas\Ldap\Dn
      */
     public function getDn()
     {
@@ -311,7 +309,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return mixed
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function getAttribute($name, $index = null)
     {
@@ -330,7 +328,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * @param  string  $name
      * @param  integer $index
      * @return array|integer
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function getDateTimeAttribute($name, $index = null)
     {
@@ -344,7 +342,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @param  mixed  $value
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */
     public function __set($name, $value)
     {
@@ -358,7 +356,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return mixed
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function __get($name)
     {
@@ -373,7 +371,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * This is an offline method.
      *
      * @param  $name
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */
     public function __unset($name)
     {
@@ -401,9 +399,9 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @param         $value
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      * @param  mixed  $value
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
@@ -418,7 +416,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      *
      * @param  string $name
      * @return mixed
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function offsetGet($name)
     {
@@ -434,7 +432,7 @@ abstract class AbstractNode implements \ArrayAccess, \Countable
      * This is an offline method.
      *
      * @param  $name
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {
