@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node\RootDse;
+namespace Laminas\Ldap\Node\RootDse;
 
-use Zend\Ldap;
-use Zend\Ldap\Node;
+use Laminas\Ldap;
+use Laminas\Ldap\Node;
 
 /**
- * Zend\Ldap\Node\RootDse\ActiveDirectory provides a simple data-container for
+ * Laminas\Ldap\Node\RootDse\ActiveDirectory provides a simple data-container for
  * the RootDse node of an Active Directory server.
  */
 class ActiveDirectory extends Node\RootDse
@@ -214,7 +213,7 @@ class ActiveDirectory extends Node\RootDse
     /**
      * Returns the schema DN
      *
-     * @return \Zend\Ldap\Dn
+     * @return \Laminas\Ldap\Dn
      */
     public function getSchemaDn()
     {
