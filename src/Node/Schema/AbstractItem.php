@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node\Schema;
+namespace Laminas\Ldap\Node\Schema;
 
-use Zend\Ldap\Exception;
+use Laminas\Ldap\Exception;
 
 /**
  * This class provides a base implementation for managing schema
  * items like objectClass and attributeType.
  *
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage Schema
  */
 abstract class AbstractItem implements \ArrayAccess, \Countable
@@ -88,14 +86,14 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws Zend\Ldap\Exception\BadMethodCallException
+     * Always throws Laminas\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
      * @param  mixed  $value
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
@@ -114,13 +112,13 @@ abstract class AbstractItem implements \ArrayAccess, \Countable
     }
 
     /**
-     * Always throws Zend\Ldap\Exception\BadMethodCallException
+     * Always throws Laminas\Ldap\Exception\BadMethodCallException
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
-     * @throws \Zend\Ldap\Exception\BadMethodCallException
+     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */
     public function offsetUnset($name)
     {

@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Node;
+namespace LaminasTest\Ldap\Node;
 
-use Zend\Ldap;
-use ZendTest\Ldap as TestLdap;
+use Laminas\Ldap;
+use LaminasTest\Ldap as TestLdap;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Node
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Node
  */
 class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 {
@@ -64,7 +62,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
             $dn  = $n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $rdn = Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
             if ($i == 0) {
-                $this->assertEquals(Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
+                $this->assertEquals(Ldap\Dn::fromString(TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE)
                         ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER), $dn
                 );
             } elseif ($i == 1) {
@@ -76,7 +74,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
                     $base = $this->createDn('ou=Node,');
                 } else {
                     $j    = $i - 3;
-                    $base = Ldap\Dn::fromString(TESTS_ZEND_LDAP_WRITEABLE_SUBTREE)
+                    $base = Ldap\Dn::fromString(TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE)
                         ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
                 }
                 $this->assertEquals('ou=Test' . $j, $rdn);
@@ -89,7 +87,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 
     /**
      * Test issue reported by Lance Hendrix on
-     * http://framework.zend.com/wiki/display/ZFPROP/Zend_Ldap+-+Extended+support+-+Stefan+Gehrig?
+     * https://getlaminas.org/wiki/display/LaminasPROP/Laminas_Ldap+-+Extended+support+-+Stefan+Gehrig?
      *      focusedCommentId=13107431#comment-13107431
      */
     public function testCallingNextAfterIterationShouldNotThrowException()
