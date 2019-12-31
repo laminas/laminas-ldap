@@ -1,10 +1,10 @@
 <?php
 
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
+use LaminasTest\Ldap\TestAsset\BuiltinFunctionMocks;
 use phpmock\Mock;
-use ZendTest\Ldap\TestAsset\BuiltinFunctionMocks;
 
 class OfflineReconnectTest extends OfflineTest
 {
@@ -28,7 +28,7 @@ class OfflineReconnectTest extends OfflineTest
 
     protected function reportErrorsAsConnectionFailure()
     {
-        $ldap_errno = $this->getFunctionMock('Zend\\Ldap', 'ldap_errno');
+        $ldap_errno = $this->getFunctionMock('Laminas\\Ldap', 'ldap_errno');
         $ldap_errno->expects($this->atLeastOnce())
             ->willReturn(-1);
     }
@@ -38,11 +38,11 @@ class OfflineReconnectTest extends OfflineTest
         $this->activateBindableOfflineMocks();
         $this->reportErrorsAsConnectionFailure();
 
-        $ldap_mod_add = $this->getFunctionMock('Zend\\Ldap', 'ldap_mod_add');
+        $ldap_mod_add = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_add');
         $ldap_mod_add->expects($this->exactly(2))
             ->willReturnOnConsecutiveCalls(false, true);
 
-        $ldap = new \Zend\Ldap\Ldap([
+        $ldap = new \Laminas\Ldap\Ldap([
             'host' => 'offline phony',
             'reconnectAttempts' => 1
         ]);
@@ -56,11 +56,11 @@ class OfflineReconnectTest extends OfflineTest
         $this->activateBindableOfflineMocks();
         $this->reportErrorsAsConnectionFailure();
 
-        $ldap_mod_del = $this->getFunctionMock('Zend\\Ldap', 'ldap_mod_del');
+        $ldap_mod_del = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_del');
         $ldap_mod_del->expects($this->exactly(2))
             ->willReturnOnConsecutiveCalls(false, true);
 
-        $ldap = new \Zend\Ldap\Ldap([
+        $ldap = new \Laminas\Ldap\Ldap([
             'host' => 'offline phony',
             'reconnectAttempts' => 1
         ]);

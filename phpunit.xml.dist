@@ -4,7 +4,7 @@
          bootstrap="test/bootstrap.php"
          colors="true">
     <testsuites>
-        <testsuite name="zend-ldap Test Suite">
+        <testsuite name="laminas-ldap Test Suite">
             <directory>./test</directory>
         </testsuite>
     </testsuites>
@@ -16,10 +16,10 @@
     </filter>
 
     <php>
-        <!-- Zend\Ldap online tests
+        <!-- Laminas\Ldap online tests
 
-             These largely map to the options described in the Zend\Ldap and
-             Zend\Auth\Adapter\Ldap documentation.
+             These largely map to the options described in the Laminas\Ldap and
+             Laminas\Auth\Adapter\Ldap documentation.
 
              Example Configuration for Active Directory:
                                   HOST: dc1.w.net
@@ -48,27 +48,27 @@
                                 ALT_DN: CN=Alice Baker,OU=Sales,DC=foo,DC=net
                           ALT_PASSWORD: apass
         -->
-        <env name="TESTS_ZEND_LDAP_ONLINE_ENABLED" value="false" />
-        <env name="TESTS_ZEND_LDAP_HOST" value="localhost" />
-        <env name="TESTS_ZEND_LDAP_PORT" value="3890" />
-        <env name="TESTS_ZEND_LDAP_SCRIPTS_PORT" value="3891" />
-        <env name="TESTS_ZEND_LDAP_USE_START_TLS" value="false" />
-        <env name="TESTS_ZEND_LDAP_USE_SSL" value="false" />
-        <env name="TESTS_ZEND_LDAP_USERNAME" value="cn=Manager,dc=example,dc=com" />
-        <env name="TESTS_ZEND_LDAP_PASSWORD" value="insecure" />
-        <env name="TESTS_ZEND_LDAP_BIND_REQUIRES_DN" value="true" />
-        <env name="TESTS_ZEND_LDAP_BASE_DN" value="dc=example,dc=com" />
-        <env name="TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT" value="(&amp;(objectClass=account)(uid=%s))" />
-        <env name="TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME" value="example.com" />
-        <env name="TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT" value="EXAMPLE" />
-        <env name="TESTS_ZEND_LDAP_ALT_USERNAME" value="user1" />
-        <env name="TESTS_ZEND_LDAP_ALT_PRINCIPAL_NAME" value="user1@example.com" />
-        <env name="TESTS_ZEND_LDAP_ALT_DN" value="uid=user1,dc=example,dc=com" />
-        <env name="TESTS_ZEND_LDAP_ALT_PASSWORD" value="user1" />
-        <env name="TESTS_ZEND_LDAP_WRITEABLE_SUBTREE" value="ou=test,dc=example,dc=com" />
-        <env name="TESTS_ZEND_LDAP_ANONYMOUS_BIND_ALLOWED" value="true"/>
-        <env name="TESTS_ZEND_LDAP_SASL_CERTIFICATE" value="/tmp/client.crt" />
-        <env name="TESTS_ZEND_LDAP_SASL_KEY" value="/tmp/client.key" />
-        <env name="TESTS_ZEND_LDAP_IDLE_TIMEOUT" value="4" />
+        <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="false" />
+        <env name="TESTS_LAMINAS_LDAP_HOST" value="localhost" />
+        <env name="TESTS_LAMINAS_LDAP_PORT" value="3890" />
+        <env name="TESTS_LAMINAS_LDAP_SCRIPTS_PORT" value="3891" />
+        <env name="TESTS_LAMINAS_LDAP_USE_START_TLS" value="false" />
+        <env name="TESTS_LAMINAS_LDAP_USE_SSL" value="false" />
+        <env name="TESTS_LAMINAS_LDAP_USERNAME" value="cn=Manager,dc=example,dc=com" />
+        <env name="TESTS_LAMINAS_LDAP_PASSWORD" value="insecure" />
+        <env name="TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN" value="true" />
+        <env name="TESTS_LAMINAS_LDAP_BASE_DN" value="dc=example,dc=com" />
+        <env name="TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT" value="(&amp;(objectClass=account)(uid=%s))" />
+        <env name="TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME" value="example.com" />
+        <env name="TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT" value="EXAMPLE" />
+        <env name="TESTS_LAMINAS_LDAP_ALT_USERNAME" value="user1" />
+        <env name="TESTS_LAMINAS_LDAP_ALT_PRINCIPAL_NAME" value="user1@example.com" />
+        <env name="TESTS_LAMINAS_LDAP_ALT_DN" value="uid=user1,dc=example,dc=com" />
+        <env name="TESTS_LAMINAS_LDAP_ALT_PASSWORD" value="user1" />
+        <env name="TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE" value="ou=test,dc=example,dc=com" />
+        <env name="TESTS_LAMINAS_LDAP_ANONYMOUS_BIND_ALLOWED" value="true"/>
+        <env name="TESTS_LAMINAS_LDAP_SASL_CERTIFICATE" value="/tmp/client.crt" />
+        <env name="TESTS_LAMINAS_LDAP_SASL_KEY" value="/tmp/client.key" />
+        <env name="TESTS_LAMINAS_LDAP_IDLE_TIMEOUT" value="4" />
     </php>
 </phpunit>

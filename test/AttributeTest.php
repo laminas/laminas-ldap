@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
+use Laminas\Ldap\Attribute;
 use PHPUnit\Framework\TestCase;
-use Zend\Ldap\Attribute;
 
 /**
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 class AttributeTest extends TestCase
 {
@@ -22,8 +21,8 @@ class AttributeTest extends TestCase
         $tsValue = date('YmdHisO', $timestamp);
 
         if (date('O', strtotime('20120101'))) {
-            // Local timezone is +0000 when DST is off. Zend_Ldap converts
-            // +0000 to "Z" (see Zend\Ldap\Converter\Converter:toLdapDateTime()), so
+            // Local timezone is +0000 when DST is off. Laminas_Ldap converts
+            // +0000 to "Z" (see Laminas\Ldap\Converter\Converter:toLdapDateTime()), so
             // take account of that here
             $tsValue = str_replace('+0000', 'Z', $tsValue);
         }
