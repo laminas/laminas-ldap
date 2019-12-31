@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 class CrudTest extends AbstractOnlineTestCase
 {
@@ -67,7 +65,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\LdapException
+     * @expectedException Laminas\Ldap\Exception\LdapException
      */
     public function testIllegalAdd()
     {
@@ -108,7 +106,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\LdapException
+     * @expectedException Laminas\Ldap\Exception\LdapException
      */
     public function testIllegalDelete()
     {
@@ -202,7 +200,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @group ZF-7888
+     * @group Laminas-7888
      */
     public function testZeroValueMakesItThroughSanitationProcess()
     {
@@ -370,7 +368,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @group ZF-9564
+     * @group Laminas-9564
      */
     public function testAddingEntryWithMissingRdnAttribute()
     {
@@ -393,7 +391,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @group ZF-9564
+     * @group Laminas-9564
      */
     public function testAddingEntryWithMissingRdnAttributeValue()
     {
@@ -417,7 +415,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @group ZF-9564
+     * @group Laminas-9564
      */
     public function testAddingEntryThatHasMultipleValuesOnRdnAttribute()
     {
@@ -441,7 +439,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @group ZF-9564
+     * @group Laminas-9564
      */
     public function testUpdatingEntryWithAttributeThatIsAnRdnAttribute()
     {
@@ -469,7 +467,7 @@ class CrudTest extends AbstractOnlineTestCase
     }
 
     /**
-     * @group ZF-9564
+     * @group Laminas-9564
      */
     public function testUpdatingEntryWithRdnAttributeValueMissingInData()
     {
