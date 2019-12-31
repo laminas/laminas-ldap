@@ -1,4 +1,4 @@
-# Object-oriented access to the LDAP tree using Zend\\Ldap\\Node
+# Object-oriented access to the LDAP tree using Laminas\\Ldap\\Node
 
 ## Basic CRUD operations
 
@@ -24,7 +24,7 @@
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $ri = new RecursiveIteratorIterator($ldap->getBaseNode(),
                                     RecursiveIteratorIterator::SELF_FIRST);

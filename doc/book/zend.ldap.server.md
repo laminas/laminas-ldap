@@ -14,7 +14,7 @@ eDirectory](http://www.novell.com/documentation/edir88/edir88/index.html?page=/d
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $rootdse = $ldap->getRootDse();
 $serverType = $rootdse->getServerType();
 ```
@@ -25,7 +25,7 @@ $serverType = $rootdse->getServerType();
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $schema = $ldap->getSchema();
 $classes = $schema->getObjectClasses();
 ```

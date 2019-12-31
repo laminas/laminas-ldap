@@ -14,7 +14,7 @@
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $hm = $ldap->getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
 /*
@@ -33,7 +33,7 @@ array(
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
 ```
@@ -42,7 +42,7 @@ $isThere = $ldap->exists('cn=Hugo Müller,ou=People,dc=my,dc=local');
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $childrenCount = $ldap->countChildren(
                             'cn=Hugo Müller,ou=People,dc=my,dc=local');
@@ -52,11 +52,11 @@ $childrenCount = $ldap->countChildren(
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $result = $ldap->search('(objectclass=*)',
                         'ou=People,dc=my,dc=local',
-                        Zend\Ldap\Ldap::SEARCH_SCOPE_ONE);
+                        Laminas\Ldap\Ldap::SEARCH_SCOPE_ONE);
 foreach ($result as $item) {
     echo $item["dn"] . ': ' . $item['cn'][0] . PHP_EOL;
 }
@@ -68,12 +68,12 @@ foreach ($result as $item) {
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $entry = array();
-Zend\Ldap\Attribute::setAttribute($entry, 'cn', 'Hans Meier');
-Zend\Ldap\Attribute::setAttribute($entry, 'sn', 'Meier');
-Zend\Ldap\Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
+Laminas\Ldap\Attribute::setAttribute($entry, 'cn', 'Hans Meier');
+Laminas\Ldap\Attribute::setAttribute($entry, 'sn', 'Meier');
+Laminas\Ldap\Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
 $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
 ```
 
@@ -83,7 +83,7 @@ $ldap->add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
 ```
@@ -94,13 +94,13 @@ $ldap->delete('cn=Hans Meier,ou=People,dc=my,dc=local');
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $hm = $ldap->getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
-Zend\Ldap\Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
-Zend\Ldap\Attribute::setPassword($hm,
+Laminas\Ldap\Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
+Laminas\Ldap\Attribute::setPassword($hm,
                                  'newPa$$w0rd',
-                                 Zend\Ldap\Attribute::PASSWORD_HASH_SHA1);
+                                 Laminas\Ldap\Attribute::PASSWORD_HASH_SHA1);
 $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
 ```
 
@@ -112,7 +112,7 @@ $ldap->update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
             'cn=Hans Meier,ou=People,dc=my,dc=local',
@@ -123,7 +123,7 @@ $ldap->copy('cn=Hugo Müller,ou=People,dc=my,dc=local',
 
 ```php
 $options = array(/* ... */);
-$ldap = new Zend\Ldap\Ldap($options);
+$ldap = new Laminas\Ldap\Ldap($options);
 $ldap->bind();
 $ldap->moveToSubtree('cn=Hugo Müller,ou=People,dc=my,dc=local',
                      'ou=Dismissed,dc=my,dc=local',
