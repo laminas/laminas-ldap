@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node;
+namespace Laminas\Ldap\Node;
 
-use Zend\Ldap;
+use Laminas\Ldap;
 
 /**
- * Zend\Ldap\Node\RootDse provides a simple data-container for the RootDse node.
+ * Laminas\Ldap\Node\RootDse provides a simple data-container for the RootDse node.
  */
 class RootDse extends AbstractNode
 {
@@ -24,7 +23,7 @@ class RootDse extends AbstractNode
     /**
      * Factory method to create the RootDse.
      *
-     * @param \Zend\Ldap\Ldap $ldap
+     * @param \Laminas\Ldap\Ldap $ldap
      * @return RootDse
      */
     public static function create(Ldap\Ldap $ldap)
@@ -49,7 +48,7 @@ class RootDse extends AbstractNode
      *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param \Zend\Ldap\Dn $dn
+     * @param \Laminas\Ldap\Dn $dn
      * @param array         $data
      */
     protected function __construct(Ldap\Dn $dn, array $data)
@@ -112,7 +111,7 @@ class RootDse extends AbstractNode
     /**
      * Returns the schema DN
      *
-     * @return \Zend\Ldap\Dn
+     * @return \Laminas\Ldap\Dn
      */
     public function getSchemaDn()
     {
