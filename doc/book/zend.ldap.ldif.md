@@ -29,7 +29,7 @@ $data = array(
     'cn;lang-en'                 => array('Rodney Ogasawara'),
     'title;lang-en'              => array('Sales, Director'),
 );
-$ldif = Zend\Ldap\Ldif\Encoder::encode($data, array('sort' => false,
+$ldif = Laminas\Ldap\Ldif\Encoder::encode($data, array('sort' => false,
                                                     'version' => null));
 /*
 $ldif contains:
@@ -87,7 +87,7 @@ givenname;lang-en: Rodney
 sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director";
-$data = Zend\Ldap\Ldif\Encoder::decode($ldif);
+$data = Laminas\Ldap\Ldif\Encoder::decode($ldif);
 /*
 $data = array(
     'dn'                         => 'uid=rogasawara,ou=営業部,o=Airius',

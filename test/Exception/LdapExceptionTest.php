@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Exception;
+namespace LaminasTest\Ldap\Exception;
 
-use Zend\Ldap\Exception\LdapException;
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Exception\LdapException;
+use Laminas\Ldap\Ldap;
 
 class LdapExceptionTest  extends \PHPUnit_Framework_TestCase
 {

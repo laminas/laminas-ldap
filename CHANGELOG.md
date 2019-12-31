@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#43](https://github.com/zendframework/zend-ldap/pull/43) Adds possibility
-  to use [Zend\StdLib](https://github.com/zendframework/zend-stdlib) and
-  [Zend\EventManager](https://github.com/zendframework/zend-eventmanager) in
+- [zendframework/zend-ldap#43](https://github.com/zendframework/zend-ldap/pull/43) Adds possibility
+  to use [Laminas\StdLib](https://github.com/laminas/laminas-stdlib) and
+  [Laminas\EventManager](https://github.com/zendframework/zend-eventmanager) in
   Version 3
 - Support for PHP7
 
@@ -18,15 +18,15 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#21](https://github.com/zendframework/zend-ldap/pull/21) Removes dependency
-  Zend\StdLib
+- [zendframework/zend-ldap#21](https://github.com/zendframework/zend-ldap/pull/21) Removes dependency
+  Laminas\StdLib
 
 ### Fixed
 
-- [#17](https://github.com/zendframework/zend-ldap/issues/17) Fixes HHVM builds
-- [#44](https://github.com/zendframework/zend-ldap/pull/40) Fixes broken builds
+- [zendframework/zend-ldap#17](https://github.com/zendframework/zend-ldap/issues/17) Fixes HHVM builds
+- [zendframework/zend-ldap#44](https://github.com/zendframework/zend-ldap/pull/40) Fixes broken builds
   in PHP7 due to faulty sorting-test
-- [#40](https://github.com/zendframework/zend-ldap/pull/40) Fixes connection test
+- [zendframework/zend-ldap#40](https://github.com/zendframework/zend-ldap/pull/40) Fixes connection test
   that failed due to different failure messages in PHP5 and 7
 
 ## 2.6.1 - 2016-04-20
@@ -45,14 +45,14 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#19](https://github.com/zendframework/zend-ldap/pull/20) checks whether the
+- [zendframework/zend-ldap#19](https://github.com/zendframework/zend-ldap/pull/20) checks whether the
   LDAP-connection shall use SSL or not and decides based on that which port to
   use if no port has been set.
-- [#25](https://github.com/zendframework/zend-ldap/issues/25) Check for correct
+- [zendframework/zend-ldap#25](https://github.com/zendframework/zend-ldap/issues/25) Check for correct
   Headers in the documentation and fix it
-- [#27](https://github.com/zendframework/zend-ldap/issues/27) Check for different
+- [zendframework/zend-ldap#27](https://github.com/zendframework/zend-ldap/issues/27) Check for different
   issues in the documentation and fixed it
-- [#29](https://github.com/zendframework/zend-ldap/issues/29) Check for incorrect
+- [zendframework/zend-ldap#29](https://github.com/zendframework/zend-ldap/issues/29) Check for incorrect
   Blockquotes in the documentation and fix it
 
 
@@ -60,7 +60,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#6](https://github.com/zendframework/zend-ldap/pull/6) Adds a possibility 
+- [zendframework/zend-ldap#6](https://github.com/zendframework/zend-ldap/pull/6) Adds a possibility 
   to delete attributes without having to remove the complete node and add it
   again without the attribute
 
@@ -74,7 +74,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#16](https://github.com/zendframework/zend-ldap/pull/16) Fixed the usage of
+- [zendframework/zend-ldap#16](https://github.com/zendframework/zend-ldap/pull/16) Fixed the usage of
   ```ldap_sort``` during sorting search-results due to deprecation of 
   ```ldap_sort``` in PHP 7
 
@@ -82,10 +82,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#16](https://github.com/zendframework/zend-ldap/pull/16) removes the call
+- [zendframework/zend-ldap#16](https://github.com/zendframework/zend-ldap/pull/16) removes the call
   to the now deprecated ldap_sort-function wile still preserving the
   sort-functionality.
-- [#14](https://github.com/zendframework/zend-ldap/pull/14) adds a Vagrant
+- [zendframework/zend-ldap#14](https://github.com/zendframework/zend-ldap/pull/14) adds a Vagrant
   environment for running an LDAP server against which to run the tests;
   additionally, it adds Travis-CI scripts for setting up an LDAP server with
   test data.
@@ -100,5 +100,5 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#18](https://github.com/zendframework/zend-ldap/pull/18) Fixes an already
+- [zendframework/zend-ldap#18](https://github.com/zendframework/zend-ldap/pull/18) Fixes an already
   removed second parameter to ```ldap_first_attribute``` and ```ldap_next_attribute```
