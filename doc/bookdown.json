@@ -1,13 +1,13 @@
 {
-    "title": "Zend\\Ldap",
+    "title": "Laminas\\Ldap",
     "target": "html/",
     "content": [
-        "book/zend.ldap.introduction.md",
-        "book/zend.ldap.api.md",
-        "book/zend.ldap.usage.md",
-        "book/zend.ldap.tools.md",
-        "book/zend.ldap.node.md",
-        "book/zend.ldap.server.md",
-        "book/zend.ldap.ldif.md"
+        "book/laminas.ldap.introduction.md",
+        "book/laminas.ldap.api.md",
+        "book/laminas.ldap.usage.md",
+        "book/laminas.ldap.tools.md",
+        "book/laminas.ldap.node.md",
+        "book/laminas.ldap.server.md",
+        "book/laminas.ldap.ldif.md"
     ]
 }
