@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap;
+namespace Laminas\Ldap;
 
+use Laminas\Ldap\Exception\LdapException;
 use Traversable;
-use Zend\Ldap\Exception\LdapException;
 
 class Ldap
 {
@@ -247,8 +246,8 @@ class Ldap
             if (array_key_exists($key, $options)) {
                 $val = $options[$key];
                 unset($options[$key]);
-                /* Enforce typing. This eliminates issues like Zend\Config\Reader\Ini
-                 * returning '1' as a string (ZF-3163).
+                /* Enforce typing. This eliminates issues like Laminas\Config\Reader\Ini
+                 * returning '1' as a string (Laminas-3163).
                  */
                 switch ($key) {
                     case 'port':
@@ -274,7 +273,7 @@ class Ldap
         }
         if (count($options) > 0) {
             $key = key($options);
-            throw new Exception\LdapException(null, "Unknown Zend\\Ldap\\Ldap option: $key");
+            throw new Exception\LdapException(null, "Unknown Laminas\\Ldap\\Ldap option: $key");
         }
         $this->options = $permittedOptions;
 
@@ -975,10 +974,10 @@ class Ldap
                     "Class '$collectionClass' can not be found"
                 );
             }
-            if (! is_subclass_of($collectionClass, 'Zend\Ldap\Collection')) {
+            if (! is_subclass_of($collectionClass, 'Laminas\Ldap\Collection')) {
                 throw new Exception\LdapException(
                     null,
-                    "Class '$collectionClass' must subclass 'Zend\\Ldap\\Collection'"
+                    "Class '$collectionClass' must subclass 'Laminas\\Ldap\\Collection'"
                 );
             }
 
@@ -1603,7 +1602,7 @@ class Ldap
     }
 
     /**
-     * Returns the specified DN as a Zend\Ldap\Node
+     * Returns the specified DN as a Laminas\Ldap\Node
      *
      * @param  string|Dn $dn
      * @return Node|null
@@ -1615,7 +1614,7 @@ class Ldap
     }
 
     /**
-     * Returns the base node as a Zend\Ldap\Node
+     * Returns the base node as a Laminas\Ldap\Node
      *
      * @return Node
      * @throws Exception\LdapException

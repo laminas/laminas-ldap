@@ -1,6 +1,6 @@
 docs_dir: docs/book
 site_dir: docs/html
-pages:
+nav:
     - index.md
     - Intro: intro.md
     - Reference:
@@ -10,7 +10,6 @@ pages:
         - "Object-oriented access to the LDAP tree": node.md
         - "Getting information from the LDAP server": server.md
         - "Serializing LDAP data to and from LDIF": ldif.md
-site_name: zend-ldap
-site_description: zend-ldap
-repo_url: 'https://github.com/zendframework/zend-ldap'
-copyright: 'Copyright (c) 2005-2018 <a href="https://www.zend.com/">Zend Technologies USA Inc.</a>'
+site_name: laminas-ldap
+site_description: laminas-ldap
+repo_url: 'https://github.com/laminas/laminas-ldap'

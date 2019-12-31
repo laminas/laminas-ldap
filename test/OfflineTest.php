@@ -1,22 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
+use Laminas\Config;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 use phpmock\phpunit\PHPMock;
 use PHPUnit\Framework\TestCase;
-use Zend\Config;
-use Zend\Ldap;
-use Zend\Ldap\Exception;
 
 /**
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  * @requires extension ldap
  */
 class OfflineTest extends TestCase
@@ -24,7 +23,7 @@ class OfflineTest extends TestCase
     use PHPMock;
 
     /**
-     * Zend\Ldap\Ldap instance
+     * Laminas\Ldap\Ldap instance
      *
      * @var Ldap\Ldap
      */
@@ -33,7 +32,7 @@ class OfflineTest extends TestCase
     /**
      * Setup operations run prior to each test method:
      *
-     * * Creates an instance of Zend\Ldap\Ldap
+     * * Creates an instance of Laminas\Ldap\Ldap
      *
      * @return void
      */
@@ -50,29 +49,29 @@ class OfflineTest extends TestCase
         $optionName = 'invalid';
         try {
             $this->ldap->setOptions([$optionName => 'irrelevant']);
-            $this->fail('Expected Zend\Ldap\Exception\LdapException not thrown');
+            $this->fail('Expected Laminas\Ldap\Exception\LdapException not thrown');
         } catch (Exception\LdapException $e) {
-            $this->assertEquals("Unknown Zend\Ldap\Ldap option: $optionName", $e->getMessage());
+            $this->assertEquals("Unknown Laminas\Ldap\Ldap option: $optionName", $e->getMessage());
         }
     }
 
     public function testOptionsGetter()
     {
         $options = [
-            'host'     => getenv('TESTS_ZEND_LDAP_HOST'),
-            'username' => getenv('TESTS_ZEND_LDAP_USERNAME'),
-            'password' => getenv('TESTS_ZEND_LDAP_PASSWORD'),
-            'baseDn'   => getenv('TESTS_ZEND_LDAP_BASE_DN'),
+            'host'     => getenv('TESTS_LAMINAS_LDAP_HOST'),
+            'username' => getenv('TESTS_LAMINAS_LDAP_USERNAME'),
+            'password' => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
+            'baseDn'   => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
         ];
         $ldap    = new Ldap\Ldap($options);
         $this->assertEquals([
-                                 'host'                   => getenv('TESTS_ZEND_LDAP_HOST'),
+                                 'host'                   => getenv('TESTS_LAMINAS_LDAP_HOST'),
                                  'port'                   => 0,
                                  'useSsl'                 => false,
-                                 'username'               => getenv('TESTS_ZEND_LDAP_USERNAME'),
-                                 'password'               => getenv('TESTS_ZEND_LDAP_PASSWORD'),
+                                 'username'               => getenv('TESTS_LAMINAS_LDAP_USERNAME'),
+                                 'password'               => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
                                  'bindRequiresDn'         => false,
-                                 'baseDn'                 => getenv('TESTS_ZEND_LDAP_BASE_DN'),
+                                 'baseDn'                 => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
                                  'accountCanonicalForm'   => null,
                                  'accountDomainName'      => null,
                                  'accountDomainNameShort' => null,
@@ -88,20 +87,20 @@ class OfflineTest extends TestCase
     public function testConfigObject()
     {
         $config = new Config\Config([
-                                         'host'     => getenv('TESTS_ZEND_LDAP_HOST'),
-                                         'username' => getenv('TESTS_ZEND_LDAP_USERNAME'),
-                                         'password' => getenv('TESTS_ZEND_LDAP_PASSWORD'),
-                                         'baseDn'   => getenv('TESTS_ZEND_LDAP_BASE_DN'),
+                                         'host'     => getenv('TESTS_LAMINAS_LDAP_HOST'),
+                                         'username' => getenv('TESTS_LAMINAS_LDAP_USERNAME'),
+                                         'password' => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
+                                         'baseDn'   => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
                                     ]);
         $ldap   = new Ldap\Ldap($config);
         $this->assertEquals([
-                                 'host'                   => getenv('TESTS_ZEND_LDAP_HOST'),
+                                 'host'                   => getenv('TESTS_LAMINAS_LDAP_HOST'),
                                  'port'                   => 0,
                                  'useSsl'                 => false,
-                                 'username'               => getenv('TESTS_ZEND_LDAP_USERNAME'),
-                                 'password'               => getenv('TESTS_ZEND_LDAP_PASSWORD'),
+                                 'username'               => getenv('TESTS_LAMINAS_LDAP_USERNAME'),
+                                 'password'               => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
                                  'bindRequiresDn'         => false,
-                                 'baseDn'                 => getenv('TESTS_ZEND_LDAP_BASE_DN'),
+                                 'baseDn'                 => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
                                  'accountCanonicalForm'   => null,
                                  'accountDomainName'      => null,
                                  'accountDomainNameShort' => null,
@@ -124,7 +123,7 @@ class OfflineTest extends TestCase
         $expectedDn,
         $expectedAttributesToRemove
     ) {
-        $ldap_mod_del = $this->getFunctionMock('Zend\\Ldap', "ldap_mod_del");
+        $ldap_mod_del = $this->getFunctionMock('Laminas\\Ldap', "ldap_mod_del");
         $ldap_mod_del->expects($this->once())
                      ->with(
                          $this->isNull(),
@@ -133,7 +132,7 @@ class OfflineTest extends TestCase
                      )
                      ->willReturn(true);
 
-        $ldap = new \Zend\Ldap\Ldap();
+        $ldap = new \Laminas\Ldap\Ldap();
         $this->assertSame($ldap, $ldap->deleteAttributes($dn, $attributes, $allowEmptyAttributes));
     }
 
@@ -163,7 +162,7 @@ class OfflineTest extends TestCase
                 ['foo' => 'bar', 'baz' => []]
             ],
             'DN is provided as DN-Object, not string' => [
-                \Zend\Ldap\Dn::fromString('dc=foo'),
+                \Laminas\Ldap\Dn::fromString('dc=foo'),
                 ['foo' => 'bar', 'baz' => []],
                 true,
                 'dc=foo',
@@ -173,15 +172,15 @@ class OfflineTest extends TestCase
     }
 
     /**
-     * @expectedException \Zend\Ldap\Exception\LdapException
+     * @expectedException \Laminas\Ldap\Exception\LdapException
      */
     public function testRemovingAttributesFails()
     {
-        $ldap_mod_del = $this->getFunctionMock('Zend\\Ldap', 'ldap_mod_del');
+        $ldap_mod_del = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_del');
         $ldap_mod_del->expects($this->once())
                      ->willReturn(false);
 
-        $ldap = new \Zend\Ldap\Ldap();
+        $ldap = new \Laminas\Ldap\Ldap();
         $ldap->deleteAttributes('foo', ['bar']);
     }
 
@@ -195,7 +194,7 @@ class OfflineTest extends TestCase
         $expectedDn,
         $expectedAttributesToRemove
     ) {
-        $ldap_mod_add = $this->getFunctionMock('Zend\\Ldap', "ldap_mod_add");
+        $ldap_mod_add = $this->getFunctionMock('Laminas\\Ldap', "ldap_mod_add");
         $ldap_mod_add->expects($this->once())
                      ->with(
                          $this->isNull(),
@@ -204,20 +203,20 @@ class OfflineTest extends TestCase
                      )
                      ->willReturn(true);
 
-        $ldap = new \Zend\Ldap\Ldap();
+        $ldap = new \Laminas\Ldap\Ldap();
         $this->assertSame($ldap, $ldap->addAttributes($dn, $attributes, $allowEmptyAttributes));
     }
 
     /**
-     * @expectedException \Zend\Ldap\Exception\LdapException
+     * @expectedException \Laminas\Ldap\Exception\LdapException
      */
     public function testAddingAttributesFails()
     {
-        $ldap_mod_del = $this->getFunctionMock('Zend\\Ldap', 'ldap_mod_add');
+        $ldap_mod_del = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_add');
         $ldap_mod_del->expects($this->once())
                      ->willReturn(false);
 
-        $ldap = new \Zend\Ldap\Ldap();
+        $ldap = new \Laminas\Ldap\Ldap();
         $ldap->addAttributes('foo', ['bar']);
     }
 }
