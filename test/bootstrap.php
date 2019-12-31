@@ -1,12 +1,13 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-ldap for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
 /*
- * Set error reporting to the level to which Zend Framework code must comply.
+ * Set error reporting to the level to which Laminas code must comply.
  */
 error_reporting(E_ALL | E_STRICT);
 
@@ -18,7 +19,7 @@ require __DIR__ . '/../vendor/autoload.php';
 /**
  * Start output buffering, if enabled
  */
-if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
+if (defined('TESTS_LAMINAS_OB_ENABLED') && constant('TESTS_LAMINAS_OB_ENABLED')) {
     ob_start();
 }
 
@@ -29,11 +30,11 @@ if (defined('TESTS_ZEND_OB_ENABLED') && constant('TESTS_ZEND_OB_ENABLED')) {
  * bind is not client certificate-based.
  *
  * Therefore, configure this aspect of the environment here in bootstrap.
- * Applications using a client cert with zend-ldap should similarly ensure their
+ * Applications using a client cert with laminas-ldap should similarly ensure their
  * environment variables are set before the first ldap connect/bind.
  */
-putenv(sprintf("LDAPTLS_CERT=%s", getenv('TESTS_ZEND_LDAP_SASL_CERTIFICATE')));
-putenv(sprintf("LDAPTLS_KEY=%s", getenv('TESTS_ZEND_LDAP_SASL_KEY')));
+putenv(sprintf("LDAPTLS_CERT=%s", getenv('TESTS_LAMINAS_LDAP_SASL_CERTIFICATE')));
+putenv(sprintf("LDAPTLS_KEY=%s", getenv('TESTS_LAMINAS_LDAP_SASL_KEY')));
 
 /**
  * Work around https://bugs.php.net/bug.php?id=68541 by defining function
@@ -45,4 +46,4 @@ putenv(sprintf("LDAPTLS_KEY=%s", getenv('TESTS_ZEND_LDAP_SASL_KEY')));
  * phpunit would find them and error while attempting to serialize global
  * variables.
  */
-\ZendTest\Ldap\TestAsset\BuiltinFunctionMocks::createMocks();
+\LaminasTest\Ldap\TestAsset\BuiltinFunctionMocks::createMocks();

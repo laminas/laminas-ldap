@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Node;
+namespace LaminasTest\Ldap\Node;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
-use ZendTest\Ldap as TestLdap;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
+use LaminasTest\Ldap as TestLdap;
 
 /**
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Node
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Node
  */
 class OnlineTest extends TestLdap\AbstractOnlineTestCase
 {
@@ -35,7 +34,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
-        $this->assertInstanceOf('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }
 
@@ -77,7 +76,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testLoadFromLDAPIllegalEntry()
     {
@@ -89,7 +88,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
-        $this->assertInstanceOf('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
         $node->detachLDAP();
         $this->assertFalse($node->isAttached());
@@ -109,7 +108,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testAttachToInvalidLDAP()
     {
@@ -172,7 +171,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testGetIllegalNode()
     {
@@ -183,10 +182,10 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     public function testGetBaseNode()
     {
         $node = $this->getLDAP()->getBaseNode();
-        $this->assertEquals(getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'), $node->getDnString());
+        $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $node->getDnString());
 
         $dn = Ldap\Dn::fromString(
-            getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'),
+            getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             Ldap\Dn::ATTR_CASEFOLD_LOWER
         );
         $this->assertEquals($dn[0]['ou'], $node->getAttribute('ou', 0));
@@ -201,7 +200,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
             [],
             'ou'
         );
-        $this->assertInstanceOf('Zend\Ldap\Node\Collection', $items);
+        $this->assertInstanceOf('Laminas\Ldap\Node\Collection', $items);
         $this->assertEquals(3, $items->count());
 
         $i   = 0;
@@ -225,7 +224,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testCountSubtree()
     {
-        $node = $this->getLDAP()->getNode(getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'));
+        $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->assertEquals(9, $node->countSubtree(
             '(objectClass=organizationalUnit)',
             Ldap\Ldap::SEARCH_SCOPE_SUB
@@ -234,7 +233,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testCountChildren()
     {
-        $node = $this->getLDAP()->getNode(getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'));
+        $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->assertEquals(6, $node->countChildren());
         $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertEquals(2, $node->countChildren());
@@ -244,7 +243,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertEquals(2, $node->searchChildren('(objectClass=*)', [], 'ou')->count());
-        $node = $this->getLDAP()->getNode(getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'));
+        $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->assertEquals(6, $node->searchChildren('(objectClass=*)', [], 'ou')->count());
     }
 
@@ -253,18 +252,18 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $node  = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $pnode = $node->getParent();
         $this->assertEquals(
-            Ldap\Dn::fromString(getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'))
+            Ldap\Dn::fromString(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'))
                 ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER),
             $pnode->getDnString(Ldap\Dn::ATTR_CASEFOLD_LOWER)
         );
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testGetNonexistentParent()
     {
-        $node  = $this->getLDAP()->getNode(getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'));
+        $node  = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $pnode = $node->getParent();
     }
 
@@ -272,7 +271,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=Test1,'));
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
-        $this->assertInstanceOf('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
         $this->assertTrue($node->isAttached());
     }
 }
