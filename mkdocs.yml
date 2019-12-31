@@ -1,15 +1,12 @@
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - Home: index.md
-    - Introduction: intro.md
-    - Reference:
-        - "API overview": api.md
-        - "Usage Scenarios": usage.md
-        - Tools: tools.md
-        - "Object-oriented access to the LDAP tree": node.md
-        - "Getting information from the LDAP server": server.md
-        - "Serializing LDAP data to and from LDIF": ldif.md
+    - { Home: index.md }
+    - { Introduction: intro.md }
+    - { Reference: [{ 'API overview': api.md }, { 'Usage Scenarios': usage.md }, { Tools: tools.md }, { 'Object-oriented access to the LDAP tree': node.md }, { 'Getting information from the LDAP server': server.md }, { 'Serializing LDAP data to and from LDIF': ldif.md }] }
 site_name: laminas-ldap
-site_description: "Provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory"
+site_description: 'Provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory'
 repo_url: 'https://github.com/laminas/laminas-ldap'
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
