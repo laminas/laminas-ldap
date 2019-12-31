@@ -12,7 +12,7 @@ within the RootDSE for a given LDAP server.
 ### Getting hands on the RootDSE
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
@@ -25,7 +25,7 @@ $serverType = $rootdse->getServerType();
 ### Getting hands on the server schema
 
 ```php
-use Zend\Ldap\Ldap;
+use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);

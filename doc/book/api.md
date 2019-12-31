@@ -2,7 +2,7 @@
 
 ## Configuration options
 
-`Zend\Ldap\Ldap` accepts an array of options either supplied to the constructor
+`Laminas\Ldap\Ldap` accepts an array of options either supplied to the constructor
 or through the `setOptions()` method. The permitted options are as follows:
 
 Name                   | Description
@@ -13,7 +13,7 @@ useStartTls            | Whether or not the LDAP client should use TLS (aka SSLv
 useSsl                 | Whether or not the LDAP client should use SSL encrypted transport. The `useSsl` and `useStartTls` options are mutually exclusive.
 username               | The default credentials username. Some servers require that this be in DN form. This must be given in DN form if the LDAP server requires a DN to bind and binding should be possible with simple usernames.
 password               | The default credentials password (used only with username above).
-bindRequiresDn         | If `true`, this instructs `Zend\Ldap\Ldap` to retrieve the DN for the account used to bind if the username is not already in DN form. The default value is `false`.
+bindRequiresDn         | If `true`, this instructs `Laminas\Ldap\Ldap` to retrieve the DN for the account used to bind if the username is not already in DN form. The default value is `false`.
 baseDn                 | The default base DN used for searching (e.g., for accounts). This option is required for most account related operations and should indicate the DN under which accounts are located.
 accountCanonicalForm   | A small integer indicating the form to which account names should be canonicalized. See the [Account Name Canonicalization section](intro.md#account-name-canonicalization).
 accountDomainName      | The FQDN domain for which the target LDAP server is an authority (e.g., `example.com`).
@@ -26,11 +26,11 @@ networkTimeout         | Number of seconds to wait for LDAP connection before fa
 
 ## API Reference
 
-Class names are relative to the `Zend\Ldap` namespace, unless otherwise noted.
+Class names are relative to the `Laminas\Ldap` namespace, unless otherwise noted.
 
-### Zend\\Ldap\\Ldap
+### Laminas\\Ldap\\Ldap
 
-`Zend\Ldap\Ldap` is the base interface into a LDAP server. It provides connection and binding
+`Laminas\Ldap\Ldap` is the base interface into a LDAP server. It provides connection and binding
 methods as well as methods to operate on the LDAP tree.
 
 Method signature                                                                                | Description
@@ -51,19 +51,19 @@ Method signature                                                                
 `countChildren(string|Dn $dn) : int`                                                            | Counts the direct descendants (children) of the entry identified by the given `$dn`.
 `exists(string|Dn $dn) : bool`                                                                  | Checks whether the entry identified by the given `$dn` exists.
 `searchEntries(/* ... */) : array`                                                              | Performs a search operation and returns the result as an PHP array. This is essentially the same method as `search()` except for the return type. See [search()](#search) and [searchEntries()](#searchentries) below for more details.
-`getEntry(string|Dn $dn, array $attributes, bool $throwOnNotFound) : array`                     | Retrieves the LDAP entry identified by `$dn` with the attributes specified in `$attributes`. if `$attributes` is omitted, all attributes (`[]`) are included in the result. `$throwOnNotFound` is `false` by default, so the method will return `null` if the specified entry cannot be found. If set to `true`, a `Zend\Ldap\Exception\LdapException` will be thrown instead.
+`getEntry(string|Dn $dn, array $attributes, bool $throwOnNotFound) : array`                     | Retrieves the LDAP entry identified by `$dn` with the attributes specified in `$attributes`. if `$attributes` is omitted, all attributes (`[]`) are included in the result. `$throwOnNotFound` is `false` by default, so the method will return `null` if the specified entry cannot be found. If set to `true`, a `Laminas\Ldap\Exception\LdapException` will be thrown instead.
 `prepareLdapEntryArray(array &$entry) : void`                                                   | Prepare an array for the use in LDAP modification operations. This method does not need to be called by the end-user as it's implicitly called on every data modification method.
-`add(string|Dn $dn, array $entry) : void`                                                       | Adds the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Zend\Ldap\Exception\LdapException` if the entry could not be added.
-`update(string|Dn $dn, array $entry) : void`                                                    | Updates the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Zend\Ldap\Exception\LdapException` if the entry could not be modified.
-`save(string|Dn $dn, array $entry) : void`                                                      | Saves the entry identified by `$dn` with its attributes $entry to the LDAP tree. Throws a `Zend\Ldap\Exception\LdapException` if the entry could not be saved. This method decides by querying the LDAP tree if the entry will be added or updated.
-`delete(string|Dn $dn, boolean $recursively) : void`                                            | Deletes the entry identified by `$dn` from the LDAP tree. Throws a `Zend\Ldap\Exception\LdapException` if the entry could not be deleted. `$recursively` is `false` by default. If set to `true` the deletion will be carried out recursively and will effectively delete a complete subtree. Deletion will fail if $recursively is `false` and the entry `$dn` is not a leaf entry.
+`add(string|Dn $dn, array $entry) : void`                                                       | Adds the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be added.
+`update(string|Dn $dn, array $entry) : void`                                                    | Updates the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be modified.
+`save(string|Dn $dn, array $entry) : void`                                                      | Saves the entry identified by `$dn` with its attributes $entry to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be saved. This method decides by querying the LDAP tree if the entry will be added or updated.
+`delete(string|Dn $dn, boolean $recursively) : void`                                            | Deletes the entry identified by `$dn` from the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be deleted. `$recursively` is `false` by default. If set to `true` the deletion will be carried out recursively and will effectively delete a complete subtree. Deletion will fail if $recursively is `false` and the entry `$dn` is not a leaf entry.
 `moveToSubtree(string|Dn $from, string|Dn $to, bool $recursively, bool $alwaysEmulate) : void`  | Moves the entry identified by `$from` to a location below `$to` keeping its RDN unchanged. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be moved. Moving will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry. `$alwaysEmulate` controls whether the ext/ldap function `ldap_rename()` should be used if available. This can only work for leaf entries and for servers and for ext/ldap supporting this function. Set to `true` to always use an emulated rename operation. All move-operations are carried out by copying and then deleting the corresponding entries in the LDAP tree. These operations are not atomic so that failures during the operation will result in an inconsistent state on the LDAP server. The same is true for all recursive operations. They also are by no means atomic. Please keep this in mind.
 `move(string|Dn $from, string|Dn $to, bool $recursively, bool $alwaysEmulate) : void`           | This is an alias for `rename()`.
 `rename(string|Dn $from, string|Dn $to, bool $recursively, bool $alwaysEmulate) : void`         | Renames the entry identified by `$from` to `$to`. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be moved. Moving will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry. `$alwaysEmulate` controls whether the ext/ldap function `ldap_rename()` should be used if available. This can only work for leaf entries and for servers and for ext/ldap supporting this function. Set to `TRUE` to always use an emulated rename operation.
 `copyToSubtree(string|Dn $from, string|Dn $to, bool $recursively) : void`                       | Copies the entry identified by `$from` to a location below `$to` keeping its RDN unchanged. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be copied. Copying will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry.
 `copy(string|Dn $from, string|Dn $to, bool $recursively) : void`                                | Copies the entry identified by `$from` to `$to`. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be copied. Copying will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry.
-`getNode(string|Dn $dn) : Node`                                                                 | Returns the entry `$dn` wrapped in a `Zend\Ldap\Node`.
-`getBaseNode() : Node`                                                                          | Returns the entry for the base DN `$baseDn` wrapped in a `Zend\Ldap\Node`.
+`getNode(string|Dn $dn) : Node`                                                                 | Returns the entry `$dn` wrapped in a `Laminas\Ldap\Node`.
+`getBaseNode() : Node`                                                                          | Returns the entry for the base DN `$baseDn` wrapped in a `Laminas\Ldap\Node`.
 `getRootDse() : Node\RootDse`                                                                   | Returns the RootDSE for the current server.
 `getSchema() : Node\Schema`                                                                     | Returns the LDAP schema for the current server.
 
@@ -105,9 +105,9 @@ where:
   attribute `$sort`. Results can only be sorted after one single attribute as
   this parameter uses the ext/ldap function `ldap_sort()`.
 - `$collectionClass`: If given, the result will be wrapped in an object of type
-  `$collectionClass`. By default, an object of type `Zend\Ldap\Collection` will
-  be returned. The custom class must extend `Zend\Ldap\Collection`, and will be
-  passed a `Zend\Ldap\Collection\Iterator\Default` on instantiation.
+  `$collectionClass`. By default, an object of type `Laminas\Ldap\Collection` will
+  be returned. The custom class must extend `Laminas\Ldap\Collection`, and will be
+  passed a `Laminas\Ldap\Collection\Iterator\Default` on instantiation.
 - `$sizelimit`: Enables you to limit the count of entries fetched. Setting this
   to `0` means no limit.
 - `$timelimit`: Sets the maximum number of seconds to spend on the search.
@@ -136,26 +136,26 @@ differences:
 
 Unlike `search()`, this method always returns an array of results.
 
-### Zend\\Ldap\\Collection
+### Laminas\\Ldap\\Collection
 
-`Zend\Ldap\Collection` implements `Iterator` to allow for item traversal using
+`Laminas\Ldap\Collection` implements `Iterator` to allow for item traversal using
 `foreach()` and `Countable` to be able to respond to `count()`. With its
 protected `createEntry()` method, it provides an extension point for developers
 needing custom result objects.
 
 Method signature                                           | Description
 ---------------------------------------------------------- | -----------
-`__construct(Collection\DefaultIterator $iterator) : void` | The constructor must be provided with a `Zend\Ldap\Collection\DefaultIterator`, which does the real result iteration.
+`__construct(Collection\DefaultIterator $iterator) : void` | The constructor must be provided with a `Laminas\Ldap\Collection\DefaultIterator`, which does the real result iteration.
 `close() : bool`                                           | Closes the internal iterator. This is also called in the destructor.
 `toArray() : array`                                        | Returns all entries as an array.
 `getFirst() : array`                                       | Returns the first entry in the collection or `null` if the collection is empty.
 
-### Zend\\Ldap\\Attribute
+### Laminas\\Ldap\\Attribute
 
-`Zend\Ldap\Attribute` is a helper class providing only static methods to
-manipulate arrays suitable to the structure used in `Zend\Ldap\Ldap` data
+`Laminas\Ldap\Attribute` is a helper class providing only static methods to
+manipulate arrays suitable to the structure used in `Laminas\Ldap\Ldap` data
 modification methods, and to the data format required by the LDAP server. PHP
-data types are converted using `Zend\Ldap\Converter\Converter` methods.
+data types are converted using `Laminas\Ldap\Converter\Converter` methods.
 
 Method signature                                                                           | Description
 ------------------------------------------------------------------------------------------ | -----------
@@ -228,9 +228,9 @@ date/time value at the given index will be returned. If the index is out of
 bounds, `null` will be returned. Date-time-conversion according to
 `Converter\Converter::fromLdapDateTime()` will take place.
 
-### Zend\\Ldap\\Converter\\Converter
+### Laminas\\Ldap\\Converter\\Converter
 
-`Zend\Ldap\Converter\Converter` is a helper class providing only static methods
+`Laminas\Ldap\Converter\Converter` is a helper class providing only static methods
 to manipulate arrays suitable to the data format required by the LDAP server.
 PHP data types are converted the following way:
 
@@ -264,9 +264,9 @@ Method signature                                                              | 
 `static toLdapSerialize(mixed $value) : string`                               | The value will be converted to a string by using `serialize()`.
 `static fromLdapUnserialize(string $value) : mixed`                           | The value will be converted from a string by using `unserialize()`.
 
-### Zend\\Ldap\\Dn
+### Laminas\\Ldap\\Dn
 
-`Zend\Ldap\Dn` provides an object-oriented interface to manipulating LDAP
+`Laminas\Ldap\Dn` provides an object-oriented interface to manipulating LDAP
 distinguished names (DN). The parameter `$caseFold` that is used in several
 methods determines the way DN attributes are handled regarding their case.
 Allowed values for this parameter are:
@@ -276,7 +276,7 @@ Allowed values for this parameter are:
 - `Dn::ATTR_CASEFOLD_LOWER`: All attributes will be converted to lower-case.
 
 The default case-folding is `Dn::ATTR_CASEFOLD_NONE`; set an alternative with
-`Dn::setDefaultCaseFold()`. Each instance of `Zend\Ldap\Dn` can have its own
+`Dn::setDefaultCaseFold()`. Each instance of `Laminas\Ldap\Dn` can have its own
 case-folding setting. If the `$caseFold` parameter is omitted in method-calls it
 defaults to the instance's case-folding setting.
 
@@ -313,15 +313,15 @@ Method signature                                                                
 `implodeDn(array $dnArray, string|null $caseFold, string $separator) : string`     | Implodes an array in the form delivered by `Dn::explodeDn()` to a DN string.  `$separator` defaults to `,` but some LDAP servers also understand `;`.  `$dnArray` must of type `[ ['cn' => 'name1', 'uid' => 'user'], ['cn' => 'name2'], ['dc' => 'example'], ['dc' => 'org'] ]`
 `isChildOf(string|Dn $childDn, string|Dn $parentDn) : bool`                        | Checks if given `$childDn` is beneath `$parentDn` subtree.
 
-### Zend\\Ldap\\Filter
+### Laminas\\Ldap\\Filter
 
-### Zend\\Ldap\\Node
+### Laminas\\Ldap\\Node
 
-`Zend\Ldap\Node` includes the magic property accessors `__set()`, `__get()`,
+`Laminas\Ldap\Node` includes the magic property accessors `__set()`, `__get()`,
 `__unset()`, and `__isset()` for accessing the attributes by name. They proxy to
 `Node::setAttribute()`, `Node::getAttribute()`, `Node::deleteAttribute()`, and
 `Node::existsAttribute()` respectively. Furthermore the class implements
-`ArrayAccess` for array-style access to the attributes. `Zend\Ldap\Node` also
+`ArrayAccess` for array-style access to the attributes. `Laminas\Ldap\Node` also
 implements `Iterator` and `RecursiveIterator` to allow for recursive
 tree-traversal.
 
@@ -352,7 +352,7 @@ Method signature                                                | Description
 
 #### Node constructor
 
-The full signature of the `Zend\Ldap\Node` constructor is:
+The full signature of the `Laminas\Ldap\Node` constructor is:
 
 ```php
 __construct(
@@ -368,11 +368,11 @@ The resulting filter will be a concatenation of `$attr`, `$filtertype`,
 `$prepend`, `$value`, and `$append`. Normally this constructor is not needed, as
 all filters can be created by using the appropriate factory methods.
 
-### Zend\\Ldap\\Node\\RootDse
+### Laminas\\Ldap\\Node\\RootDse
 
 The following methods are available on all vendor-specific subclasses.
 
-`Zend\Ldap\Node\RootDse` includes the magic property accessors `__get()` and
+`Laminas\Ldap\Node\RootDse` includes the magic property accessors `__get()` and
 `__isset()` to access the attributes by their name. They proxy to
 `Node\RootDse::getAttribute()` and `Node\RootDse::existsAttribute()`
 respectively. `__set()` and `__unset()` are also implemented but they throw a
@@ -383,14 +383,14 @@ attributes.  `offsetSet()` and `offsetUnset()` also throw a
 
 Method signature                                                  | Description
 ----------------------------------------------------------------- | -----------
-`getDn() : Dn`                                                    | Gets the DN of the current node as a `Zend\Ldap\Dn` instance.
+`getDn() : Dn`                                                    | Gets the DN of the current node as a `Laminas\Ldap\Dn` instance.
 `getDnString(string $caseFold) : string`                          | Gets the DN of the current node as a string.
 `getDnArray(string $caseFold) : array`                            | Gets the DN of the current node as an array.
 `getRdnString(string $caseFold) : string`                         | Gets the RDN of the current node as a string.
 `getRdnArray(string $caseFold) : array`                           | Gets the RDN of the current node as an array.
 `getObjectClass() : array`                                        | Returns the `objectClass` of the node.
-`toString() : string`                                             | Returns the DN of the current node; proxies to `Zend\Ldap\Dn::getDnString()`.
-`__toString() : string`                                           | Casts to string representation; proxies to `Zend\Ldap\Dn::toString()`.
+`toString() : string`                                             | Returns the DN of the current node; proxies to `Laminas\Ldap\Dn::getDnString()`.
+`__toString() : string`                                           | Casts to string representation; proxies to `Laminas\Ldap\Dn::toString()`.
 `toArray(bool $includeSystemAttributes) : array`                  | Returns an array representation of the current node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array. Unlike `getAttributes()`, the resulting array contains the DN with key ‘dn’.
 `toJson(bool $includeSystemAttributes) : string`                  | Returns a JSON representation of the current node using `toArray()`.
 `getData(bool $includeSystemAttributes) : array`                  | Returns the node's attributes. The array contains all attributes in its internal format (no conversion).
@@ -411,14 +411,14 @@ Method signature                                                  | Description
 
 #### OpenLDAP
 
-Additionally the common methods above apply to instances of `Zend\Ldap\Node\RootDse\OpenLdap`.
+Additionally the common methods above apply to instances of `Laminas\Ldap\Node\RootDse\OpenLdap`.
 
 Refer to [LDAP Operational Attributes and Objects](http://www.zytrax.com/books/ldap/ch3/#operational)
 specification for information on the attributes of OpenLDAP RootDSE.
 
 Method signature                               | Description
 ---------------------------------------------- | -----------
-`getServerType() : int`                        | Gets the server type. Returns `Zend\Ldap\Node\RootDse::SERVER_TYPE_OPENLDAP`
+`getServerType() : int`                        | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_OPENLDAP`
 `getConfigContext() : string|null`             | Gets the `configContext`.
 `getMonitorContext() : string|null`            | Gets the `monitorContext`.
 `supportsControl(string|array $oids) : bool`   | Determines if the control is supported.
@@ -428,7 +428,7 @@ Method signature                               | Description
 #### ActiveDirectory
 
 Additionally the common methods above apply to instances of
-`Zend\Ldap\Node\RootDse\ActiveDirectory`.
+`Laminas\Ldap\Node\RootDse\ActiveDirectory`.
 
 Refer to the [RootDSE](http://msdn.microsoft.com/en-us/library/ms684291(VS.85).aspx)
 specification for information on the attributes of Microsoft ActiveDirectory
@@ -436,7 +436,7 @@ RootDSE.
 
 Method signature                                   | Description
 -------------------------------------------------- | -----------
-`getServerType() : int`                            | Gets the server type. Returns `Zend\Ldap\Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY`
+`getServerType() : int`                            | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY`
 `getConfigurationNamingContext() : string|null`    | Gets the `configurationNamingContext`.
 `getCurrentTime() : string|null`                   | Gets the `currentTime`.
 `getDefaultNamingContext() : string|null`          | Gets the `defaultNamingContext`.
@@ -459,14 +459,14 @@ Method signature                                   | Description
 #### eDirectory
 
 Additionally the common methods above apply to instances of
-`Zend\Ldap\Node\RootDse\eDirectory`.
+`Laminas\Ldap\Node\RootDse\eDirectory`.
 
 Refer to [Getting Information about the LDAP Server](http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html)
 for information on the attributes of Novell eDirectory RootDSE.
 
 Method signature                                     | Description
 ---------------------------------------------------- | -----------
-`getServerType() : int`                              | Gets the server type. Returns `Zend\Ldap\Node\RootDse::SERVER_TYPE_EDIRECTORY`
+`getServerType() : int`                              | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_EDIRECTORY`
 `supportsExtension(string|array $oids) : bool`       | Determines if the extension is supported.
 `getVendorName() : string|null`                      | Gets the `vendorName`.
 `getVendorVersion() : string|null`                   | Gets the `vendorVersion`.
@@ -479,11 +479,11 @@ Method signature                                     | Description
 `getStatisticsAbandonOps() : string|null`            | Gets the server statistics `abandonOps`.
 `getStatisticsWholeSubtreeSearchOps() : string|null` | Gets the server statistics `wholeSubtreeSearchOps`.
 
-### Zend\\Ldap\\Node\\Schema
+### Laminas\\Ldap\\Node\\Schema
 
 The following methods are available on all vendor-specific subclasses.
 
-`Zend\Ldap\Node\Schema` includes the magic property accessors `__get()` and `__isset()` to access
+`Laminas\Ldap\Node\Schema` includes the magic property accessors `__get()` and `__isset()` to access
 the attributes by their name. They proxy to `Schema::getAttribute()` and
 `Schema::existsAttribute()` respectively. `__set()` and `__unset()` are also
 implemented, but they throw a `BadMethodCallException`, as modifications are not allowed on RootDSE
@@ -492,14 +492,14 @@ nodes. Furthermore the class implements `ArrayAccess` for array-style access to 
 
 Method signature                                                  | Description
 ----------------------------------------------------------------- | -----------
-`getDn() : Dn`                                                    | Gets the DN of the current node as a `Zend\Ldap\Dn` instance.
+`getDn() : Dn`                                                    | Gets the DN of the current node as a `Laminas\Ldap\Dn` instance.
 `getDnString(string $caseFold) : string`                          | Gets the DN of the current node as a string.
 `getDnArray(string $caseFold) : array`                            | Gets the DN of the current node as an array.
 `getRdnString(string $caseFold) : string`                         | Gets the RDN of the current node as a string.
 `getRdnArray(string $caseFold) : array`                           | Gets the RDN of the current node as an array.
 `getObjectClass() : array`                                        | Returns the `objectClass` of the node.
-`toString() : string`                                             | Returns the DN of the current node; proxies to `Zend\Ldap\Dn::getDnString()`.
-`__toString() : string`                                           | Casts to string representation; proxies to `Zend\Ldap\Dn::toString()`.
+`toString() : string`                                             | Returns the DN of the current node; proxies to `Laminas\Ldap\Dn::getDnString()`.
+`__toString() : string`                                           | Casts to string representation; proxies to `Laminas\Ldap\Dn::toString()`.
 `toArray(bool $includeSystemAttributes) : array`                  | Returns an array representation of the current node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array. Unlike `Node\Schema::getAttributes()`, the resulting array contains the DN with key `dn`.
 `toJson(bool $includeSystemAttributes) : string`                  | Returns a JSON representation of the current node using `Node\Schema::toArray()`.
 `getData(bool $includeSystemAttributes) : array`                  | Returns the node’s attributes. The array contains all attributes in its internal format (no conversion).
@@ -512,7 +512,7 @@ Method signature                                                  | Description
 `reload(Ldap $ldap) : void`                                       | Reloads the current node’s attributes from the given LDAP server.
 `static create(Ldap $ldap) : Node\Schema`                         | Factory method to create the `Schema` node.
 `getAttributeTypes() : array`                                     | Gets the attribute types as an array.
-`getObjectClasses() : array`                                      | Gets the object classes as an array of `Zend\Ldap\Node\Schema\ObjectClass\ObjectClassInterface` instances.
+`getObjectClasses() : array`                                      | Gets the object classes as an array of `Laminas\Ldap\Node\Schema\ObjectClass\ObjectClassInterface` instances.
 
 #### AttributeTypeInterface
 
@@ -540,7 +540,7 @@ Method signature             | Description
 #### AbstractItem
 
 Classes representing attribute types and object classes extend
-`Zend\Ldap\Node\Schema\AbstractItem`, which provides some core methods to access
+`Laminas\Ldap\Node\Schema\AbstractItem`, which provides some core methods to access
 arbitrary attributes on the underlying LDAP node.  `AbstractItem` includes the
 magic property accessors `__get()` and `__isset()` to access the attributes by
 their name. Furthermore the class implements `ArrayAccess` for
@@ -556,7 +556,7 @@ Method signature    | Description
 #### OpenLDAP
 
 Additionally the common methods above apply to instances of
-`Zend\Ldap\Node\Schema\OpenLDAP`.
+`Laminas\Ldap\Node\Schema\OpenLDAP`.
 
 Method signature               | Description
 ------------------------------ | -----------
@@ -564,17 +564,17 @@ Method signature               | Description
 `getMatchingRules() : array`   | Gets the matching rules.
 `getMatchingRuleUse() : array` | Gets the matching rule use.
 
-`Zend\Ldap\Node\Schema\AttributeType\OpenLDAP` has the following API:
+`Laminas\Ldap\Node\Schema\AttributeType\OpenLDAP` has the following API:
 
 Method signature                                        | Description
 ------------------------------------------------------- | -----------
 `getParent() : Node\Schema\AttributeType\OpenLdap|null` | Returns the parent attribute type in the inheritance tree if one exists.
 
-`Zend\Ldap\Node\Schema\ObjectClass\OpenLDAP` has the following API:
+`Laminas\Ldap\Node\Schema\ObjectClass\OpenLDAP` has the following API:
 
 Method signature       | Description
 ---------------------- | -----------
-`getParents() : array` | Returns the parent object classes in the inheritance tree if one exists. The returned array is an array of `Zend\Ldap\Node\Schema\ObjectClass\OpenLdap`.
+`getParents() : array` | Returns the parent object classes in the inheritance tree if one exists. The returned array is an array of `Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap`.
 
 #### ActiveDirectory
 
@@ -585,12 +585,12 @@ Method signature       | Description
 > the ActiveDirectory schema repository, schema browsing is currently **not**
 > available for Microsoft ActiveDirectory servers.
 
-None of `Zend\Ldap\Node\Schema\ActiveDirectory`,
-`Zend\Ldap\Node\Schema\AttributeType\ActiveDirectory`, or
-`Zend\Ldap\Node\Schema\\ObjectClass\ActiveDirectory` provide additional
+None of `Laminas\Ldap\Node\Schema\ActiveDirectory`,
+`Laminas\Ldap\Node\Schema\AttributeType\ActiveDirectory`, or
+`Laminas\Ldap\Node\Schema\\ObjectClass\ActiveDirectory` provide additional
 methods.
 
-### Zend\\Ldap\\Ldif\\Encoder
+### Laminas\\Ldap\\Ldif\\Encoder
 
 Method signature                                            | Description
 ----------------------------------------------------------- | -----------
