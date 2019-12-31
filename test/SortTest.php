@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap\Collection\DefaultIterator;
+use Laminas\Ldap\Collection\DefaultIterator;
 
 class SortTest extends AbstractOnlineTestCase
 {
@@ -32,7 +31,7 @@ class SortTest extends AbstractOnlineTestCase
     {
         $search = ldap_search(
             $this->getLDAP()->getResource(),
-            getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'),
+            getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             '(l=*)',
             ['l']
         );
@@ -56,7 +55,7 @@ class SortTest extends AbstractOnlineTestCase
 
         $search = ldap_search(
             $this->getLDAP()->getResource(),
-            getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'),
+            getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             '(l=*)',
             ['l']
         );
@@ -100,7 +99,7 @@ class SortTest extends AbstractOnlineTestCase
 
         $search = ldap_search(
             $this->getLDAP()->getResource(),
-            getenv('TESTS_ZEND_LDAP_WRITEABLE_SUBTREE'),
+            getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             '(l=*)',
             ['l']
         );

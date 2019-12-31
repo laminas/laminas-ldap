@@ -1,22 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Collection;
+namespace Laminas\Ldap\Collection;
 
 use Countable;
 use Iterator;
-use Zend\Ldap;
-use Zend\Ldap\Exception;
-use Zend\Stdlib\ErrorHandler;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
+use Laminas\Stdlib\ErrorHandler;
 
 /**
- * Zend\Ldap\Collection\DefaultIterator is the default collection iterator implementation
+ * Laminas\Ldap\Collection\DefaultIterator is the default collection iterator implementation
  * using ext/ldap
  */
 class DefaultIterator implements Iterator, Countable
@@ -28,7 +27,7 @@ class DefaultIterator implements Iterator, Countable
     /**
      * LDAP Connection
      *
-     * @var \Zend\Ldap\Ldap
+     * @var \Laminas\Ldap\Ldap
      */
     protected $ldap = null;
 
@@ -84,9 +83,9 @@ class DefaultIterator implements Iterator, Countable
     /**
      * Constructor.
      *
-     * @param  \Zend\Ldap\Ldap $ldap
+     * @param  \Laminas\Ldap\Ldap $ldap
      * @param  resource        $resultId
-     * @throws \Zend\Ldap\Exception\LdapException if no entries was found.
+     * @throws \Laminas\Ldap\Exception\LdapException if no entries was found.
      * @return DefaultIterator
      */
     public function __construct(Ldap\Ldap $ldap, $resultId)
@@ -148,7 +147,7 @@ class DefaultIterator implements Iterator, Countable
     /**
      * Gets the current LDAP connection.
      *
-     * @return \Zend\Ldap\Ldap
+     * @return \Laminas\Ldap\Ldap
      */
     public function getLDAP()
     {
@@ -159,9 +158,9 @@ class DefaultIterator implements Iterator, Countable
      * Sets the attribute name treatment.
      *
      * Can either be one of the following constants
-     * - Zend\Ldap\Collection\DefaultIterator::ATTRIBUTE_TO_LOWER
-     * - Zend\Ldap\Collection\DefaultIterator::ATTRIBUTE_TO_UPPER
-     * - Zend\Ldap\Collection\DefaultIterator::ATTRIBUTE_NATIVE
+     * - Laminas\Ldap\Collection\DefaultIterator::ATTRIBUTE_TO_LOWER
+     * - Laminas\Ldap\Collection\DefaultIterator::ATTRIBUTE_TO_UPPER
+     * - Laminas\Ldap\Collection\DefaultIterator::ATTRIBUTE_NATIVE
      * or a valid callback accepting the attribute's name as it's only
      * argument and returning the new attribute's name.
      *
@@ -223,7 +222,7 @@ class DefaultIterator implements Iterator, Countable
      * Implements Iterator
      *
      * @return array|null
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      */
     public function current()
     {
@@ -282,7 +281,7 @@ class DefaultIterator implements Iterator, Countable
      * Return the result item key
      * Implements Iterator
      *
-     * @throws \Zend\Ldap\Exception\LdapException
+     * @throws \Laminas\Ldap\Exception\LdapException
      * @return string|null
      */
     public function key()
