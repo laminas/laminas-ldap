@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -19,50 +18,50 @@ use Zend\Ldap\Exception;
  */
 
 /**
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 class BindTest extends \PHPUnit_Framework_TestCase
 {
     protected $options = null;
-    protected $principalName = TESTS_ZEND_LDAP_PRINCIPAL_NAME;
-    protected $altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
+    protected $principalName = TESTS_LAMINAS_LDAP_PRINCIPAL_NAME;
+    protected $altUsername = TESTS_LAMINAS_LDAP_ALT_USERNAME;
     protected $bindRequiresDn = false;
 
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
-            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
+        if (!constant('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
         }
 
         $this->options = array(
-            'host'     => TESTS_ZEND_LDAP_HOST,
-            'username' => TESTS_ZEND_LDAP_USERNAME,
-            'password' => TESTS_ZEND_LDAP_PASSWORD,
-            'baseDn'   => TESTS_ZEND_LDAP_BASE_DN,
+            'host'     => TESTS_LAMINAS_LDAP_HOST,
+            'username' => TESTS_LAMINAS_LDAP_USERNAME,
+            'password' => TESTS_LAMINAS_LDAP_PASSWORD,
+            'baseDn'   => TESTS_LAMINAS_LDAP_BASE_DN,
         );
-        if (defined('TESTS_ZEND_LDAP_PORT')) {
-            $this->options['port'] = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_LAMINAS_LDAP_PORT')) {
+            $this->options['port'] = TESTS_LAMINAS_LDAP_PORT;
         }
-        if (defined('TESTS_ZEND_LDAP_USE_START_TLS')) {
-            $this->options['useStartTls'] = TESTS_ZEND_LDAP_USE_START_TLS;
+        if (defined('TESTS_LAMINAS_LDAP_USE_START_TLS')) {
+            $this->options['useStartTls'] = TESTS_LAMINAS_LDAP_USE_START_TLS;
         }
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $this->options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $this->options['useSsl'] = TESTS_LAMINAS_LDAP_USE_SSL;
         }
-        if (defined('TESTS_ZEND_LDAP_BIND_REQUIRES_DN')) {
-            $this->options['bindRequiresDn'] = TESTS_ZEND_LDAP_BIND_REQUIRES_DN;
+        if (defined('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')) {
+            $this->options['bindRequiresDn'] = TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN;
         }
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT')) {
-            $this->options['accountFilterFormat'] = TESTS_ZEND_LDAP_ACCOUNT_FILTER_FORMAT;
+        if (defined('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')) {
+            $this->options['accountFilterFormat'] = TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT;
         }
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME')) {
-            $this->options['accountDomainName'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME;
+        if (defined('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')) {
+            $this->options['accountDomainName'] = TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME;
         }
-        if (defined('TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
-            $this->options['accountDomainNameShort'] = TESTS_ZEND_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
+        if (defined('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
+            $this->options['accountDomainNameShort'] = TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT;
         }
-        if (defined('TESTS_ZEND_LDAP_ALT_USERNAME')) {
-            $this->altUsername = TESTS_ZEND_LDAP_ALT_USERNAME;
+        if (defined('TESTS_LAMINAS_LDAP_ALT_USERNAME')) {
+            $this->altUsername = TESTS_LAMINAS_LDAP_ALT_USERNAME;
         }
 
         if (isset($this->options['bindRequiresDn'])) {
@@ -225,7 +224,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
     public function testBindWithoutDnUsernameAndDnRequired()
     {
         $options                   = $this->options;
-        $options['username']       = TESTS_ZEND_LDAP_ALT_USERNAME;
+        $options['username']       = TESTS_LAMINAS_LDAP_ALT_USERNAME;
         $options['bindRequiresDn'] = true;
         $ldap                      = new Ldap\Ldap($options);
         try {
@@ -239,7 +238,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-8259
+     * @group Laminas-8259
      */
     public function testBoundUserIsFalseIfNotBoundToLDAP()
     {
@@ -248,24 +247,24 @@ class BindTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-8259
+     * @group Laminas-8259
      */
     public function testBoundUserIsReturnedAfterBinding()
     {
         $ldap = new Ldap\Ldap($this->options);
         $ldap->bind();
-        $this->assertEquals(TESTS_ZEND_LDAP_USERNAME, $ldap->getBoundUser());
+        $this->assertEquals(TESTS_LAMINAS_LDAP_USERNAME, $ldap->getBoundUser());
     }
 
     /**
-     * @group ZF-8259
+     * @group Laminas-8259
      */
     public function testResourceIsAlwaysReturned()
     {
         $ldap = new Ldap\Ldap($this->options);
         $this->assertNotNull($ldap->getResource());
         $this->assertTrue(is_resource($ldap->getResource()));
-        $this->assertEquals(TESTS_ZEND_LDAP_USERNAME, $ldap->getBoundUser());
+        $this->assertEquals(TESTS_LAMINAS_LDAP_USERNAME, $ldap->getBoundUser());
     }
 
     /**
@@ -274,7 +273,7 @@ class BindTest extends \PHPUnit_Framework_TestCase
     public function testBindWithNullPassword()
     {
         $ldap = new Ldap\Ldap($this->options);
-        $this->setExpectedException('Zend\Ldap\Exception\LdapException', 'Invalid credentials');
+        $this->setExpectedException('Laminas\Ldap\Exception\LdapException', 'Invalid credentials');
         $ldap->bind($this->altUsername, "\0invalidpassword");
     }
 }
