@@ -1,17 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -20,10 +18,10 @@ use Zend\Ldap\Exception;
  */
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 class ConnectTest extends \PHPUnit_Framework_TestCase
 {
@@ -31,16 +29,16 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (!constant('TESTS_ZEND_LDAP_ONLINE_ENABLED')) {
-            $this->markTestSkipped("Zend_Ldap online tests are not enabled");
+        if (!constant('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
+            $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
         }
 
-        $this->options = array('host' => TESTS_ZEND_LDAP_HOST);
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
-            $this->options['port'] = TESTS_ZEND_LDAP_PORT;
+        $this->options = array('host' => TESTS_LAMINAS_LDAP_HOST);
+        if (defined('TESTS_LAMINAS_LDAP_PORT') && TESTS_LAMINAS_LDAP_PORT != 389) {
+            $this->options['port'] = TESTS_LAMINAS_LDAP_PORT;
         }
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $this->options['useSsl'] = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $this->options['useSsl'] = TESTS_LAMINAS_LDAP_USE_SSL;
         }
     }
 
@@ -93,14 +91,14 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
 
     public function testExplicitParamsConnect()
     {
-        $host = TESTS_ZEND_LDAP_HOST;
+        $host = TESTS_LAMINAS_LDAP_HOST;
         $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
-            $port = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_LAMINAS_LDAP_PORT') && TESTS_LAMINAS_LDAP_PORT != 389) {
+            $port = TESTS_LAMINAS_LDAP_PORT;
         }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $useSsl = TESTS_LAMINAS_LDAP_USE_SSL;
         }
 
         $ldap = new Ldap\Ldap();
@@ -116,10 +114,10 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     public function testExplicitPortConnect()
     {
         $port = 389;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT) {
-            $port = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_LAMINAS_LDAP_PORT') && TESTS_LAMINAS_LDAP_PORT) {
+            $port = TESTS_LAMINAS_LDAP_PORT;
         }
-        if (defined('TESTS_ZEND_LDAP_USE_SSL') && TESTS_ZEND_LDAP_USE_SSL) {
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL') && TESTS_LAMINAS_LDAP_USE_SSL) {
             $port = 636;
         }
 
@@ -136,14 +134,14 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     public function testExplicitNetworkTimeoutConnect()
     {
         $networkTimeout = 1;
-        $host           = TESTS_ZEND_LDAP_HOST;
+        $host           = TESTS_LAMINAS_LDAP_HOST;
         $port           = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
-            $port = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_LAMINAS_LDAP_PORT') && TESTS_LAMINAS_LDAP_PORT != 389) {
+            $port = TESTS_LAMINAS_LDAP_PORT;
         }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $useSsl = TESTS_LAMINAS_LDAP_USE_SSL;
         }
 
         $ldap = new Ldap\Ldap();
@@ -223,18 +221,18 @@ class ConnectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @group ZF-8274
+     * @group Laminas-8274
      */
     public function testConnectWithUri()
     {
-        $host = TESTS_ZEND_LDAP_HOST;
+        $host = TESTS_LAMINAS_LDAP_HOST;
         $port = 0;
-        if (defined('TESTS_ZEND_LDAP_PORT') && TESTS_ZEND_LDAP_PORT != 389) {
-            $port = TESTS_ZEND_LDAP_PORT;
+        if (defined('TESTS_LAMINAS_LDAP_PORT') && TESTS_LAMINAS_LDAP_PORT != 389) {
+            $port = TESTS_LAMINAS_LDAP_PORT;
         }
         $useSsl = false;
-        if (defined('TESTS_ZEND_LDAP_USE_SSL')) {
-            $useSsl = TESTS_ZEND_LDAP_USE_SSL;
+        if (defined('TESTS_LAMINAS_LDAP_USE_SSL')) {
+            $useSsl = TESTS_LAMINAS_LDAP_USE_SSL;
         }
         if ($useSsl) {
             $host = 'ldaps://' . $host;

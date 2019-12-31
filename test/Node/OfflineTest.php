@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Node;
+namespace LaminasTest\Ldap\Node;
 
-use Zend\Ldap;
-use ZendTest\Ldap as TestLdap;
+use Laminas\Ldap;
+use LaminasTest\Ldap as TestLdap;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  * @group      Ldap\Node
  */
 class OfflineTest extends TestLdap\AbstractTestCase
@@ -27,8 +25,8 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $tsValue = date('YmdHisO', $timestamp);
 
         if (date('O', strtotime('20120101'))) {
-            // Local timezone is +0000 when DST is off. Zend_Ldap converts
-            // +0000 to "Z" (see Zend\Ldap\Converter\Converter:toLdapDateTime()), so
+            // Local timezone is +0000 when DST is off. Laminas_Ldap converts
+            // +0000 to "Z" (see Laminas\Ldap\Converter\Converter:toLdapDateTime()), so
             // take account of that here
             $tsValue = str_replace('+0000', 'Z', $tsValue);
         }
@@ -47,7 +45,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     {
         $data = $this->createTestArrayData();
         $node = Ldap\Node::fromArray($data);
-        $this->assertInstanceOf('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
         $this->assertFalse($node->isAttached());
         $this->assertFalse($node->willBeDeleted());
         $this->assertFalse($node->willBeMoved());
@@ -59,12 +57,12 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $data       = $this->createTestArrayData();
         $data['dn'] = Ldap\Dn::fromString($data['dn']);
         $node       = Ldap\Node::fromArray($data);
-        $this->assertInstanceOf('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
         $this->assertFalse($node->isAttached());
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testCreateFromArrayMissingDn()
     {
@@ -74,7 +72,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testCreateFromArrayIllegalDn()
     {
@@ -84,7 +82,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testCreateFromArrayMalformedDn()
     {
@@ -98,7 +96,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $data       = $this->createTestArrayData();
         $data['dn'] = Ldap\Dn::fromString($data['dn']);
         $node       = Ldap\Node::fromArray($data);
-        $this->assertInstanceOf('Zend\Ldap\Node', $node);
+        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
         $this->assertFalse($node->isAttached());
         unset($data['dn']);
         $this->assertEquals($data, $node->getData());
@@ -319,7 +317,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testIllegalAttributeAccessRdnAttributeSet()
     {
@@ -328,7 +326,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @expectedException Zend\Ldap\Exception\ExceptionInterface
+     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
      */
     public function testIllegalAttributeAccessDnSet()
     {
@@ -594,7 +592,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * ZF-11611
+     * Laminas-11611
      */
     public function testRdnAttributesHandleMultiValuedAttribute()
     {
@@ -617,7 +615,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * ZF-11611
+     * Laminas-11611
      */
     public function testRdnAttributesHandleMultiValuedAttribute2()
     {
@@ -638,7 +636,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * ZF-11611
+     * Laminas-11611
      */
     public function testRdnAttributesHandleMultiValuedAttribute3()
     {

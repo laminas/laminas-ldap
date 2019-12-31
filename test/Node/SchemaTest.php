@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Node;
+namespace LaminasTest\Ldap\Node;
 
-use Zend\Ldap\Node;
-use ZendTest\Ldap as TestLdap;
+use Laminas\Ldap\Node;
+use LaminasTest\Ldap as TestLdap;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Node
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Node
  */
 class SchemaTest extends TestLdap\AbstractOnlineTestCase
 {
@@ -109,7 +107,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
         $this->assertArrayHasKey('organizationalUnit', $objectClasses);
         $ou = $objectClasses['organizationalUnit'];
-        $this->assertInstanceOf('Zend\Ldap\Node\Schema\ObjectClass\OpenLdap', $ou);
+        $this->assertInstanceOf('Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap', $ou);
         $this->assertEquals('organizationalUnit', $ou->getName());
         $this->assertEquals('2.5.6.5', $ou->getOid());
         $this->assertEquals(array('objectClass', 'ou'), $ou->getMustContain());
@@ -121,7 +119,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
                                  'userPassword', 'x121Address'), $ou->getMayContain()
         );
         $this->assertEquals('RFC2256: an organizational unit', $ou->getDescription());
-        $this->assertEquals(\Zend\Ldap\Node\Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
+        $this->assertEquals(\Laminas\Ldap\Node\Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
         $this->assertEquals(array('top'), $ou->getParentClasses());
 
         $this->assertEquals('2.5.6.5', $ou->oid);
@@ -154,7 +152,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
         $this->assertArrayHasKey('ou', $attributeTypes);
         $ou = $attributeTypes['ou'];
-        $this->assertInstanceOf('Zend\Ldap\Node\Schema\AttributeType\OpenLdap', $ou);
+        $this->assertInstanceOf('Laminas\Ldap\Node\Schema\AttributeType\OpenLdap', $ou);
         $this->assertEquals('ou', $ou->getName());
         $this->assertEquals('2.5.4.11', $ou->getOid());
         $this->assertEquals('1.3.6.1.4.1.1466.115.121.1.15', $ou->getSyntax());

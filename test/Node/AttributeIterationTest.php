@@ -1,23 +1,21 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Ldap
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap\Node;
+namespace LaminasTest\Ldap\Node;
 
-use ZendTest\Ldap as TestLdap;
+use LaminasTest\Ldap as TestLdap;
 
 /**
- * @category   Zend
- * @package    Zend_Ldap
+ * @category   Laminas
+ * @package    Laminas_Ldap
  * @subpackage UnitTests
- * @group      Zend_Ldap
- * @group      Zend_Ldap_Node
+ * @group      Laminas_Ldap
+ * @group      Laminas_Ldap_Node
  */
 class AttributeIterationTest extends TestLdap\AbstractTestCase
 {
