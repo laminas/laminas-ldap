@@ -1,21 +1,20 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Filter;
+namespace Laminas\Ldap\Filter;
 
 /**
- * Zend\Ldap\Filter\MaskFilter provides a simple string filter to be used with a mask.
+ * Laminas\Ldap\Filter\MaskFilter provides a simple string filter to be used with a mask.
  */
 class MaskFilter extends StringFilter
 {
     /**
-     * Creates a Zend\Ldap\Filter\MaskFilter.
+     * Creates a Laminas\Ldap\Filter\MaskFilter.
      *
      * @param string $mask
      * @param string $value,...
