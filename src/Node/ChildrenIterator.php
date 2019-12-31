@@ -1,27 +1,26 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Ldap\Node;
+namespace Laminas\Ldap\Node;
 
 use ArrayAccess;
 use Countable;
 use Iterator;
+use Laminas\Ldap;
 use RecursiveIterator;
-use Zend\Ldap;
 
 /**
- * Zend\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
+ * Laminas\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
  */
 class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayAccess
 {
     /**
-     * An array of Zend\Ldap\Node objects
+     * An array of Laminas\Ldap\Node objects
      *
      * @var array
      */
@@ -31,7 +30,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * Constructor.
      *
      * @param array $data
-     * @return \Zend\Ldap\Node\ChildrenIterator
+     * @return \Laminas\Ldap\Node\ChildrenIterator
      */
     public function __construct(array $data)
     {
@@ -53,7 +52,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * Return the current child.
      * Implements Iterator
      *
-     * @return \Zend\Ldap\Node
+     * @return \Laminas\Ldap\Node
      */
     public function current()
     {

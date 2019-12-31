@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-ldap for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-ldap/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Ldap;
+namespace LaminasTest\Ldap;
 
-use Zend\Ldap;
-use Zend\Ldap\Exception;
-use Zend\Ldap\Node;
+use Laminas\Ldap;
+use Laminas\Ldap\Exception;
+use Laminas\Ldap\Node;
 
 /**
- * @group      Zend_Ldap
+ * @group      Laminas_Ldap
  */
 
 class ChangePasswordTest extends AbstractOnlineTestCase
@@ -40,7 +39,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
         try {
             $this->getLDAP()->add($dn, $data);
 
-            $this->assertInstanceOf('Zend\Ldap\Ldap', $this->getLDAP()->bind($dn, $password));
+            $this->assertInstanceOf('Laminas\Ldap\Ldap', $this->getLDAP()->bind($dn, $password));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
@@ -93,7 +92,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
                 );
             }
 
-            $this->assertInstanceOf('Zend\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf('Laminas\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
@@ -135,7 +134,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
         try {
             $this->getLDAP()->add($dn, $data);
 
-            $this->assertInstanceOf('Zend\Ldap', $this->getLDAP()->bind($dn, $password));
+            $this->assertInstanceOf('Laminas\Ldap', $this->getLDAP()->bind($dn, $password));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
@@ -194,7 +193,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
                 );
             }
 
-            $this->assertInstanceOf('\Zend\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf('\Laminas\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
