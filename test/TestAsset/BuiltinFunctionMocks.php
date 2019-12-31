@@ -1,5 +1,5 @@
 <?php
-namespace ZendTest\Ldap\TestAsset;
+namespace LaminasTest\Ldap\TestAsset;
 
 class BuiltinFunctionMocks
 {
@@ -10,7 +10,7 @@ class BuiltinFunctionMocks
     public static function createMocks()
     {
         $ldap_connect_mock = new \phpmock\Mock(
-            'Zend\\Ldap',
+            'Laminas\\Ldap',
             'ldap_connect',
             function () {
                 static $a_resource = null;
@@ -22,7 +22,7 @@ class BuiltinFunctionMocks
         );
 
         $ldap_bind_mock = new \phpmock\Mock(
-            'Zend\\Ldap',
+            'Laminas\\Ldap',
             'ldap_bind',
             function () {
                 return true;
@@ -30,7 +30,7 @@ class BuiltinFunctionMocks
         );
 
         $ldap_set_option_mock = new \phpmock\Mock(
-            'Zend\\Ldap',
+            'Laminas\\Ldap',
             'ldap_set_option',
             function () {
                 return true;

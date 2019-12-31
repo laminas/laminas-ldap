@@ -10,6 +10,6 @@ nav:
         - "Object-oriented access to the LDAP tree": node.md
         - "Getting information from the LDAP server": server.md
         - "Serializing LDAP data to and from LDIF": ldif.md
-site_name: zend-ldap
+site_name: laminas-ldap
 site_description: "Provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory"
-repo_url: 'https://github.com/zendframework/zend-ldap'
+repo_url: 'https://github.com/laminas/laminas-ldap'

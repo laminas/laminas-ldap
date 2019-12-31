@@ -1,44 +1,19 @@
 {
-    "name": "zendframework/zend-ldap",
+    "name": "laminas/laminas-ldap",
     "description": "Provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
-        "zendframework",
+        "laminas",
         "ldap"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-ldap/",
-        "issues": "https://github.com/zendframework/zend-ldap/issues",
-        "source": "https://github.com/zendframework/zend-ldap",
-        "rss": "https://github.com/zendframework/zend-ldap/releases.atom",
-        "chat": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "ext-ldap": "*"
-    },
-    "require-dev": {
-        "php-mock/php-mock-phpunit": "^1.1.2 || ^2.1.1",
-        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-config": "^2.5",
-        "zendframework/zend-eventmanager": "^2.6.3 || ^3.0.1",
-        "zendframework/zend-stdlib": "^2.7 || ^3.0"
-    },
-    "suggest": {
-        "zendframework/zend-eventmanager": "Zend\\EventManager component"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Ldap\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Ldap\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-ldap/",
+        "issues": "https://github.com/laminas/laminas-ldap/issues",
+        "source": "https://github.com/laminas/laminas-ldap",
+        "rss": "https://github.com/laminas/laminas-ldap/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -47,6 +22,32 @@
         "branch-alias": {
             "dev-master": "2.10.x-dev",
             "dev-develop": "2.11.x-dev"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "ext-ldap": "*",
+        "laminas/laminas-zendframework-bridge": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-config": "^2.5",
+        "laminas/laminas-eventmanager": "^2.6.3 || ^3.0.1",
+        "laminas/laminas-stdlib": "^2.7 || ^3.0",
+        "php-mock/php-mock-phpunit": "^1.1.2 || ^2.1.1",
+        "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2"
+    },
+    "suggest": {
+        "laminas/laminas-eventmanager": "Laminas\\EventManager component"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Ldap\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Ldap\\": "test/"
         }
     },
     "scripts": {
@@ -58,5 +59,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-ldap": "self.version"
     }
 }

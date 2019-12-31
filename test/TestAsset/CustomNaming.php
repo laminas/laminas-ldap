@@ -1,6 +1,6 @@
 <?php
 
-namespace ZendTest\Ldap\TestAsset;
+namespace LaminasTest\Ldap\TestAsset;
 
 class CustomNaming
 {
