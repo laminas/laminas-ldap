@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -467,17 +471,16 @@ methods as well as methods to operate on the LDAP tree.</p>
 </table></div>
 <h4>search()</h4>
 <p>The <code>search()</code> signature is as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>search(</span>
-<span class=x>    string|Filter\AbstractFilter $filter,</span>
-<span class=x>    string|Dn $basedn,</span>
-<span class=x>    int $scope,</span>
-<span class=x>    array $attributes,</span>
-<span class=x>    string $sort,</span>
-<span class=x>    string $collectionClass,</span>
-<span class=x>    int $sizelimit,</span>
-<span class=x>    int $timelimit</span>
-<span class=x>) : Collection</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>search(
+    string|Filter\AbstractFilter $filter,
+    string|Dn $basedn,
+    int $scope,
+    array $attributes,
+    string $sort,
+    string $collectionClass,
+    int $sizelimit,
+    int $timelimit
+) : Collection</code></pre>
 <p>where:</p>
 <ul>
 <li><code>$filter</code>: The filter string to be used in the search, e.g. <code>(objectClass=posixAccount)</code>.</li>
@@ -510,16 +513,15 @@ methods as well as methods to operate on the LDAP tree.</p>
   Setting this to <code>0</code> means no limit.</li>
 </ul>
 <h4>searchEntries()</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>searchEntries(</span>
-<span class=x>    string|Dn $basedn,</span>
-<span class=x>    int $scope,</span>
-<span class=x>    array $attributes,</span>
-<span class=x>    string $sort,</span>
-<span class=x>    bool $reverseSort,</span>
-<span class=x>    int $sizelimit,</span>
-<span class=x>    int $timelimit</span>
-<span class=x>) : array</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>searchEntries(
+    string|Dn $basedn,
+    int $scope,
+    array $attributes,
+    string $sort,
+    bool $reverseSort,
+    int $sizelimit,
+    int $timelimit
+) : array</code></pre>
 <p>Arguments are essentially the same as for <a href="#search">search()</a>, with two
 differences:</p>
 <ul>
@@ -612,13 +614,12 @@ data types are converted using <code>Laminas\Ldap\Converter\Converter</code> met
 </table></div>
 <h4>setPassword()</h4>
 <p>The full signature of <code>setPassword()</code> is as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>static setPassword(</span>
-<span class=x>    array &amp;$data,</span>
-<span class=x>    string $password,</span>
-<span class=x>    string $hashType,</span>
-<span class=x>    string $attribName</span>
-<span class=x>) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>static setPassword(
+    array &amp;$data,
+    string $password,
+    string $hashType,
+    string $attribName
+) : void</code></pre>
 <p>Sets an LDAP password for the attribute <code>$attribName</code> in <code>$data</code>. <code>$attribName</code>
 defaults to <code>userPassword</code> which is the standard password attribute. The
 password hash can be specified with <code>$hashType</code>. The default value here is
@@ -626,14 +627,13 @@ password hash can be specified with <code>$hashType</code>. The default value he
 possibility.</p>
 <h4>setDateTimeAttribute()</h4>
 <p>The full signature of <code>setDateTimeAttribute()</code> is as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>static setDateTimeAttribute(</span>
-<span class=x>    array &amp;$data,</span>
-<span class=x>    string $attribName,</span>
-<span class=x>    int|array $value,</span>
-<span class=x>    boolean $utc,</span>
-<span class=x>    boolean $append</span>
-<span class=x>) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>static setDateTimeAttribute(
+    array &amp;$data,
+    string $attribName,
+    int|array $value,
+    boolean $utc,
+    boolean $append
+) : void</code></pre>
 <p>Sets the attribute <code>$attribName</code> in <code>$data</code> to the date/time value <code>$value</code>. if
 <code>$append</code> is <code>true</code> (<code>false</code> by default) <code>$value</code> will be appended to the
 attribute. <code>$value</code> can be an integer value or an array of integers.
@@ -641,12 +641,11 @@ Date-time-conversion according to <code>Converter\Converter::toLdapDateTime()</c
 take place.</p>
 <h4>getDateTimeAttribute()</h4>
 <p>The full signature of <code>getDateTimeAttribute()</code> is as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>static getDateTimeAttribute(</span>
-<span class=x>    array $data,</span>
-<span class=x>    string $attribName,</span>
-<span class=x>    int|null $index</span>
-<span class=x>) : array|int</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>static getDateTimeAttribute(
+    array $data,
+    string $attribName,
+    int|null $index
+) : array|int</code></pre>
 <p>Returns the date/time attribute <code>$attribName</code> from <code>$data</code>. If <code>$index</code> is
 <code>null</code> (default), an array will be returned containing all the date/time values
 for the given attribute. An empty array will be returned if the attribute does
@@ -960,14 +959,13 @@ tree-traversal.</p>
 </table></div>
 <h4>Node constructor</h4>
 <p>The full signature of the <code>Laminas\Ldap\Node</code> constructor is:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>__construct(</span>
-<span class=x>    string $attr,</span>
-<span class=x>    string $value,</span>
-<span class=x>    string $filtertype,</span>
-<span class=x>    string|null $prepend,</span>
-<span class=x>    string|null $append</span>
-<span class=x>) : void</span>
-</pre></div></p>
+<pre class=codehilite><code class=language-php>__construct(
+    string $attr,
+    string $value,
+    string $filtertype,
+    string|null $prepend,
+    string|null $append
+) : void</code></pre>
 <p>The resulting filter will be a concatenation of <code>$attr</code>, <code>$filtertype</code>,
 <code>$prepend</code>, <code>$value</code>, and <code>$append</code>. Normally this constructor is not needed, as
 all filters can be created by using the appropriate factory methods.</p>
@@ -1731,9 +1729,10 @@ methods.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -1770,7 +1769,7 @@ methods.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-ldap//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -1779,8 +1778,8 @@ methods.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-ldap//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-ldap/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

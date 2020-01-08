@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -246,128 +250,126 @@
 
     <h1 id="serializing-ldap-data-to-and-from-ldif">Serializing LDAP data to and from LDIF</h1>
 <h2 id="serialize-a-ldap-entry-to-ldif">Serialize a LDAP entry to LDIF</h2>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldif\Encoder;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldif\Encoder;
 
-<span class=x>$data = [</span>
-<span class=x>    &#39;dn&#39;                         =&gt; &#39;uid=rogasawara,ou=営業部,o=Airius&#39;,</span>
-<span class=x>    &#39;objectclass&#39;                =&gt; [</span>
-<span class=x>        &#39;top&#39;,</span>
-<span class=x>        &#39;person&#39;,</span>
-<span class=x>        &#39;organizationalPerson&#39;,</span>
-<span class=x>        &#39;inetOrgPerson&#39;,</span>
-<span class=x>    ],</span>
-<span class=x>    &#39;uid&#39;                        =&gt; [&#39;rogasawara&#39;],</span>
-<span class=x>    &#39;mail&#39;                       =&gt; [&#39;rogasawara@airius.co.jp&#39;],</span>
-<span class=x>    &#39;givenname;lang-ja&#39;          =&gt; [&#39;ロドニー&#39;],</span>
-<span class=x>    &#39;sn;lang-ja&#39;                 =&gt; [&#39;小笠原&#39;],</span>
-<span class=x>    &#39;cn;lang-ja&#39;                 =&gt; [&#39;小笠原 ロドニー&#39;],</span>
-<span class=x>    &#39;title;lang-ja&#39;              =&gt; [&#39;営業部 部長&#39;],</span>
-<span class=x>    &#39;preferredlanguage&#39;          =&gt; [&#39;ja&#39;],</span>
-<span class=x>    &#39;givenname&#39;                  =&gt; [&#39;ロドニー&#39;],</span>
-<span class=x>    &#39;sn&#39;                         =&gt; [&#39;小笠原&#39;],</span>
-<span class=x>    &#39;cn&#39;                         =&gt; [&#39;小笠原 ロドニー&#39;],</span>
-<span class=x>    &#39;title&#39;                      =&gt; [&#39;営業部 部長&#39;],</span>
-<span class=x>    &#39;givenname;lang-ja;phonetic&#39; =&gt; [&#39;ろどにー&#39;],</span>
-<span class=x>    &#39;sn;lang-ja;phonetic&#39;        =&gt; [&#39;おがさわら&#39;],</span>
-<span class=x>    &#39;cn;lang-ja;phonetic&#39;        =&gt; [&#39;おがさわら ろどにー&#39;],</span>
-<span class=x>    &#39;title;lang-ja;phonetic&#39;     =&gt; [&#39;えいぎょうぶ ぶちょう&#39;],</span>
-<span class=x>    &#39;givenname;lang-en&#39;          =&gt; [&#39;Rodney&#39;],</span>
-<span class=x>    &#39;sn;lang-en&#39;                 =&gt; [&#39;Ogasawara&#39;],</span>
-<span class=x>    &#39;cn;lang-en&#39;                 =&gt; [&#39;Rodney Ogasawara&#39;],</span>
-<span class=x>    &#39;title;lang-en&#39;              =&gt; [&#39;Sales, Director&#39;],</span>
-<span class=x>];</span>
+$data = [
+    'dn'                         =&gt; 'uid=rogasawara,ou=営業部,o=Airius',
+    'objectclass'                =&gt; [
+        'top',
+        'person',
+        'organizationalPerson',
+        'inetOrgPerson',
+    ],
+    'uid'                        =&gt; ['rogasawara'],
+    'mail'                       =&gt; ['rogasawara@airius.co.jp'],
+    'givenname;lang-ja'          =&gt; ['ロドニー'],
+    'sn;lang-ja'                 =&gt; ['小笠原'],
+    'cn;lang-ja'                 =&gt; ['小笠原 ロドニー'],
+    'title;lang-ja'              =&gt; ['営業部 部長'],
+    'preferredlanguage'          =&gt; ['ja'],
+    'givenname'                  =&gt; ['ロドニー'],
+    'sn'                         =&gt; ['小笠原'],
+    'cn'                         =&gt; ['小笠原 ロドニー'],
+    'title'                      =&gt; ['営業部 部長'],
+    'givenname;lang-ja;phonetic' =&gt; ['ろどにー'],
+    'sn;lang-ja;phonetic'        =&gt; ['おがさわら'],
+    'cn;lang-ja;phonetic'        =&gt; ['おがさわら ろどにー'],
+    'title;lang-ja;phonetic'     =&gt; ['えいぎょうぶ ぶちょう'],
+    'givenname;lang-en'          =&gt; ['Rodney'],
+    'sn;lang-en'                 =&gt; ['Ogasawara'],
+    'cn;lang-en'                 =&gt; ['Rodney Ogasawara'],
+    'title;lang-en'              =&gt; ['Sales, Director'],
+];
 
-<span class=x>$ldif = Encoder::encode($data, [&#39;sort&#39; =&gt; false, &#39;version&#39; =&gt; null]);</span>
+$ldif = Encoder::encode($data, ['sort' =&gt; false, 'version' =&gt; null]);
 
-<span class=x>/*</span>
-<span class=x>$ldif contains:</span>
-<span class=x>dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz</span>
-<span class=x>objectclass: top</span>
-<span class=x>objectclass: person</span>
-<span class=x>objectclass: organizationalPerson</span>
-<span class=x>objectclass: inetOrgPerson</span>
-<span class=x>uid: rogasawara</span>
-<span class=x>mail: rogasawara@airius.co.jp</span>
-<span class=x>givenname;lang-ja:: 44Ot44OJ44OL44O8</span>
-<span class=x>sn;lang-ja:: 5bCP56yg5Y6f</span>
-<span class=x>cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==</span>
-<span class=x>title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==</span>
-<span class=x>preferredlanguage: ja</span>
-<span class=x>givenname:: 44Ot44OJ44OL44O8</span>
-<span class=x>sn:: 5bCP56yg5Y6f</span>
-<span class=x>cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==</span>
-<span class=x>title:: 5Za25qWt6YOoIOmDqOmVtw==</span>
-<span class=x>givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8</span>
-<span class=x>sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ</span>
-<span class=x>cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==</span>
-<span class=x>title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==</span>
-<span class=x>givenname;lang-en: Rodney</span>
-<span class=x>sn;lang-en: Ogasawara</span>
-<span class=x>cn;lang-en: Rodney Ogasawara</span>
-<span class=x>title;lang-en: Sales, Director</span>
-<span class=x>*/</span>
-</pre></div></p>
+/*
+$ldif contains:
+dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: rogasawara
+mail: rogasawara@airius.co.jp
+givenname;lang-ja:: 44Ot44OJ44OL44O8
+sn;lang-ja:: 5bCP56yg5Y6f
+cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==
+preferredlanguage: ja
+givenname:: 44Ot44OJ44OL44O8
+sn:: 5bCP56yg5Y6f
+cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+title:: 5Za25qWt6YOoIOmDqOmVtw==
+givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8
+sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ
+cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==
+title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==
+givenname;lang-en: Rodney
+sn;lang-en: Ogasawara
+cn;lang-en: Rodney Ogasawara
+title;lang-en: Sales, Director
+*/</code></pre>
 <h2 id="deserialize-a-ldif-string-into-a-ldap-entry">Deserialize a LDIF string into a LDAP entry</h2>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldif\Encoder;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldif\Encoder;
 
-<span class=x>$ldif = &quot;dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz</span>
-<span class=x>objectclass: top</span>
-<span class=x>objectclass: person</span>
-<span class=x>objectclass: organizationalPerson</span>
-<span class=x>objectclass: inetOrgPerson</span>
-<span class=x>uid: rogasawara</span>
-<span class=x>mail: rogasawara@airius.co.jp</span>
-<span class=x>givenname;lang-ja:: 44Ot44OJ44OL44O8</span>
-<span class=x>sn;lang-ja:: 5bCP56yg5Y6f</span>
-<span class=x>cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==</span>
-<span class=x>title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==</span>
-<span class=x>preferredlanguage: ja</span>
-<span class=x>givenname:: 44Ot44OJ44OL44O8</span>
-<span class=x>sn:: 5bCP56yg5Y6f</span>
-<span class=x>cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==</span>
-<span class=x>title:: 5Za25qWt6YOoIOmDqOmVtw==</span>
-<span class=x>givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8</span>
-<span class=x>sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ</span>
-<span class=x>cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==</span>
-<span class=x>title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==</span>
-<span class=x>givenname;lang-en: Rodney</span>
-<span class=x>sn;lang-en: Ogasawara</span>
-<span class=x>cn;lang-en: Rodney Ogasawara</span>
-<span class=x>title;lang-en: Sales, Director&quot;;</span>
+$ldif = &quot;dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+uid: rogasawara
+mail: rogasawara@airius.co.jp
+givenname;lang-ja:: 44Ot44OJ44OL44O8
+sn;lang-ja:: 5bCP56yg5Y6f
+cn;lang-ja:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+title;lang-ja:: 5Za25qWt6YOoIOmDqOmVtw==
+preferredlanguage: ja
+givenname:: 44Ot44OJ44OL44O8
+sn:: 5bCP56yg5Y6f
+cn:: 5bCP56yg5Y6fIOODreODieODi+ODvA==
+title:: 5Za25qWt6YOoIOmDqOmVtw==
+givenname;lang-ja;phonetic:: 44KN44Gp44Gr44O8
+sn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJ
+cn;lang-ja;phonetic:: 44GK44GM44GV44KP44KJIOOCjeOBqeOBq+ODvA==
+title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==
+givenname;lang-en: Rodney
+sn;lang-en: Ogasawara
+cn;lang-en: Rodney Ogasawara
+title;lang-en: Sales, Director&quot;;
 
-<span class=x>$data = Encoder::decode($ldif);</span>
+$data = Encoder::decode($ldif);
 
-<span class=x>/*</span>
-<span class=x>$data = [</span>
-<span class=x>    &#39;dn&#39;                         =&gt; &#39;uid=rogasawara,ou=営業部,o=Airius&#39;,</span>
-<span class=x>    &#39;objectclass&#39;                =&gt; [</span>
-<span class=x>        &#39;top&#39;,</span>
-<span class=x>        &#39;person&#39;,</span>
-<span class=x>        &#39;organizationalPerson&#39;,</span>
-<span class=x>        &#39;inetOrgPerson&#39;,</span>
-<span class=x>    ],</span>
-<span class=x>    &#39;uid&#39;                        =&gt; [&#39;rogasawara&#39;],</span>
-<span class=x>    &#39;mail&#39;                       =&gt; [&#39;rogasawara@airius.co.jp&#39;],</span>
-<span class=x>    &#39;givenname;lang-ja&#39;          =&gt; [&#39;ロドニー&#39;],</span>
-<span class=x>    &#39;sn;lang-ja&#39;                 =&gt; [&#39;小笠原&#39;],</span>
-<span class=x>    &#39;cn;lang-ja&#39;                 =&gt; [&#39;小笠原 ロドニー&#39;],</span>
-<span class=x>    &#39;title;lang-ja&#39;              =&gt; [&#39;営業部 部長&#39;],</span>
-<span class=x>    &#39;preferredlanguage&#39;          =&gt; [&#39;ja&#39;],</span>
-<span class=x>    &#39;givenname&#39;                  =&gt; [&#39;ロドニー&#39;],</span>
-<span class=x>    &#39;sn&#39;                         =&gt; [&#39;小笠原&#39;],</span>
-<span class=x>    &#39;cn&#39;                         =&gt; [&#39;小笠原 ロドニー&#39;],</span>
-<span class=x>    &#39;title&#39;                      =&gt; [&#39;営業部 部長&#39;],</span>
-<span class=x>    &#39;givenname;lang-ja;phonetic&#39; =&gt; [&#39;ろどにー&#39;],</span>
-<span class=x>    &#39;sn;lang-ja;phonetic&#39;        =&gt; [&#39;おがさわら&#39;],</span>
-<span class=x>    &#39;cn;lang-ja;phonetic&#39;        =&gt; [&#39;おがさわら ろどにー&#39;],</span>
-<span class=x>    &#39;title;lang-ja;phonetic&#39;     =&gt; [&#39;えいぎょうぶ ぶちょう&#39;],</span>
-<span class=x>    &#39;givenname;lang-en&#39;          =&gt; [&#39;Rodney&#39;],</span>
-<span class=x>    &#39;sn;lang-en&#39;                 =&gt; [&#39;Ogasawara&#39;],</span>
-<span class=x>    &#39;cn;lang-en&#39;                 =&gt; [&#39;Rodney Ogasawara&#39;],</span>
-<span class=x>    &#39;title;lang-en&#39;              =&gt; [&#39;Sales, Director&#39;],</span>
-<span class=x>];</span>
-<span class=x>*/</span>
-</pre></div></p>
+/*
+$data = [
+    'dn'                         =&gt; 'uid=rogasawara,ou=営業部,o=Airius',
+    'objectclass'                =&gt; [
+        'top',
+        'person',
+        'organizationalPerson',
+        'inetOrgPerson',
+    ],
+    'uid'                        =&gt; ['rogasawara'],
+    'mail'                       =&gt; ['rogasawara@airius.co.jp'],
+    'givenname;lang-ja'          =&gt; ['ロドニー'],
+    'sn;lang-ja'                 =&gt; ['小笠原'],
+    'cn;lang-ja'                 =&gt; ['小笠原 ロドニー'],
+    'title;lang-ja'              =&gt; ['営業部 部長'],
+    'preferredlanguage'          =&gt; ['ja'],
+    'givenname'                  =&gt; ['ロドニー'],
+    'sn'                         =&gt; ['小笠原'],
+    'cn'                         =&gt; ['小笠原 ロドニー'],
+    'title'                      =&gt; ['営業部 部長'],
+    'givenname;lang-ja;phonetic' =&gt; ['ろどにー'],
+    'sn;lang-ja;phonetic'        =&gt; ['おがさわら'],
+    'cn;lang-ja;phonetic'        =&gt; ['おがさわら ろどにー'],
+    'title;lang-ja;phonetic'     =&gt; ['えいぎょうぶ ぶちょう'],
+    'givenname;lang-en'          =&gt; ['Rodney'],
+    'sn;lang-en'                 =&gt; ['Ogasawara'],
+    'cn;lang-en'                 =&gt; ['Rodney Ogasawara'],
+    'title;lang-en'              =&gt; ['Sales, Director'],
+];
+*/</code></pre>
 
 
 
@@ -515,9 +517,10 @@
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -554,7 +557,7 @@
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-ldap//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -563,8 +566,8 @@
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-ldap//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-ldap/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>

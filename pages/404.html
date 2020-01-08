@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory">  
-    <link rel="canonical" href="https://docs.laminas.dev/intro/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Introduction - laminas-ldap - Laminas Docs</title>
+    <title>laminas-ldap - Laminas Docs</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -59,7 +58,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-ldap</a>
+            <a href="../.">laminas-ldap</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -73,8 +72,8 @@
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Introduction</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     
@@ -192,267 +191,21 @@
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#theory-of-operation" class="toc__link">Theory of operation</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
             </div>
             <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="..">laminas-ldap</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Introduction</li>
-            
-        
-    </ol>
-</nav>
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-
-
-    
-    
-
-    <h1 id="introduction">Introduction</h1>
-<p>laminas-ldap lets you perform LDAP operations, including, but not limited to,
-binding, searching and modifying entries in an LDAP directory.</p>
-<h2 id="theory-of-operation">Theory of operation</h2>
-<p>This component currently consists of the main <code>Laminas\Ldap\Ldap</code> class, which
-conceptually represents a binding to a single LDAP server and allows for
-executing operations against a LDAP server such as OpenLDAP or ActiveDirectory
-(AD) servers. The parameters for binding may be provided explicitly or in the
-form of an options array. <code>Laminas\Ldap\Node</code> provides an object-oriented interface
-for single LDAP nodes and can be used to form a basis for an active-record-like
-interface for a LDAP-based domain model.</p>
-<p>The component provides several helper classes to perform operations on LDAP
-entries (<code>Laminas\Ldap\Attribute</code>) such as setting and retrieving attributes (date
-values, passwords, boolean values, ...), to create and modify LDAP filter
-strings (<code>Laminas\Ldap\Filter</code>) and to manipulate LDAP distinguished names (DN)
-(<code>Laminas\Ldap\Dn</code>).</p>
-<p>Additionally the component abstracts LDAP schema browsing for OpenLDAP and
-ActiveDirectory servers <code>Laminas\Ldap\Node\Schema</code> and server information retrieval
-for OpenLDAP-, ActiveDirectory- and Novell eDirectory servers
-(<code>Laminas\Ldap\Node\RootDse</code>).</p>
-<p>Usage of laminas-ldap depends on the type of LDAP server, and is best summarized with
-some examples.</p>
-<p>If you are using OpenLDAP, consider the following example (note that the
-<code>bindRequiresDn</code> option is important if you are <strong>not</strong> using AD):</p>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
-
-$options = [
-    'host'              =&gt; 's0.foo.net',
-    'username'          =&gt; 'CN=user1,DC=foo,DC=net',
-    'password'          =&gt; 'pass1',
-    'bindRequiresDn'    =&gt; true,
-    'accountDomainName' =&gt; 'foo.net',
-    'baseDn'            =&gt; 'OU=Sales,DC=foo,DC=net',
-];
-
-$ldap = new Ldap($options);
-$acctname = $ldap-&gt;getCanonicalAccountName('abaker', Ldap::ACCTNAME_FORM_DN);
-echo &quot;$acctname\n&quot;;</code></pre>
-<p>If you are using Microsoft AD:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
-
-$options = [
-    'host'                   =&gt; 'dc1.w.net',
-    'useStartTls'            =&gt; true,
-    'username'               =&gt; 'user1@w.net',
-    'password'               =&gt; 'pass1',
-    'accountDomainName'      =&gt; 'w.net',
-    'accountDomainNameShort' =&gt; 'W',
-    'baseDn'                 =&gt; 'CN=Users,DC=w,DC=net',
-];
-
-$ldap = new Ldap($options);
-$acctname = $ldap-&gt;getCanonicalAccountName('bcarter', Ldap::ACCTNAME_FORM_DN);
-echo &quot;$acctname\n&quot;;</code></pre>
-<p>Note that we use the <code>getCanonicalAccountName()</code> method to retrieve the account
-DN here only because that is what exercises the most of what little code is
-currently present in this class.</p>
-<h3>Automatic Username Canonicalization When Binding</h3>
-<p>If <code>bind()</code> is called with a non-DN username but <code>bindRequiresDN</code> is <code>true</code>
-and no username in DN form was supplied as an option, the bind will fail.
-However, if a username in DN form is supplied in the options array,
-<code>Laminas\Ldap\Ldap</code> will first bind with that username, retrieve the account DN for
-the username supplied to <code>bind()</code> and then re-bind with that DN.</p>
-<p>This behavior is critical to <a href="http://docs.laminas.dev/laminas-authentication/adapter/ldap/">Laminas\Authentication\Adapter\Ldap</a>,
-which passes the username supplied by the user directly to <code>bind()</code>.</p>
-<p>The following example illustrates how the non-DN username 'abaker' can be used
-with <code>bind()</code>:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
-
-$options = [
-    'host'              =&gt; 's0.foo.net',
-    'username'          =&gt; 'CN=user1,DC=foo,DC=net',
-    'password'          =&gt; 'pass1',
-    'bindRequiresDn'    =&gt; true,
-    'accountDomainName' =&gt; 'foo.net',
-    'baseDn'            =&gt; 'OU=Sales,DC=foo,DC=net',
-];
-
-$ldap = new Ldap($options);
-$ldap-&gt;bind('abaker', 'moonbike55');
-$acctname = $ldap-&gt;getCanonicalAccountName('abaker', Ldap::ACCTNAME_FORM_DN);
-echo &quot;$acctname\n&quot;;</code></pre>
-<p>The <code>bind()</code> call in this example sees that the username 'abaker' is not in DN
-form, finds <code>bindRequiresDn</code> is <code>TRUE</code>, uses <code>CN=user1,DC=foo,DC=net</code> and
-<code>pass1</code> to bind, retrieves the DN for 'abaker', unbinds and then rebinds with
-the newly discovered <code>CN=Alice Baker,OU=Sales,DC=foo,DC=net</code>.</p>
-<h3>Account Name Canonicalization</h3>
-<p>The <code>accountDomainName</code> and <code>accountDomainNameShort</code> options are used for two
-purposes: (1) they facilitate multi-domain authentication and failover
-capability, and (2) they are also used to canonicalize usernames. Specifically,
-names are canonicalized to the form specified by the <code>accountCanonicalForm</code>
-option. This option may one of the following values:</p>
-<p>The default canonicalization depends on what account domain name options were
-supplied. If <code>accountDomainNameShort</code> was supplied, the default
-<code>accountCanonicalForm</code> value is <code>ACCTNAME_FORM_BACKSLASH</code>. Otherwise, if
-<code>accountDomainName</code> was supplied, the default is <code>ACCTNAME_FORM_PRINCIPAL</code>.</p>
-<p>Account name canonicalization ensures that the string used to identify an
-account is consistent regardless of what was supplied to <code>bind()</code>. For example,
-if the user supplies an account name of <code>abaker@example.com</code> or just <code>abaker</code>
-and the <code>accountCanonicalForm</code> is set to 3, the resulting canonicalized name
-would be <code>EXAMPLE\\abaker</code>.</p>
-<h3>Multi-domain Authentication and Failover</h3>
-<p>The <code>Laminas\Ldap\Ldap</code> component by itself makes no attempt to authenticate with
-multiple servers.  However, <code>Laminas\Ldap\Ldap</code> is specifically designed to handle
-this scenario gracefully. The required technique is to simply iterate over an
-array of arrays of serve options and attempt to bind with each server. As
-described above <code>bind()</code> will automatically canonicalize each name, so it does
-not matter if the user passes <code>abaker@foo.net</code> or <code>Wbcarter</code> or <code>cdavis</code>; the
-<code>bind()</code> method will only succeed if the credentials were successfully used in
-the bind.</p>
-<p>Consider the following example that illustrates the technique required to
-implement multi-domain authentication and failover:</p>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Exception\LdapException;
-use Laminas\Ldap\Ldap;
-
-$acctname = 'W\\user2';
-$password = 'pass2';
-
-$multiOptions = [
-    'server1' =&gt; [
-        'host'                   =&gt; 's0.foo.net',
-        'username'               =&gt; 'CN=user1,DC=foo,DC=net',
-        'password'               =&gt; 'pass1',
-        'bindRequiresDn'         =&gt; true,
-        'accountDomainName'      =&gt; 'foo.net',
-        'accountDomainNameShort' =&gt; 'FOO',
-        'accountCanonicalForm'   =&gt; 4, // ACCT_FORM_PRINCIPAL
-        'baseDn'                 =&gt; 'OU=Sales,DC=foo,DC=net',
-    ],
-    'server2' =&gt; [
-        'host'                   =&gt; 'dc1.w.net',
-        'useSsl'                 =&gt; true,
-        'username'               =&gt; 'user1@w.net',
-        'password'               =&gt; 'pass1',
-        'accountDomainName'      =&gt; 'w.net',
-        'accountDomainNameShort' =&gt; 'W',
-        'accountCanonicalForm'   =&gt; 4, // ACCT_FORM_PRINCIPAL
-        'baseDn'                 =&gt; 'CN=Users,DC=w,DC=net',
-    ],
-];
-
-$ldap = new Ldap();
-
-foreach ($multiOptions as $name =&gt; $options) {
-    echo &quot;Trying to bind using server options for '$name'\n&quot;;
-
-    $ldap-&gt;setOptions($options);
-    try {
-        $ldap-&gt;bind($acctname, $password);
-        $acctname = $ldap-&gt;getCanonicalAccountName($acctname);
-        echo &quot;SUCCESS: authenticated $acctname\n&quot;;
-        return;
-    } catch (LdapException $zle) {
-        echo '  ' . $zle-&gt;getMessage() . &quot;\n&quot;;
-        if ($zle-&gt;getCode() === LdapException::LDAP_X_DOMAIN_MISMATCH) {
-            continue;
-        }
-    }
-}</code></pre>
-<p>If the bind fails for any reason, the next set of server options is tried.</p>
-<p>The <code>getCanonicalAccountName()</code> call gets the canonical account name that the
-application would presumably use to associate data with such as preferences. The
-<code>accountCanonicalForm = 4</code> in all server options ensures that the canonical form
-is consistent regardless of which server was ultimately used.</p>
-<p>The special <code>LDAP_X_DOMAIN_MISMATCH</code> exception occurs when an account name with
-a domain component was supplied (e.g., <code>abaker@foo.net</code> or <code>FOO\\abaker</code> and not
-just <code>abaker</code>) but the domain component did not match either domain in the
-currently selected server options. This exception indicates that the server is
-not an authority for the account. In this case, the bind will not be performed,
-thereby eliminating unnecessary communication with the server. Note that the
-<code>continue</code> instruction has no effect in this example, but in practice for error
-handling and debugging purposes, you will probably want to check for
-<code>LDAP_X_DOMAIN_MISMATCH</code> as well as <code>LDAP_NO_SUCH_OBJECT</code> and
-<code>LDAP_INVALID_CREDENTIALS</code>.</p>
-<p>The above code is very similar to code used within
-<a href="http://docs.laminas.dev/laminas-authentication/adapter/ldap/">Laminas\Authentication\Adapter\Ldap</a>.
-In fact,we recommend that you use that authentication adapter for multi-domain +
-failover LDAP based authentication (or copy the code).</p>
-
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="..">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../api/">
-                    Next <i class="fa fa-chevron-right"></i>
-                </a>
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-ldap/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -467,7 +220,7 @@ failover LDAP based authentication (or copy the code).</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-ldap</a>
+            <a href="../.">laminas-ldap</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -481,8 +234,8 @@ failover LDAP based authentication (or copy the code).</p>
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Introduction</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
                             </li>
                         
                     

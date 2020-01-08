@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -261,122 +265,113 @@
 <h2 id="basic-crud-operations">Basic CRUD operations</h2>
 <h3>Retrieving data from the LDAP</h3>
 <h4>Getting an entry by its DN</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$hm = $ldap-&gt;getEntry(&#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;);</span>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$hm = $ldap-&gt;getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
 
-<span class=x>/*</span>
-<span class=x>$hm is an array of the following structure:</span>
-<span class=x>[</span>
-<span class=x>    &#39;dn&#39;          =&gt; &#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;,</span>
-<span class=x>    &#39;cn&#39;          =&gt; [&#39;Hugo Müller&#39;],</span>
-<span class=x>    &#39;sn&#39;          =&gt; [&#39;Müller&#39;],</span>
-<span class=x>    &#39;objectclass&#39; =&gt; [&#39;inetOrgPerson&#39;, &#39;top&#39;],</span>
-<span class=x>    ...</span>
-<span class=x>]</span>
-<span class=x>*/</span>
-</pre></div></p>
+/*
+$hm is an array of the following structure:
+[
+    'dn'          =&gt; 'cn=Hugo Müller,ou=People,dc=my,dc=local',
+    'cn'          =&gt; ['Hugo Müller'],
+    'sn'          =&gt; ['Müller'],
+    'objectclass' =&gt; ['inetOrgPerson', 'top'],
+    ...
+]
+*/</code></pre>
 <h4>Check for the existence of a given DN</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$isThere = $ldap-&gt;exists(&#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;);</span>
-</pre></div></p>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$isThere = $ldap-&gt;exists('cn=Hugo Müller,ou=People,dc=my,dc=local');</code></pre>
 <h4>Count children of a given DN</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$childrenCount = $ldap-&gt;countChildren(&#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;);</span>
-</pre></div></p>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$childrenCount = $ldap-&gt;countChildren('cn=Hugo Müller,ou=People,dc=my,dc=local');</code></pre>
 <h4>Searching the LDAP tree</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$result = $ldap-&gt;search(</span>
-<span class=x>    &#39;(objectclass=*)&#39;,</span>
-<span class=x>    &#39;ou=People,dc=my,dc=local&#39;,</span>
-<span class=x>    Ldap::SEARCH_SCOPE_ONE</span>
-<span class=x>);</span>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$result = $ldap-&gt;search(
+    '(objectclass=*)',
+    'ou=People,dc=my,dc=local',
+    Ldap::SEARCH_SCOPE_ONE
+);
 
-<span class=x>foreach ($result as $item) {</span>
-<span class=x>    echo $item[&quot;dn&quot;] . &#39;: &#39; . $item[&#39;cn&#39;][0] . PHP_EOL;</span>
-<span class=x>}</span>
-</pre></div></p>
+foreach ($result as $item) {
+    echo $item[&quot;dn&quot;] . ': ' . $item['cn'][0] . PHP_EOL;
+}</code></pre>
 <h3>Adding data to the LDAP</h3>
 <h4>Add a new entry to the LDAP</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Attribute;</span>
-<span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Attribute;
+use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
 
-<span class=x>$entry = [];</span>
-<span class=x>Attribute::setAttribute($entry, &#39;cn&#39;, &#39;Hans Meier&#39;);</span>
-<span class=x>Attribute::setAttribute($entry, &#39;sn&#39;, &#39;Meier&#39;);</span>
-<span class=x>Attribute::setAttribute($entry, &#39;objectClass&#39;, &#39;inetOrgPerson&#39;);</span>
+$entry = [];
+Attribute::setAttribute($entry, 'cn', 'Hans Meier');
+Attribute::setAttribute($entry, 'sn', 'Meier');
+Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
 
-<span class=x>$ldap-&gt;add(&#39;cn=Hans Meier,ou=People,dc=my,dc=local&#39;, $entry);</span>
-</pre></div></p>
+$ldap-&gt;add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);</code></pre>
 <h3>Deleting from the LDAP</h3>
 <h4>Delete an existing entry from the LDAP</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$ldap-&gt;delete(&#39;cn=Hans Meier,ou=People,dc=my,dc=local&#39;);</span>
-</pre></div></p>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$ldap-&gt;delete('cn=Hans Meier,ou=People,dc=my,dc=local');</code></pre>
 <h3>Updating the LDAP</h3>
 <h4>Update an existing entry on the LDAP</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Attribute;</span>
-<span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Attribute;
+use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
 
-<span class=x>$hm = $ldap-&gt;getEntry(&#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;);</span>
-<span class=x>Attribute::setAttribute($hm, &#39;mail&#39;, &#39;mueller@my.local&#39;);</span>
-<span class=x>Attribute::setPassword($hm, &#39;newPa$$w0rd&#39;, Attribute::PASSWORD_HASH_SHA1);</span>
+$hm = $ldap-&gt;getEntry('cn=Hugo Müller,ou=People,dc=my,dc=local');
+Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
+Attribute::setPassword($hm, 'newPa$$w0rd', Attribute::PASSWORD_HASH_SHA1);
 
-<span class=x>$ldap-&gt;update(&#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;, $hm);</span>
-</pre></div></p>
+$ldap-&gt;update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);</code></pre>
 <h2 id="extended-operations">Extended operations</h2>
 <h3>Copy and move entries in the LDAP</h3>
 <h4>Copy a LDAP entry recursively with all its descendants</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$ldap-&gt;copy(</span>
-<span class=x>    &#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;,</span>
-<span class=x>    &#39;cn=Hans Meier,ou=People,dc=my,dc=local&#39;,</span>
-<span class=x>    true</span>
-<span class=x>);</span>
-</pre></div></p>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$ldap-&gt;copy(
+    'cn=Hugo Müller,ou=People,dc=my,dc=local',
+    'cn=Hans Meier,ou=People,dc=my,dc=local',
+    true
+);</code></pre>
 <h4>Move a LDAP entry recursively with all its descendants to a different subtree</h4>
-<p> <div class=codehilite><pre><span></span><span class=x>use Laminas\Ldap\Ldap;</span>
+<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
 
-<span class=x>$options = [/* ... */];</span>
-<span class=x>$ldap = new Ldap($options);</span>
-<span class=x>$ldap-&gt;bind();</span>
-<span class=x>$ldap-&gt;moveToSubtree(</span>
-<span class=x>    &#39;cn=Hugo Müller,ou=People,dc=my,dc=local&#39;,</span>
-<span class=x>    &#39;ou=Dismissed,dc=my,dc=local&#39;,</span>
-<span class=x>    true</span>
-<span class=x>);</span>
-</pre></div></p>
+$options = [/* ... */];
+$ldap = new Ldap($options);
+$ldap-&gt;bind();
+$ldap-&gt;moveToSubtree(
+    'cn=Hugo Müller,ou=People,dc=my,dc=local',
+    'ou=Dismissed,dc=my,dc=local',
+    true
+);</code></pre>
 
 
 
@@ -528,9 +523,10 @@
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -567,7 +563,7 @@
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-ldap//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-ldap/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -576,8 +572,8 @@
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-ldap//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-ldap/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
