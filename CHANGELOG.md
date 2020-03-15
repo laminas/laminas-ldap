@@ -40,7 +40,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#7](https://github.com/laminas/laminas-ldap/pull/7) fixes compatibility with PHP 7.4 in `Collection\DefaultIterator`.
 
 ## 2.10.1 - 2019-10-17
 
