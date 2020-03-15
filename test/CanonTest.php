@@ -28,7 +28,7 @@ class CanonTest extends TestCase
      */
     protected $options;
 
-    public function setUp()
+    protected function setUp()
     {
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
