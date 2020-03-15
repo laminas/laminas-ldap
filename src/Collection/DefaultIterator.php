@@ -330,7 +330,7 @@ class DefaultIterator implements Iterator, Countable
     {
         reset($this->entries);
         $nextEntry = current($this->entries);
-        $this->current = $nextEntry['resource'];
+        $this->current = isset($nextEntry['resource']) ? $nextEntry['resource'] : null;
     }
 
     /**
