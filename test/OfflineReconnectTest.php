@@ -20,7 +20,7 @@ class OfflineReconnectTest extends OfflineTest
         BuiltinFunctionMocks::$ldap_set_option_mock->enable();
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         parent::tearDown();
         Mock::disableAll();
