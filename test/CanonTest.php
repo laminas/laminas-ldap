@@ -73,8 +73,8 @@ class CanonTest extends TestCase
         if (getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')) {
             $names[Ldap\Ldap::ACCTNAME_FORM_USERNAME] = getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME');
             if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')) {
-                $names[Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL]
-                    = getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME') . '@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME');
+                $names[Ldap\Ldap::ACCTNAME_FORM_PRINCIPAL] = getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')
+                    . '@' . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME');
             }
             if (getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')) {
                 $names[Ldap\Ldap::ACCTNAME_FORM_BACKSLASH]

@@ -330,8 +330,8 @@ class SearchTest extends AbstractOnlineTestCase
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertContains(
-                "Class 'LaminasTest\\Ldap\\TestAsset\\CollectionClassNotSubclassingLaminasLDAPCollection' must subclass "
-                . "'Laminas\\Ldap\\Collection'",
+                "Class 'LaminasTest\\Ldap\\TestAsset\\CollectionClassNotSubclassingLaminasLDAPCollection'"
+                . " must subclass 'Laminas\\Ldap\\Collection'",
                 $zle->getMessage()
             );
         }
