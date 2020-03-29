@@ -61,6 +61,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-ldap": "self.version"
+        "zendframework/zend-ldap": "^2.10.1"
     }
 }
