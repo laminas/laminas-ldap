@@ -317,20 +317,22 @@ within the RootDSE for a given LDAP server.</p>
 <li><a href="http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html">Novell eDirectory</a></li>
 </ul>
 <h3>Getting hands on the RootDSE</h3>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
+<pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
 $rootdse = $ldap-&gt;getRootDse();
 $serverType = $rootdse-&gt;getServerType();</code></pre>
+
 <h2 id="schema-browsing">Schema Browsing</h2>
 <h3>Getting hands on the server schema</h3>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldap;
+<pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
 
 $options = [/* ... */];
 $ldap = new Ldap($options);
 $schema = $ldap-&gt;getSchema();
 $classes = $schema-&gt;getObjectClasses();</code></pre>
+
 <h4>OpenLDAP</h4>
 <ul>
 <li>TODO</li>

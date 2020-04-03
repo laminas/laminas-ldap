@@ -309,7 +309,7 @@
 
     <h1 id="serializing-ldap-data-to-and-from-ldif">Serializing LDAP data to and from LDIF</h1>
 <h2 id="serialize-a-ldap-entry-to-ldif">Serialize a LDAP entry to LDIF</h2>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldif\Encoder;
+<pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldif\Encoder;
 
 $data = [
     'dn'                         =&gt; 'uid=rogasawara,ou=営業部,o=Airius',
@@ -369,10 +369,11 @@ sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
 title;lang-en: Sales, Director
 */</code></pre>
-<h2 id="deserialize-a-ldif-string-into-a-ldap-entry">Deserialize a LDIF string into a LDAP entry</h2>
-<pre class=codehilite><code class=language-php>use Laminas\Ldap\Ldif\Encoder;
 
-$ldif = &quot;dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
+<h2 id="deserialize-a-ldif-string-into-a-ldap-entry">Deserialize a LDIF string into a LDAP entry</h2>
+<pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldif\Encoder;
+
+$ldif = "dn:: dWlkPXJvZ2FzYXdhcmEsb3U95Za25qWt6YOoLG89QWlyaXVz
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -395,7 +396,7 @@ title;lang-ja;phonetic:: 44GI44GE44GO44KH44GG44G2IOOBtuOBoeOCh+OBhg==
 givenname;lang-en: Rodney
 sn;lang-en: Ogasawara
 cn;lang-en: Rodney Ogasawara
-title;lang-en: Sales, Director&quot;;
+title;lang-en: Sales, Director";
 
 $data = Encoder::decode($ldif);
 
