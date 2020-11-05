@@ -552,7 +552,7 @@ class Dn implements ArrayAccess
         $k = [];
         $v = [];
         if (! self::checkDn($dn, $k, $v, $caseFold)) {
-            throw new Exception\LdapException(null, 'DN is malformed');
+            throw new Exception\LdapException(null, 'DN is malformed: "' . $dn . '"');
         }
         $ret = [];
         for ($i = 0, $count = count($k); $i < $count; $i++) {
