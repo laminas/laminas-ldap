@@ -12,13 +12,13 @@ use Laminas\Ldap\Collection\DefaultIterator;
 
 class SortTest extends AbstractOnlineTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cleanupLDAPServer();
         parent::tearDown();
@@ -41,9 +41,12 @@ class SortTest extends AbstractOnlineTestCase
             return 1;
         };
 
-        $this->assertAttributeEquals('strnatcasecmp', 'sortFunction', $iterator);
+        $reflectionObject = new \ReflectionObject($iterator);
+        $reflectionProperty = $reflectionObject->getProperty('sortFunction');
+        $reflectionProperty->setAccessible(true);
+        $this->assertEquals('strnatcasecmp', $reflectionProperty->getValue($iterator));
         $iterator->setSortFunction($sortFunction);
-        $this->assertAttributeEquals($sortFunction, 'sortFunction', $iterator);
+        $this->assertEquals($sortFunction, $reflectionProperty->getValue($iterator));
     }
 
     /**
@@ -62,32 +65,20 @@ class SortTest extends AbstractOnlineTestCase
 
         $iterator = new DefaultIterator($this->getLdap(), $search);
 
-        $this->assertAttributeEquals('strnatcasecmp', 'sortFunction', $iterator);
         $reflectionObject = new \ReflectionObject($iterator);
+        $reflectionProperty = $reflectionObject->getProperty('sortFunction');
+        $reflectionProperty->setAccessible(true);
+        $this->assertEquals('strnatcasecmp', $reflectionProperty->getValue($iterator));
+
         $reflectionProperty = $reflectionObject->getProperty('entries');
         $reflectionProperty->setAccessible(true);
-        $reflectionEntries = $reflectionProperty->getValue($iterator);
 
         $iterator->sort('l');
 
-        $this->assertAttributeEquals([
-            [
-                'resource' => $reflectionEntries[4]['resource'],
-                'sortValue' => 'a',
-            ], [
-                'resource' => $reflectionEntries[3]['resource'],
-                'sortValue' => 'b',
-            ], [
-                'resource' => $reflectionEntries[2]['resource'],
-                'sortValue' => 'c',
-            ], [
-                'resource' => $reflectionEntries[1]['resource'],
-                'sortValue' => 'd',
-            ], [
-                'resource' => $reflectionEntries[0]['resource'],
-                'sortValue' => 'e',
-            ],
-        ], 'entries', $iterator);
+        $reflectionEntries = $reflectionProperty->getValue($iterator);
+        foreach ($lSorted as $index => $value) {
+            $this->assertEquals($value, $reflectionEntries[$index]["sortValue"]);
+        }
     }
 
     /**
@@ -95,7 +86,7 @@ class SortTest extends AbstractOnlineTestCase
      */
     public function testCustomSorting()
     {
-        $lSorted = ['a', 'b', 'c', 'd', 'e'];
+        $lSorted = ['d', 'e', 'a', 'b', 'c'];
 
         $search = ldap_search(
             $this->getLDAP()->getResource(),
@@ -119,31 +110,19 @@ class SortTest extends AbstractOnlineTestCase
         };
         $iterator->setSortFunction($sortFunction);
 
-        $this->assertAttributeEquals($sortFunction, 'sortFunction', $iterator);
         $reflectionObject = new \ReflectionObject($iterator);
+        $reflectionProperty = $reflectionObject->getProperty('sortFunction');
+        $reflectionProperty->setAccessible(true);
+        $this->assertEquals($sortFunction, $reflectionProperty->getValue($iterator));
+
         $reflectionProperty = $reflectionObject->getProperty('entries');
         $reflectionProperty->setAccessible(true);
-        $reflectionEntries = $reflectionProperty->getValue($iterator);
 
         $iterator->sort('l');
 
-        $this->assertAttributeEquals([
-            [
-                'resource' => $reflectionEntries[1]['resource'],
-                'sortValue' => 'd',
-            ], [
-                'resource' => $reflectionEntries[0]['resource'],
-                'sortValue' => 'e',
-            ], [
-                'resource' => $reflectionEntries[4]['resource'],
-                'sortValue' => 'a',
-            ], [
-                'resource' => $reflectionEntries[3]['resource'],
-                'sortValue' => 'b',
-            ], [
-                'resource' => $reflectionEntries[2]['resource'],
-                'sortValue' => 'c',
-            ],
-        ], 'entries', $iterator);
+        $reflectionEntries = $reflectionProperty->getValue($iterator);
+        foreach ($lSorted as $index => $value) {
+            $this->assertEquals($value, $reflectionEntries[$index]["sortValue"]);
+        }
     }
 }

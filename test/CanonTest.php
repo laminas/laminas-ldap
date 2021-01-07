@@ -28,7 +28,7 @@ class CanonTest extends TestCase
      */
     protected $options;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
@@ -209,7 +209,7 @@ class CanonTest extends TestCase
             $canon = $ldap->getCanonicalAccountName('invalid', Ldap\Ldap::ACCTNAME_FORM_DN);
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains('(&(objectClass=posixAccount)(uid=invalid))', $zle->getMessage());
+            $this->assertStringContainsString('(&(objectClass=posixAccount)(uid=invalid))', $zle->getMessage());
         }
 
         $options['bindRequiresDn'] = false;
@@ -218,7 +218,7 @@ class CanonTest extends TestCase
             $canon = $ldap->getCanonicalAccountName('invalid', Ldap\Ldap::ACCTNAME_FORM_DN);
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains('(&(objectClass=user)(sAMAccountName=invalid))', $zle->getMessage());
+            $this->assertStringContainsString('(&(objectClass=user)(sAMAccountName=invalid))', $zle->getMessage());
         }
     }
 
@@ -233,7 +233,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Binding domain is not an authority for user: invalid\invalid',
                 $zle->getMessage()
             );
@@ -245,7 +245,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Binding domain is not an authority for user: invalid@invalid.tld',
                 $zle->getMessage()
             );
@@ -265,7 +265,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Binding domain is not an authority for user: invalid@' .
                     getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 $zle->getMessage()
@@ -282,7 +282,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Binding domain is not an authority for user: ' .
                     getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
                 $zle->getMessage()
@@ -321,7 +321,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Invalid account name syntax: 0@' .
                     getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 $zle->getMessage()
@@ -335,7 +335,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Invalid account name syntax: ' .
                     getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
                 $zle->getMessage()
@@ -352,7 +352,7 @@ class CanonTest extends TestCase
             $canon = $ldap->getCanonicalAccountName(getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME'), 99);
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Unknown canonical name form: 99',
                 $zle->getMessage()
             );
@@ -371,7 +371,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Option required: accountDomainName',
                 $zle->getMessage()
             );
@@ -386,7 +386,7 @@ class CanonTest extends TestCase
             );
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Option required: accountDomainNameShort',
                 $zle->getMessage()
             );

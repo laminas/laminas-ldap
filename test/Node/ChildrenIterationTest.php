@@ -17,13 +17,13 @@ use LaminasTest\Ldap as TestLdap;
  */
 class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cleanupLDAPServer();
         parent::tearDown();
@@ -94,5 +94,10 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
             // do nothing - just iterate
         }
         $nodes->next();
+        // The "pass" expectation here is just that no exception was thrown.
+        // Getting to this point in the code is the "definition of pass".
+        // phpunit will flag this as a risky test if we do not assert anything,
+        // so assert something.
+        $this->assertIsObject($nodes);
     }
 }

@@ -22,7 +22,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
      */
     private $schema;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->schema = $this->getLDAP()->getSchema();
@@ -43,8 +43,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testGetters()
     {
-        $this->assertInternalType('array', $this->schema->getAttributeTypes());
-        $this->assertInternalType('array', $this->schema->getObjectClasses());
+        $this->assertIsArray($this->schema->getAttributeTypes());
+        $this->assertIsArray($this->schema->getObjectClasses());
 
         switch ($this->getLDAP()->getRootDse()->getServerType()) {
             case Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
@@ -52,42 +52,34 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
             case Node\RootDse::SERVER_TYPE_EDIRECTORY:
                 break;
             case Node\RootDse::SERVER_TYPE_OPENLDAP:
-                $this->assertInternalType('array', $this->schema->getLDAPSyntaxes());
-                $this->assertInternalType('array', $this->schema->getMatchingRules());
-                $this->assertInternalType('array', $this->schema->getMatchingRuleUse());
+                $this->assertIsArray($this->schema->getLDAPSyntaxes());
+                $this->assertIsArray($this->schema->getMatchingRules());
+                $this->assertIsArray($this->schema->getMatchingRuleUse());
                 break;
         }
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testSetterWillThrowException()
     {
+        $this->expectException(\BadMethodCallException::class);
         $this->schema->objectClass = 'illegal';
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testOffsetSetWillThrowException()
     {
+        $this->expectException(\BadMethodCallException::class);
         $this->schema['objectClass'] = 'illegal';
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testUnsetterWillThrowException()
     {
+        $this->expectException(\BadMethodCallException::class);
         unset($this->schema->objectClass);
     }
 
-    /**
-     * @expectedException BadMethodCallException
-     */
     public function testOffsetUnsetWillThrowException()
     {
+        $this->expectException(\BadMethodCallException::class);
         unset($this->schema['objectClass']);
     }
 

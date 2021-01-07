@@ -9,6 +9,7 @@
 namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Exception\LdapException;
 use LaminasTest\Ldap as TestLdap;
 
 /**
@@ -58,31 +59,25 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $this->assertFalse($node->isAttached());
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testCreateFromArrayMissingDn()
     {
+        $this->expectException(LdapException::class);
         $data = $this->createTestArrayData();
         unset($data['dn']);
         $node = Ldap\Node::fromArray($data);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testCreateFromArrayIllegalDn()
     {
+        $this->expectException(LdapException::class);
         $data       = $this->createTestArrayData();
         $data['dn'] = 5;
         $node       = Ldap\Node::fromArray($data);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testCreateFromArrayMalformedDn()
     {
+        $this->expectException(LdapException::class);
         $data       = $this->createTestArrayData();
         $data['dn'] = 'name1,cn=name2,dc=example,dc=org';
         $node       = Ldap\Node::fromArray($data);
@@ -311,20 +306,16 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $this->assertFalse(isset($node->key));
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testIllegalAttributeAccessRdnAttributeSet()
     {
+        $this->expectException(LdapException::class);
         $node     = $this->createTestNode();
         $node->cn = 'test';
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testIllegalAttributeAccessDnSet()
     {
+        $this->expectException(LdapException::class);
         $node     = $this->createTestNode();
         $node->dn = 'test';
     }
@@ -332,7 +323,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     public function testAttributeAccessDnGet()
     {
         $node = $this->createTestNode();
-        $this->assertInternalType('string', $node->dn);
+        $this->assertIsString($node->dn);
         $this->assertEquals($node->getDn()->toString(), $node->dn);
     }
 
