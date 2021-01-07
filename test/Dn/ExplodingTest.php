@@ -9,6 +9,7 @@
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Exception\LdapException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -192,11 +193,9 @@ class ExplodingTest extends TestCase
         $this->assertEquals($expected, $dnArray);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testCreateDnArrayIllegalDn()
     {
+        $this->expectException(LdapException::class);
         $dn      = 'name1,cn=name2,dc=example,dc=org';
         $dnArray = Ldap\Dn::explodeDn($dn);
     }

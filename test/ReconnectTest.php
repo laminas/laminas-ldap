@@ -47,7 +47,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         return $options;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
@@ -56,7 +56,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->getLDAP()->setOptions(static::getStandardOptions());
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         // Make sure we're using a non-expired connection with known settings
         // for each test.

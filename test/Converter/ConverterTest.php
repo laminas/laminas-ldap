@@ -229,11 +229,12 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @expectedException    InvalidArgumentException
+     *
      * @dataProvider         fromLdapDateTimeException
      */
     public function testFromLdapDateTimeThrowsException($value)
     {
+        $this->expectException(\InvalidArgumentException::class);
         Converter::fromLdapDatetime($value);
     }
 

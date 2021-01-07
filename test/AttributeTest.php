@@ -65,7 +65,7 @@ class AttributeTest extends TestCase
         $value = Attribute::getAttribute($data, 'uid2', 0);
         $this->assertNull($value);
         $array = Attribute::getAttribute($data, 'uid2');
-        $this->assertInternalType('array', $array);
+        $this->assertIsArray($array);
         $this->assertCount(0, $array);
     }
 
@@ -82,7 +82,7 @@ class AttributeTest extends TestCase
     {
         $data  = ['uid' => ['value']];
         $value = Attribute::getAttribute($data, 'uid');
-        $this->assertInternalType('array', $value);
+        $this->assertIsArray($value);
         $this->assertCount(1, $value);
         $this->assertContains('value', $value);
     }
@@ -92,7 +92,7 @@ class AttributeTest extends TestCase
         $data = [];
         Attribute::setAttribute($data, 'uid', 'new', false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertInternalType('array', $data['uid']);
+        $this->assertIsArray($data['uid']);
         $this->assertCount(1, $data['uid']);
         $this->assertContains('new', $data['uid']);
     }
@@ -102,7 +102,7 @@ class AttributeTest extends TestCase
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', 'new', false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertInternalType('array', $data['uid']);
+        $this->assertIsArray($data['uid']);
         $this->assertCount(1, $data['uid']);
         $this->assertContains('new', $data['uid']);
     }
@@ -112,7 +112,7 @@ class AttributeTest extends TestCase
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', 'new', true);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertInternalType('array', $data['uid']);
+        $this->assertIsArray($data['uid']);
         $this->assertCount(2, $data['uid']);
         $this->assertContains('old', $data['uid']);
         $this->assertContains('new', $data['uid']);
@@ -139,7 +139,7 @@ class AttributeTest extends TestCase
         $data = [];
         Attribute::setAttribute($data, 'uid', ['new1', 'new2'], false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertInternalType('array', $data['uid']);
+        $this->assertIsArray($data['uid']);
         $this->assertCount(2, $data['uid']);
         $this->assertContains('new1', $data['uid']);
         $this->assertContains('new2', $data['uid']);
@@ -152,7 +152,7 @@ class AttributeTest extends TestCase
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', ['new1', 'new2'], false);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertInternalType('array', $data['uid']);
+        $this->assertIsArray($data['uid']);
         $this->assertCount(2, $data['uid']);
         $this->assertContains('new1', $data['uid']);
         $this->assertContains('new2', $data['uid']);
@@ -165,7 +165,7 @@ class AttributeTest extends TestCase
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', ['new1', 'new2'], true);
         $this->assertArrayHasKey('uid', $data);
-        $this->assertInternalType('array', $data['uid']);
+        $this->assertIsArray($data['uid']);
         $this->assertCount(3, $data['uid']);
         $this->assertContains('old', $data['uid']);
         $this->assertContains('new1', $data['uid']);
@@ -329,7 +329,7 @@ class AttributeTest extends TestCase
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', 'value2');
         $this->assertArrayHasKey('test', $data);
-        $this->assertInternalType('array', $data['test']);
+        $this->assertIsArray($data['test']);
         $this->assertCount(3, $data['test']);
         $this->assertContains('value1', $data['test']);
         $this->assertContains('value3', $data['test']);
@@ -341,7 +341,7 @@ class AttributeTest extends TestCase
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', ['value1', 'value2']);
         $this->assertArrayHasKey('test', $data);
-        $this->assertInternalType('array', $data['test']);
+        $this->assertIsArray($data['test']);
         $this->assertCount(2, $data['test']);
         $this->assertContains('value3', $data['test']);
         $this->assertNotContains('value1', $data['test']);
@@ -353,7 +353,7 @@ class AttributeTest extends TestCase
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', 'value3');
         $this->assertArrayHasKey('test', $data);
-        $this->assertInternalType('array', $data['test']);
+        $this->assertIsArray($data['test']);
         $this->assertCount(2, $data['test']);
         $this->assertContains('value1', $data['test']);
         $this->assertContains('value2', $data['test']);
@@ -365,7 +365,7 @@ class AttributeTest extends TestCase
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', ['value1', 'value3']);
         $this->assertArrayHasKey('test', $data);
-        $this->assertInternalType('array', $data['test']);
+        $this->assertIsArray($data['test']);
         $this->assertCount(1, $data['test']);
         $this->assertContains('value2', $data['test']);
         $this->assertNotContains('value1', $data['test']);
@@ -377,7 +377,7 @@ class AttributeTest extends TestCase
         $data = ['test' => ['TRUE', 'FALSE', 'TRUE', 'FALSE']];
         Attribute::removeFromAttribute($data, 'test', false);
         $this->assertArrayHasKey('test', $data);
-        $this->assertInternalType('array', $data['test']);
+        $this->assertIsArray($data['test']);
         $this->assertCount(2, $data['test']);
         $this->assertContains('TRUE', $data['test']);
         $this->assertNotContains('FALSE', $data['test']);
@@ -388,7 +388,7 @@ class AttributeTest extends TestCase
         $data = ['test' => ['1', '2', '3', '4']];
         Attribute::removeFromAttribute($data, 'test', [2, 4]);
         $this->assertArrayHasKey('test', $data);
-        $this->assertInternalType('array', $data['test']);
+        $this->assertIsArray($data['test']);
         $this->assertCount(2, $data['test']);
         $this->assertContains('1', $data['test']);
         $this->assertContains('3', $data['test']);
