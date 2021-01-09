@@ -270,6 +270,8 @@ class ConnectTest extends TestCase
      */
     public function testConnectionWithoutPortInOptionsArray($host, $ssl, $connectURI)
     {
+        $this->expectException(Exception\LdapException::class);
+        $this->expectExceptionMessage($connectURI);
         $options = [
             'host' => $host,
             'useSsl' => $ssl,
@@ -277,13 +279,16 @@ class ConnectTest extends TestCase
 
         $ldap = new Ldap\Ldap($options);
         $ldap->connect();
-
-        $this->assertAttributeEquals($connectURI, 'connectString', $ldap);
+        // bind should throw the expected exception
+        // The purpose of the test is to see that the $connectURI string is found
+        // in the exception message.
+        $ldap->bind();
     }
 
     public function connectionWithoutPortInOptionsArrayProvider()
     {
-        $host = getenv('TESTS_LAMINAS_LDAP_HOST');
+        // purposely set the host to something invalid so that the test will throw an exception
+        $host = 'unknown';
         return [
             // ['host', 'boolean whether to use LDAPS or not', 'connectionURI'],
             [$host, false, 'ldap://' . $host . ':389'],
