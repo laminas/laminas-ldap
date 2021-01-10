@@ -133,7 +133,10 @@ class Ldap
     public function getLastErrorCode()
     {
         ErrorHandler::start(E_WARNING);
-        $ret = ldap_get_option($this->resource, LDAP_OPT_ERROR_NUMBER, $err);
+        $ret = false;
+        if (is_resource($this->resource)) {
+            $ret = ldap_get_option($this->resource, LDAP_OPT_ERROR_NUMBER, $err);
+        }
         ErrorHandler::stop();
         if ($ret === true) {
             if ($err <= -1 && $err >= -17) {
@@ -165,7 +168,10 @@ class Ldap
          * can and eliminate dupes.
          */
         ErrorHandler::start(E_WARNING);
-        $estr1 = ldap_error($this->resource);
+        $estr1 = "getLastError: could not call ldap_error because LDAP resource was not of type resource";
+        if (is_resource($this->resource)) {
+            $estr1 = ldap_error($this->resource);
+        }
         ErrorHandler::stop();
         if ($errorCode !== 0 && $estr1 === 'Success') {
             ErrorHandler::start(E_WARNING);
@@ -177,7 +183,10 @@ class Ldap
         }
 
         ErrorHandler::start(E_WARNING);
-        ldap_get_option($this->resource, LDAP_OPT_ERROR_STRING, $estr2);
+        $estr2 = "getLastError: could not call ldap_get_option because LDAP resource was not of type resource";
+        if (is_resource($this->resource)) {
+            ldap_get_option($this->resource, LDAP_OPT_ERROR_STRING, $estr2);
+        }
         ErrorHandler::stop();
         if (! empty($estr2) && ! in_array($estr2, $errorMessages)) {
             $errorMessages[] = $estr2;
@@ -733,7 +742,7 @@ class Ldap
 
     protected function unbind()
     {
-        if (is_resource($this->resource)) {
+        if (is_resource($this->resource) && is_string($this->boundUser)) {
             ErrorHandler::start(E_WARNING);
             ldap_unbind($this->resource);
             ErrorHandler::stop();
@@ -973,6 +982,8 @@ class Ldap
                 $this->boundUser = $username;
                 return $this;
             }
+
+            $this->boundUser = false;
 
             if ($this->shouldReconnect($this->resource)) {
                 return $this;
