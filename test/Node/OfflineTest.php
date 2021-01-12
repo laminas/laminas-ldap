@@ -61,25 +61,25 @@ class OfflineTest extends TestLdap\AbstractTestCase
 
     public function testCreateFromArrayMissingDn()
     {
-        $this->expectException(LdapException::class);
         $data = $this->createTestArrayData();
         unset($data['dn']);
+        $this->expectException(LdapException::class);
         $node = Ldap\Node::fromArray($data);
     }
 
     public function testCreateFromArrayIllegalDn()
     {
-        $this->expectException(LdapException::class);
         $data       = $this->createTestArrayData();
         $data['dn'] = 5;
+        $this->expectException(LdapException::class);
         $node       = Ldap\Node::fromArray($data);
     }
 
     public function testCreateFromArrayMalformedDn()
     {
-        $this->expectException(LdapException::class);
         $data       = $this->createTestArrayData();
         $data['dn'] = 'name1,cn=name2,dc=example,dc=org';
+        $this->expectException(LdapException::class);
         $node       = Ldap\Node::fromArray($data);
     }
 
@@ -308,15 +308,15 @@ class OfflineTest extends TestLdap\AbstractTestCase
 
     public function testIllegalAttributeAccessRdnAttributeSet()
     {
-        $this->expectException(LdapException::class);
         $node     = $this->createTestNode();
+        $this->expectException(LdapException::class);
         $node->cn = 'test';
     }
 
     public function testIllegalAttributeAccessDnSet()
     {
-        $this->expectException(LdapException::class);
         $node     = $this->createTestNode();
+        $this->expectException(LdapException::class);
         $node->dn = 'test';
     }
 

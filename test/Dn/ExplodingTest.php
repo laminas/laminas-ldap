@@ -195,8 +195,8 @@ class ExplodingTest extends TestCase
 
     public function testCreateDnArrayIllegalDn()
     {
-        $this->expectException(LdapException::class);
         $dn      = 'name1,cn=name2,dc=example,dc=org';
+        $this->expectException(LdapException::class);
         $dnArray = Ldap\Dn::explodeDn($dn);
     }
 

@@ -116,15 +116,15 @@ class ImplodingTest extends TestCase
 
     public function testImplodeRdnInvalidOne()
     {
-        $this->expectException(LdapException::class);
         $a = ['cn'];
+        $this->expectException(LdapException::class);
         Ldap\Dn::implodeRdn($a);
     }
 
     public function testImplodeRdnInvalidThree()
     {
-        $this->expectException(LdapException::class);
         $a = ['cn' => 'value', 'ou'];
+        $this->expectException(LdapException::class);
         Ldap\Dn::implodeRdn($a);
     }
 }

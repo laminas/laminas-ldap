@@ -64,14 +64,13 @@ class CrudTest extends AbstractOnlineTestCase
 
     public function testIllegalAdd()
     {
-        $this->expectException(LdapException::class);
         $dn   = $this->createDn('ou=TestCreated,ou=Node2,');
         $data = [
             'ou'          => 'TestCreated',
             'objectClass' => 'organizationalUnit'
         ];
+        $this->expectException(LdapException::class);
         $this->getLDAP()->add($dn, $data);
-        $this->getLDAP()->delete($dn);
     }
 
     public function testIllegalUpdate()
@@ -109,8 +108,8 @@ class CrudTest extends AbstractOnlineTestCase
 
     public function testIllegalDelete()
     {
-        $this->expectException(LdapException::class);
         $dn = $this->createDn('ou=TestCreated,');
+        $this->expectException(LdapException::class);
         $this->getLDAP()->delete($dn);
     }
 
@@ -230,19 +229,19 @@ class CrudTest extends AbstractOnlineTestCase
 
     public function testPrepareLDAPEntryArrayArrayData()
     {
-        $this->expectException(\InvalidArgumentException::class);
         $data = [
             'a1' => [['account']]];
+        $this->expectException(\InvalidArgumentException::class);
         Ldap\Ldap::prepareLDAPEntryArray($data);
     }
 
     public function testPrepareLDAPEntryArrayObjectData()
     {
-        $this->expectException(\InvalidArgumentException::class);
         $class    = new \stdClass();
         $class->a = 'b';
         $data     = [
             'a1' => [$class]];
+        $this->expectException(\InvalidArgumentException::class);
         Ldap\Ldap::prepareLDAPEntryArray($data);
     }
 

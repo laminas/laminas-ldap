@@ -176,7 +176,7 @@ class ConverterTest extends TestCase
 
     public function testFromLdapUnserializeThrowsException()
     {
-        $this->expectException('UnexpectedValueException');
+        $this->expectException(\UnexpectedValueException::class);
         Converter::fromLdapUnserialize('--');
     }
 
@@ -193,7 +193,7 @@ class ConverterTest extends TestCase
     {
         $this->assertTrue(Converter::fromLdapBoolean('TRUE'));
         $this->assertFalse(Converter::fromLdapBoolean('FALSE'));
-        $this->expectException('InvalidArgumentException');
+        $this->expectException(\InvalidArgumentException::class);
         Converter::fromLdapBoolean('test');
     }
 

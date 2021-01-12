@@ -103,8 +103,8 @@ class FilterTest extends TestCase
 
     public function testIllegalGroupingFilter()
     {
-        $this->expectException(FilterException::class);
         $data = ['a', 'b', 5];
+        $this->expectException(FilterException::class);
         $f    = new Filter\AndFilter($data);
     }
 

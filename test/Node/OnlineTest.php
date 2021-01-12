@@ -78,8 +78,8 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testLoadFromLDAPIllegalEntry()
     {
-        $this->expectException(ExceptionInterface::class);
         $dn   = $this->createDn('ou=Test99,');
+        $this->expectException(ExceptionInterface::class);
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
     }
 
@@ -108,7 +108,6 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testAttachToInvalidLDAP()
     {
-        $this->expectException(ExceptionInterface::class);
         $data = [
             'dn'          => 'ou=name,dc=example,dc=org',
             'ou'          => ['name'],
@@ -117,6 +116,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         ];
         $node = Ldap\Node::fromArray($data);
         $this->assertFalse($node->isAttached());
+        $this->expectException(ExceptionInterface::class);
         $node->attachLDAP($this->getLDAP());
     }
 
@@ -169,8 +169,8 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testGetIllegalNode()
     {
-        $this->expectException(ExceptionInterface::class);
         $dn   = $this->createDn('ou=Test99,');
+        $this->expectException(ExceptionInterface::class);
         $node = $this->getLDAP()->getNode($dn);
     }
 
@@ -255,8 +255,8 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testGetNonexistentParent()
     {
-        $this->expectException(ExceptionInterface::class);
         $node  = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
+        $this->expectException(ExceptionInterface::class);
         $pnode = $node->getParent();
     }
 

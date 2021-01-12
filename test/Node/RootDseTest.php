@@ -122,29 +122,29 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
 
     public function testSetterWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
         $root              = $this->getLDAP()->getRootDse();
+        $this->expectException(\BadMethodCallException::class);
         $root->objectClass = 'illegal';
     }
 
     public function testOffsetSetWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
         $root                = $this->getLDAP()->getRootDse();
+        $this->expectException(\BadMethodCallException::class);
         $root['objectClass'] = 'illegal';
     }
 
     public function testUnsetterWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
         $root = $this->getLDAP()->getRootDse();
+        $this->expectException(\BadMethodCallException::class);
         unset($root->objectClass);
     }
 
     public function testOffsetUnsetWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
         $root = $this->getLDAP()->getRootDse();
+        $this->expectException(\BadMethodCallException::class);
         unset($root['objectClass']);
     }
 }

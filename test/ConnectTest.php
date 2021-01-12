@@ -270,8 +270,6 @@ class ConnectTest extends TestCase
      */
     public function testConnectionWithoutPortInOptionsArray($host, $ssl, $connectURI)
     {
-        $this->expectException(Exception\LdapException::class);
-        $this->expectExceptionMessage($connectURI);
         $options = [
             'host' => $host,
             'useSsl' => $ssl,
@@ -282,6 +280,8 @@ class ConnectTest extends TestCase
         // bind should throw the expected exception
         // The purpose of the test is to see that the $connectURI string is found
         // in the exception message.
+        $this->expectException(Exception\LdapException::class);
+        $this->expectExceptionMessage($connectURI);
         $ldap->bind();
     }
 

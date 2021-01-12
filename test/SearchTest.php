@@ -50,8 +50,8 @@ class SearchTest extends AbstractOnlineTestCase
 
     public function testGetSingleIllegalEntryWithException()
     {
-        $this->expectException(LdapException::class);
         $dn    = $this->createDn('ou=Test99,');
+        $this->expectException(LdapException::class);
         $entry = $this->getLDAP()->getEntry($dn, [], true);
     }
 
@@ -128,8 +128,8 @@ class SearchTest extends AbstractOnlineTestCase
 
     public function testIllegalSearch()
     {
-        $this->expectException(LdapException::class);
         $dn    = $this->createDn('ou=Node2,');
+        $this->expectException(LdapException::class);
         $items = $this->getLDAP()->search('(objectClass=account)', $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
     }
 
