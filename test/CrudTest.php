@@ -102,8 +102,8 @@ class CrudTest extends AbstractOnlineTestCase
         // This test "manually" handles which exceptions are expected where.
         // So it does make any "assert*" calls, and does not set any expected exception.
         // Because of this, phpunit will flag this as a risky test,
-        // so assert something before finishing the test.
-        $this->assertTrue(true);
+        // so assert something about the LDAP object.
+        $this->assertEquals(0, $this->getLDAP()->getLastErrorCode());
     }
 
     public function testIllegalDelete()

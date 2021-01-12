@@ -321,8 +321,8 @@ class BindTest extends TestCase
         // The "pass" expectation here is just that no exception was thrown.
         // Getting to this point in the code is the "definition of pass".
         // phpunit will flag this as a risky test if we do not assert anything,
-        // so assert something.
-        $this->assertIsObject($ldap);
+        // so assert something about the LDAP object.
+        $this->assertEquals(0, $ldap->getLastErrorCode());
     }
 
     /**
