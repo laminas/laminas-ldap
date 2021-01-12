@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.11.0 - TBD
+## 2.11.0 - 2021-01-12
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [2.11.0](https://github.com/laminas/laminas-ldap/milestone/2)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 2.11.0
 
-### Removed
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-- Nothing.
+#### Enhancement
 
-### Fixed
-
-- Nothing.
+ - [13: Support PHP 7.3 7.4 8.0](https://github.com/laminas/laminas-ldap/pull/13) thanks to @phil-davis
 
 ## 2.10.3 - 2020-03-29
 
