@@ -227,7 +227,7 @@
             </div>
 
             
-            <div class="col-4 text-sm-right">
+            <div class="col-4 text-right">
                 
                     
 
@@ -341,7 +341,6 @@ $hm is an array of the following structure:
     ...
 ]
 */</code></pre>
-
 <h4>Check for the existence of a given DN</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
 
@@ -349,7 +348,6 @@ $options = [/* ... */];
 $ldap = new Ldap($options);
 $ldap-&gt;bind();
 $isThere = $ldap-&gt;exists('cn=Hugo Müller,ou=People,dc=my,dc=local');</code></pre>
-
 <h4>Count children of a given DN</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
 
@@ -357,7 +355,6 @@ $options = [/* ... */];
 $ldap = new Ldap($options);
 $ldap-&gt;bind();
 $childrenCount = $ldap-&gt;countChildren('cn=Hugo Müller,ou=People,dc=my,dc=local');</code></pre>
-
 <h4>Searching the LDAP tree</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
 
@@ -373,7 +370,6 @@ $result = $ldap-&gt;search(
 foreach ($result as $item) {
     echo $item["dn"] . ': ' . $item['cn'][0] . PHP_EOL;
 }</code></pre>
-
 <h3>Adding data to the LDAP</h3>
 <h4>Add a new entry to the LDAP</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Attribute;
@@ -389,7 +385,6 @@ Attribute::setAttribute($entry, 'sn', 'Meier');
 Attribute::setAttribute($entry, 'objectClass', 'inetOrgPerson');
 
 $ldap-&gt;add('cn=Hans Meier,ou=People,dc=my,dc=local', $entry);</code></pre>
-
 <h3>Deleting from the LDAP</h3>
 <h4>Delete an existing entry from the LDAP</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
@@ -398,7 +393,6 @@ $options = [/* ... */];
 $ldap = new Ldap($options);
 $ldap-&gt;bind();
 $ldap-&gt;delete('cn=Hans Meier,ou=People,dc=my,dc=local');</code></pre>
-
 <h3>Updating the LDAP</h3>
 <h4>Update an existing entry on the LDAP</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Attribute;
@@ -413,7 +407,6 @@ Attribute::setAttribute($hm, 'mail', 'mueller@my.local');
 Attribute::setPassword($hm, 'newPa$$w0rd', Attribute::PASSWORD_HASH_SHA1);
 
 $ldap-&gt;update('cn=Hugo Müller,ou=People,dc=my,dc=local', $hm);</code></pre>
-
 <h2 id="extended-operations">Extended operations</h2>
 <h3>Copy and move entries in the LDAP</h3>
 <h4>Copy a LDAP entry recursively with all its descendants</h4>
@@ -427,7 +420,6 @@ $ldap-&gt;copy(
     'cn=Hans Meier,ou=People,dc=my,dc=local',
     true
 );</code></pre>
-
 <h4>Move a LDAP entry recursively with all its descendants to a different subtree</h4>
 <pre class="highlight"><code class="language-php">use Laminas\Ldap\Ldap;
 
@@ -578,6 +570,7 @@ $ldap-&gt;moveToSubtree(
         </ul>
     </div>
 
+                    
                 
             </div>
         </div>
@@ -650,7 +643,7 @@ $ldap-&gt;moveToSubtree(
                         <p>
                             <!--Built with love by the Laminas team with the help of our
                             <a href="https://github.com/laminas/laminas-ldap/graphs/contributors">contributors</a>.<br>-->
-                            &copy; 2020 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
+                            &copy; 2021 <a href="https://getlaminas.org/">Laminas Project</a> a Series of LF Projects, LLC.
                         </p>
                     </div>
                 </div>
