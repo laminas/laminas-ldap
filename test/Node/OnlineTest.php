@@ -10,6 +10,7 @@ namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Exception\ExceptionInterface;
 use LaminasTest\Ldap as TestLdap;
 
 /**
@@ -18,13 +19,13 @@ use LaminasTest\Ldap as TestLdap;
  */
 class OnlineTest extends TestLdap\AbstractOnlineTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cleanupLDAPServer();
         parent::tearDown();
@@ -44,25 +45,25 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         try {
             $node->setAttribute('createTimestamp', false);
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
             $node->createTimestamp = false;
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
             $node['createTimestamp'] = false;
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
             $node->appendToAttribute('createTimestamp', 'value');
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s read-only', $e->getMessage());
         }
         try {
@@ -70,17 +71,15 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
             $attr = key($rdn);
             $node->deleteAttribute($attr);
             $this->fail('Expected exception for modification of read-only attribute ' . $attr);
-        } catch (Exception\ExceptionInterface $e) {
+        } catch (ExceptionInterface $e) {
             $this->assertEquals('Cannot change attribute because it\'s part of the RDN', $e->getMessage());
         }
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testLoadFromLDAPIllegalEntry()
     {
         $dn   = $this->createDn('ou=Test99,');
+        $this->expectException(ExceptionInterface::class);
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
     }
 
@@ -107,9 +106,6 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals($sdata, serialize($newObject));
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testAttachToInvalidLDAP()
     {
         $data = [
@@ -120,6 +116,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         ];
         $node = Ldap\Node::fromArray($data);
         $this->assertFalse($node->isAttached());
+        $this->expectException(ExceptionInterface::class);
         $node->attachLDAP($this->getLDAP());
     }
 
@@ -170,12 +167,10 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals("Test1", $node->getAttribute('ou', 0));
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testGetIllegalNode()
     {
         $dn   = $this->createDn('ou=Test99,');
+        $this->expectException(ExceptionInterface::class);
         $node = $this->getLDAP()->getNode($dn);
     }
 
@@ -258,12 +253,10 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         );
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testGetNonexistentParent()
     {
         $node  = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
+        $this->expectException(ExceptionInterface::class);
         $pnode = $node->getParent();
     }
 

@@ -17,13 +17,13 @@ use LaminasTest\Ldap as TestLdap;
  */
 class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cleanupLDAPServer();
         parent::tearDown();
@@ -94,5 +94,6 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
             // do nothing - just iterate
         }
         $nodes->next();
+        $this->assertInstanceOf(\Laminas\Ldap\Node::class, $nodes->current());
     }
 }

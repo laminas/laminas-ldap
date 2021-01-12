@@ -9,6 +9,7 @@
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Exception\LdapException;
 
 /**
  * @group      Laminas_Ldap
@@ -41,7 +42,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
      */
     private $nodes;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
@@ -85,7 +86,7 @@ class CopyRenameTest extends AbstractOnlineTestCase
         }
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             return;
@@ -136,51 +137,39 @@ class CopyRenameTest extends AbstractOnlineTestCase
         $this->assertTrue($this->getLDAP()->exists('ou=OrgTest,' . $this->orgSubTreeDn));
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testRenameSourceNotExists()
     {
+        $this->expectException(LdapException::class);
         $this->getLDAP()->rename($this->createDn('ou=DoesNotExist,'), $this->newDn, false);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testRenameTargetExists()
     {
+        $this->expectException(LdapException::class);
         $this->getLDAP()->rename($this->orgDn, $this->createDn('ou=Test1,'), false);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testRenameTargetParentNotExists()
     {
+        $this->expectException(LdapException::class);
         $this->getLDAP()->rename($this->orgDn, $this->createDn('ou=Test1,ou=ParentDoesNotExist,'), false);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testRenameEmulationSourceNotExists()
     {
+        $this->expectException(LdapException::class);
         $this->getLDAP()->rename($this->createDn('ou=DoesNotExist,'), $this->newDn, false, true);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testRenameEmulationTargetExists()
     {
+        $this->expectException(LdapException::class);
         $this->getLDAP()->rename($this->orgDn, $this->createDn('ou=Test1,'), false, true);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testRenameEmulationTargetParentNotExists()
     {
+        $this->expectException(LdapException::class);
         $this->getLDAP()->rename(
             $this->orgDn,
             $this->createDn('ou=Test1,ou=ParentDoesNotExist,'),

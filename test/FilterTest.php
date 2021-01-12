@@ -10,6 +10,7 @@ namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Filter;
+use Laminas\Ldap\Filter\Exception\FilterException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -100,12 +101,10 @@ class FilterTest extends TestCase
         $this->assertEquals('(name=*value)', $f1->toString());
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Filter\Exception\FilterException
-     */
     public function testIllegalGroupingFilter()
     {
         $data = ['a', 'b', 5];
+        $this->expectException(FilterException::class);
         $f    = new Filter\AndFilter($data);
     }
 

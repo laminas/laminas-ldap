@@ -18,18 +18,8 @@ class ErrorHandlerTest extends TestCase
 {
     protected $dummyErrorHandler;
 
-    protected $currentErrorHandler = [
-        \PHPUnit\Util\ErrorHandler::class,
-        'handleError',
-    ];
-
-    protected function setUp()
+    protected function setUp(): void
     {
-        /** @todo: remove when migrate to PHP 7.1+ and PHPUnit 7+ only */
-        if (class_exists(\PHPUnit_Util_ErrorHandler::class)) {
-            $this->currentErrorHandler[0] = \PHPUnit_Util_ErrorHandler::class;
-        }
-
         $this->dummyErrorHandler = function ($errno, $error) {
         };
     }
@@ -37,21 +27,29 @@ class ErrorHandlerTest extends TestCase
     {
         $errorHandler = new ErrorHandler();
 
-        $this->assertEquals($this->currentErrorHandler, set_error_handler($this->dummyErrorHandler));
+        $returnValue1 = set_error_handler($this->dummyErrorHandler);
+        $this->assertIsObject($returnValue1);
+        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $returnValue1);
         $errorHandler->startErrorHandling();
-        $this->assertEquals($this->dummyErrorHandler, set_error_handler($this->dummyErrorHandler));
+        $returnValue2 = set_error_handler($this->dummyErrorHandler);
+        $this->assertIsObject($returnValue2);
+        $this->assertInstanceOf(\Closure::class, $returnValue2);
 
         restore_error_handler();
         restore_error_handler();
     }
 
-    public function testErrorHandlerREmovalWorks()
+    public function testErrorHandlerRemovalWorks()
     {
         $errorHandler = new ErrorHandler();
 
-        $this->assertEquals($this->currentErrorHandler, set_error_handler($this->dummyErrorHandler));
+        $returnValue1 = set_error_handler($this->dummyErrorHandler);
+        $this->assertIsObject($returnValue1);
+        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $returnValue1);
         $errorHandler->stopErrorHandling();
-        $this->assertEquals($this->currentErrorHandler, set_error_handler($this->dummyErrorHandler));
+        $returnValue2 = set_error_handler($this->dummyErrorHandler);
+        $this->assertIsObject($returnValue2);
+        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $returnValue2);
 
         restore_error_handler();
     }

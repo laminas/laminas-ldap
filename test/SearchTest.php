@@ -11,6 +11,7 @@ namespace LaminasTest\Ldap;
 use Laminas\Ldap;
 use Laminas\Ldap\Collection;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Exception\LdapException;
 use LaminasTest\Ldap\TestAsset\CustomNaming;
 
 /**
@@ -18,13 +19,13 @@ use LaminasTest\Ldap\TestAsset\CustomNaming;
  */
 class SearchTest extends AbstractOnlineTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cleanupLDAPServer();
         parent::tearDown();
@@ -47,12 +48,10 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertNull($entry);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testGetSingleIllegalEntryWithException()
     {
         $dn    = $this->createDn('ou=Test99,');
+        $this->expectException(LdapException::class);
         $entry = $this->getLDAP()->getEntry($dn, [], true);
     }
 
@@ -123,16 +122,14 @@ class SearchTest extends AbstractOnlineTestCase
             getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             Ldap\Ldap::SEARCH_SCOPE_SUB
         );
-        $this->assertInternalType("array", $entries);
+        $this->assertIsArray($entries);
         $this->assertCount(9, $entries);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\LdapException
-     */
     public function testIllegalSearch()
     {
         $dn    = $this->createDn('ou=Node2,');
+        $this->expectException(LdapException::class);
         $items = $this->getLDAP()->search('(objectClass=account)', $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
     }
 
@@ -229,7 +226,7 @@ class SearchTest extends AbstractOnlineTestCase
         $filter = Ldap\Filter::equals('objectClass', 'organizationalUnit');
 
         $entries = $this->getLDAP()->searchEntries($filter, $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
-        $this->assertInternalType("array", $entries);
+        $this->assertIsArray($entries);
         $this->assertCount(9, $entries);
     }
 
@@ -294,6 +291,7 @@ class SearchTest extends AbstractOnlineTestCase
             // do nothing - just iterate
         }
         $items->next();
+        $this->assertIsArray($items->current());
     }
 
     public function testUnknownCollectionClassThrowsException()
@@ -308,8 +306,8 @@ class SearchTest extends AbstractOnlineTestCase
                 'This_Class_Does_Not_Exist'
             );
             $this->fail('Expected exception not thrown');
-        } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+        } catch (LdapException $zle) {
+            $this->assertStringContainsString(
                 "Class 'This_Class_Does_Not_Exist' can not be found",
                 $zle->getMessage()
             );
@@ -328,8 +326,8 @@ class SearchTest extends AbstractOnlineTestCase
                 'LaminasTest\Ldap\TestAsset\CollectionClassNotSubclassingLaminasLDAPCollection'
             );
             $this->fail('Expected exception not thrown');
-        } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+        } catch (LdapException $zle) {
+            $this->assertStringContainsString(
                 "Class 'LaminasTest\\Ldap\\TestAsset\\CollectionClassNotSubclassingLaminasLDAPCollection'"
                 . " must subclass 'Laminas\\Ldap\\Collection'",
                 $zle->getMessage()
@@ -488,7 +486,7 @@ class SearchTest extends AbstractOnlineTestCase
         );
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $items->getInnerIterator()->key());
         $current = $items->getInnerIterator()->current();
-        $this->assertInternalType('array', $current);
+        $this->assertIsArray($current);
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $current['dn']);
     }
 
@@ -505,7 +503,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $items->key());
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $items->dn());
         $current = $items->current();
-        $this->assertInternalType('array', $current);
+        $this->assertIsArray($current);
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $current['dn']);
     }
 
@@ -551,7 +549,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, $items->count());
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $items->getInnerIterator()->key());
         $current = $items->current();
-        $this->assertInternalType('array', $current);
+        $this->assertIsArray($current);
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $current['dn']);
 
         $i = 0;

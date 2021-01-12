@@ -29,7 +29,7 @@ class BindTest extends TestCase
     protected $altUsername;
     protected $bindRequiresDn = false;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
@@ -79,7 +79,7 @@ class BindTest extends TestCase
             $ldap->bind();
             $this->fail('Expected exception for empty options');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains('A host parameter is required', $zle->getMessage());
+            $this->assertStringContainsString('A host parameter is required', $zle->getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ class BindTest extends TestCase
             $ldap->bind();
         } catch (Exception\LdapException $zle) {
             // or I guess the server doesn't allow unauthenticated binds
-            $this->assertContains('unauthenticated bind', $zle->getMessage());
+            $this->assertStringContainsString('unauthenticated bind', $zle->getMessage());
         }
     }
 
@@ -108,7 +108,7 @@ class BindTest extends TestCase
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for baseDn missing');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains('Base DN not set', $zle->getMessage());
+            $this->assertStringContainsString('Base DN not set', $zle->getMessage());
         }
     }
 
@@ -124,7 +124,7 @@ class BindTest extends TestCase
             $ldap->bind('invalid', 'ignored');
             $this->fail('Expected exception for missing accountDomainName');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains('Option required: accountDomainName', $zle->getMessage());
+            $this->assertStringContainsString('Option required: accountDomainName', $zle->getMessage());
         }
     }
 
@@ -167,7 +167,7 @@ class BindTest extends TestCase
             $ldap->bind($this->altUsername, 'invalid');
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains('Invalid credentials', $zle->getMessage());
+            $this->assertStringContainsString('Invalid credentials', $zle->getMessage());
         }
     }
 
@@ -190,7 +190,7 @@ class BindTest extends TestCase
                 $this->markTestSkipped('Anonymous bind needs to be disallowed for this test');
             }
 
-            $this->assertContains('Failed to retrieve DN', $zle->getMessage());
+            $this->assertStringContainsString('Failed to retrieve DN', $zle->getMessage());
         }
     }
 
@@ -203,7 +203,7 @@ class BindTest extends TestCase
             $ldap->bind($this->altUsername, '');
             $this->fail('Expected exception for empty password');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Empty password not allowed - see allowEmptyPassword option.',
                 $zle->getMessage()
             );
@@ -238,7 +238,7 @@ class BindTest extends TestCase
             $ldap->bind();
             $this->fail('Expected exception for empty password');
         } catch (Exception\LdapException $zle) {
-            $this->assertContains(
+            $this->assertStringContainsString(
                 'Binding requires username in DN form',
                 $zle->getMessage()
             );
@@ -271,7 +271,7 @@ class BindTest extends TestCase
     {
         $ldap = new Ldap\Ldap($this->options);
         $this->assertNotNull($ldap->getResource());
-        $this->assertInternalType('resource', $ldap->getResource());
+        $this->assertIsResource($ldap->getResource());
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_USERNAME'), $ldap->getBoundUser());
     }
 
@@ -318,6 +318,11 @@ class BindTest extends TestCase
         ];
         $ldap = $this->getSslLdap($options);
         $ldap->bind();
+        // The "pass" expectation here is just that no exception was thrown.
+        // Getting to this point in the code is the "definition of pass".
+        // phpunit will flag this as a risky test if we do not assert anything,
+        // so assert something about the LDAP object.
+        $this->assertEquals(0, $ldap->getLastErrorCode());
     }
 
     /**

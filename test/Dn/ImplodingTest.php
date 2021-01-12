@@ -9,6 +9,7 @@
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Exception\LdapException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -113,21 +114,17 @@ class ImplodingTest extends TestCase
         );
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testImplodeRdnInvalidOne()
     {
         $a = ['cn'];
+        $this->expectException(LdapException::class);
         Ldap\Dn::implodeRdn($a);
     }
 
-    /**
-     * @expectedException Laminas\Ldap\Exception\ExceptionInterface
-     */
     public function testImplodeRdnInvalidThree()
     {
         $a = ['cn' => 'value', 'ou'];
+        $this->expectException(LdapException::class);
         Ldap\Dn::implodeRdn($a);
     }
 }

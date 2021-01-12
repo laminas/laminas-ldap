@@ -350,7 +350,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * The callable has to accept two parameters that will be compared.
      *
-     * @param callable $sortingAlgorithm The algorithm to be used for sorting
+     * @param callable $sortFunction The algorithm to be used for sorting
      *
      * @return DefaultIterator Provides a fluent interface
      */

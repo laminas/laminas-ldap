@@ -10,8 +10,7 @@ namespace LaminasTest\Ldap;
 
 use Laminas\Config;
 use Laminas\Ldap;
-use Laminas\Ldap\Exception;
-use phpmock\Mock;
+use Laminas\Ldap\Exception\LdapException;
 use phpmock\phpunit\PHPMock;
 use PHPUnit\Framework\TestCase;
 
@@ -37,7 +36,7 @@ class OfflineTest extends TestCase
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->ldap = new Ldap\Ldap();
     }
@@ -51,7 +50,7 @@ class OfflineTest extends TestCase
         try {
             $this->ldap->setOptions([$optionName => 'irrelevant']);
             $this->fail('Expected Laminas\Ldap\Exception\LdapException not thrown');
-        } catch (Exception\LdapException $e) {
+        } catch (LdapException $e) {
             $this->assertEquals("Unknown Laminas\Ldap\Ldap option: $optionName", $e->getMessage());
         }
     }
@@ -176,9 +175,6 @@ class OfflineTest extends TestCase
         ];
     }
 
-    /**
-     * @expectedException \Laminas\Ldap\Exception\LdapException
-     */
     public function testRemovingAttributesFails()
     {
         $ldap_mod_del = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_del');
@@ -186,6 +182,7 @@ class OfflineTest extends TestCase
                      ->willReturn(false);
 
         $ldap = new \Laminas\Ldap\Ldap();
+        $this->expectException(LdapException::class);
         $ldap->deleteAttributes('foo', ['bar']);
     }
 
@@ -212,9 +209,6 @@ class OfflineTest extends TestCase
         $this->assertSame($ldap, $ldap->addAttributes($dn, $attributes, $allowEmptyAttributes));
     }
 
-    /**
-     * @expectedException \Laminas\Ldap\Exception\LdapException
-     */
     public function testAddingAttributesFails()
     {
         $ldap_mod_del = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_add');
@@ -222,6 +216,7 @@ class OfflineTest extends TestCase
                      ->willReturn(false);
 
         $ldap = new \Laminas\Ldap\Ldap();
+        $this->expectException(LdapException::class);
         $ldap->addAttributes('foo', ['bar']);
     }
 
@@ -248,9 +243,6 @@ class OfflineTest extends TestCase
         $this->assertSame($ldap, $ldap->updateAttributes($dn, $attributes, $allowEmptyAttributes));
     }
 
-    /**
-     * @expectedException \Laminas\Ldap\Exception\LdapException
-     */
     public function testUpdatingAttributesFails()
     {
         $ldap_mod_upd = $this->getFunctionMock('Laminas\\Ldap', 'ldap_mod_replace');
@@ -258,6 +250,7 @@ class OfflineTest extends TestCase
                      ->willReturn(false);
 
         $ldap = new \Laminas\Ldap\Ldap();
+        $this->expectException(LdapException::class);
         $ldap->updateAttributes('foo', ['bar']);
     }
 }

@@ -16,13 +16,13 @@ use LaminasTest\Ldap as TestLdap;
  */
 class ChildrenTest extends TestLdap\AbstractOnlineTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->prepareLDAPServer();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->cleanupLDAPServer();
         parent::tearDown();

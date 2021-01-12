@@ -20,7 +20,7 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
      */
     private static $ldap;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $options = [
             'host'     => getenv('TESTS_LAMINAS_LDAP_HOST'),
@@ -53,7 +53,7 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
         self::$ldap = new Ldap\Ldap($options);
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         if (self::$ldap !== null) {
             self::$ldap->disconnect();
@@ -74,7 +74,7 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
         return self::$ldap;
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
