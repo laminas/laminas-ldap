@@ -72,7 +72,7 @@ abstract class AbstractFilter
     /**
      * Escapes the given VALUES according to RFC 2254 so that they can be safely used in LDAP filters.
      *
-     * Any control characters with an ACII code < 32 as well as the characters with special meaning in
+     * Any control characters with an ASCII code < 32 as well as the characters with special meaning in
      * LDAP filters "*", "(", ")", and "\" (the backslash) are converted into the representation of a
      * backslash followed by two hex digits representing the hexadecimal value of the character.
      * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>

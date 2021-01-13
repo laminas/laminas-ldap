@@ -498,7 +498,7 @@ class Dn implements ArrayAccess
     /**
      * Undoes the conversion done by {@link escapeValue()}.
      *
-     * Any escape sequence starting with a baskslash - hexpair or special character -
+     * Any escape sequence starting with a backslash - hexpair or special character -
      * will be transformed back to the corresponding character.
      * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
      * @link   http://pear.php.net/package/Net_LDAP2

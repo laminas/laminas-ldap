@@ -16,7 +16,7 @@ namespace Laminas\Ldap;
 class ErrorHandler implements ErrorHandlerInterface
 {
     /**
-     * @var ErrorHandlerInterface The Errror-Handler instance
+     * @var ErrorHandlerInterface The Error-Handler instance
      */
     protected static $errorHandler;
 
