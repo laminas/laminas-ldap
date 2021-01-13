@@ -10,7 +10,7 @@ class OfflineReconnectTest extends OfflineTest
 {
     /**
      * Enables mocks for ldap_connect(), ldap_bind(), and ldap_set_option().
-     * Not all tests need or are compatible with this, so it is called expliclty
+     * Not all tests need or are compatible with this, so it is called explicitly
      * by tests that do.
      */
     protected function activateBindableOfflineMocks()

@@ -359,7 +359,7 @@ class CanonTest extends TestCase
         }
     }
 
-    public function testGetUnavailableCanoncialForm()
+    public function testGetUnavailableCanonicalForm()
     {
         $options = $this->options;
         unset($options['accountDomainName']);

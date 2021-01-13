@@ -240,7 +240,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     public function testExistsAttribute()
     {
         $node = $this->createTestNode();
-        $this->assertFalse($node->existsAttribute('nonExistant'));
+        $this->assertFalse($node->existsAttribute('nonExistent'));
         $this->assertFalse($node->existsAttribute('empty', false));
         $this->assertTrue($node->existsAttribute('empty', true));
 

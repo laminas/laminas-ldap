@@ -142,7 +142,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
         $this->assertTrue(
             $exCaught,
-            'Execption not raised when deleting item with children without specifiying recursive delete'
+            'Exception not raised when deleting item with children without specifying recursive delete'
         );
         $this->getLDAP()->delete($topDn, true);
         $this->assertFalse($this->getLDAP()->exists($topDn));

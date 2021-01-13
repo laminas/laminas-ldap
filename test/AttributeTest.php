@@ -308,7 +308,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('dummy', $retTs);
     }
 
-    public function testGetDateTimeValueNegativeOffet()
+    public function testGetDateTimeValueNegativeOffset()
     {
         $data      = ['ts' => ['20080612143045-0700']];
         $retTs     = Attribute::getDateTimeAttribute($data, 'ts', 0);
@@ -316,7 +316,7 @@ class AttributeTest extends TestCase
         $this->assertEquals($tsCompare, $retTs);
     }
 
-    public function testGetDateTimeValueNegativeOffet2()
+    public function testGetDateTimeValueNegativeOffset2()
     {
         $data      = ['ts' => ['20080612143045-0715']];
         $retTs     = Attribute::getDateTimeAttribute($data, 'ts', 0);
