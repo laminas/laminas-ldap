@@ -1,29 +1,19 @@
 {
     "name": "laminas/laminas-ldap",
     "description": "Provides support for LDAP operations including but not limited to binding, searching and modifying entries in an LDAP directory",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "ldap"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-ldap/",
-        "issues": "https://github.com/laminas/laminas-ldap/issues",
-        "source": "https://github.com/laminas/laminas-ldap",
-        "rss": "https://github.com/laminas/laminas-ldap/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "ext-ldap": "*",
         "laminas/laminas-zendframework-bridge": "^1.1"
+    },
+    "replace": {
+        "zendframework/zend-ldap": "^2.10.1"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
@@ -36,6 +26,10 @@
     "suggest": {
         "laminas/laminas-eventmanager": "Laminas\\EventManager component"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\Ldap\\": "src/"
@@ -56,7 +50,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-ldap": "^2.10.1"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-ldap/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-ldap",
+        "docs": "https://docs.laminas.dev/laminas-ldap/",
+        "rss": "https://github.com/laminas/laminas-ldap/releases.atom"
     }
 }
