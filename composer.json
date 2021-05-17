@@ -30,7 +30,8 @@
         "laminas/laminas-eventmanager": "^3.3",
         "laminas/laminas-stdlib": "^3.3",
         "php-mock/php-mock-phpunit": "^2.6",
-        "phpunit/phpunit": "^9.5.8"
+        "phpunit/phpunit": "^9.5.8",
+        "vimeo/psalm": "^4.13.1"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "Laminas\\EventManager component"
