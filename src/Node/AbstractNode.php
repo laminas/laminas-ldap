@@ -10,6 +10,7 @@ namespace Laminas\Ldap\Node;
 
 use ArrayAccess;
 use Countable;
+use ReturnTypeWillChange;
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 
@@ -448,6 +449,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * @param  string $name
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function offsetExists($name)
     {
         return $this->existsAttribute($name, false);

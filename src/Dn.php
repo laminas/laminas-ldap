@@ -9,6 +9,7 @@
 namespace Laminas\Ldap;
 
 use ArrayAccess;
+use ReturnTypeWillChange;
 
 /**
  * Laminas\Ldap\Dn provides an API for DN manipulation
@@ -376,6 +377,7 @@ class Dn implements ArrayAccess
      * @param  int $offset
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         $offset = (int) $offset;
