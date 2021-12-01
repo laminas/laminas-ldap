@@ -169,6 +169,7 @@ Method signature                                                                
 `static createPassword(string $password, string $hashType) : string`                       | Creates an LDAP password. The password hash can be specified with `$hashType`. The default value here is `Attribute::PASSWORD_HASH_MD5` with `Attribute::PASSWORD_HASH_SHA` as the other possibility.
 `static setDateTimeAttribute(/* ... */) : void`                                            | See [setDateTimeAttribute()](#setdatetimeattribute) below for details.
 `static getDateTimeAttribute(/* ... */) : array|int`                                       | See [getDateTimeAttribute()](#getdatetimeattribute) below for details.
+
 #### setPassword()
 
 The full signature of `setPassword()` is as follows:
