@@ -210,7 +210,7 @@ class Filter extends Filter\StringFilter
         if ($prepend !== null) {
             $str .= $prepend;
         }
-        $str .= ldap_escape($value, null, LDAP_ESCAPE_FILTER);
+        $str .= ldap_escape($value, '', LDAP_ESCAPE_FILTER);
         if ($append !== null) {
             $str .= $append;
         }
