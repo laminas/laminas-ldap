@@ -22,8 +22,7 @@
     },
     "require": {
         "php": "^7.3 || ~8.0.0 || ~8.1.0",
-        "ext-ldap": "*",
-        "laminas/laminas-zendframework-bridge": "^1.1"
+        "ext-ldap": "*"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "^2.2",
@@ -56,7 +55,7 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-ldap": "^2.10.1"
+    "conflict": {
+        "zendframework/zend-ldap": "*"
     }
 }
