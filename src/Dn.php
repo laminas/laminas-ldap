@@ -394,6 +394,7 @@ class Dn implements ArrayAccess
      * @param  int $offset
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->get($offset, 1, null);
@@ -406,6 +407,7 @@ class Dn implements ArrayAccess
      * @param int   $offset
      * @param array $value
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->set($offset, $value);
@@ -417,6 +419,7 @@ class Dn implements ArrayAccess
      *
      * @param int $offset
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         $this->remove($offset, 1);
