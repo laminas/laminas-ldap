@@ -91,11 +91,11 @@ where:
 - `$basedn`: The search base for the search. If omitted or `null`, the `baseDn`
   from the connection and binding parameters is used.
 - `$scope`: The search scope:
-    - `Ldap::SEARCH_SCOPE_SUB` searches the complete subtree including the
-      `$baseDn` node. This is the default value.
-    - `Ldap::SEARCH_SCOPE_ONE` restricts search to one level below `$baseDn`.
-    - `Ldap::SEARCH_SCOPE_BASE` restricts search to the `$baseDn` itself; this
-      can be used to efficiently retrieve a single entry by its DN.
+  - `Ldap::SEARCH_SCOPE_SUB` searches the complete subtree including the
+    `$baseDn` node. This is the default value.
+  - `Ldap::SEARCH_SCOPE_ONE` restricts search to one level below `$baseDn`.
+  - `Ldap::SEARCH_SCOPE_BASE` restricts search to the `$baseDn` itself; this
+    can be used to efficiently retrieve a single entry by its DN.
 - `$attributes`: Specifies the attributes contained in the returned entries. To
   include all possible attributes (ACL restrictions can disallow certain
   attribute to be retrieved by a given user), pass either an empty array (`[]`)
@@ -167,8 +167,8 @@ Method signature                                                                
 `static removeFromAttribute(array &$data, string $attribName, mixed|array $value) : void`  | Removes the value(s) given in `$value` from the attribute `$attribName` in `$data`.
 `static setPassword(/* ... */) : void`                                                     | See [setPassword](#setpassword) below for details.
 `static createPassword(string $password, string $hashType) : string`                       | Creates an LDAP password. The password hash can be specified with `$hashType`. The default value here is `Attribute::PASSWORD_HASH_MD5` with `Attribute::PASSWORD_HASH_SHA` as the other possibility.
-static setDateTimeAttribute(/* ... */) : void                                              | See [setDateTimeAttribute()](#setdatetimeattribute) below for details.
-static getDateTimeAttribute(/* ... */) : array|int                                         | See [getDateTimeAttribute()](#getdatetimeattribute) below for details.
+`static setDateTimeAttribute(/* ... */) : void`                                            | See [setDateTimeAttribute()](#setdatetimeattribute) below for details.
+`static getDateTimeAttribute(/* ... */) : array|int`                                       | See [getDateTimeAttribute()](#getdatetimeattribute) below for details.
 
 #### setPassword()
 
