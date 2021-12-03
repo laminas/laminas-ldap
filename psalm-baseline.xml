@@ -1,0 +1,3027 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.13.1@5cf660f63b548ccd4a56f62d916ee4d6028e01a3">
+  <file src="src/Attribute.php">
+    <InvalidReturnStatement occurrences="2">
+      <code>$value-&gt;format('U')</code>
+      <code>Converter\Converter::fromLdapDateTime($value, false)-&gt;format('U')</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>int|null</code>
+    </InvalidReturnType>
+    <InvalidScalarArgument occurrences="2">
+      <code>mt_rand()</code>
+      <code>mt_rand()</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="2">
+      <code>setDateTimeAttribute</code>
+      <code>setPassword</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="11">
+      <code>$data[$attribName]</code>
+      <code>$data[$attribName]</code>
+      <code>$data[$attribName]</code>
+      <code>$data[$attribName]</code>
+      <code>$data[$attribName][$index]</code>
+      <code>$resultArray</code>
+      <code>$resultArray</code>
+      <code>$v</code>
+      <code>$v</code>
+      <code>$values</code>
+      <code>$values[$i]</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$data[$attribName][$index]</code>
+      <code>$resultArray[$k]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="9">
+      <code>$resultArray</code>
+      <code>$retArray[]</code>
+      <code>$return</code>
+      <code>$v</code>
+      <code>$v</code>
+      <code>$v</code>
+      <code>$v</code>
+      <code>$v</code>
+      <code>$values</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array|int</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$values</code>
+    </MixedReturnStatement>
+    <RedundantConditionGivenDocblockType occurrences="5">
+      <code>$value !== null</code>
+      <code>$value !== null</code>
+      <code>is_int($index)</code>
+      <code>is_int($value)</code>
+      <code>is_string($value)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Collection.php">
+    <InvalidNullableReturnType occurrences="1">
+      <code>array</code>
+    </InvalidNullableReturnType>
+    <MixedInferredReturnType occurrences="1">
+      <code>array|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;cache[$this-&gt;current]</code>
+    </MixedReturnStatement>
+    <NullableReturnStatement occurrences="1">
+      <code>$this-&gt;current()</code>
+    </NullableReturnStatement>
+    <PossiblyNullPropertyAssignmentValue occurrences="1">
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+  </file>
+  <file src="src/Collection/DefaultIterator.php">
+    <DocblockTypeContradiction occurrences="3">
+      <code>is_resource($this-&gt;current)</code>
+      <code>is_resource($this-&gt;current)</code>
+      <code>is_resource($this-&gt;current)</code>
+    </DocblockTypeContradiction>
+    <InvalidArgument occurrences="1">
+      <code>$this</code>
+    </InvalidArgument>
+    <MissingClosureParamType occurrences="2">
+      <code>$a</code>
+      <code>$b</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>function ($a, $b) use ($sortFunction) {</code>
+    </MissingClosureReturnType>
+    <MixedArgument occurrences="1">
+      <code>$entry['resource']</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1"/>
+    <MixedArrayAccess occurrences="5">
+      <code>$a['sortValue']</code>
+      <code>$b['sortValue']</code>
+      <code>$entry['resource']</code>
+      <code>$nextEntry['resource']</code>
+      <code>$nextEntry['resource']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$this-&gt;entries[$key]['sortValue']</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="1">
+      <code>$entry[$attrName]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="6">
+      <code>$attrName</code>
+      <code>$entry</code>
+      <code>$nextEntry</code>
+      <code>$nextEntry</code>
+      <code>$this-&gt;current</code>
+      <code>$this-&gt;current</code>
+    </MixedAssignment>
+    <PossiblyInvalidFunctionCall occurrences="1">
+      <code>call_user_func($this-&gt;attributeNameTreatment, $name)</code>
+    </PossiblyInvalidFunctionCall>
+    <PossiblyNullPropertyAssignmentValue occurrences="5">
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(int) $attributeNameTreatment</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="3">
+      <code>is_resource($this-&gt;current)</code>
+      <code>is_resource($this-&gt;current)</code>
+      <code>is_resource($this-&gt;resultId)</code>
+    </RedundantConditionGivenDocblockType>
+    <TypeDoesNotContainType occurrences="1">
+      <code>is_string($attributeNameTreatment) &amp;&amp; ! function_exists($attributeNameTreatment)</code>
+    </TypeDoesNotContainType>
+  </file>
+  <file src="src/Converter/Converter.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>is_scalar($value)</code>
+    </DocblockTypeContradiction>
+    <InvalidScalarArgument occurrences="8">
+      <code>$e-&gt;getCode()</code>
+      <code>$time['day']</code>
+      <code>$time['hour']</code>
+      <code>$time['minute']</code>
+      <code>$time['month']</code>
+      <code>$time['offsethours']</code>
+      <code>$time['offsetminutes']</code>
+      <code>$time['second']</code>
+    </InvalidScalarArgument>
+    <MissingClosureParamType occurrences="1">
+      <code>$matches</code>
+    </MissingClosureParamType>
+    <MixedArgument occurrences="3">
+      <code>$matches[1]</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$matches[1]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$v</code>
+    </MixedAssignment>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>is_string($date)</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Dn.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === $val</code>
+    </DocblockTypeContradiction>
+    <InvalidArgument occurrences="1">
+      <code>[$key, $value]</code>
+    </InvalidArgument>
+    <InvalidClass occurrences="4">
+      <code>DN</code>
+      <code>DN</code>
+      <code>DN</code>
+      <code>DN</code>
+    </InvalidClass>
+    <InvalidReturnType occurrences="1">
+      <code>bool</code>
+    </InvalidReturnType>
+    <MissingReturnType occurrences="2">
+      <code>setCaseFold</code>
+      <code>setDefaultCaseFold</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="6">
+      <code>$p</code>
+      <code>$part</code>
+      <code>$this-&gt;dn[$index]</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayOffset occurrences="1">
+      <code>$multi[$key]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="8">
+      <code>$key</code>
+      <code>$multi[$key]</code>
+      <code>$p</code>
+      <code>$part</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>array</code>
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>(count($values) == 1) ? $values[0] : $values</code>
+      <code>(count($values) == 1) ? $values[0] : $values</code>
+    </MixedReturnStatement>
+    <NullArgument occurrences="2">
+      <code>null</code>
+      <code>null</code>
+    </NullArgument>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$lastKey</code>
+    </PossiblyInvalidArgument>
+    <PossiblyNullArgument occurrences="8">
+      <code>$caseFold</code>
+      <code>$caseFold</code>
+      <code>$caseFold</code>
+      <code>$caseFold</code>
+      <code>$caseFold</code>
+      <code>$caseFold</code>
+      <code>$caseFold</code>
+      <code>$k</code>
+    </PossiblyNullArgument>
+    <PossiblyNullArrayAccess occurrences="4">
+      <code>$k[$i]</code>
+      <code>$k[$i]</code>
+      <code>$v[$i]</code>
+      <code>$v[$i]</code>
+    </PossiblyNullArrayAccess>
+    <RedundantCast occurrences="1">
+      <code>(string) $dn</code>
+    </RedundantCast>
+    <RedundantCastGivenDocblockType occurrences="4">
+      <code>(int) $length</code>
+      <code>(int) $length</code>
+      <code>(int) $levelUp</code>
+      <code>(int) $offset</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>is_string($dn)</code>
+    </RedundantConditionGivenDocblockType>
+    <UnsafeInstantiation occurrences="3">
+      <code>new static($dn, $caseFold)</code>
+      <code>new static($dnArray, $caseFold)</code>
+      <code>new static($newDn, $this-&gt;caseFold)</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/ErrorHandler.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>! self::$errorHandler</code>
+      <code>! self::$errorHandler</code>
+    </DocblockTypeContradiction>
+    <InvalidArgument occurrences="1"/>
+    <MissingClosureParamType occurrences="2">
+      <code>$errNo</code>
+      <code>$errString</code>
+    </MissingClosureParamType>
+    <UnusedClosureParam occurrences="2">
+      <code>$errNo</code>
+      <code>$errString</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/Exception/LdapException.php">
+    <PossiblyNullArgument occurrences="1">
+      <code>$code</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Filter.php">
+    <MissingParamType occurrences="2">
+      <code>$filter</code>
+      <code>$filter</code>
+    </MissingParamType>
+    <UnsafeInstantiation occurrences="10">
+      <code>new static($attr, $value, self::TYPE_APPROX, null, null)</code>
+      <code>new static($attr, $value, self::TYPE_EQUALS, '*', '*')</code>
+      <code>new static($attr, $value, self::TYPE_EQUALS, '*', null)</code>
+      <code>new static($attr, $value, self::TYPE_EQUALS, null, '*')</code>
+      <code>new static($attr, $value, self::TYPE_EQUALS, null, null)</code>
+      <code>new static($attr, $value, self::TYPE_GREATER, null, null)</code>
+      <code>new static($attr, $value, self::TYPE_GREATEROREQUAL, null, null)</code>
+      <code>new static($attr, $value, self::TYPE_LESS, null, null)</code>
+      <code>new static($attr, $value, self::TYPE_LESSOREQUAL, null, null)</code>
+      <code>new static($attr, '', self::TYPE_EQUALS, '*', null)</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Filter/AbstractFilter.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>null === $val</code>
+    </DocblockTypeContradiction>
+    <MissingParamType occurrences="2">
+      <code>$filter</code>
+      <code>$filter</code>
+    </MissingParamType>
+    <MixedArgument occurrences="2">
+      <code>$val</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="2">
+      <code>$val</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="2">
+      <code>array</code>
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>(count($values) == 1) ? $values[0] : $values</code>
+      <code>(count($values) == 1) ? $values[0] : $values</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Filter/AbstractLogicalFilter.php">
+    <MixedAssignment occurrences="2">
+      <code>$s</code>
+      <code>$sub</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>toString</code>
+    </MixedMethodCall>
+    <MixedOperand occurrences="1">
+      <code>$sub-&gt;toString()</code>
+    </MixedOperand>
+  </file>
+  <file src="src/Filter/MaskFilter.php">
+    <MissingParamType occurrences="1">
+      <code>$value</code>
+    </MissingParamType>
+    <MixedArgument occurrences="1">
+      <code>$args[$i]</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Ldap.php">
+    <ArgumentTypeCoercion occurrences="2">
+      <code>$duration * 1000000</code>
+      <code>'Laminas\Ldap\Collection'</code>
+    </ArgumentTypeCoercion>
+    <DocblockTypeContradiction occurrences="8">
+      <code>! is_resource($this-&gt;resource)</code>
+      <code>$accountDomainName === null</code>
+      <code>$accountDomainNameShort === null</code>
+      <code>$dname === null</code>
+      <code>$this-&gt;rootDse === null</code>
+      <code>$this-&gt;schema === null</code>
+      <code>is_resource($this-&gt;getResource())</code>
+      <code>is_resource($this-&gt;resource)</code>
+    </DocblockTypeContradiction>
+    <InvalidArgument occurrences="3">
+      <code>$aname</code>
+      <code>$aname</code>
+      <code>$aname</code>
+    </InvalidArgument>
+    <InvalidNullableReturnType occurrences="2">
+      <code>Node</code>
+      <code>array</code>
+    </InvalidNullableReturnType>
+    <MissingParamType occurrences="3">
+      <code>$a</code>
+      <code>$b</code>
+      <code>$resource</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="6">
+      <code>coalesce</code>
+      <code>getReconnectsAttempted</code>
+      <code>reconnectSleep</code>
+      <code>resetReconnectsAttempted</code>
+      <code>shouldReconnect</code>
+      <code>unbind</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="24">
+      <code>$c</code>
+      <code>$c</code>
+      <code>$c</code>
+      <code>$collectionClass</code>
+      <code>$entry[$key]</code>
+      <code>$entry[$key]</code>
+      <code>$entry[$key]</code>
+      <code>$entry[$key]</code>
+      <code>$host</code>
+      <code>$message</code>
+      <code>$password</code>
+      <code>$password</code>
+      <code>$resource</code>
+      <code>$this-&gt;connectString</code>
+      <code>$username</code>
+      <code>$username</code>
+      <code>$username</code>
+      <code>$username</code>
+      <code>$username</code>
+      <code>$val</code>
+      <code>$val</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>array_shift($newDnParts)</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$errorMessages</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;lastConnectBindParams[$method][$parameter]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="29">
+      <code>$$key</code>
+      <code>$accountCanonicalForm</code>
+      <code>$c</code>
+      <code>$c</code>
+      <code>$collectionClass</code>
+      <code>$err</code>
+      <code>$errorMessages[]</code>
+      <code>$host</code>
+      <code>$message</code>
+      <code>$networkTimeout</code>
+      <code>$password</code>
+      <code>$permittedOptions[$key]</code>
+      <code>$port</code>
+      <code>$reverseSort</code>
+      <code>$this-&gt;boundUser</code>
+      <code>$this-&gt;connectString</code>
+      <code>$useSsl</code>
+      <code>$useStartTls</code>
+      <code>$username</code>
+      <code>$v</code>
+      <code>$val</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="20">
+      <code>bool</code>
+      <code>bool</code>
+      <code>bool</code>
+      <code>bool</code>
+      <code>bool</code>
+      <code>bool</code>
+      <code>int</code>
+      <code>int</code>
+      <code>int</code>
+      <code>int</code>
+      <code>int</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string[]|null</code>
+    </MixedInferredReturnType>
+    <MixedOperand occurrences="5">
+      <code>$host</code>
+      <code>$host</code>
+      <code>$port</code>
+      <code>$username</code>
+      <code>-$err</code>
+    </MixedOperand>
+    <MixedReturnStatement occurrences="20">
+      <code>$accountCanonicalForm</code>
+      <code>$acct['dn']</code>
+      <code>$err</code>
+      <code>$this-&gt;options['accountDomainName']</code>
+      <code>$this-&gt;options['accountDomainNameShort']</code>
+      <code>$this-&gt;options['accountFilterFormat']</code>
+      <code>$this-&gt;options['allowEmptyPassword']</code>
+      <code>$this-&gt;options['baseDn']</code>
+      <code>$this-&gt;options['bindRequiresDn']</code>
+      <code>$this-&gt;options['host']</code>
+      <code>$this-&gt;options['networkTimeout']</code>
+      <code>$this-&gt;options['optReferrals']</code>
+      <code>$this-&gt;options['password']</code>
+      <code>$this-&gt;options['port']</code>
+      <code>$this-&gt;options['reconnectAttempts']</code>
+      <code>$this-&gt;options['saslOpts']</code>
+      <code>$this-&gt;options['tryUsernameSplit']</code>
+      <code>$this-&gt;options['useSsl']</code>
+      <code>$this-&gt;options['useStartTls']</code>
+      <code>$this-&gt;options['username']</code>
+    </MixedReturnStatement>
+    <NullableReturnStatement occurrences="1">
+      <code>$this-&gt;getNode($this-&gt;getBaseDn(), $this)</code>
+    </NullableReturnStatement>
+    <PossiblyInvalidArgument occurrences="3">
+      <code>$filter</code>
+      <code>$filter</code>
+      <code>$filter</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidCast occurrences="3">
+      <code>$filter</code>
+      <code>$filter</code>
+      <code>$filter</code>
+    </PossiblyInvalidCast>
+    <PossiblyInvalidOperand occurrences="1">
+      <code>$filter</code>
+    </PossiblyInvalidOperand>
+    <PossiblyNullArgument occurrences="8">
+      <code>$attrs</code>
+      <code>$password</code>
+      <code>$sasl_authc_id</code>
+      <code>$sasl_authz_id</code>
+      <code>$sasl_mech</code>
+      <code>$sasl_props</code>
+      <code>$sasl_realm</code>
+      <code>$username</code>
+    </PossiblyNullArgument>
+    <PossiblyNullPropertyAssignmentValue occurrences="5">
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <PossiblyUndefinedVariable occurrences="2">
+      <code>$err</code>
+      <code>$err</code>
+    </PossiblyUndefinedVariable>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$connectString</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCastGivenDocblockType occurrences="6">
+      <code>(bool) $alwaysEmulate</code>
+      <code>(bool) $useSsl</code>
+      <code>(bool) $useStartTls</code>
+      <code>(int) $networkTimeout</code>
+      <code>(int) $port</code>
+      <code>(string) $collectionClass</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="6">
+      <code>$sort !== null &amp;&amp; is_string($sort)</code>
+      <code>is_resource($this-&gt;resource)</code>
+      <code>is_resource($this-&gt;resource)</code>
+      <code>is_resource($this-&gt;resource)</code>
+      <code>is_resource($this-&gt;resource)</code>
+      <code>is_string($sort)</code>
+    </RedundantConditionGivenDocblockType>
+    <ReferenceConstraintViolation occurrences="3">
+      <code>$aname</code>
+      <code>$dname</code>
+      <code>return;</code>
+    </ReferenceConstraintViolation>
+    <ReservedWord occurrences="1">
+      <code>null|Exception\LdapException</code>
+    </ReservedWord>
+    <TooManyArguments occurrences="1">
+      <code>getNode</code>
+    </TooManyArguments>
+    <UnsafeInstantiation occurrences="1">
+      <code>new $collectionClass($iterator)</code>
+    </UnsafeInstantiation>
+    <UnusedForeachValue occurrences="1">
+      <code>$val</code>
+    </UnusedForeachValue>
+    <UnusedFunctionCall occurrences="2">
+      <code>ldap_free_result</code>
+      <code>ldap_unbind</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="src/Ldif/Encoder.php">
+    <InvalidNullableReturnType occurrences="1">
+      <code>string</code>
+    </InvalidNullableReturnType>
+    <InvalidScalarArgument occurrences="1">
+      <code>$value</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="1">
+      <code>pushAttribute</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="5">
+      <code>$this-&gt;options['version']</code>
+      <code>$this-&gt;options['wrap']</code>
+      <code>$v</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAssignment occurrences="1">
+      <code>$entry[$name][]</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="3">
+      <code>$entry[$name]</code>
+      <code>$entry[$name]</code>
+      <code>$entry[$name]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="9">
+      <code>$dn</code>
+      <code>$entry[$name]</code>
+      <code>$entry[$name][]</code>
+      <code>$name</code>
+      <code>$oc</code>
+      <code>$type</code>
+      <code>$v</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(string) $string</code>
+    </RedundantCastGivenDocblockType>
+    <UnsafeInstantiation occurrences="2">
+      <code>new static($options)</code>
+      <code>new static([])</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Node.php">
+    <DocblockTypeContradiction occurrences="5">
+      <code>$data === null</code>
+      <code>$this-&gt;ldap === null</code>
+      <code>$this-&gt;newDn === null</code>
+      <code>is_array($this-&gt;children)</code>
+      <code>is_array($this-&gt;children)</code>
+    </DocblockTypeContradiction>
+    <InvalidMethodCall occurrences="1">
+      <code>getRdnString</code>
+    </InvalidMethodCall>
+    <InvalidNullableReturnType occurrences="1">
+      <code>Node</code>
+    </InvalidNullableReturnType>
+    <InvalidPropertyAssignmentValue occurrences="1">
+      <code>$this-&gt;children</code>
+    </InvalidPropertyAssignmentValue>
+    <InvalidReturnStatement occurrences="1">
+      <code>$this</code>
+    </InvalidReturnStatement>
+    <InvalidReturnType occurrences="1">
+      <code>array</code>
+    </InvalidReturnType>
+    <LessSpecificReturnStatement occurrences="1"/>
+    <MissingParamType occurrences="1">
+      <code>$value</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="6">
+      <code>_setAttribute</code>
+      <code>_setDateTimeAttribute</code>
+      <code>loadData</code>
+      <code>markAsNew</code>
+      <code>markAsToBeDeleted</code>
+      <code>triggerEvent</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="6">
+      <code>$this-&gt;currentData[$key]</code>
+      <code>$this-&gt;originalData[$key]</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>static::$systemAttributes</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$key</code>
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="10">
+      <code>$changed[$key]</code>
+      <code>$changed[$key]</code>
+      <code>$changes['add'][$key]</code>
+      <code>$changes['add'][$key]</code>
+      <code>$changes['delete'][$key]</code>
+      <code>$changes['replace'][$key]</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MoreSpecificReturnType occurrences="1">
+      <code>Node\Collection</code>
+    </MoreSpecificReturnType>
+    <NullableReturnStatement occurrences="1">
+      <code>static::fromLdap($parentDn, $ldap)</code>
+    </NullableReturnStatement>
+    <PossiblyNullPropertyAssignmentValue occurrences="3">
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <PossiblyNullReference occurrences="1">
+      <code>getRdnString</code>
+    </PossiblyNullReference>
+    <PropertyNotSetInConstructor occurrences="3">
+      <code>$events</code>
+      <code>$ldap</code>
+      <code>$newDn</code>
+    </PropertyNotSetInConstructor>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(bool) $delete</code>
+      <code>(bool) $new</code>
+    </RedundantCastGivenDocblockType>
+    <RedundantConditionGivenDocblockType occurrences="9">
+      <code>$dn instanceof Dn</code>
+      <code>$dn instanceof Dn</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;events</code>
+      <code>$this-&gt;ldap !== null</code>
+      <code>$this-&gt;newDn</code>
+      <code>$this-&gt;newDn !== null</code>
+      <code>is_array($this-&gt;children)</code>
+      <code>is_array($this-&gt;children)</code>
+    </RedundantConditionGivenDocblockType>
+    <UnsafeInstantiation occurrences="3">
+      <code>new static($dn, $data, $fromDataSource, null)</code>
+      <code>new static($dn, $data, true, $ldap)</code>
+      <code>new static($dn, [], false, null)</code>
+    </UnsafeInstantiation>
+    <UnusedForeachValue occurrences="1">
+      <code>$value</code>
+    </UnusedForeachValue>
+  </file>
+  <file src="src/Node/AbstractNode.php">
+    <InvalidDocblock occurrences="1">
+      <code>public function offsetSet($name, $value)</code>
+    </InvalidDocblock>
+    <MissingParamType occurrences="1">
+      <code>$name</code>
+    </MissingParamType>
+    <MissingPropertyType occurrences="1">
+      <code>$systemAttributes</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="1">
+      <code>loadData</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$this-&gt;currentData[$name]</code>
+      <code>static::$systemAttributes</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$name</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="4">
+      <code>$data[$key]</code>
+      <code>$data[$name]</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;getAttribute('objectClass', null)</code>
+    </MixedReturnStatement>
+    <UnusedForeachValue occurrences="1">
+      <code>$value</code>
+    </UnusedForeachValue>
+  </file>
+  <file src="src/Node/ChildrenIterator.php">
+    <InvalidNullableReturnType occurrences="1">
+      <code>ChildrenIterator</code>
+    </InvalidNullableReturnType>
+    <MissingParamType occurrences="1">
+      <code>$value</code>
+    </MissingParamType>
+    <MixedInferredReturnType occurrences="2">
+      <code>\Laminas\Ldap\Node</code>
+      <code>array|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;data[$rdn]</code>
+      <code>current($this-&gt;data)</code>
+    </MixedReturnStatement>
+    <MixedReturnTypeCoercion occurrences="2">
+      <code>key($this-&gt;data)</code>
+      <code>string</code>
+    </MixedReturnTypeCoercion>
+  </file>
+  <file src="src/Node/Collection.php">
+    <ImplementedReturnTypeMismatch occurrences="2">
+      <code>\Laminas\Ldap\Node</code>
+      <code>string</code>
+    </ImplementedReturnTypeMismatch>
+    <InvalidNullableReturnType occurrences="1">
+      <code>string</code>
+    </InvalidNullableReturnType>
+    <NullableReturnStatement occurrences="1">
+      <code>$this-&gt;iterator-&gt;key()</code>
+    </NullableReturnStatement>
+  </file>
+  <file src="src/Node/RootDse.php">
+    <MixedArrayAccess occurrences="1">
+      <code>$data['structuralobjectclass'][0]</code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType occurrences="2">
+      <code>array</code>
+      <code>string|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;getAttribute('namingContexts', null)</code>
+      <code>$this-&gt;getAttribute('subschemaSubentry', 0)</code>
+    </MixedReturnStatement>
+    <PossiblyNullArgument occurrences="1">
+      <code>$schemaDn</code>
+    </PossiblyNullArgument>
+    <UnsafeInstantiation occurrences="1">
+      <code>new static($dn, $data)</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Node/RootDse/ActiveDirectory.php">
+    <MixedInferredReturnType occurrences="15">
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="15">
+      <code>$this-&gt;getAttribute('configurationNamingContext', 0)</code>
+      <code>$this-&gt;getAttribute('currentTime', 0)</code>
+      <code>$this-&gt;getAttribute('defaultNamingContext', 0)</code>
+      <code>$this-&gt;getAttribute('dnsHostName', 0)</code>
+      <code>$this-&gt;getAttribute('domainControllerFunctionality', 0)</code>
+      <code>$this-&gt;getAttribute('domainFunctionality', 0)</code>
+      <code>$this-&gt;getAttribute('dsServiceName', 0)</code>
+      <code>$this-&gt;getAttribute('forestFunctionality', 0)</code>
+      <code>$this-&gt;getAttribute('highestCommittedUSN', 0)</code>
+      <code>$this-&gt;getAttribute('isGlobalCatalogReady', 0)</code>
+      <code>$this-&gt;getAttribute('isSynchronized', 0)</code>
+      <code>$this-&gt;getAttribute('ldapServiceName', 0)</code>
+      <code>$this-&gt;getAttribute('rootDomainNamingContext', 0)</code>
+      <code>$this-&gt;getAttribute('schemaNamingContext', 0)</code>
+      <code>$this-&gt;getAttribute('serverName', 0)</code>
+    </MixedReturnStatement>
+    <PossiblyNullArgument occurrences="1">
+      <code>$schemaDn</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Node/RootDse/OpenLdap.php">
+    <MixedInferredReturnType occurrences="2">
+      <code>string|null</code>
+      <code>string|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="2">
+      <code>$this-&gt;getAttribute('configContext', 0)</code>
+      <code>$this-&gt;getAttribute('monitorContext', 0)</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Node/RootDse/eDirectory.php">
+    <MixedInferredReturnType occurrences="10">
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+      <code>string|null</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="10">
+      <code>$this-&gt;getAttribute('abandonOps', 0)</code>
+      <code>$this-&gt;getAttribute('chainings', 0)</code>
+      <code>$this-&gt;getAttribute('dsaName', 0)</code>
+      <code>$this-&gt;getAttribute('errors', 0)</code>
+      <code>$this-&gt;getAttribute('extendedOps', 0)</code>
+      <code>$this-&gt;getAttribute('referralsReturned', 0)</code>
+      <code>$this-&gt;getAttribute('securityErrors', 0)</code>
+      <code>$this-&gt;getAttribute('vendorName', 0)</code>
+      <code>$this-&gt;getAttribute('vendorVersion', 0)</code>
+      <code>$this-&gt;getAttribute('wholeSubtreeSearchOps', 0)</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Node/Schema.php">
+    <UnsafeInstantiation occurrences="1">
+      <code>new static($dn, $data, $ldap)</code>
+    </UnsafeInstantiation>
+  </file>
+  <file src="src/Node/Schema/ActiveDirectory.php">
+    <PossiblyNullArgument occurrences="2">
+      <code>$node</code>
+      <code>$node</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Node/Schema/AttributeType/ActiveDirectory.php">
+    <InvalidReturnType occurrences="4">
+      <code>bool</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+    </InvalidReturnType>
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;ldapdisplayname[0]</code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;ldapdisplayname[0]</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Node/Schema/AttributeType/OpenLdap.php">
+    <MixedArgument occurrences="1">
+      <code>$this-&gt;_parents</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;_parents[0]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="1">
+      <code>$maxLength</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="6">
+      <code>OpenLdap|null</code>
+      <code>bool</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="6">
+      <code>$this-&gt;_parents[0]</code>
+      <code>$this-&gt;desc</code>
+      <code>$this-&gt;name</code>
+      <code>$this-&gt;oid</code>
+      <code>$this-&gt;syntax</code>
+      <code>$this-&gt;{'single-value'}</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Node/Schema/ObjectClass/ActiveDirectory.php">
+    <InvalidReturnType occurrences="6">
+      <code>array</code>
+      <code>array</code>
+      <code>array</code>
+      <code>int</code>
+      <code>string</code>
+      <code>string</code>
+    </InvalidReturnType>
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;ldapdisplayname[0]</code>
+    </MixedArrayAccess>
+    <MixedInferredReturnType occurrences="1">
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;ldapdisplayname[0]</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Node/Schema/ObjectClass/OpenLdap.php">
+    <DocblockTypeContradiction occurrences="2">
+      <code>$this-&gt;inheritedMay === null</code>
+      <code>$this-&gt;inheritedMust === null</code>
+    </DocblockTypeContradiction>
+    <MixedArgument occurrences="6">
+      <code>$may</code>
+      <code>$may</code>
+      <code>$must</code>
+      <code>$must</code>
+      <code>$p-&gt;getMayContain()</code>
+      <code>$p-&gt;getMustContain()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="3">
+      <code>$may</code>
+      <code>$must</code>
+      <code>$p</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="5">
+      <code>array</code>
+      <code>array</code>
+      <code>string</code>
+      <code>string</code>
+      <code>string</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="2">
+      <code>getMayContain</code>
+      <code>getMustContain</code>
+    </MixedMethodCall>
+    <MixedReturnStatement occurrences="5">
+      <code>$this-&gt;_parents</code>
+      <code>$this-&gt;desc</code>
+      <code>$this-&gt;name</code>
+      <code>$this-&gt;oid</code>
+      <code>$this-&gt;sup</code>
+    </MixedReturnStatement>
+    <PossiblyNullPropertyAssignmentValue occurrences="2">
+      <code>null</code>
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+  </file>
+  <file src="src/Node/Schema/OpenLdap.php">
+    <MissingReturnType occurrences="2">
+      <code>ensureNameAttribute</code>
+      <code>resolveInheritance</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="12">
+      <code>$attributeType['syntax']</code>
+      <code>$data[$token]</code>
+      <code>$parent</code>
+      <code>$tmp</code>
+      <code>$val-&gt;sup</code>
+      <code>$val-&gt;sup</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>array_shift($tokens)</code>
+    </MixedArgument>
+    <MixedArrayAssignment occurrences="1">
+      <code>$data[$token][]</code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset occurrences="5">
+      <code>$this-&gt;attributeTypes[$alias]</code>
+      <code>$this-&gt;ldapSyntaxes[$val['oid']]</code>
+      <code>$this-&gt;matchingRuleUse[$val['name']]</code>
+      <code>$this-&gt;matchingRules[$val['name']]</code>
+      <code>$this-&gt;objectClasses[$alias]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="21">
+      <code>$alias</code>
+      <code>$alias</code>
+      <code>$attributeType['oid']</code>
+      <code>$data[$token]</code>
+      <code>$data[$token]</code>
+      <code>$data[$token][]</code>
+      <code>$data['_parents'][]</code>
+      <code>$data['name']</code>
+      <code>$data['name']</code>
+      <code>$ldapSyntax['oid']</code>
+      <code>$matchingRuleUse['oid']</code>
+      <code>$matchingRule['oid']</code>
+      <code>$objectClass['oid']</code>
+      <code>$parent</code>
+      <code>$tmp</code>
+      <code>$tmp</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <PossiblyNullPropertyAssignmentValue occurrences="5">
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+  </file>
+  <file src="test/AbstractOnlineTestCase.php">
+    <MissingParamType occurrences="1">
+      <code>$dn</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="3">
+      <code>cleanupLDAPServer</code>
+      <code>createDn</code>
+      <code>prepareLDAPServer</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$dn</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$dn</code>
+      <code>$dn</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayOffset occurrences="1"/>
+    <MixedAssignment occurrences="1">
+      <code>$entry</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="2">
+      <code>$dn</code>
+      <code>$dn</code>
+    </MixedOperand>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>self::$ldap !== null</code>
+    </RedundantConditionGivenDocblockType>
+    <UnusedForeachValue occurrences="1">
+      <code>$entry</code>
+    </UnusedForeachValue>
+    <UnusedFunctionCall occurrences="2">
+      <code>ldap_add</code>
+      <code>ldap_delete</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="test/AttributeTest.php">
+    <InvalidArgument occurrences="3">
+      <code>$object</code>
+      <code>$stream</code>
+      <code>false</code>
+    </InvalidArgument>
+    <InvalidScalarArgument occurrences="4">
+      <code>$ts</code>
+      <code>'index'</code>
+      <code>3.1415</code>
+      <code>true</code>
+    </InvalidScalarArgument>
+    <MissingParamType occurrences="4">
+      <code>$localTimestamp</code>
+      <code>$timestamp</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="44">
+      <code>assertLocalDateTimeString</code>
+      <code>assertUtcDateTimeString</code>
+      <code>testArrayAppendAttribute</code>
+      <code>testArrayOverwriteAttribute</code>
+      <code>testArraySetAttribute</code>
+      <code>testBooleanAttributeHandling</code>
+      <code>testGetAttributeArray</code>
+      <code>testGetAttributeValue</code>
+      <code>testGetAttributeWithWrongIndexType</code>
+      <code>testGetDateTimeValueFromArray</code>
+      <code>testGetDateTimeValueFromLocal</code>
+      <code>testGetDateTimeValueFromUtc</code>
+      <code>testGetDateTimeValueIllegal</code>
+      <code>testGetDateTimeValueNegativeOffet</code>
+      <code>testGetDateTimeValueNegativeOffet2</code>
+      <code>testGetNonExistentAttribute</code>
+      <code>testGetNonExistentAttributeValue</code>
+      <code>testHasValue</code>
+      <code>testInvalidValue</code>
+      <code>testPasswordGenerationMD5</code>
+      <code>testPasswordGenerationSHA</code>
+      <code>testPasswordGenerationSMD5</code>
+      <code>testPasswordGenerationSSHA</code>
+      <code>testPasswordGenerationUnicodePwd</code>
+      <code>testPasswordSettingCustomAttribute</code>
+      <code>testPasswordSettingMD5</code>
+      <code>testPasswordSettingSHA</code>
+      <code>testPasswordSettingUnicodePwd</code>
+      <code>testRemoveAttributeMultipleValueArray</code>
+      <code>testRemoveAttributeMultipleValueSimple</code>
+      <code>testRemoveAttributeValueArray</code>
+      <code>testRemoveAttributeValueBoolean</code>
+      <code>testRemoveAttributeValueInteger</code>
+      <code>testRemoveAttributeValueSimple</code>
+      <code>testRemoveDuplicates</code>
+      <code>testSetAttributeWithFilestream</code>
+      <code>testSetAttributeWithObject</code>
+      <code>testSetDateTimeValueIllegal</code>
+      <code>testSetDateTimeValueLocal</code>
+      <code>testSetDateTimeValueLocalArray</code>
+      <code>testSetDateTimeValueUtc</code>
+      <code>testSimpleAppendAttribute</code>
+      <code>testSimpleOverwriteAttribute</code>
+      <code>testSimpleSetAttribute</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$data['ts']</code>
+      <code>$localTimestamp</code>
+      <code>$timestamp</code>
+      <code>$utcTimestamp</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="12">
+      <code>$data['file'][0]</code>
+      <code>$data['object'][0]</code>
+      <code>$data['p2_false'][0]</code>
+      <code>$data['p2_true'][0]</code>
+      <code>$data['ts'][0]</code>
+      <code>$data['ts'][0]</code>
+      <code>$data['ts'][0]</code>
+      <code>$data['ts'][0]</code>
+      <code>$data['ts'][0]</code>
+      <code>$data['ts'][0]</code>
+      <code>$data['ts'][1]</code>
+      <code>$data['ts'][1]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="8">
+      <code>$password</code>
+      <code>$password</code>
+      <code>$password</code>
+      <code>$password</code>
+      <code>$utcTimestamp</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="1">
+      <code>$localTimestamp</code>
+    </MixedOperand>
+    <PossiblyFalseArgument occurrences="5">
+      <code>$tsValue</code>
+      <code>strpos($md5, '}')</code>
+      <code>strpos($sha, '}')</code>
+      <code>strpos($smd5, '}')</code>
+      <code>strpos($ssha, '}')</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand occurrences="1">
+      <code>date('YmdHis', $utcTimestamp)</code>
+    </PossiblyFalseOperand>
+    <PossiblyInvalidArrayAccess occurrences="2">
+      <code>$retTs[0]</code>
+      <code>$retTs[1]</code>
+    </PossiblyInvalidArrayAccess>
+  </file>
+  <file src="test/BindTest.php">
+    <MissingParamType occurrences="1">
+      <code>$options</code>
+    </MissingParamType>
+    <MissingPropertyType occurrences="4">
+      <code>$altPrincipalName</code>
+      <code>$altUsername</code>
+      <code>$bindRequiresDn</code>
+      <code>$options</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="18">
+      <code>getSslLdap</code>
+      <code>testAnonymousBind</code>
+      <code>testBindWithEmptyPassword</code>
+      <code>testBindWithNullPassword</code>
+      <code>testBindWithoutDnUsernameAndDnRequired</code>
+      <code>testBoundUserIsFalseIfNotBoundToLDAP</code>
+      <code>testBoundUserIsReturnedAfterBinding</code>
+      <code>testConnectBind</code>
+      <code>testEmptyOptionsBind</code>
+      <code>testExplicitParamsBind</code>
+      <code>testNoBaseDnBind</code>
+      <code>testNoDomainNameBind</code>
+      <code>testPlainBind</code>
+      <code>testRequiresDnBind</code>
+      <code>testRequiresDnWithoutDnBind</code>
+      <code>testResourceIsAlwaysReturned</code>
+      <code>testSaslBind</code>
+      <code>testSaslBindNoExplicitUsername</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="23">
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$password</code>
+      <code>$this-&gt;altPrincipalName</code>
+      <code>$this-&gt;altUsername</code>
+      <code>$this-&gt;altUsername</code>
+      <code>$this-&gt;altUsername</code>
+      <code>$this-&gt;altUsername</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$username</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="10">
+      <code>$options['accountDomainName']</code>
+      <code>$options['baseDn']</code>
+      <code>$options['password']</code>
+      <code>$options['password']</code>
+      <code>$options['password']</code>
+      <code>$options['password']</code>
+      <code>$options['username']</code>
+      <code>$options['username']</code>
+      <code>$options['username']</code>
+      <code>$options['username']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="13">
+      <code>$options['accountCanonicalForm']</code>
+      <code>$options['allowEmptyPassword']</code>
+      <code>$options['allowEmptyPassword']</code>
+      <code>$options['bindRequiresDn']</code>
+      <code>$options['bindRequiresDn']</code>
+      <code>$options['bindRequiresDn']</code>
+      <code>$options['bindRequiresDn']</code>
+      <code>$options['bindRequiresDn']</code>
+      <code>$options['port']</code>
+      <code>$options['saslOpts']</code>
+      <code>$options['saslOpts']</code>
+      <code>$options['useSsl']</code>
+      <code>$options['username']</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="14">
+      <code>$ldap</code>
+      <code>$ldap</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$options</code>
+      <code>$password</code>
+      <code>$username</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="4">
+      <code>bind</code>
+      <code>bind</code>
+      <code>getBoundUser</code>
+      <code>getLastErrorCode</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/CanonTest.php">
+    <MissingReturnType occurrences="12">
+      <code>testAccountCanonization</code>
+      <code>testDefaultAccountFilterFormat</code>
+      <code>testDnCanon</code>
+      <code>testGetUnavailableCanoncialForm</code>
+      <code>testGetUnknownCanonicalForm</code>
+      <code>testInvalidAccountCanon</code>
+      <code>testInvalidAccountName</code>
+      <code>testMismatchDomainBind</code>
+      <code>testPlainCanon</code>
+      <code>testPossibleAuthority</code>
+      <code>testSpecialCharacterInUsername</code>
+      <code>testSplittingOption</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$form</code>
+      <code>$name</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$names[$form]</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="1">
+      <code>$names[$form]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="2">
+      <code>$form</code>
+      <code>$name</code>
+    </MixedAssignment>
+    <PossiblyFalseArgument occurrences="14">
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand occurrences="28">
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+    </PossiblyFalseOperand>
+    <PossiblyUndefinedVariable occurrences="3">
+      <code>$names</code>
+      <code>$names</code>
+      <code>$names</code>
+    </PossiblyUndefinedVariable>
+    <UnusedVariable occurrences="11">
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+      <code>$canon</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/ChangePasswordTest.php">
+    <ArgumentTypeCoercion occurrences="4">
+      <code>'Laminas\Ldap'</code>
+      <code>'Laminas\Ldap\Ldap'</code>
+      <code>'Laminas\Ldap\Ldap'</code>
+      <code>'\Laminas\Ldap\Ldap'</code>
+    </ArgumentTypeCoercion>
+    <InvalidScalarArgument occurrences="2">
+      <code>512</code>
+      <code>512</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="4">
+      <code>testAddNewUserWithPasswordActiveDirectory</code>
+      <code>testAddNewUserWithPasswordOpenLDAP</code>
+      <code>testChangePasswordWithUserAccountActiveDirectory</code>
+      <code>testChangePasswordWithUserAccountOpenLDAP</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="26">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="4">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+    </MixedAssignment>
+    <UndefinedClass occurrences="1">
+      <code>'Laminas\Ldap'</code>
+    </UndefinedClass>
+  </file>
+  <file src="test/ConnectTest.php">
+    <InvalidScalarArgument occurrences="3">
+      <code>$port</code>
+      <code>$port</code>
+      <code>$useSsl</code>
+    </InvalidScalarArgument>
+    <MissingParamType occurrences="3">
+      <code>$connectURI</code>
+      <code>$host</code>
+      <code>$ssl</code>
+    </MissingParamType>
+    <MissingPropertyType occurrences="1">
+      <code>$options</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="15">
+      <code>connectionWithoutPortInOptionsArrayProvider</code>
+      <code>testBadPortConnect</code>
+      <code>testConnectWithUri</code>
+      <code>testConnectionWithoutPortInOptionsArray</code>
+      <code>testDisconnect</code>
+      <code>testEmptyOptionsConnect</code>
+      <code>testExplicitNetworkTimeoutConnect</code>
+      <code>testExplicitParamsConnect</code>
+      <code>testExplicitPortConnect</code>
+      <code>testGetErrorCode</code>
+      <code>testMultiConnect</code>
+      <code>testNetworkTimeoutConnect</code>
+      <code>testPlainConnect</code>
+      <code>testSetOptionsConnect</code>
+      <code>testUnknownHostConnect</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="11">
+      <code>$connectURI</code>
+      <code>$options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+      <code>$this-&gt;options</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$this-&gt;options['networkTimeout']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$options['port']</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="1">
+      <code>$options</code>
+    </MixedAssignment>
+    <PossiblyFalseArgument occurrences="1">
+      <code>$host</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand occurrences="2">
+      <code>$host</code>
+      <code>$host</code>
+    </PossiblyFalseOperand>
+  </file>
+  <file src="test/Converter/ConverterTest.php">
+    <MissingParamType occurrences="15">
+      <code>$convert</code>
+      <code>$convert</code>
+      <code>$convert</code>
+      <code>$convert</code>
+      <code>$convert</code>
+      <code>$dateTimeAsUtc</code>
+      <code>$expect</code>
+      <code>$expect</code>
+      <code>$expect</code>
+      <code>$expect</code>
+      <code>$expect</code>
+      <code>$expect</code>
+      <code>$type</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="19">
+      <code>fromLdapDateTimeException</code>
+      <code>fromLdapDateTimeProvider</code>
+      <code>fromLdapProvider</code>
+      <code>fromLdapUnserializeProvider</code>
+      <code>testAsc2hex32</code>
+      <code>testFromLdap</code>
+      <code>testFromLdapBoolean</code>
+      <code>testFromLdapDateTimeThrowsException</code>
+      <code>testFromLdapUnserialize</code>
+      <code>testFromLdapUnserializeThrowsException</code>
+      <code>testHex2asc</code>
+      <code>testToLdap</code>
+      <code>testToLdapBoolean</code>
+      <code>testToLdapDateTime</code>
+      <code>testToLdapSerialize</code>
+      <code>toLdapBooleanProvider</code>
+      <code>toLdapDateTimeProvider</code>
+      <code>toLdapProvider</code>
+      <code>toLdapSerializeProvider</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="9">
+      <code>$convert</code>
+      <code>$convert</code>
+      <code>$convert['date']</code>
+      <code>$convert['type']</code>
+      <code>$convert['utc']</code>
+      <code>$dateTimeAsUtc</code>
+      <code>$type</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$convert['date']</code>
+      <code>$convert['type']</code>
+      <code>$convert['utc']</code>
+      <code>$convert['value']</code>
+    </MixedArrayAccess>
+  </file>
+  <file src="test/CopyRenameTest.php">
+    <MissingReturnType occurrences="25">
+      <code>testRecursiveCopy</code>
+      <code>testRecursiveCopyToSubtree</code>
+      <code>testRecursiveCopyToSubtreeWithDnObjects</code>
+      <code>testRecursiveCopyWithDnObjects</code>
+      <code>testRecursiveMoveToSubtree</code>
+      <code>testRecursiveMoveToSubtreeWithDnObjects</code>
+      <code>testRecursiveRename</code>
+      <code>testRecursiveRenameWithDnObjects</code>
+      <code>testRenameEmulationSourceNotExists</code>
+      <code>testRenameEmulationTargetExists</code>
+      <code>testRenameEmulationTargetParentNotExists</code>
+      <code>testRenameSourceNotExists</code>
+      <code>testRenameTargetExists</code>
+      <code>testRenameTargetParentNotExists</code>
+      <code>testSimpleLeafCopy</code>
+      <code>testSimpleLeafCopyToSubtree</code>
+      <code>testSimpleLeafCopyToSubtreeWithDnObjects</code>
+      <code>testSimpleLeafCopyWithDnObjects</code>
+      <code>testSimpleLeafMoveAlias</code>
+      <code>testSimpleLeafMoveToSubtree</code>
+      <code>testSimpleLeafMoveToSubtreeWithDnObjects</code>
+      <code>testSimpleLeafRename</code>
+      <code>testSimpleLeafRenameEmulation</code>
+      <code>testSimpleLeafRenameEmulationWithDnObjects</code>
+      <code>testSimpleLeafRenameWithDnObjects</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="6">
+      <code>$this-&gt;createDn('ou=DoesNotExist,')</code>
+      <code>$this-&gt;createDn('ou=DoesNotExist,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+      <code>$this-&gt;createDn('ou=Test1,ou=ParentDoesNotExist,')</code>
+      <code>$this-&gt;createDn('ou=Test1,ou=ParentDoesNotExist,')</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$dn</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayOffset occurrences="1"/>
+    <MixedAssignment occurrences="5">
+      <code>$this-&gt;newDn</code>
+      <code>$this-&gt;newSubTreeDn</code>
+      <code>$this-&gt;orgDn</code>
+      <code>$this-&gt;orgSubTreeDn</code>
+      <code>$this-&gt;targetSubTreeDn</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="6">
+      <code>$this-&gt;orgSubTreeDn</code>
+      <code>$this-&gt;orgSubTreeDn</code>
+      <code>$this-&gt;orgSubTreeDn</code>
+      <code>$this-&gt;orgSubTreeDn</code>
+      <code>$this-&gt;orgSubTreeDn</code>
+      <code>$this-&gt;orgSubTreeDn</code>
+    </MixedOperand>
+    <UnusedFunctionCall occurrences="1">
+      <code>ldap_add</code>
+    </UnusedFunctionCall>
+  </file>
+  <file src="test/CrudTest.php">
+    <MissingReturnType occurrences="21">
+      <code>testAddAndDelete</code>
+      <code>testAddObjectClass</code>
+      <code>testAddWithDnObject</code>
+      <code>testAddingEntryThatHasMultipleValuesOnRdnAttribute</code>
+      <code>testAddingEntryWithMissingRdnAttribute</code>
+      <code>testAddingEntryWithMissingRdnAttributeValue</code>
+      <code>testDeleteRecursively</code>
+      <code>testIllegalAdd</code>
+      <code>testIllegalDelete</code>
+      <code>testIllegalUpdate</code>
+      <code>testPrepareLDAPEntryArray</code>
+      <code>testPrepareLDAPEntryArrayArrayData</code>
+      <code>testPrepareLDAPEntryArrayObjectData</code>
+      <code>testRemoveObjectClass</code>
+      <code>testSave</code>
+      <code>testSaveWithDnObject</code>
+      <code>testUpdate</code>
+      <code>testUpdateWithDnObject</code>
+      <code>testUpdatingEntryWithAttributeThatIsAnRdnAttribute</code>
+      <code>testUpdatingEntryWithRdnAttributeValueMissingInData</code>
+      <code>testZeroValueMakesItThroughSanitationProcess</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="80">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$entry['objectclass']</code>
+      <code>$entry['objectclass']</code>
+      <code>$entry['objectclass']</code>
+      <code>$entry['objectclass']</code>
+      <code>$entry['ou']</code>
+      <code>$this-&gt;createDn('ou=TestCreated,')</code>
+      <code>$this-&gt;createDn('ou=TestCreated,')</code>
+      <code>$this-&gt;createDn('ou=TestCreated,')</code>
+      <code>$topDn</code>
+      <code>$topDn</code>
+      <code>$topDn</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="7">
+      <code>$entry['associateddomain'][0]</code>
+      <code>$entry['l'][0]</code>
+      <code>$entry['l'][0]</code>
+      <code>$entry['l'][0]</code>
+      <code>$entry['l'][0]</code>
+      <code>$entry['l'][0]</code>
+      <code>$entry['l'][0]</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="3">
+      <code>$entry['associatedDomain'][]</code>
+      <code>$entry['objectclass'][]</code>
+      <code>$entry['objectclass'][]</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="15">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$topDn</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="1">
+      <code>$dn</code>
+    </MixedOperand>
+    <UnusedVariable occurrences="1">
+      <code>$entry</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Dn/CreationTest.php">
+    <InvalidScalarArgument occurrences="1">
+      <code>1</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="5">
+      <code>testDnCreation</code>
+      <code>testDnCreationWithDifferentCaseFoldings</code>
+      <code>testEmptyStringDn</code>
+      <code>testGetParentDn</code>
+      <code>testGetRdn</code>
+    </MissingReturnType>
+    <NullArgument occurrences="1">
+      <code>null</code>
+    </NullArgument>
+  </file>
+  <file src="test/Dn/EscapingTest.php">
+    <MissingReturnType occurrences="2">
+      <code>testEscapeValues</code>
+      <code>testUnescapeValues</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Dn/ExplodingTest.php">
+    <MissingParamType occurrences="4">
+      <code>$expected</code>
+      <code>$expected</code>
+      <code>$input</code>
+      <code>$input</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="12">
+      <code>explodeDnOperationProvider</code>
+      <code>rfc2253DnProvider</code>
+      <code>testCoreExplodeDnWithMultiValuedRdn</code>
+      <code>testCreateDnArrayIllegalDn</code>
+      <code>testExplodeDn</code>
+      <code>testExplodeDnCaseFold</code>
+      <code>testExplodeDnOperation</code>
+      <code>testExplodeDnWithMultiValuedRdn</code>
+      <code>testExplodeDnWithMultiValuedRdn2</code>
+      <code>testExplodeDnWithSpaces</code>
+      <code>testExplodeDnWithUtf8Characters</code>
+      <code>testExplodeDnsProvidedByRFC2253</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$input</code>
+      <code>$input</code>
+    </MixedArgument>
+    <UnusedVariable occurrences="1">
+      <code>$dnArray</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Dn/ImplodingTest.php">
+    <MissingReturnType occurrences="10">
+      <code>testDnWithMultiValuedRdnRoundTrip</code>
+      <code>testImplodeDn</code>
+      <code>testImplodeDnWithUtf8Characters</code>
+      <code>testImplodeRdn</code>
+      <code>testImplodeRdnCaseFold</code>
+      <code>testImplodeRdnInvalidOne</code>
+      <code>testImplodeRdnInvalidThree</code>
+      <code>testImplodeRdnMultiValuedRdn</code>
+      <code>testImplodeRdnMultiValuedRdn2</code>
+      <code>testImplodeRdnMultiValuedRdnCaseFold</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Dn/MiscTest.php">
+    <MissingReturnType occurrences="7">
+      <code>testIsChildOf</code>
+      <code>testIsChildOfIllegalBothDn</code>
+      <code>testIsChildOfIllegalDn1</code>
+      <code>testIsChildOfIllegalDn2</code>
+      <code>testIsChildOfOtherSubtree</code>
+      <code>testIsChildOfParentDnLonger</code>
+      <code>testIsChildOfWithDnObjects</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Dn/ModificationTest.php">
+    <InvalidScalarArgument occurrences="1">
+      <code>'string'</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="6">
+      <code>testArrayAccessImplementation</code>
+      <code>testDnManipulationAppendAndPrepend</code>
+      <code>testDnManipulationGet</code>
+      <code>testDnManipulationInsert</code>
+      <code>testDnManipulationRemove</code>
+      <code>testDnManipulationSet</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/ErrorHandlerTest.php">
+    <MissingClosureParamType occurrences="2">
+      <code>$errno</code>
+      <code>$error</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>function ($errno, $error) {</code>
+    </MissingClosureReturnType>
+    <MissingPropertyType occurrences="1">
+      <code>$dummyErrorHandler</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="2">
+      <code>testErrorHandlerRemovalWorks</code>
+      <code>testErrorHandlerSettingWorks</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$this-&gt;dummyErrorHandler</code>
+      <code>$this-&gt;dummyErrorHandler</code>
+      <code>$this-&gt;dummyErrorHandler</code>
+      <code>$this-&gt;dummyErrorHandler</code>
+    </MixedArgument>
+    <UnusedClosureParam occurrences="2">
+      <code>$errno</code>
+      <code>$error</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="test/Exception/LdapExceptionTest.php">
+    <MissingReturnType occurrences="2">
+      <code>constructorArgumentsProvider</code>
+      <code>testException</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/FilterTest.php">
+    <MissingReturnType occurrences="12">
+      <code>testChaining</code>
+      <code>testComplexFilter</code>
+      <code>testEscapeValues</code>
+      <code>testFilterCreation</code>
+      <code>testFilterEscapeBasicOperation</code>
+      <code>testFilterValueUtf8</code>
+      <code>testGroupingFilter</code>
+      <code>testIllegalGroupingFilter</code>
+      <code>testNegate</code>
+      <code>testRealFilterString</code>
+      <code>testToStringImplementation</code>
+      <code>testUnescapeValues</code>
+    </MissingReturnType>
+    <UnusedVariable occurrences="1">
+      <code>$f</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Ldif/SimpleDecoderTest.php">
+    <MissingReturnType occurrences="12">
+      <code>testDecodeSimpleSingleItem</code>
+      <code>testDecodeSimpleSingleItemWithMultilineComment</code>
+      <code>testDecodeSimpleSingleItemWithUri</code>
+      <code>testDecodeSingleItemWithBase64Attributes</code>
+      <code>testDecodeSingleItemWithFoldedAttribute</code>
+      <code>testDecodeSingleItemWithFoldedAttributesAndEmptyLinesBetween</code>
+      <code>testDecodeSingleItemWithFoldedBase64Attribute</code>
+      <code>testDecodeStringContainingBase64EncodedValue</code>
+      <code>testDecodeStringContainingEntriesWithUtf8EncodedAttributeValues</code>
+      <code>testDecodeStringContainingEntryWithFoldedAttributeValue</code>
+      <code>testDecodeTwoItems</code>
+      <code>testRoundtripEncoding</code>
+    </MissingReturnType>
+    <MixedArrayAccess occurrences="29">
+      <code>$actual[0]['description']</code>
+      <code>$actual[0]['dn']</code>
+      <code>$actual[0]['objectclass']</code>
+      <code>$actual[0]['ou']</code>
+      <code>$actual[0]['ou;lang-en']</code>
+      <code>$actual[0]['ou;lang-ja']</code>
+      <code>$actual[0]['ou;lang-ja;phonetic']</code>
+      <code>$actual[1]['cn']</code>
+      <code>$actual[1]['cn;lang-en']</code>
+      <code>$actual[1]['cn;lang-ja']</code>
+      <code>$actual[1]['cn;lang-ja;phonetic']</code>
+      <code>$actual[1]['dn']</code>
+      <code>$actual[1]['givenname']</code>
+      <code>$actual[1]['givenname;lang-en']</code>
+      <code>$actual[1]['givenname;lang-ja']</code>
+      <code>$actual[1]['givenname;lang-ja;phonetic']</code>
+      <code>$actual[1]['mail']</code>
+      <code>$actual[1]['objectclass']</code>
+      <code>$actual[1]['preferredlanguage']</code>
+      <code>$actual[1]['sn']</code>
+      <code>$actual[1]['sn;lang-en']</code>
+      <code>$actual[1]['sn;lang-ja']</code>
+      <code>$actual[1]['sn;lang-ja;phonetic']</code>
+      <code>$actual[1]['title']</code>
+      <code>$actual[1]['title;lang-en']</code>
+      <code>$actual[1]['title;lang-ja']</code>
+      <code>$actual[1]['title;lang-ja;phonetic']</code>
+      <code>$actual[1]['uid']</code>
+      <code>$actual[1]['userpassword']</code>
+    </MixedArrayAccess>
+  </file>
+  <file src="test/Ldif/SimpleEncoderTest.php">
+    <MissingParamType occurrences="4">
+      <code>$array</code>
+      <code>$expected</code>
+      <code>$expected</code>
+      <code>$string</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="11">
+      <code>attributeEncodingProvider</code>
+      <code>stringEncodingProvider</code>
+      <code>testAttributeEncoding</code>
+      <code>testChangedWrapCount</code>
+      <code>testEncodeMultipleAttributes</code>
+      <code>testEncodeUnsupportedType</code>
+      <code>testEncodingWithJapaneseCharacters</code>
+      <code>testNodeEncoding</code>
+      <code>testSorting</code>
+      <code>testStringEncoding</code>
+      <code>testSupressVersionHeader</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Node/AttributeIterationTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testSimpleIteration</code>
+    </MissingReturnType>
+    <MixedAssignment occurrences="2">
+      <code>$data[$k]</code>
+      <code>$v</code>
+    </MixedAssignment>
+    <RedundantConditionGivenDocblockType occurrences="1">
+      <code>assertNotNull</code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="test/Node/ChildrenIterationTest.php">
+    <MissingReturnType occurrences="3">
+      <code>testCallingNextAfterIterationShouldNotThrowException</code>
+      <code>testSimpleIteration</code>
+      <code>testSimpleRecursiveIteration</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="1">
+      <code>$n-&gt;getRdnArray()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="4">
+      <code>$base</code>
+      <code>$dn</code>
+      <code>$n</code>
+      <code>$rdn</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="3">
+      <code>getDn</code>
+      <code>getRdnArray</code>
+      <code>toString</code>
+    </MixedMethodCall>
+    <MixedOperand occurrences="1">
+      <code>$base</code>
+    </MixedOperand>
+    <PossiblyFalseArgument occurrences="2">
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+    </PossiblyFalseArgument>
+    <UnusedForeachValue occurrences="1">
+      <code>$n</code>
+    </UnusedForeachValue>
+    <UnusedVariable occurrences="3">
+      <code>$rdn</code>
+      <code>$rdn</code>
+      <code>$rdn</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Node/ChildrenTest.php">
+    <ArgumentTypeCoercion occurrences="5">
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node\ChildrenIterator'</code>
+      <code>'Laminas\Ldap\Node\ChildrenIterator'</code>
+      <code>'Laminas\Ldap\Node\ChildrenIterator'</code>
+    </ArgumentTypeCoercion>
+    <InvalidMethodCall occurrences="1">
+      <code>getChildren</code>
+    </InvalidMethodCall>
+    <MissingReturnType occurrences="7">
+      <code>testCascadingAttachAndDetach</code>
+      <code>testChildrenCollectionSerialization</code>
+      <code>testGetChildrenOnAttachedNode</code>
+      <code>testGetChildrenOnDetachedNode</code>
+      <code>testHasChildrenOnAttachedNode</code>
+      <code>testHasChildrenOnDetachedNodeWithPriorGetChildren</code>
+      <code>testHasChildrenOnDetachedNodeWithoutPriorGetChildren</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="13">
+      <code>$children2</code>
+      <code>$children2</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+      <code>$this-&gt;createDn('ou=Test1,ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Test1,ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Test1,ou=Node,')</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="8">
+      <code>$children2</code>
+      <code>$children2</code>
+      <code>$nc</code>
+      <code>$nc</code>
+      <code>$nc</code>
+      <code>$node2</code>
+      <code>$node2</code>
+      <code>$nodeChildren</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="12">
+      <code>attachLDAP</code>
+      <code>attachLDAP</code>
+      <code>getChildren</code>
+      <code>getChildren</code>
+      <code>getLDAP</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+      <code>isAttached</code>
+      <code>isAttached</code>
+      <code>isAttached</code>
+    </MixedMethodCall>
+    <PossiblyFalseArgument occurrences="3">
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+    </PossiblyFalseArgument>
+    <PossiblyNullReference occurrences="15">
+      <code>detachLDAP</code>
+      <code>detachLDAP</code>
+      <code>detachLDAP</code>
+      <code>detachLDAP</code>
+      <code>getChildren</code>
+      <code>getChildren</code>
+      <code>getChildren</code>
+      <code>getChildren</code>
+      <code>getChildren</code>
+      <code>getChildren</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+      <code>hasChildren</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="test/Node/OfflineTest.php">
+    <ArgumentTypeCoercion occurrences="3">
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node'</code>
+    </ArgumentTypeCoercion>
+    <MissingParamType occurrences="4">
+      <code>$localTimestamp</code>
+      <code>$timestamp</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="47">
+      <code>assertLocalDateTimeString</code>
+      <code>assertUtcDateTimeString</code>
+      <code>testAppendToAttributeFirstTime</code>
+      <code>testArrayAccess</code>
+      <code>testAttributeAccessDnGet</code>
+      <code>testCreateEmptyNode</code>
+      <code>testCreateFromArrayAndEnsureRdnValues</code>
+      <code>testCreateFromArrayIllegalDn</code>
+      <code>testCreateFromArrayMalformedDn</code>
+      <code>testCreateFromArrayMissingDn</code>
+      <code>testCreateFromArrayObjectDn</code>
+      <code>testCreateFromArrayStringDn</code>
+      <code>testDeleteUnusedAttribute</code>
+      <code>testDnObjectCloning</code>
+      <code>testExistsAttribute</code>
+      <code>testGetAttributes</code>
+      <code>testGetChangedData</code>
+      <code>testGetChanges</code>
+      <code>testGetData</code>
+      <code>testGetDnArray</code>
+      <code>testGetDnObject</code>
+      <code>testGetDnString</code>
+      <code>testGetObjectClass</code>
+      <code>testGetRdnArray</code>
+      <code>testGetRdnString</code>
+      <code>testGetSetAndDeleteMethods</code>
+      <code>testHasValue</code>
+      <code>testIllegalAttributeAccessDnSet</code>
+      <code>testIllegalAttributeAccessRdnAttributeSet</code>
+      <code>testModifyObjectClass</code>
+      <code>testOverloading</code>
+      <code>testRdnAttributesHandleMultiValuedAttribute</code>
+      <code>testRdnAttributesHandleMultiValuedAttribute2</code>
+      <code>testRdnAttributesHandleMultiValuedAttribute3</code>
+      <code>testRemoveDuplicates</code>
+      <code>testRemoveFromAttributeArray</code>
+      <code>testRemoveFromAttributeMultipleArray</code>
+      <code>testRemoveFromAttributeMultipleSimple</code>
+      <code>testRemoveFromAttributeSimple</code>
+      <code>testRenameNodeArray</code>
+      <code>testRenameNodeDnObject</code>
+      <code>testRenameNodeFromDataSource</code>
+      <code>testRenameNodeString</code>
+      <code>testSerialize</code>
+      <code>testToArray</code>
+      <code>testToJson</code>
+      <code>testToString</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="11">
+      <code>$data['dn']</code>
+      <code>$data['dn']</code>
+      <code>$data['dn']</code>
+      <code>$localTimestamp</code>
+      <code>$node-&gt;getAttribute('key')</code>
+      <code>$node-&gt;getAttribute('key')</code>
+      <code>$node-&gt;getAttribute('userPassword')</code>
+      <code>$node-&gt;key</code>
+      <code>$node['key']</code>
+      <code>$timestamp</code>
+      <code>$utcTimestamp</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$node-&gt;cn[0]</code>
+      <code>$node-&gt;host[3]</code>
+      <code>$node-&gt;key[0]</code>
+      <code>$node['key'][0]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="4">
+      <code>$cn</code>
+      <code>$cn</code>
+      <code>$newObject</code>
+      <code>$utcTimestamp</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="1">
+      <code>$localTimestamp</code>
+    </MixedOperand>
+    <PossiblyFalseArgument occurrences="1">
+      <code>$tsValue</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand occurrences="1">
+      <code>date('YmdHis', $utcTimestamp)</code>
+    </PossiblyFalseOperand>
+    <UnusedVariable occurrences="3">
+      <code>$node</code>
+      <code>$node</code>
+      <code>$node</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Node/OnlineTest.php">
+    <ArgumentTypeCoercion occurrences="4">
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node'</code>
+      <code>'Laminas\Ldap\Node\Collection'</code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument occurrences="7">
+      <code>ExceptionInterface::class</code>
+      <code>ExceptionInterface::class</code>
+      <code>ExceptionInterface::class</code>
+      <code>ExceptionInterface::class</code>
+      <code>[]</code>
+      <code>[]</code>
+      <code>[]</code>
+    </InvalidArgument>
+    <InvalidCatch occurrences="5"/>
+    <InvalidMethodCall occurrences="1">
+      <code>getDnString</code>
+    </InvalidMethodCall>
+    <InvalidPropertyFetch occurrences="2">
+      <code>$node-&gt;ou</code>
+      <code>$node-&gt;ou</code>
+    </InvalidPropertyFetch>
+    <MissingReturnType occurrences="19">
+      <code>testAttachToInvalidLDAP</code>
+      <code>testAttachToValidLDAP</code>
+      <code>testChangeReadOnlySystemAttributes</code>
+      <code>testCountChildren</code>
+      <code>testCountSubtree</code>
+      <code>testDetachAndReattach</code>
+      <code>testExistsDn</code>
+      <code>testGetBaseNode</code>
+      <code>testGetIllegalNode</code>
+      <code>testGetNode</code>
+      <code>testGetNonexistentParent</code>
+      <code>testGetParent</code>
+      <code>testLoadFromLDAP</code>
+      <code>testLoadFromLDAPIllegalEntry</code>
+      <code>testLoadFromLDAPWithDnObject</code>
+      <code>testReload</code>
+      <code>testSearchChildren</code>
+      <code>testSearchSubtree</code>
+      <code>testSerialize</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="13">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$attr</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="9">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$newObject</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="1">
+      <code>isAttached</code>
+    </MixedMethodCall>
+    <PossiblyFalseArgument occurrences="6">
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+    </PossiblyFalseArgument>
+    <PossiblyNullPropertyFetch occurrences="2">
+      <code>$node-&gt;ou</code>
+      <code>$node-&gt;ou</code>
+    </PossiblyNullPropertyFetch>
+    <PossiblyNullReference occurrences="16">
+      <code>countChildren</code>
+      <code>countChildren</code>
+      <code>countSubtree</code>
+      <code>exists</code>
+      <code>getDn</code>
+      <code>getDnString</code>
+      <code>getParent</code>
+      <code>getParent</code>
+      <code>isAttached</code>
+      <code>isAttached</code>
+      <code>isAttached</code>
+      <code>isAttached</code>
+      <code>reload</code>
+      <code>searchChildren</code>
+      <code>searchChildren</code>
+      <code>searchSubtree</code>
+    </PossiblyNullReference>
+    <TooManyArguments occurrences="3">
+      <code>searchChildren</code>
+      <code>searchChildren</code>
+      <code>searchSubtree</code>
+    </TooManyArguments>
+    <UnusedVariable occurrences="3">
+      <code>$node</code>
+      <code>$node</code>
+      <code>$pnode</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Node/RootDseTest.php">
+    <MissingParamType occurrences="1">
+      <code>$value</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="8">
+      <code>assertNullOrString</code>
+      <code>testGetters</code>
+      <code>testLoadRootDseNode</code>
+      <code>testOffsetSetWillThrowException</code>
+      <code>testOffsetUnsetWillThrowException</code>
+      <code>testSetterWillThrowException</code>
+      <code>testSupportCheckMethods</code>
+      <code>testUnsetterWillThrowException</code>
+    </MissingReturnType>
+    <RedundantCondition occurrences="1">
+      <code>assertNull</code>
+    </RedundantCondition>
+    <UndefinedMethod occurrences="41">
+      <code>getConfigContext</code>
+      <code>getConfigurationNamingContext</code>
+      <code>getCurrentTime</code>
+      <code>getDefaultNamingContext</code>
+      <code>getDnsHostName</code>
+      <code>getDomainControllerFunctionality</code>
+      <code>getDomainFunctionality</code>
+      <code>getDsServiceName</code>
+      <code>getDsaName</code>
+      <code>getForestFunctionality</code>
+      <code>getHighestCommittedUSN</code>
+      <code>getIsGlobalCatalogReady</code>
+      <code>getIsSynchronized</code>
+      <code>getLDAPServiceName</code>
+      <code>getMonitorContext</code>
+      <code>getRootDomainNamingContext</code>
+      <code>getSchemaNamingContext</code>
+      <code>getServerName</code>
+      <code>getStatisticsAbandonOps</code>
+      <code>getStatisticsChainings</code>
+      <code>getStatisticsErrors</code>
+      <code>getStatisticsExtendedOps</code>
+      <code>getStatisticsReferralsReturned</code>
+      <code>getStatisticsSecurityErrors</code>
+      <code>getStatisticsWholeSubtreeSearchOps</code>
+      <code>getVendorName</code>
+      <code>getVendorVersion</code>
+      <code>supportsCapability</code>
+      <code>supportsCapability</code>
+      <code>supportsControl</code>
+      <code>supportsControl</code>
+      <code>supportsControl</code>
+      <code>supportsControl</code>
+      <code>supportsExtension</code>
+      <code>supportsExtension</code>
+      <code>supportsExtension</code>
+      <code>supportsExtension</code>
+      <code>supportsFeature</code>
+      <code>supportsFeature</code>
+      <code>supportsPolicy</code>
+      <code>supportsPolicy</code>
+    </UndefinedMethod>
+  </file>
+  <file src="test/Node/SchemaTest.php">
+    <ArgumentTypeCoercion occurrences="2">
+      <code>'Laminas\Ldap\Node\Schema\AttributeType\OpenLdap'</code>
+      <code>'Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap'</code>
+    </ArgumentTypeCoercion>
+    <MissingReturnType occurrences="13">
+      <code>testActiveDirectorySchema</code>
+      <code>testGetters</code>
+      <code>testOffsetSetWillThrowException</code>
+      <code>testOffsetUnsetWillThrowException</code>
+      <code>testOpenLDAPSchema</code>
+      <code>testOpenLDAPSchemaAttributeTypeAliases</code>
+      <code>testOpenLDAPSchemaAttributeTypeInheritance</code>
+      <code>testOpenLDAPSchemaObjectClassAliases</code>
+      <code>testOpenLDAPSchemaObjectClassInheritance</code>
+      <code>testSchemaNode</code>
+      <code>testSetterWillThrowException</code>
+      <code>testUnsetterWillThrowException</code>
+      <code>testeDirectorySchema</code>
+    </MissingReturnType>
+    <MixedArrayAccess occurrences="2">
+      <code>$ou-&gt;_parents[0]</code>
+      <code>$ou-&gt;_parents[0]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="11">
+      <code>$ca</code>
+      <code>$ca2</code>
+      <code>$cn</code>
+      <code>$name</code>
+      <code>$ob1</code>
+      <code>$ob1</code>
+      <code>$ob2</code>
+      <code>$ob2</code>
+      <code>$ou</code>
+      <code>$ou</code>
+      <code>$schemaUn</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="25">
+      <code>getDescription</code>
+      <code>getDescription</code>
+      <code>getMaxLength</code>
+      <code>getMaxLength</code>
+      <code>getMaxLength</code>
+      <code>getMayContain</code>
+      <code>getMayContain</code>
+      <code>getMayContain</code>
+      <code>getMustContain</code>
+      <code>getMustContain</code>
+      <code>getMustContain</code>
+      <code>getName</code>
+      <code>getName</code>
+      <code>getOid</code>
+      <code>getOid</code>
+      <code>getOid</code>
+      <code>getOid</code>
+      <code>getOid</code>
+      <code>getOid</code>
+      <code>getParentClasses</code>
+      <code>getSyntax</code>
+      <code>getSyntax</code>
+      <code>getSyntax</code>
+      <code>getType</code>
+      <code>isSingleValued</code>
+    </MixedMethodCall>
+    <MixedPropertyFetch occurrences="48">
+      <code>$ca-&gt;may</code>
+      <code>$ca-&gt;must</code>
+      <code>$ca-&gt;sup</code>
+      <code>$ca2-&gt;may</code>
+      <code>$ca2-&gt;must</code>
+      <code>$ca2-&gt;sup</code>
+      <code>$cn-&gt;equality</code>
+      <code>$cn-&gt;ordering</code>
+      <code>$cn-&gt;substr</code>
+      <code>$cn-&gt;sup</code>
+      <code>$cn-&gt;syntax</code>
+      <code>$cn-&gt;{'max-length'}</code>
+      <code>$name-&gt;equality</code>
+      <code>$name-&gt;ordering</code>
+      <code>$name-&gt;substr</code>
+      <code>$name-&gt;sup</code>
+      <code>$name-&gt;syntax</code>
+      <code>$name-&gt;{'max-length'}</code>
+      <code>$ou-&gt;_parents</code>
+      <code>$ou-&gt;_parents</code>
+      <code>$ou-&gt;_string</code>
+      <code>$ou-&gt;_string</code>
+      <code>$ou-&gt;abstract</code>
+      <code>$ou-&gt;aliases</code>
+      <code>$ou-&gt;aliases</code>
+      <code>$ou-&gt;auxiliary</code>
+      <code>$ou-&gt;collective</code>
+      <code>$ou-&gt;desc</code>
+      <code>$ou-&gt;desc</code>
+      <code>$ou-&gt;equality</code>
+      <code>$ou-&gt;may</code>
+      <code>$ou-&gt;must</code>
+      <code>$ou-&gt;name</code>
+      <code>$ou-&gt;name</code>
+      <code>$ou-&gt;obsolete</code>
+      <code>$ou-&gt;obsolete</code>
+      <code>$ou-&gt;oid</code>
+      <code>$ou-&gt;oid</code>
+      <code>$ou-&gt;ordering</code>
+      <code>$ou-&gt;structural</code>
+      <code>$ou-&gt;substr</code>
+      <code>$ou-&gt;sup</code>
+      <code>$ou-&gt;sup</code>
+      <code>$ou-&gt;syntax</code>
+      <code>$ou-&gt;usage</code>
+      <code>$ou-&gt;{'max-length'}</code>
+      <code>$ou-&gt;{'no-user-modification'}</code>
+      <code>$ou-&gt;{'single-value'}</code>
+    </MixedPropertyFetch>
+    <UndefinedMethod occurrences="3">
+      <code>getLDAPSyntaxes</code>
+      <code>getMatchingRuleUse</code>
+      <code>getMatchingRules</code>
+    </UndefinedMethod>
+    <UnusedVariable occurrences="2">
+      <code>$attributeTypes</code>
+      <code>$objectClasses</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Node/UpdateTest.php">
+    <InvalidMethodCall occurrences="1">
+      <code>getDn</code>
+    </InvalidMethodCall>
+    <MissingParamType occurrences="1">
+      <code>$entry</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="10">
+      <code>stripActiveDirectorySystemAttributes</code>
+      <code>testAddDeletedNode</code>
+      <code>testAddNewNode</code>
+      <code>testModifyDeletedNode</code>
+      <code>testMoveDeletedExistingNode</code>
+      <code>testMoveDeletedNewNode</code>
+      <code>testMoveExistingNode</code>
+      <code>testMoveNewNode</code>
+      <code>testMoveNode</code>
+      <code>testSimpleUpdateOneValue</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="46">
+      <code>$child-&gt;getDn()</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$entry</code>
+      <code>$entry</code>
+      <code>$entry['objectclass']</code>
+      <code>$entry['objectclass']</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="6">
+      <code>$entry[$attr]</code>
+      <code>$entry['objectclass'][0]</code>
+      <code>$node2['dn']</code>
+      <code>$node2['dn']</code>
+      <code>$node2['dn']</code>
+      <code>$node2['dn']</code>
+    </MixedArrayAccess>
+    <MixedArrayAssignment occurrences="1">
+      <code>$entry['objectclass']</code>
+    </MixedArrayAssignment>
+    <MixedAssignment occurrences="14">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnNew</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+      <code>$dnOld</code>
+    </MixedAssignment>
+    <PossiblyNullPropertyAssignment occurrences="2">
+      <code>$node1</code>
+      <code>$node1</code>
+    </PossiblyNullPropertyAssignment>
+    <PossiblyNullReference occurrences="7">
+      <code>getDn</code>
+      <code>move</code>
+      <code>rename</code>
+      <code>setDn</code>
+      <code>setDn</code>
+      <code>setDn</code>
+      <code>update</code>
+    </PossiblyNullReference>
+  </file>
+  <file src="test/OfflineReconnectTest.php">
+    <MissingReturnType occurrences="4">
+      <code>activateBindableOfflineMocks</code>
+      <code>reportErrorsAsConnectionFailure</code>
+      <code>testAddingAttributesReconnect</code>
+      <code>testRemovingAttributesReconnect</code>
+    </MissingReturnType>
+    <MixedMethodCall occurrences="3">
+      <code>enable</code>
+      <code>enable</code>
+      <code>enable</code>
+    </MixedMethodCall>
+  </file>
+  <file src="test/OfflineTest.php">
+    <MissingParamType occurrences="15">
+      <code>$allowEmptyAttributes</code>
+      <code>$allowEmptyAttributes</code>
+      <code>$allowEmptyAttributes</code>
+      <code>$attributes</code>
+      <code>$attributes</code>
+      <code>$attributes</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$expectedAttributesToRemove</code>
+      <code>$expectedAttributesToRemove</code>
+      <code>$expectedAttributesToRemove</code>
+      <code>$expectedDn</code>
+      <code>$expectedDn</code>
+      <code>$expectedDn</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="9">
+      <code>removingAttributesProvider</code>
+      <code>testAddingAttributes</code>
+      <code>testAddingAttributesFails</code>
+      <code>testConfigObject</code>
+      <code>testOptionsGetter</code>
+      <code>testRemovingAttributes</code>
+      <code>testRemovingAttributesFails</code>
+      <code>testUpdatingAttributes</code>
+      <code>testUpdatingAttributesFails</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="9">
+      <code>$allowEmptyAttributes</code>
+      <code>$allowEmptyAttributes</code>
+      <code>$allowEmptyAttributes</code>
+      <code>$attributes</code>
+      <code>$attributes</code>
+      <code>$attributes</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+    </MixedArgument>
+    <PossiblyNullPropertyAssignmentValue occurrences="1">
+      <code>null</code>
+    </PossiblyNullPropertyAssignmentValue>
+  </file>
+  <file src="test/ReconnectTest.php">
+    <InvalidScalarArgument occurrences="2">
+      <code>getenv('TESTS_LAMINAS_LDAP_PORT')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_PORT')</code>
+    </InvalidScalarArgument>
+    <MissingReturnType occurrences="13">
+      <code>causeLdapConnectionFailure</code>
+      <code>getStandardOptions</code>
+      <code>testAddReconnect</code>
+      <code>testConnectParameterPreservation</code>
+      <code>testDeleteReconnect</code>
+      <code>testErroneousModificationDoesNotTriggerReconnect</code>
+      <code>testMultipleReconnectAttempts</code>
+      <code>testNoReconnectWhenNotRequested</code>
+      <code>testParametersOverridePropertiesDuringReconnect</code>
+      <code>testReconnectWhenRequested</code>
+      <code>testRenameReconnect</code>
+      <code>testUpdateReconnect</code>
+      <code>triggerReconnection</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="21">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$new_dn</code>
+      <code>$new_dn</code>
+      <code>static::getStandardOptions()</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="4">
+      <code>$entry['l'][0]</code>
+      <code>$entry['uid'][0]</code>
+      <code>$entry['uid'][0]</code>
+      <code>$entry['uid'][0]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="7">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$new_dn</code>
+      <code>$options['port']</code>
+    </MixedAssignment>
+    <MixedOperand occurrences="1">
+      <code>$options['port']</code>
+    </MixedOperand>
+    <PossiblyFalseArgument occurrences="3">
+      <code>getenv('TESTS_LAMINAS_LDAP_HOST')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_HOST')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_SCRIPTS_PORT')</code>
+    </PossiblyFalseArgument>
+    <PossiblyFalseOperand occurrences="8">
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_BASE_DN')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_BASE_DN')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_BASE_DN')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_BASE_DN')</code>
+    </PossiblyFalseOperand>
+  </file>
+  <file src="test/SearchTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>'\Laminas\Ldap\Collection\DefaultIterator'</code>
+    </ArgumentTypeCoercion>
+    <DocblockTypeContradiction occurrences="1">
+      <code>assertNull</code>
+    </DocblockTypeContradiction>
+    <MissingParamType occurrences="1">
+      <code>$attrib</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="45">
+      <code>customNaming</code>
+      <code>testAttributeNameTreatmentCustomFunction</code>
+      <code>testAttributeNameTreatmentCustomInstanceMethod</code>
+      <code>testAttributeNameTreatmentCustomStaticMethod</code>
+      <code>testAttributeNameTreatmentNative</code>
+      <code>testAttributeNameTreatmentToLower</code>
+      <code>testAttributeNameTreatmentToUpper</code>
+      <code>testCallingCurrentOnCollectionReturnsFirstElement</code>
+      <code>testCallingCurrentOnEmptyCollectionReturnsNull</code>
+      <code>testCallingCurrentOnEmptyIteratorReturnsNull</code>
+      <code>testCallingCurrentOnIteratorReturnsFirstElement</code>
+      <code>testCallingNextAfterIterationShouldNotThrowException</code>
+      <code>testCollectionClassNotSubclassingLaminasLDAPCollectionThrowsException</code>
+      <code>testCountBase</code>
+      <code>testCountChildren</code>
+      <code>testCountChildrenWithDnObject</code>
+      <code>testCountOne</code>
+      <code>testCountSub</code>
+      <code>testCountSubWithDnObjectAndFilterObject</code>
+      <code>testExistsDn</code>
+      <code>testExistsDnWithDnObject</code>
+      <code>testGetSingleEntry</code>
+      <code>testGetSingleEntryWithDnObject</code>
+      <code>testGetSingleIllegalEntry</code>
+      <code>testGetSingleIllegalEntryWithException</code>
+      <code>testIllegalSearch</code>
+      <code>testInnerIteratorIsOfRequiredType</code>
+      <code>testMultipleResultIteration</code>
+      <code>testResultIteration</code>
+      <code>testResultIterationAfterCallingCurrent</code>
+      <code>testReverseSortingWithSearchEntriesShortcut</code>
+      <code>testReverseSortingWithSearchEntriesShortcutWithOptionsArray</code>
+      <code>testSearchEntriesShortcut</code>
+      <code>testSearchEntriesShortcutWithDnObjectAndFilterObject</code>
+      <code>testSearchEntriesShortcutWithOptionsArray</code>
+      <code>testSearchNoResult</code>
+      <code>testSearchNothingGetFirst</code>
+      <code>testSearchNothingIteration</code>
+      <code>testSearchNothingToArray</code>
+      <code>testSearchWithDnObjectAndFilterObject</code>
+      <code>testSearchWithOptionsArray</code>
+      <code>testSorting</code>
+      <code>testUnknownCollectionClassThrowsException</code>
+      <code>testUserIsAutomaticallyBoundOnOperationInDisconnectedState</code>
+      <code>testUserIsAutomaticallyBoundOnOperationInUnboundState</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="26">
+      <code>$attrib</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn1</code>
+      <code>$dn1</code>
+      <code>$dn1</code>
+      <code>$dn1</code>
+      <code>$dn2</code>
+      <code>$entry['ou']</code>
+      <code>$entry['ou']</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Node,')</code>
+      <code>$this-&gt;createDn('ou=Test1,')</code>
+      <code>$this-&gt;createDn('ou=Test2,')</code>
+      <code>$this-&gt;createDn('ou=Test99,')</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="3">
+      <code>$item['l']</code>
+      <code>$item['l']</code>
+      <code>$item['l'][0]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="21">
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn</code>
+      <code>$dn1</code>
+      <code>$dn1</code>
+      <code>$dn1</code>
+      <code>$dn1</code>
+      <code>$dn2</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+    </MixedAssignment>
+    <PossiblyFalseArgument occurrences="25">
+      <code>$dn2</code>
+      <code>$dn2</code>
+      <code>$dn2</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+    </PossiblyFalseArgument>
+    <PossiblyNullArgument occurrences="6">
+      <code>$list-&gt;current()</code>
+      <code>$list-&gt;current()</code>
+      <code>$list-&gt;current()</code>
+      <code>$list-&gt;current()</code>
+      <code>$list-&gt;current()</code>
+      <code>$list-&gt;current()</code>
+    </PossiblyNullArgument>
+    <PossiblyNullArrayAccess occurrences="1">
+      <code>$item['l']</code>
+    </PossiblyNullArrayAccess>
+    <PossiblyNullArrayOffset occurrences="1">
+      <code>$lSorted</code>
+    </PossiblyNullArrayOffset>
+    <RedundantConditionGivenDocblockType occurrences="2">
+      <code>assertIsArray</code>
+      <code>assertIsArray</code>
+    </RedundantConditionGivenDocblockType>
+    <UnusedForeachValue occurrences="11">
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+    </UnusedForeachValue>
+    <UnusedVariable occurrences="7">
+      <code>$entry</code>
+      <code>$items</code>
+      <code>$items</code>
+      <code>$items</code>
+      <code>$key</code>
+      <code>$key</code>
+      <code>$key</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/SortTest.php">
+    <InvalidScalarArgument occurrences="2">
+      <code>bin2hex($a)</code>
+      <code>bin2hex($b)</code>
+    </InvalidScalarArgument>
+    <MissingClosureParamType occurrences="4">
+      <code>$a</code>
+      <code>$a</code>
+      <code>$b</code>
+      <code>$b</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="2">
+      <code>function ($a, $b) use ($lSorted) {</code>
+      <code>function ($a, $b) {</code>
+    </MissingClosureReturnType>
+    <MissingReturnType occurrences="3">
+      <code>testCustomSorting</code>
+      <code>testSettingCallable</code>
+      <code>testSorting</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="4">
+      <code>$a</code>
+      <code>$a</code>
+      <code>$b</code>
+      <code>$b</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="2">
+      <code>$reflectionEntries[$index]</code>
+      <code>$reflectionEntries[$index]</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$reflectionEntries</code>
+      <code>$reflectionEntries</code>
+    </MixedAssignment>
+    <PossiblyFalseArgument occurrences="3">
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
+    </PossiblyFalseArgument>
+    <UnusedClosureParam occurrences="2">
+      <code>$a</code>
+      <code>$b</code>
+    </UnusedClosureParam>
+    <UnusedVariable occurrences="1">
+      <code>$lSorted</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/TestAsset/BuiltinFunctionMocks.php">
+    <MissingPropertyType occurrences="3">
+      <code>$ldap_bind_mock</code>
+      <code>$ldap_connect_mock</code>
+      <code>$ldap_set_option_mock</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="1">
+      <code>createMocks</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/TestAsset/CustomNaming.php">
+    <MissingParamType occurrences="2">
+      <code>$attrib</code>
+      <code>$attrib</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="2">
+      <code>name1</code>
+      <code>name2</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$attrib</code>
+      <code>$attrib</code>
+    </MixedArgument>
+  </file>
+  <file src="test/bootstrap.php">
+    <PossiblyFalseArgument occurrences="2">
+      <code>getenv('TESTS_LAMINAS_LDAP_SASL_CERTIFICATE')</code>
+      <code>getenv('TESTS_LAMINAS_LDAP_SASL_KEY')</code>
+    </PossiblyFalseArgument>
+  </file>
+</files>
