@@ -351,7 +351,7 @@ echo "$acctname\n";</code></pre>
 <p>Note that we use the <code>getCanonicalAccountName()</code> method to retrieve the account
 DN here only because that is what exercises the most of what little code is
 currently present in this class.</p>
-<h3>Automatic Username Canonicalization When Binding</h3>
+<h3 id="automatic-username-canonicalization-when-binding">Automatic Username Canonicalization When Binding</h3>
 <p>If <code>bind()</code> is called with a non-DN username but <code>bindRequiresDN</code> is <code>true</code>
 and no username in DN form was supplied as an option, the bind will fail.
 However, if a username in DN form is supplied in the options array,
@@ -380,7 +380,7 @@ echo "$acctname\n";</code></pre>
 form, finds <code>bindRequiresDn</code> is <code>TRUE</code>, uses <code>CN=user1,DC=foo,DC=net</code> and
 <code>pass1</code> to bind, retrieves the DN for 'abaker', unbinds and then rebinds with
 the newly discovered <code>CN=Alice Baker,OU=Sales,DC=foo,DC=net</code>.</p>
-<h3>Account Name Canonicalization</h3>
+<h3 id="account-name-canonicalization">Account Name Canonicalization</h3>
 <p>The <code>accountDomainName</code> and <code>accountDomainNameShort</code> options are used for two
 purposes: (1) they facilitate multi-domain authentication and failover
 capability, and (2) they are also used to canonicalize usernames. Specifically,
@@ -395,7 +395,7 @@ account is consistent regardless of what was supplied to <code>bind()</code>. Fo
 if the user supplies an account name of <code>abaker@example.com</code> or just <code>abaker</code>
 and the <code>accountCanonicalForm</code> is set to 3, the resulting canonicalized name
 would be <code>EXAMPLE\\abaker</code>.</p>
-<h3>Multi-domain Authentication and Failover</h3>
+<h3 id="multi-domain-authentication-and-failover">Multi-domain Authentication and Failover</h3>
 <p>The <code>Laminas\Ldap\Ldap</code> component by itself makes no attempt to authenticate with
 multiple servers.  However, <code>Laminas\Ldap\Ldap</code> is specifically designed to handle
 this scenario gracefully. The required technique is to simply iterate over an
@@ -500,16 +500,6 @@ failover LDAP based authentication (or copy the code).</p>
 </nav>
 
 
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-ldap/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
 
                 
             </div>
