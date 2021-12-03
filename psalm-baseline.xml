@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.2@83a0325c0a95c0ab531d6b90c877068b464377b5">
+<files psalm-version="4.13.1@5cf660f63b548ccd4a56f62d916ee4d6028e01a3">
   <file src="src/Attribute.php">
     <InvalidReturnStatement occurrences="2">
       <code>$value-&gt;format('U')</code>
@@ -174,6 +174,9 @@
     <DocblockTypeContradiction occurrences="1">
       <code>null === $val</code>
     </DocblockTypeContradiction>
+    <InvalidArgument occurrences="1">
+      <code>[$key, $value]</code>
+    </InvalidArgument>
     <InvalidClass occurrences="4">
       <code>DN</code>
       <code>DN</code>
@@ -261,7 +264,8 @@
     </UnsafeInstantiation>
   </file>
   <file src="src/ErrorHandler.php">
-    <DocblockTypeContradiction occurrences="1">
+    <DocblockTypeContradiction occurrences="2">
+      <code>! self::$errorHandler</code>
       <code>! self::$errorHandler</code>
     </DocblockTypeContradiction>
     <InvalidArgument occurrences="1"/>
@@ -284,9 +288,6 @@
       <code>$filter</code>
       <code>$filter</code>
     </MissingParamType>
-    <NullArgument occurrences="1">
-      <code>null</code>
-    </NullArgument>
     <UnsafeInstantiation occurrences="10">
       <code>new static($attr, $value, self::TYPE_APPROX, null, null)</code>
       <code>new static($attr, $value, self::TYPE_EQUALS, '*', '*')</code>
@@ -346,6 +347,10 @@
     </MixedArgument>
   </file>
   <file src="src/Ldap.php">
+    <ArgumentTypeCoercion occurrences="2">
+      <code>$duration * 1000000</code>
+      <code>'Laminas\Ldap\Collection'</code>
+    </ArgumentTypeCoercion>
     <DocblockTypeContradiction occurrences="8">
       <code>! is_resource($this-&gt;resource)</code>
       <code>$accountDomainName === null</code>
@@ -365,9 +370,6 @@
       <code>Node</code>
       <code>array</code>
     </InvalidNullableReturnType>
-    <InvalidScalarArgument occurrences="1">
-      <code>$duration * 1000000</code>
-    </InvalidScalarArgument>
     <MissingParamType occurrences="3">
       <code>$a</code>
       <code>$b</code>
@@ -407,6 +409,9 @@
       <code>$value</code>
       <code>array_shift($newDnParts)</code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$errorMessages</code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayAccess occurrences="1">
       <code>$this-&gt;lastConnectBindParams[$method][$parameter]</code>
     </MixedArrayAccess>
@@ -525,9 +530,7 @@
       <code>null</code>
       <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
-    <PossiblyUndefinedVariable occurrences="4">
-      <code>$err</code>
-      <code>$err</code>
+    <PossiblyUndefinedVariable occurrences="2">
       <code>$err</code>
       <code>$err</code>
     </PossiblyUndefinedVariable>
@@ -564,12 +567,13 @@
     <UnsafeInstantiation occurrences="1">
       <code>new $collectionClass($iterator)</code>
     </UnsafeInstantiation>
-    <UnusedFunctionCall occurrences="1">
-      <code>ldap_free_result</code>
-    </UnusedFunctionCall>
-    <UnusedVariable occurrences="1">
+    <UnusedForeachValue occurrences="1">
       <code>$val</code>
-    </UnusedVariable>
+    </UnusedForeachValue>
+    <UnusedFunctionCall occurrences="2">
+      <code>ldap_free_result</code>
+      <code>ldap_unbind</code>
+    </UnusedFunctionCall>
   </file>
   <file src="src/Ldif/Encoder.php">
     <InvalidNullableReturnType occurrences="1">
@@ -619,9 +623,8 @@
     </UnsafeInstantiation>
   </file>
   <file src="src/Node.php">
-    <DocblockTypeContradiction occurrences="6">
+    <DocblockTypeContradiction occurrences="5">
       <code>$data === null</code>
-      <code>$ldap instanceof Ldap</code>
       <code>$this-&gt;ldap === null</code>
       <code>$this-&gt;newDn === null</code>
       <code>is_array($this-&gt;children)</code>
@@ -701,9 +704,10 @@
       <code>(bool) $delete</code>
       <code>(bool) $new</code>
     </RedundantCastGivenDocblockType>
-    <RedundantConditionGivenDocblockType occurrences="8">
+    <RedundantConditionGivenDocblockType occurrences="9">
       <code>$dn instanceof Dn</code>
       <code>$dn instanceof Dn</code>
+      <code>$this-&gt;events</code>
       <code>$this-&gt;events</code>
       <code>$this-&gt;ldap !== null</code>
       <code>$this-&gt;newDn</code>
@@ -716,9 +720,9 @@
       <code>new static($dn, $data, true, $ldap)</code>
       <code>new static($dn, [], false, null)</code>
     </UnsafeInstantiation>
-    <UnusedVariable occurrences="1">
+    <UnusedForeachValue occurrences="1">
       <code>$value</code>
-    </UnusedVariable>
+    </UnusedForeachValue>
   </file>
   <file src="src/Node/AbstractNode.php">
     <InvalidDocblock occurrences="1">
@@ -752,9 +756,9 @@
     <MixedReturnStatement occurrences="1">
       <code>$this-&gt;getAttribute('objectClass', null)</code>
     </MixedReturnStatement>
-    <UnusedVariable occurrences="1">
+    <UnusedForeachValue occurrences="1">
       <code>$value</code>
-    </UnusedVariable>
+    </UnusedForeachValue>
   </file>
   <file src="src/Node/ChildrenIterator.php">
     <InvalidNullableReturnType occurrences="1">
@@ -1084,18 +1088,19 @@
     <RedundantConditionGivenDocblockType occurrences="1">
       <code>self::$ldap !== null</code>
     </RedundantConditionGivenDocblockType>
+    <UnusedForeachValue occurrences="1">
+      <code>$entry</code>
+    </UnusedForeachValue>
     <UnusedFunctionCall occurrences="2">
       <code>ldap_add</code>
       <code>ldap_delete</code>
     </UnusedFunctionCall>
-    <UnusedVariable occurrences="1">
-      <code>$entry</code>
-    </UnusedVariable>
   </file>
   <file src="test/AttributeTest.php">
-    <InvalidArgument occurrences="2">
+    <InvalidArgument occurrences="3">
       <code>$object</code>
       <code>$stream</code>
+      <code>false</code>
     </InvalidArgument>
     <InvalidScalarArgument occurrences="4">
       <code>$ts</code>
@@ -1188,9 +1193,8 @@
     <MixedOperand occurrences="1">
       <code>$localTimestamp</code>
     </MixedOperand>
-    <PossiblyFalseArgument occurrences="6">
+    <PossiblyFalseArgument occurrences="5">
       <code>$tsValue</code>
-      <code>false</code>
       <code>strpos($md5, '}')</code>
       <code>strpos($sha, '}')</code>
       <code>strpos($smd5, '}')</code>
@@ -2025,8 +2029,10 @@
       <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
       <code>getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')</code>
     </PossiblyFalseArgument>
-    <UnusedVariable occurrences="4">
+    <UnusedForeachValue occurrences="1">
       <code>$n</code>
+    </UnusedForeachValue>
+    <UnusedVariable occurrences="3">
       <code>$rdn</code>
       <code>$rdn</code>
       <code>$rdn</code>
@@ -2732,13 +2738,14 @@
       <code>$entry['uid'][0]</code>
       <code>$entry['uid'][0]</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="6">
+    <MixedAssignment occurrences="7">
       <code>$dn</code>
       <code>$dn</code>
       <code>$dn</code>
       <code>$dn</code>
       <code>$dn</code>
       <code>$new_dn</code>
+      <code>$options['port']</code>
     </MixedAssignment>
     <MixedOperand occurrences="1">
       <code>$options['port']</code>
@@ -2917,19 +2924,21 @@
       <code>assertIsArray</code>
       <code>assertIsArray</code>
     </RedundantConditionGivenDocblockType>
-    <UnusedVariable occurrences="18">
+    <UnusedForeachValue occurrences="11">
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+      <code>$item</code>
+    </UnusedForeachValue>
+    <UnusedVariable occurrences="7">
       <code>$entry</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
       <code>$items</code>
       <code>$items</code>
       <code>$items</code>
