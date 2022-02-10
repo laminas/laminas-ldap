@@ -5,3 +5,5 @@ JOB=$3
 PHP_VERSION=$(echo "${JOB}" | jq -r '.php')
 
 apt install -y php8.1-ldap || exit 1
+
+apt install -y openldap || exit 1
