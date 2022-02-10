@@ -43,7 +43,7 @@
                                 ALT_DN: CN=Alice Baker,OU=Sales,DC=foo,DC=net
                           ALT_PASSWORD: apass
         -->
-    <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="false"/>
+    <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="true"/>
     <env name="TESTS_LAMINAS_LDAP_HOST" value="localhost"/>
     <env name="TESTS_LAMINAS_LDAP_PORT" value="3890"/>
     <env name="TESTS_LAMINAS_LDAP_SCRIPTS_PORT" value="3891"/>
