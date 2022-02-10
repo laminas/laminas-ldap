@@ -5,7 +5,7 @@ JOB=$3
 PHP_VERSION=$(echo "${JOB}" | jq -r '.php')
 
 apt-get install -y iptables conntrack || exit 1
-sudo ./.ci/config_iptables.sh
+iptables-restore -v --test ./.ci/iptables.rules
 
 apt-get install -y slapd ldap-utils || exit 1
 
