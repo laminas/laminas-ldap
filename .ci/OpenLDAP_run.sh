@@ -5,8 +5,7 @@ LDAP_DB=/tmp/ldap_db
 
 echo "Creating database directory"
 
-#rm -rf ${LDAP_DB} && mkdir ${LDAP_DB} && cp  /usr/local/etc/openldap/DB_CONFIG ${LDAP_DB}
-rm -rf ${LDAP_DB} && mkdir ${LDAP_DB}
+rm -rf ${LDAP_DB} && mkdir ${LDAP_DB} && cp /var/lib/ldap/*.mdb ${LDAP_DB}
 
 cp ${DIR}/OpenLDAP/certs/IntegrationTestCA/root-ca.crt /tmp
 cp ${DIR}/OpenLDAP/certs/*.crt /tmp
