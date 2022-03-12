@@ -127,7 +127,7 @@ class DefaultIterator implements Iterator, Countable
     public function close()
     {
         $isClosed = false;
-        if (is_resource($this->resultId)) {
+        if (is_resource($this->resultId) || is_object($this->resultId)) {
             ErrorHandler::start();
             $isClosed       = ldap_free_result($this->resultId);
             ErrorHandler::stop();
@@ -206,6 +206,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return int
      */
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return $this->itemCount;
@@ -218,12 +219,13 @@ class DefaultIterator implements Iterator, Countable
      * @return array|null
      * @throws \Laminas\Ldap\Exception\LdapException
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
-        if (! is_resource($this->current)) {
+        if (! (is_resource($this->current) || is_object($this->current))) {
             $this->rewind();
         }
-        if (! is_resource($this->current)) {
+        if (! (is_resource($this->current) || is_object($this->current))) {
             return;
         }
 
@@ -278,12 +280,13 @@ class DefaultIterator implements Iterator, Countable
      * @throws \Laminas\Ldap\Exception\LdapException
      * @return string|null
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
-        if (! is_resource($this->current)) {
+        if (! (is_resource($this->current) || is_object($this->current))) {
             $this->rewind();
         }
-        if (is_resource($this->current)) {
+        if (is_resource($this->current) || is_object($this->current)) {
             $resource = $this->ldap->getResource();
             ErrorHandler::start();
             $currentDn = ldap_get_dn($resource, $this->current);
@@ -306,6 +309,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         next($this->entries);
@@ -320,6 +324,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->entries);
@@ -334,9 +339,10 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return bool
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
-        return (is_resource($this->current));
+        return (is_resource($this->current) || is_object($this->current));
     }
 
     /**
