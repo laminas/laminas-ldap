@@ -96,7 +96,8 @@ class ReconnectTest extends AbstractOnlineTestCase
             getenv('TESTS_LAMINAS_LDAP_HOST'),
             getenv('TESTS_LAMINAS_LDAP_SCRIPTS_PORT')
         );
-        file_get_contents($url);
+        var_Dump($url);
+        var_Dump(file_get_contents($url));
     }
 
     public function testNoReconnectWhenNotRequested()
