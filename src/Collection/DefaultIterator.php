@@ -7,6 +7,7 @@ use Iterator;
 use Laminas\Ldap;
 use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Handler;
 
 /**
  * Laminas\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -28,14 +29,14 @@ class DefaultIterator implements Iterator, Countable
     /**
      * Result identifier resource
      *
-     * @var resource
+     * @var object|resource
      */
     protected $resultId = null;
 
     /**
      * Current result entry identifier
      *
-     * @var resource
+     * @var object|resource
      */
     protected $current = null;
 
@@ -78,7 +79,7 @@ class DefaultIterator implements Iterator, Countable
      * Constructor.
      *
      * @param  \Laminas\Ldap\Ldap $ldap
-     * @param  resource        $resultId
+     * @param  object|resource $resultId
      * @throws \Laminas\Ldap\Exception\LdapException if no entries was found.
      * @return DefaultIterator
      */
@@ -127,7 +128,7 @@ class DefaultIterator implements Iterator, Countable
     public function close()
     {
         $isClosed = false;
-        if (is_resource($this->resultId) || is_object($this->resultId)) {
+        if (Handler::isResultHandle($this->resultId)) {
             ErrorHandler::start();
             $isClosed       = ldap_free_result($this->resultId);
             ErrorHandler::stop();
@@ -222,10 +223,10 @@ class DefaultIterator implements Iterator, Countable
     #[\ReturnTypeWillChange]
     public function current()
     {
-        if (! (is_resource($this->current) || is_object($this->current))) {
+        if (! Handler::isResultEntryHandle($this->current)) {
             $this->rewind();
         }
-        if (! (is_resource($this->current) || is_object($this->current))) {
+        if (! Handler::isResultEntryHandle($this->current)) {
             return;
         }
 
@@ -283,10 +284,10 @@ class DefaultIterator implements Iterator, Countable
     #[\ReturnTypeWillChange]
     public function key()
     {
-        if (! (is_resource($this->current) || is_object($this->current))) {
+        if (! Handler::isResultEntryHandle($this->current)) {
             $this->rewind();
         }
-        if (is_resource($this->current) || is_object($this->current)) {
+        if (Handler::isResultEntryHandle($this->current)) {
             $resource = $this->ldap->getResource();
             ErrorHandler::start();
             $currentDn = ldap_get_dn($resource, $this->current);
@@ -342,7 +343,7 @@ class DefaultIterator implements Iterator, Countable
     #[\ReturnTypeWillChange]
     public function valid()
     {
-        return (is_resource($this->current) || is_object($this->current));
+        return Handler::isResultEntryHandle($this->current);
     }
 
     /**
