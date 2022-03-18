@@ -9,7 +9,7 @@ class Handler
 {
 
     /**
-     * @param resource $handle
+     * @param resource|\LDAP\Connection|\LDAP\Result|\LDAP\ResultEntry $handle
      * @param string $handleClassName
      * @return bool
      */
