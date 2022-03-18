@@ -9,7 +9,7 @@ class Handler
 {
 
     /**
-     * @param object|resource $handle
+     * @param resource $handle
      * @return bool
      */
     private static function isHandle($handle, $handleClassName)
@@ -21,7 +21,7 @@ class Handler
     /**
      * Checks if the given handle is an LDAP connection object or a resource based on the running PHP version.
      *
-     * @param object|resource $handle
+     * @param resource $handle
      * @return bool
      */
     public static function isLdapHandle($handle)
@@ -32,7 +32,7 @@ class Handler
     /**
      * Checks if the given handle is an LDAP result object or a resource based on the running PHP version.
      *
-     * @param object|resource $handle
+     * @param resource $handle
      * @return bool
      */
     public static function isResultHandle($handle)
@@ -43,7 +43,7 @@ class Handler
     /**
      * Checks if the given handle is an LDAP result entry object or a resource based on the running PHP version.
      *
-     * @param object|resource $handle
+     * @param resource $handle
      * @return bool
      */
     public static function isResultEntryHandle($handle)

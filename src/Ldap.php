@@ -34,7 +34,7 @@ class Ldap
     /**
      * The raw LDAP extension resource.
      *
-     * @var object|resource
+     * @var resource
      */
     protected $resource = null;
 
@@ -109,7 +109,7 @@ class Ldap
     }
 
     /**
-     * @return object|resource The raw LDAP extension resource.
+     * @return resource The raw LDAP extension resource.
      */
     public function getResource()
     {

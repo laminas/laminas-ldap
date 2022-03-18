@@ -29,14 +29,14 @@ class DefaultIterator implements Iterator, Countable
     /**
      * Result identifier resource
      *
-     * @var object|resource
+     * @var resource
      */
     protected $resultId = null;
 
     /**
      * Current result entry identifier
      *
-     * @var object|resource
+     * @var resource
      */
     protected $current = null;
 
@@ -79,7 +79,7 @@ class DefaultIterator implements Iterator, Countable
      * Constructor.
      *
      * @param  \Laminas\Ldap\Ldap $ldap
-     * @param  object|resource $resultId
+     * @param  resource $resultId
      * @throws \Laminas\Ldap\Exception\LdapException if no entries was found.
      * @return DefaultIterator
      */
