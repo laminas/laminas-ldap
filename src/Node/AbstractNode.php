@@ -393,8 +393,6 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * This is an offline method.
      *
      * @param  string $name
-     * @param         $value
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
      * @param  mixed  $value
      * @throws \Laminas\Ldap\Exception\BadMethodCallException
      */

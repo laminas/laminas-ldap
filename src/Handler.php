@@ -13,7 +13,7 @@ class Handler
      * @param string $handleClassName
      * @return bool
      */
-    private static function isHandle($handle, $handleClassName)
+    private static function isHandle($handle, $handleClassName): bool
     {
         $useResource = version_compare(PHP_VERSION, '8.1.0') < 0;
         return ($useResource && is_resource($handle))
