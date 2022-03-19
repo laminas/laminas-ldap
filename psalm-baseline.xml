@@ -76,11 +76,6 @@
     </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="src/Collection/DefaultIterator.php">
-    <DocblockTypeContradiction occurrences="3">
-      <code>is_resource($this-&gt;current)</code>
-      <code>is_resource($this-&gt;current)</code>
-      <code>is_resource($this-&gt;current)</code>
-    </DocblockTypeContradiction>
     <InvalidArgument occurrences="1">
       <code>$this</code>
     </InvalidArgument>
@@ -129,11 +124,6 @@
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(int) $attributeNameTreatment</code>
     </RedundantCastGivenDocblockType>
-    <RedundantConditionGivenDocblockType occurrences="3">
-      <code>is_resource($this-&gt;current)</code>
-      <code>is_resource($this-&gt;current)</code>
-      <code>is_resource($this-&gt;resultId)</code>
-    </RedundantConditionGivenDocblockType>
     <TypeDoesNotContainType occurrences="1">
       <code>is_string($attributeNameTreatment) &amp;&amp; ! function_exists($attributeNameTreatment)</code>
     </TypeDoesNotContainType>
@@ -346,20 +336,25 @@
       <code>$args[$i]</code>
     </MixedArgument>
   </file>
+  <file src="src/Handler.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>bool</code>
+    </MixedInferredReturnType>
+    <UndefinedDocblockClass occurrences="1">
+      <code>resource|\LDAP\Connection|\LDAP\Result|\LDAP\ResultEntry</code>
+    </UndefinedDocblockClass>
+  </file>
   <file src="src/Ldap.php">
     <ArgumentTypeCoercion occurrences="2">
       <code>$duration * 1000000</code>
       <code>'Laminas\Ldap\Collection'</code>
     </ArgumentTypeCoercion>
-    <DocblockTypeContradiction occurrences="8">
-      <code>! is_resource($this-&gt;resource)</code>
+    <DocblockTypeContradiction occurrences="5">
       <code>$accountDomainName === null</code>
       <code>$accountDomainNameShort === null</code>
       <code>$dname === null</code>
       <code>$this-&gt;rootDse === null</code>
       <code>$this-&gt;schema === null</code>
-      <code>is_resource($this-&gt;getResource())</code>
-      <code>is_resource($this-&gt;resource)</code>
     </DocblockTypeContradiction>
     <InvalidArgument occurrences="3">
       <code>$aname</code>
@@ -383,7 +378,7 @@
       <code>shouldReconnect</code>
       <code>unbind</code>
     </MissingReturnType>
-    <MixedArgument occurrences="24">
+    <MixedArgument occurrences="23">
       <code>$c</code>
       <code>$c</code>
       <code>$c</code>
@@ -403,7 +398,6 @@
       <code>$username</code>
       <code>$username</code>
       <code>$username</code>
-      <code>$val</code>
       <code>$val</code>
       <code>$value</code>
       <code>$value</code>
@@ -545,12 +539,8 @@
       <code>(int) $port</code>
       <code>(string) $collectionClass</code>
     </RedundantCastGivenDocblockType>
-    <RedundantConditionGivenDocblockType occurrences="6">
+    <RedundantConditionGivenDocblockType occurrences="2">
       <code>$sort !== null &amp;&amp; is_string($sort)</code>
-      <code>is_resource($this-&gt;resource)</code>
-      <code>is_resource($this-&gt;resource)</code>
-      <code>is_resource($this-&gt;resource)</code>
-      <code>is_resource($this-&gt;resource)</code>
       <code>is_string($sort)</code>
     </RedundantConditionGivenDocblockType>
     <ReferenceConstraintViolation occurrences="3">
@@ -725,9 +715,6 @@
     </UnusedForeachValue>
   </file>
   <file src="src/Node/AbstractNode.php">
-    <InvalidDocblock occurrences="1">
-      <code>public function offsetSet($name, $value)</code>
-    </InvalidDocblock>
     <MissingParamType occurrences="1">
       <code>$name</code>
     </MissingParamType>
