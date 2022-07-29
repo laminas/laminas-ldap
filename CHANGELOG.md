@@ -2,27 +2,30 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.14.0 - TBD
+## 2.14.0 - 2022-07-29
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [2.14.0](https://github.com/laminas/laminas-ldap/milestone/9)
 
-- Nothing.
+Feature release (minor)
 
-### Deprecated
+### 2.14.0
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **4**
+- Total contributors: **3**
 
-### Removed
+#### Enhancement
 
-- Nothing.
+ - [34: Dropped PHP 7.3, upgraded to `laminas/laminas-coding-standard:~2.3.0`, improved internal type documentation](https://github.com/laminas/laminas-ldap/pull/34) thanks to @Ocramius
+ - [26: Prepare for Renovate with reusable workflows](https://github.com/laminas/laminas-ldap/pull/26) thanks to @ghostwriter
 
-### Fixed
+#### renovate
 
-- Nothing.
+ - [33: Update dependency laminas/laminas-coding-standard to v2](https://github.com/laminas/laminas-ldap/pull/33) thanks to @renovate[bot]
+ - [31: Configure Renovate](https://github.com/laminas/laminas-ldap/pull/31) thanks to @renovate[bot]
 
 ## 2.13.0 - 2022-03-19
 
