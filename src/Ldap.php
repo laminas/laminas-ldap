@@ -27,7 +27,6 @@ use function iterator_to_array;
 use function key;
 use function mb_strtolower;
 use function min;
-use function pow;
 use function preg_match_all;
 use function sprintf;
 use function str_replace;
@@ -56,10 +55,8 @@ class Ldap
 
     /**
      * String used with ldap_connect for error handling purposes.
-     *
-     * @var string
      */
-    private $connectString;
+    private ?string $connectString = null;
 
     /**
      * The options used in connecting, binding, etc.
@@ -1930,7 +1927,11 @@ class Ldap
      */
     public function getBaseNode()
     {
-        return $this->getNode($this->getBaseDn(), $this);
+        $baseNode = $this->getNode($this->getBaseDn());
+
+        assert($baseNode instanceof Node);
+
+        return $baseNode;
     }
 
     /**

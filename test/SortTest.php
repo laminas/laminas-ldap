@@ -41,9 +41,7 @@ class SortTest extends AbstractOnlineTestCase
         );
 
         $iterator     = new DefaultIterator($this->getLdap(), $search);
-        $sortFunction = function ($a, $b) {
-            return 1;
-        };
+        $sortFunction = static fn($a, $b): int => 1;
 
         $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
@@ -100,7 +98,7 @@ class SortTest extends AbstractOnlineTestCase
         );
 
         $iterator     = new DefaultIterator($this->getLdap(), $search);
-        $sortFunction = function ($a, $b) {
+        $sortFunction = static function ($a, $b): int {
             // Sort values by the number of "1" in their binary representation
             // and when that is equals by their position in the alphabet.
             $f = strlen(str_replace('0', '', decbin(bin2hex($a)))) -

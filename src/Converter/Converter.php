@@ -81,9 +81,11 @@ class Converter
      */
     public static function hex32ToAsc($string)
     {
-        $string = preg_replace_callback('/\\\([0-9A-Fa-f]{2})/', function ($matches) {
-            return chr(hexdec($matches[1]));
-        }, $string);
+        $string = preg_replace_callback(
+            '/\\\([0-9A-Fa-f]{2})/',
+            static fn($matches): string => chr(hexdec($matches[1])),
+            $string
+        );
         return $string;
     }
 

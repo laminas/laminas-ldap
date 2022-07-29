@@ -72,8 +72,8 @@
     <InvalidArgument occurrences="1">
       <code>$this</code>
     </InvalidArgument>
-    <MissingClosureReturnType occurrences="1">
-      <code>function ($a, $b) use ($sortFunction) {</code>
+    <MissingClosureReturnType occurrences="2">
+      <code>static fn($a, $b)</code>
     </MissingClosureReturnType>
     <MixedArgument occurrences="1">
       <code>$entry['resource']</code>

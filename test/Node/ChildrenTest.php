@@ -90,6 +90,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($node->hasChildren());
 
         $node = $this->getLDAP()->getNode($this->createDn('ou=Test1,ou=Node,'));
+
         $node->detachLDAP();
         $this->assertFalse($node->hasChildren());
     }

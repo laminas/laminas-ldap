@@ -20,8 +20,7 @@ use function unserialize;
  */
 class SchemaTest extends TestLdap\AbstractOnlineTestCase
 {
-    /** @var Node\Schema */
-    private $schema;
+    private Schema $schema;
 
     protected function setUp(): void
     {
