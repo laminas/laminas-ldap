@@ -1,6 +1,30 @@
 <?xml version="1.0"?>
 <ruleset name="Laminas coding standard">
-    <rule ref="./vendor/laminas/laminas-coding-standard/ruleset.xml"/>
+    <rule ref="LaminasCodingStandard"/>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
+        <!-- strict types are too risky to introduce in existing sources here, and have been disabled, for now -->
+        <exclude-pattern>src/</exclude-pattern>
+    </rule>
+    
+    <rule ref="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps">
+        <!-- renaming all non-camel-case variables now is of very little value, and lots of review overhead -->
+        <exclude-pattern>src/</exclude-pattern>
+        <exclude-pattern>test/</exclude-pattern>
+    </rule>
+
+    <rule ref="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCapsProperty">
+        <!-- renaming all non-camel-case variables now is of very little value, and lots of review overhead -->
+        <exclude-pattern>src/</exclude-pattern>
+        <exclude-pattern>test/</exclude-pattern>
+    </rule>
+    
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName">
+        <!-- our test suite relies on `ldap_*` functions being mocked out, therefore we can't really import them -->
+        <exclude-pattern>src</exclude-pattern>
+        <exclude-pattern>test</exclude-pattern>
+    </rule>
+
 
     <!-- Paths to check -->
     <file>src</file>

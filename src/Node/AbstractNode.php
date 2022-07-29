@@ -4,26 +4,54 @@ namespace Laminas\Ldap\Node;
 
 use ArrayAccess;
 use Countable;
-use ReturnTypeWillChange;
 use Laminas\Ldap;
+use Laminas\Ldap\Dn;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Exception\BadMethodCallException;
+use Laminas\Ldap\Exception\LdapException;
+
+use function array_key_exists;
+use function array_merge;
+use function count;
+use function in_array;
+use function json_encode;
+use function ksort;
+use function strtolower;
+
+use const SORT_STRING;
 
 /**
  * This class provides a base implementation for LDAP nodes
  */
 abstract class AbstractNode implements ArrayAccess, Countable
 {
-    protected static $systemAttributes = ['createtimestamp', 'creatorsname',
-                                               'entrycsn', 'entrydn', 'entryuuid', 'hassubordinates', 'modifiersname',
-                                               'modifytimestamp', 'structuralobjectclass', 'subschemasubentry',
-                                               'distinguishedname', 'instancetype', 'name', 'objectcategory',
-                                               'objectguid',
-                                               'usnchanged', 'usncreated', 'whenchanged', 'whencreated'];
+    /** @var non-empty-list<non-empty-string> */
+    protected static $systemAttributes = [
+        'createtimestamp',
+        'creatorsname',
+        'entrycsn',
+        'entrydn',
+        'entryuuid',
+        'hassubordinates',
+        'modifiersname',
+        'modifytimestamp',
+        'structuralobjectclass',
+        'subschemasubentry',
+        'distinguishedname',
+        'instancetype',
+        'name',
+        'objectcategory',
+        'objectguid',
+        'usnchanged',
+        'usncreated',
+        'whenchanged',
+        'whencreated',
+    ];
 
     /**
      * Holds the node's DN.
      *
-     * @var \Laminas\Ldap\Dn
+     * @var Dn
      */
     protected $dn;
 
@@ -35,11 +63,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
     protected $currentData;
 
     /**
-     * Constructor.
-     *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Laminas\Ldap\Dn $dn
      * @param  array         $data
      * @param  bool       $fromDataSource
      */
@@ -67,10 +92,9 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an online method.
      *
-     * @param  \Laminas\Ldap\Ldap $ldap
      * @return AbstractNode Provides a fluid interface
      */
-    public function reload(Ldap\Ldap $ldap = null)
+    public function reload(?Ldap\Ldap $ldap = null)
     {
         if ($ldap !== null) {
             $data = $ldap->getEntry($this->_getDn(), ['*', '+'], true);
@@ -85,7 +109,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @return \Laminas\Ldap\Dn
+     * @return Dn
      */
     // @codingStandardsIgnoreStart
     protected function _getDn()
@@ -100,12 +124,11 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @return \Laminas\Ldap\Dn
+     * @return Dn
      */
     public function getDn()
     {
-        $dn = clone $this->_getDn();
-        return $dn;
+        return clone $this->_getDn();
     }
 
     /**
@@ -304,11 +327,11 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * @param  string  $name
      * @param  int $index
      * @return mixed
-     * @throws \Laminas\Ldap\Exception\LdapException
+     * @throws LdapException
      */
     public function getAttribute($name, $index = null)
     {
-        if ($name == 'dn') {
+        if ($name === 'dn') {
             return $this->getDnString();
         }
 
@@ -323,7 +346,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * @param  string  $name
      * @param  int $index
      * @return array|int
-     * @throws \Laminas\Ldap\Exception\LdapException
+     * @throws LdapException
      */
     public function getDateTimeAttribute($name, $index = null)
     {
@@ -337,7 +360,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * @param  string $name
      * @param  mixed  $value
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function __set($name, $value)
     {
@@ -351,7 +374,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * @param  string $name
      * @return mixed
-     * @throws \Laminas\Ldap\Exception\LdapException
+     * @throws LdapException
      */
     public function __get($name)
     {
@@ -365,8 +388,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  $name
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
+     * @param  string $name
+     * @throws BadMethodCallException
      */
     public function __unset($name)
     {
@@ -394,7 +417,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * @param  string $name
      * @param  mixed  $value
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
+     * @throws BadMethodCallException
      */
     #[ReturnTypeWillChange]
     public function offsetSet($name, $value)
@@ -410,7 +433,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * @param  string $name
      * @return mixed
-     * @throws \Laminas\Ldap\Exception\LdapException
+     * @throws LdapException
      */
     #[ReturnTypeWillChange]
     public function offsetGet($name)
@@ -426,8 +449,8 @@ abstract class AbstractNode implements ArrayAccess, Countable
      *
      * This is an offline method.
      *
-     * @param  $name
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
+     * @param  string $name
+     * @throws BadMethodCallException
      */
     #[ReturnTypeWillChange]
     public function offsetUnset($name)

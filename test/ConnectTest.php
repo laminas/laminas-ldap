@@ -1,10 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use PHPUnit\Framework\TestCase;
+
+use function array_key_exists;
+use function array_merge;
+use function getenv;
+use function rand;
+use function strpos;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -17,7 +25,17 @@ use PHPUnit\Framework\TestCase;
  */
 class ConnectTest extends TestCase
 {
-    protected $options = null;
+    /**
+     * @var array{
+     *     host: string,
+     *     username: string,
+     *     password: string,
+     *     baseDn: string,
+     *     port?: numeric-string,
+     *     useSsl?: string|bool,
+     * }
+     */
+    protected $options;
 
     protected function setUp(): void
     {
@@ -31,7 +49,7 @@ class ConnectTest extends TestCase
             'password' => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
             'baseDn'   => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
         ];
-        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') != 389) {
+        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') !== '389') {
             $this->options['port'] = getenv('TESTS_LAMINAS_LDAP_PORT');
         }
         if (getenv('TESTS_LAMINAS_LDAP_USE_SSL')) {
@@ -39,7 +57,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testEmptyOptionsConnect()
+    public function testEmptyOptionsConnect(): void
     {
         $ldap = new Ldap\Ldap([]);
         try {
@@ -50,7 +68,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testUnknownHostConnect()
+    public function testUnknownHostConnect(): void
     {
         $ldap = new Ldap\Ldap(['host' => 'bogus.example.com']);
         try {
@@ -60,9 +78,9 @@ class ConnectTest extends TestCase
         } catch (Exception\LdapException $zle) {
             $alternatives = [
                 'Can\'t contact LDAP server',
-                'Failed to connect to LDAP server'
+                'Failed to connect to LDAP server',
             ];
-            $message = $zle->getMessage();
+            $message      = $zle->getMessage();
 
             foreach ($alternatives as $alternative) {
                 if (strpos($message, $alternative) !== false) {
@@ -75,7 +93,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testPlainConnect()
+    public function testPlainConnect(): void
     {
         $ldap = new Ldap\Ldap($this->options);
         try {
@@ -89,7 +107,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testNetworkTimeoutConnect()
+    public function testNetworkTimeoutConnect(): void
     {
         $networkTimeout = 1;
         $ldap           = new Ldap\Ldap(array_merge($this->options, ['networkTimeout' => $networkTimeout]));
@@ -99,11 +117,11 @@ class ConnectTest extends TestCase
         $this->assertEquals($networkTimeout, $actual);
     }
 
-    public function testExplicitParamsConnect()
+    public function testExplicitParamsConnect(): void
     {
         $host = getenv('TESTS_LAMINAS_LDAP_HOST');
         $port = 0;
-        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') != 389) {
+        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') !== '389') {
             $port = getenv('TESTS_LAMINAS_LDAP_PORT');
         }
         $useSsl = false;
@@ -121,7 +139,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testExplicitPortConnect()
+    public function testExplicitPortConnect(): void
     {
         $port = 389;
         if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT')) {
@@ -141,7 +159,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testExplicitNetworkTimeoutConnect()
+    public function testExplicitNetworkTimeoutConnect(): void
     {
         $networkTimeout = rand(1, 100);
         if (array_key_exists('networkTimeout', $this->options)) {
@@ -155,7 +173,7 @@ class ConnectTest extends TestCase
         $this->assertEquals($networkTimeout, $actual);
     }
 
-    public function testBadPortConnect()
+    public function testBadPortConnect(): void
     {
         $options         = $this->options;
         $options['port'] = 10;
@@ -169,7 +187,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testSetOptionsConnect()
+    public function testSetOptionsConnect(): void
     {
         $ldap = new Ldap\Ldap();
         $ldap->setOptions($this->options);
@@ -181,7 +199,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testMultiConnect()
+    public function testMultiConnect(): void
     {
         $ldap = new Ldap\Ldap($this->options);
         for ($i = 0; $i < 3; $i++) {
@@ -194,7 +212,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testDisconnect()
+    public function testDisconnect(): void
     {
         $ldap = new Ldap\Ldap($this->options);
         for ($i = 0; $i < 3; $i++) {
@@ -208,7 +226,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    public function testGetErrorCode()
+    public function testGetErrorCode(): void
     {
         $ldap = new Ldap\Ldap($this->options);
         try {
@@ -228,11 +246,11 @@ class ConnectTest extends TestCase
     /**
      * @group Laminas-8274
      */
-    public function testConnectWithUri()
+    public function testConnectWithUri(): void
     {
         $host = getenv('TESTS_LAMINAS_LDAP_HOST');
         $port = 0;
-        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') != 389) {
+        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') !== '389') {
             $port = getenv('TESTS_LAMINAS_LDAP_PORT');
         }
         $useSsl = false;
@@ -245,7 +263,7 @@ class ConnectTest extends TestCase
             $host = 'ldap://' . $host;
         }
         if ($port) {
-            $host = $host . ':' . $port;
+            $host .= ':' . $port;
         }
 
         $ldap = new Ldap\Ldap();
@@ -260,12 +278,13 @@ class ConnectTest extends TestCase
 
     /**
      * @see https://github.com/zendframework/zend-ldap/issues/19
+     *
      * @dataProvider connectionWithoutPortInOptionsArrayProvider
      */
-    public function testConnectionWithoutPortInOptionsArray($host, $ssl, $connectURI)
+    public function testConnectionWithoutPortInOptionsArray(string $host, bool $ssl, string $connectUri): void
     {
         $options = [
-            'host' => $host,
+            'host'   => $host,
             'useSsl' => $ssl,
         ];
 
@@ -275,11 +294,12 @@ class ConnectTest extends TestCase
         // The purpose of the test is to see that the $connectURI string is found
         // in the exception message.
         $this->expectException(Exception\LdapException::class);
-        $this->expectExceptionMessage($connectURI);
+        $this->expectExceptionMessage($connectUri);
         $ldap->bind();
     }
 
-    public function connectionWithoutPortInOptionsArrayProvider()
+    /** @return non-empty-list<array{string, bool, string}> */
+    public function connectionWithoutPortInOptionsArrayProvider(): array
     {
         // purposely set the host to something invalid so that the test will throw an exception
         $host = 'unknown';

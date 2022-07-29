@@ -1,10 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
+use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
+
+use function date;
+use function ksort;
+use function mktime;
+use function serialize;
+use function str_replace;
+use function strtotime;
+use function unserialize;
+
+use const SORT_STRING;
 
 /**
  * @group      Laminas_Ldap
@@ -12,7 +25,8 @@ use LaminasTest\Ldap as TestLdap;
  */
 class OfflineTest extends TestLdap\AbstractTestCase
 {
-    protected function assertLocalDateTimeString($timestamp, $value)
+    /** @param mixed $value */
+    protected function assertLocalDateTimeString(int $timestamp, $value): void
     {
         $tsValue = date('YmdHisO', $timestamp);
 
@@ -26,7 +40,8 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $this->assertEquals($tsValue, $value);
     }
 
-    protected function assertUtcDateTimeString($localTimestamp, $value)
+    /** @param mixed $value */
+    protected function assertUtcDateTimeString(int $localTimestamp, $value): void
     {
         $localOffset  = date('Z', $localTimestamp);
         $utcTimestamp = $localTimestamp - $localOffset;
@@ -37,7 +52,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
     {
         $data = $this->createTestArrayData();
         $node = Ldap\Node::fromArray($data);
-        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertFalse($node->isAttached());
         $this->assertFalse($node->willBeDeleted());
         $this->assertFalse($node->willBeMoved());
@@ -49,7 +64,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $data       = $this->createTestArrayData();
         $data['dn'] = Ldap\Dn::fromString($data['dn']);
         $node       = Ldap\Node::fromArray($data);
-        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertFalse($node->isAttached());
     }
 
@@ -66,7 +81,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $data       = $this->createTestArrayData();
         $data['dn'] = 5;
         $this->expectException(LdapException::class);
-        $node       = Ldap\Node::fromArray($data);
+        $node = Ldap\Node::fromArray($data);
     }
 
     public function testCreateFromArrayMalformedDn()
@@ -74,7 +89,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $data       = $this->createTestArrayData();
         $data['dn'] = 'name1,cn=name2,dc=example,dc=org';
         $this->expectException(LdapException::class);
-        $node       = Ldap\Node::fromArray($data);
+        $node = Ldap\Node::fromArray($data);
     }
 
     public function testCreateFromArrayAndEnsureRdnValues()
@@ -82,7 +97,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $data       = $this->createTestArrayData();
         $data['dn'] = Ldap\Dn::fromString($data['dn']);
         $node       = Ldap\Node::fromArray($data);
-        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertFalse($node->isAttached());
         unset($data['dn']);
         $this->assertEquals($data, $node->getData());
@@ -143,24 +158,24 @@ class OfflineTest extends TestLdap\AbstractTestCase
     {
         $node = $this->createTestNode();
         $this->assertEquals([
-                                 'dn'          => 'cn=name,dc=example,dc=org',
-                                 'cn'          => ['name'],
-                                 'host'        => ['a', 'b', 'c'],
-                                 'empty'       => [],
-                                 'boolean'     => [true, false],
-                                 'objectclass' => ['account', 'top'],
-                            ], $node->toArray());
+            'dn'          => 'cn=name,dc=example,dc=org',
+            'cn'          => ['name'],
+            'host'        => ['a', 'b', 'c'],
+            'empty'       => [],
+            'boolean'     => [true, false],
+            'objectclass' => ['account', 'top'],
+        ], $node->toArray());
     }
 
     public function testToJson()
     {
         $node = $this->createTestNode();
-        $this->assertEquals('{"dn":"cn=name,dc=example,dc=org",' .
-                            '"boolean":[true,false],' .
-                            '"cn":["name"],' .
-                            '"empty":[],' .
-                            '"host":["a","b","c"],' .
-                            '"objectclass":["account","top"]}', $node->toJson());
+        $this->assertEquals('{"dn":"cn=name,dc=example,dc=org",'
+                            . '"boolean":[true,false],'
+                            . '"cn":["name"],'
+                            . '"empty":[],'
+                            . '"host":["a","b","c"],'
+                            . '"objectclass":["account","top"]}', $node->toJson());
     }
 
     public function testGetData()
@@ -302,14 +317,14 @@ class OfflineTest extends TestLdap\AbstractTestCase
 
     public function testIllegalAttributeAccessRdnAttributeSet()
     {
-        $node     = $this->createTestNode();
+        $node = $this->createTestNode();
         $this->expectException(LdapException::class);
         $node->cn = 'test';
     }
 
     public function testIllegalAttributeAccessDnSet()
     {
-        $node     = $this->createTestNode();
+        $node = $this->createTestNode();
         $this->expectException(LdapException::class);
         $node->dn = 'test';
     }
@@ -396,7 +411,8 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $newDnArray = [
             ['uid' => 'tester'],
             ['dc' => 'example'],
-            ['dc' => 'org']];
+            ['dc' => 'org'],
+        ];
 
         $node->setDn($newDnArray);
         $this->assertEquals($data['dn'], $node->getCurrentDn()->toString());
@@ -444,8 +460,9 @@ class OfflineTest extends TestLdap\AbstractTestCase
 
         $dn3   = Ldap\Dn::fromString('cn=name2,dc=example,dc=org');
         $node3 = Ldap\Node::fromArray([
-                                           'dn' => $dn3,
-                                           'ou' => 'Test'], false);
+            'dn' => $dn3,
+            'ou' => 'Test',
+        ], false);
         $dn3->prepend(['cn' => 'name']);
         $this->assertNotEquals($dn3->toString(), $node3->getDn()->toString());
     }
@@ -458,16 +475,16 @@ class OfflineTest extends TestLdap\AbstractTestCase
         unset($node->boolean);
         $changes = $node->getChanges();
         $this->assertEquals([
-                                 'add'     => [
-                                     'empty' => ['not Empty']
-                                 ],
-                                 'delete'  => [
-                                     'boolean' => []
-                                 ],
-                                 'replace' => [
-                                     'host' => ['d']
-                                 ]
-                            ], $changes);
+            'add'     => [
+                'empty' => ['not Empty'],
+            ],
+            'delete'  => [
+                'boolean' => [],
+            ],
+            'replace' => [
+                'host' => ['d'],
+            ],
+        ], $changes);
 
         $node       = Ldap\Node::create('uid=test,dc=example,dc=org', ['account']);
         $node->host = 'host';
@@ -476,21 +493,21 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $node['givenName'] = 'givenName';
         $node->appendToAttribute('objectClass', 'domain');
         $this->assertEquals([
-                                 'uid'         => ['test'],
-                                 'objectclass' => ['account', 'domain'],
-                                 'host'        => ['host'],
-                                 'givenname'   => ['givenName']
-                            ], $node->getChangedData());
+            'uid'         => ['test'],
+            'objectclass' => ['account', 'domain'],
+            'host'        => ['host'],
+            'givenname'   => ['givenName'],
+        ], $node->getChangedData());
         $this->assertEquals([
-                                 'add'     => [
-                                     'uid'         => ['test'],
-                                     'objectclass' => ['account', 'domain'],
-                                     'host'        => ['host'],
-                                     'givenname'   => ['givenName'],
-                                 ],
-                                 'delete'  => [],
-                                 'replace' => []
-                            ], $node->getChanges());
+            'add'     => [
+                'uid'         => ['test'],
+                'objectclass' => ['account', 'domain'],
+                'host'        => ['host'],
+                'givenname'   => ['givenName'],
+            ],
+            'delete'  => [],
+            'replace' => [],
+        ], $node->getChanges());
     }
 
     public function testHasValue()
@@ -607,8 +624,8 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $node = Ldap\Node::fromArray($data, true);
         $cn   = $node->getAttribute('cn');
         $this->assertEquals([
-                                 0 => 'funkygroup'
-                            ], $cn);
+            0 => 'funkygroup',
+        ], $cn);
     }
 
     /**
@@ -623,7 +640,7 @@ class OfflineTest extends TestLdap\AbstractTestCase
                 'top',
             ],
             'cn'          => [
-                0 => 'The Funkygroup'
+                0 => 'The Funkygroup',
             ],
             'member'      => 'uid=john-doe,ou=Users,dc=domain,dc=local',
         ];
@@ -631,8 +648,8 @@ class OfflineTest extends TestLdap\AbstractTestCase
         $node = Ldap\Node::fromArray($data, true);
         $cn   = $node->getAttribute('cn');
         $this->assertEquals([
-                                 0 => 'The Funkygroup',
-                                 1 => 'funkygroup',
-                            ], $cn);
+            0 => 'The Funkygroup',
+            1 => 'funkygroup',
+        ], $cn);
     }
 }

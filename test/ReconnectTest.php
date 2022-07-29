@@ -1,12 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\Exception\LdapException;
 
+use function array_merge;
+use function file_get_contents;
+use function function_exists;
+use function getenv;
+use function sprintf;
+
 class ReconnectTest extends AbstractOnlineTestCase
 {
-    protected static function getStandardOptions()
+    /** @return non-empty-array<string, string> */
+    protected static function getStandardOptions(): array
     {
         // Options array setup copied verbatim from
         // AbstractOnlineTestCase::setUpBeforeClass(), where it is unfortunately
@@ -17,7 +26,7 @@ class ReconnectTest extends AbstractOnlineTestCase
             'password' => getenv('TESTS_LAMINAS_LDAP_PASSWORD'),
             'baseDn'   => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
         ];
-        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') != 389) {
+        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT') !== '389') {
             $options['port'] = getenv('TESTS_LAMINAS_LDAP_PORT');
         }
         if (getenv('TESTS_LAMINAS_LDAP_USE_START_TLS')) {
@@ -43,6 +52,8 @@ class ReconnectTest extends AbstractOnlineTestCase
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {
             $this->markTestSkipped("Laminas_Ldap online tests are not enabled");
         }
@@ -55,9 +66,11 @@ class ReconnectTest extends AbstractOnlineTestCase
         // Make sure we're using a non-expired connection with known settings
         // for each test.
         $this->getLDAP()->disconnect();
+
+        parent::tearDown();
     }
 
-    protected function triggerReconnection()
+    protected function triggerReconnection(): void
     {
         $entry = $this->getLDAP()->getEntry(
             'uid=' . getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME') . ',' . getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
@@ -89,7 +102,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         );
     }
 
-    protected function causeLdapConnectionFailure()
+    protected function causeLdapConnectionFailure(): void
     {
         $url = sprintf(
             'http://%s:%s/drop_3890.php',
@@ -99,7 +112,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         file_get_contents($url);
     }
 
-    public function testNoReconnectWhenNotRequested()
+    public function testNoReconnectWhenNotRequested(): void
     {
         $this->getLDAP()->setOptions(
             array_merge(
@@ -129,7 +142,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         );
     }
 
-    public function testReconnectWhenRequested()
+    public function testReconnectWhenRequested(): void
     {
         $this->getLDAP()->setOptions(
             array_merge(
@@ -142,14 +155,14 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->triggerReconnection();
     }
 
-    public function testMultipleReconnectAttempts()
+    public function testMultipleReconnectAttempts(): void
     {
         $this->getLDAP()->setOptions(
             array_merge(
                 $this->getLDAP()->getOptions(),
                 [
                     'reconnectAttempts' => 2,
-                    'port'              => 3899
+                    'port'              => 3899,
                 ]
             )
         );
@@ -165,7 +178,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testConnectParameterPreservation()
+    public function testConnectParameterPreservation(): void
     {
         $options = $this->getLDAP()->getOptions();
         unset($options['host']);
@@ -181,10 +194,10 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->triggerReconnection();
     }
 
-    public function testParametersOverridePropertiesDuringReconnect()
+    public function testParametersOverridePropertiesDuringReconnect(): void
     {
-        $options = $this->getLDAP()->getOptions();
-        $options['port'] += 9;
+        $options                      = $this->getLDAP()->getOptions();
+        $options['port']             += 9;
         $options['reconnectAttempts'] = 1;
         $this->getLDAP()->setOptions($options);
 
@@ -205,19 +218,18 @@ class ReconnectTest extends AbstractOnlineTestCase
      * $this->triggerReconnection();
      * }
      */
-
-    public function testAddReconnect()
+    public function testAddReconnect(): void
     {
-        $options = $this->getLDAP()->getOptions();
+        $options                      = $this->getLDAP()->getOptions();
         $options['reconnectAttempts'] = 1;
         $this->getLDAP()->setOptions($options);
 
         $this->getLDAP()->bind();
 
-        $dn = $this->createDn('ou=TestCreatedOnReconnect,');
+        $dn   = $this->createDn('ou=TestCreatedOnReconnect,');
         $data = [
             'ou'          => 'TestCreatedOnReconnect',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
 
         if ($this->getLDAP()->exists($dn)) {
@@ -235,19 +247,19 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $this->getLDAP()->count('ou=TestCreatedOnReconnect'));
     }
 
-    public function testUpdateReconnect()
+    public function testUpdateReconnect(): void
     {
-        $options = $this->getLDAP()->getOptions();
+        $options                      = $this->getLDAP()->getOptions();
         $options['reconnectAttempts'] = 1;
         $this->getLDAP()->setOptions($options);
 
         $this->getLDAP()->bind();
 
-        $dn = $this->createDn('ou=TestModifiedOnReconnect,');
+        $dn   = $this->createDn('ou=TestModifiedOnReconnect,');
         $data = [
             'ou'          => 'TestModifiedOnReconnect',
             'l'           => 'mylocation1',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
 
         if ($this->getLDAP()->exists($dn)) {
@@ -267,18 +279,18 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->assertEquals('mylocation2', $entry['l'][0]);
     }
 
-    public function testDeleteReconnect()
+    public function testDeleteReconnect(): void
     {
-        $options = $this->getLDAP()->getOptions();
+        $options                      = $this->getLDAP()->getOptions();
         $options['reconnectAttempts'] = 1;
         $this->getLDAP()->setOptions($options);
 
         $this->getLDAP()->bind();
 
-        $dn = $this->createDn('ou=TestDeletedOnReconnect,');
+        $dn   = $this->createDn('ou=TestDeletedOnReconnect,');
         $data = [
             'ou'          => 'TestDeletedOnReconnect',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
 
         if (! $this->getLDAP()->exists($dn)) {
@@ -292,22 +304,22 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->assertEquals(1, $this->getLDAP()->getReconnectsAttempted());
     }
 
-    public function testRenameReconnect()
+    public function testRenameReconnect(): void
     {
         if (! function_exists('ldap_rename')) {
             $this->markTestSkipped("Test would provide no useful coverage
             because the php installation lacks ldap_rename().");
         }
-        $options = $this->getLDAP()->getOptions();
+        $options                      = $this->getLDAP()->getOptions();
         $options['reconnectAttempts'] = 1;
         $this->getLDAP()->setOptions($options);
 
         $this->getLDAP()->bind();
 
-        $dn = $this->createDn('ou=TestRenameOnReconnect,');
+        $dn   = $this->createDn('ou=TestRenameOnReconnect,');
         $data = [
             'ou'          => 'TestRenameOnReconnect',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
 
         if (! $this->getLDAP()->exists($dn)) {
@@ -317,16 +329,16 @@ class ReconnectTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $this->getLDAP()->getReconnectsAttempted());
         $this->causeLdapConnectionFailure();
 
-        $new_dn = $this->createDn('ou=TestRenamedOnReconnect');
-        $this->getLDAP()->rename($dn, $new_dn);
+        $newDn = $this->createDn('ou=TestRenamedOnReconnect');
+        $this->getLDAP()->rename($dn, $newDn);
         $this->assertEquals(1, $this->getLDAP()->getReconnectsAttempted());
 
-        $this->getLDAP()->delete($new_dn, true);
+        $this->getLDAP()->delete($newDn, true);
     }
 
-    public function testErroneousModificationDoesNotTriggerReconnect()
+    public function testErroneousModificationDoesNotTriggerReconnect(): void
     {
-        $options = $this->getLDAP()->getOptions();
+        $options                      = $this->getLDAP()->getOptions();
         $options['reconnectAttempts'] = 1;
         $this->getLDAP()->setOptions($options);
 
@@ -335,7 +347,7 @@ class ReconnectTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=DoesNotExistReconnect,');
         $data = [
             'ou'          => 'DoesNotExistReconnect',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
 
         try {

@@ -4,6 +4,13 @@ namespace Laminas\Ldap\Node\Schema\ObjectClass;
 
 use Laminas\Ldap\Node\Schema;
 
+use function array_diff;
+use function array_merge;
+use function array_unique;
+use function sort;
+
+use const SORT_STRING;
+
 /**
  * Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap provides access to the objectClass
  * schema information on an OpenLDAP server.
@@ -15,14 +22,14 @@ class OpenLdap extends Schema\AbstractItem implements ObjectClassInterface
      *
      * @var array
      */
-    protected $inheritedMust = null;
+    protected $inheritedMust;
 
     /**
      * All inherited "MAY" attributes
      *
      * @var array
      */
-    protected $inheritedMay = null;
+    protected $inheritedMay;
 
     /**
      * Gets the objectClass name

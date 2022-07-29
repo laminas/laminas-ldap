@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Filter;
 use Laminas\Ldap\Filter\Exception\FilterException;
 use PHPUnit\Framework\TestCase;
+
+use function chr;
 
 /**
  * @group      Laminas_Ldap
@@ -99,7 +103,7 @@ class FilterTest extends TestCase
     {
         $data = ['a', 'b', 5];
         $this->expectException(FilterException::class);
-        $f    = new Filter\AndFilter($data);
+        $f = new Filter\AndFilter($data);
     }
 
     public function testGroupingFilter()

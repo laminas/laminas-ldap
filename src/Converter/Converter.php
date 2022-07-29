@@ -4,23 +4,52 @@ namespace Laminas\Ldap\Converter;
 
 use DateTime;
 use DateTimeZone;
+use Exception as PHPException;
 use Laminas\Ldap\ErrorHandler;
+
+use function chr;
+use function date_default_timezone_get;
+use function dechex;
+use function get_resource_type;
+use function hexdec;
+use function is_array;
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_numeric;
+use function is_object;
+use function is_resource;
+use function is_scalar;
+use function is_string;
+use function ord;
+use function preg_match;
+use function preg_replace_callback;
+use function serialize;
+use function str_pad;
+use function str_replace;
+use function stream_get_contents;
+use function strlen;
+use function strtolower;
+use function substr;
+use function unserialize;
+
+use const E_NOTICE;
+use const STR_PAD_LEFT;
 
 /**
  * Laminas\Ldap\Converter is a collection of useful LDAP related conversion functions.
  */
 class Converter
 {
-    const STANDARD         = 0;
-    const BOOLEAN          = 1;
-    const GENERALIZED_TIME = 2;
+    public const STANDARD         = 0;
+    public const BOOLEAN          = 1;
+    public const GENERALIZED_TIME = 2;
 
     /**
      * Converts all ASCII chars < 32 to "\HEX"
      *
-     * @see    Net_LDAP2_Util::asc2hex32() from Benedikt Hallinger <beni@php.net>
      * @link   http://pear.php.net/package/Net_LDAP2
-     * @author Benedikt Hallinger <beni@php.net>
+     * @see    Net_LDAP2_Util::asc2hex32() from Benedikt Hallinger <beni@php.net>
      *
      * @param string $string String to convert
      * @return string
@@ -31,7 +60,7 @@ class Converter
             $char = substr($string, $i, 1);
             if (ord($char) < 32) {
                 $hex = dechex(ord($char));
-                if (strlen($hex) == 1) {
+                if (strlen($hex) === 1) {
                     $hex = '0' . $hex;
                 }
                 $string = str_replace($char, '\\' . $hex, $string);
@@ -43,10 +72,9 @@ class Converter
     /**
      * Converts all Hex expressions ("\HEX") to their original ASCII characters
      *
+     * @link   http://pear.php.net/package/Net_LDAP2
      * @see    Net_LDAP2_Util::hex2asc() from Benedikt Hallinger <beni@php.net>,
      *         heavily based on work from DavidSmith@byu.net
-     * @link   http://pear.php.net/package/Net_LDAP2
-     * @author Benedikt Hallinger <beni@php.net>, heavily based on work from DavidSmith@byu.net
      *
      * @param string $string String to convert
      * @return string
@@ -64,7 +92,6 @@ class Converter
      *
      * By setting the <var>$type</var>-parameter the conversion of a certain
      * type can be forced
-     *
      *
      * @param mixed $value The value to convert
      * @param int   $type  The conversion type to use
@@ -98,9 +125,9 @@ class Converter
                         return stream_get_contents($value);
                     }
 
-                    return;
+                    return null;
             }
-        } catch (\Exception $e) {
+        } catch (PHPException $e) {
             throw new Exception\ConverterException($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -118,7 +145,7 @@ class Converter
      */
     public static function toLdapDateTime($date, $asUtc = true)
     {
-        if (! ($date instanceof DateTime)) {
+        if (! $date instanceof DateTime) {
             if (is_int($date)) {
                 $date = new DateTime('@' . $date);
                 $date->setTimezone(new DateTimeZone(date_default_timezone_get()));
@@ -181,6 +208,7 @@ class Converter
      * @see Converter::STANDARD
      * @see Converter::BOOLEAN
      * @see Converter::GENERALIZED_TIME
+     *
      * @param string  $value         The value to convert
      * @param int     $type          The conversion type to use
      * @param  bool $dateTimeAsUtc Return DateTime values in UTC timezone
@@ -222,7 +250,7 @@ class Converter
      * @param string  $date  The generalized-Time
      * @param  bool $asUtc Return the DateTime with UTC timezone
      * @return DateTime
-     * @throws Exception\InvalidArgumentException if a non-parseable-format is given
+     * @throws Exception\InvalidArgumentException If a non-parseable-format is given.
      */
     public static function fromLdapDateTime($date, $asUtc = true)
     {
@@ -245,7 +273,7 @@ class Converter
             'second'        => 0,
             'offdir'        => '+',
             'offsethours'   => 0,
-            'offsetminutes' => 0
+            'offsetminutes' => 0,
         ];
 
         $length = strlen($date);
@@ -300,7 +328,7 @@ class Converter
         $off         = [];
         if (preg_match($offsetRegEx, $date, $off)) {
             $offset = $off[1];
-            if ($offset == '+' || $offset == '-') {
+            if ($offset === '+' || $offset === '-') {
                 $time['offdir'] = $offset;
                 // we have an offset, so lets calculate it.
                 if (isset($off[2])) {
@@ -334,7 +362,7 @@ class Converter
                       . str_pad($time['offsetminutes'], 2, '0', STR_PAD_LEFT);
         try {
             $date = new DateTime($timestring);
-        } catch (\Exception $e) {
+        } catch (PHPException $e) {
             throw new Exception\InvalidArgumentException(
                 'Invalid date format found',
                 0,
@@ -378,7 +406,7 @@ class Converter
         $v = unserialize($value);
         ErrorHandler::stop();
 
-        if (false === $v && $value != 'b:0;') {
+        if (false === $v && $value !== 'b:0;') {
             throw new Exception\UnexpectedValueException('The given value could not be unserialized');
         }
         return $v;

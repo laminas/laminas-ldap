@@ -1,12 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Collection;
-use Laminas\Ldap\Exception;
+use Laminas\Ldap\Collection\DefaultIterator;
 use Laminas\Ldap\Exception\LdapException;
+use LaminasTest\Ldap\TestAsset\CollectionClassNotSubclassingLaminasLDAPCollection;
 use LaminasTest\Ldap\TestAsset\CustomNaming;
+
+use function getenv;
+use function strrev;
+use function strtoupper;
 
 /**
  * @group      Laminas_Ldap
@@ -44,7 +51,7 @@ class SearchTest extends AbstractOnlineTestCase
 
     public function testGetSingleIllegalEntryWithException()
     {
-        $dn    = $this->createDn('ou=Test99,');
+        $dn = $this->createDn('ou=Test99,');
         $this->expectException(LdapException::class);
         $entry = $this->getLDAP()->getEntry($dn, [], true);
     }
@@ -122,7 +129,7 @@ class SearchTest extends AbstractOnlineTestCase
 
     public function testIllegalSearch()
     {
-        $dn    = $this->createDn('ou=Node2,');
+        $dn = $this->createDn('ou=Node2,');
         $this->expectException(LdapException::class);
         $items = $this->getLDAP()->search('(objectClass=account)', $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
     }
@@ -281,7 +288,7 @@ class SearchTest extends AbstractOnlineTestCase
             getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             Ldap\Ldap::SEARCH_SCOPE_SUB
         );
-        foreach ($items as $key => $item) {
+        foreach ($items as $key => $item) { // phpcs:ignore
             // do nothing - just iterate
         }
         $items->next();
@@ -317,7 +324,7 @@ class SearchTest extends AbstractOnlineTestCase
                 Ldap\Ldap::SEARCH_SCOPE_SUB,
                 [],
                 null,
-                'LaminasTest\Ldap\TestAsset\CollectionClassNotSubclassingLaminasLDAPCollection'
+                CollectionClassNotSubclassingLaminasLDAPCollection::class
             );
             $this->fail('Expected exception not thrown');
         } catch (LdapException $zle) {
@@ -337,10 +344,10 @@ class SearchTest extends AbstractOnlineTestCase
         $items = $this
             ->getLDAP()
             ->search([
-                          'filter' => '(objectClass=organizationalUnit)',
-                          'baseDn' => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
-                          'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB
-                     ]);
+                'filter' => '(objectClass=organizationalUnit)',
+                'baseDn' => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
+                'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB,
+            ]);
         $this->assertEquals(9, $items->count());
     }
 
@@ -352,10 +359,10 @@ class SearchTest extends AbstractOnlineTestCase
         $items = $this
             ->getLDAP()
             ->searchEntries([
-                                 'filter' => '(objectClass=organizationalUnit)',
-                                 'baseDn' => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
-                                 'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB
-                            ]);
+                'filter' => '(objectClass=organizationalUnit)',
+                'baseDn' => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
+                'scope'  => Ldap\Ldap::SEARCH_SCOPE_SUB,
+            ]);
         $this->assertCount(9, $items);
     }
 
@@ -387,12 +394,12 @@ class SearchTest extends AbstractOnlineTestCase
         $items   = $this
             ->getLDAP()
             ->searchEntries([
-                                 'filter'      => '(l=*)',
-                                 'baseDn'      => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
-                                 'scope'       => Ldap\Ldap::SEARCH_SCOPE_SUB,
-                                 'sort'        => 'l',
-                                 'reverseSort' => true
-                            ]);
+                'filter'      => '(l=*)',
+                'baseDn'      => getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
+                'scope'       => Ldap\Ldap::SEARCH_SCOPE_SUB,
+                'sort'        => 'l',
+                'reverseSort' => true,
+            ]);
         foreach ($items as $key => $item) {
             $this->assertEquals($lSorted[$key], $item['l'][0]);
         }
@@ -465,7 +472,7 @@ class SearchTest extends AbstractOnlineTestCase
             getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'),
             Ldap\Ldap::SEARCH_SCOPE_SUB
         );
-        $this->assertInstanceOf('\Laminas\Ldap\Collection\DefaultIterator', $items->getInnerIterator());
+        $this->assertInstanceOf(DefaultIterator::class, $items->getInnerIterator());
     }
 
     /**
@@ -627,7 +634,7 @@ class SearchTest extends AbstractOnlineTestCase
     }
 }
 
-function customNaming($attrib)
+function customNaming(string $attrib): string
 {
     return strtoupper(strrev($attrib));
 }

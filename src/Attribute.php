@@ -3,24 +3,47 @@
 namespace Laminas\Ldap;
 
 use DateTime;
+use Traversable;
+
+use function array_keys;
+use function array_merge;
+use function array_unique;
+use function array_values;
+use function base64_encode;
+use function count;
+use function function_exists;
+use function iconv;
+use function in_array;
+use function is_array;
+use function is_int;
+use function is_scalar;
+use function is_string;
+use function mb_convert_encoding;
+use function md5;
+use function mt_rand;
+use function sha1;
+use function strlen;
+use function strtolower;
+use function substr;
+use function uniqid;
 
 /**
  * Laminas\Ldap\Attribute is a collection of LDAP attribute related functions.
  */
 class Attribute
 {
-    const PASSWORD_HASH_MD5   = 'md5';
-    const PASSWORD_HASH_SMD5  = 'smd5';
-    const PASSWORD_HASH_SHA   = 'sha';
-    const PASSWORD_HASH_SSHA  = 'ssha';
-    const PASSWORD_UNICODEPWD = 'unicodePwd';
+    public const PASSWORD_HASH_MD5   = 'md5';
+    public const PASSWORD_HASH_SMD5  = 'smd5';
+    public const PASSWORD_HASH_SHA   = 'sha';
+    public const PASSWORD_HASH_SSHA  = 'ssha';
+    public const PASSWORD_UNICODEPWD = 'unicodePwd';
 
     /**
      * Sets a LDAP attribute.
      *
      * @param  array                     $data
      * @param  string                    $attribName
-     * @param  string|array|\Traversable $value
+     * @param string|array|Traversable $value
      * @param  bool                   $append
      * @return void
      */
@@ -28,7 +51,7 @@ class Attribute
     {
         $attribName = strtolower($attribName);
         $valArray   = [];
-        if (is_array($value) || ($value instanceof \Traversable)) {
+        if (is_array($value) || $value instanceof Traversable) {
             foreach ($value as $v) {
                 $v = self::valueToLdap($v);
                 if ($v !== null) {
@@ -82,7 +105,7 @@ class Attribute
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -277,7 +300,7 @@ class Attribute
      *
      * @param  array                      $data
      * @param  string                     $attribName
-     * @param  int|array|\Traversable $value
+     * @param int|array|Traversable $value
      * @param  bool                    $utc
      * @param  bool                    $append
      */
@@ -289,7 +312,7 @@ class Attribute
         $append = false
     ) {
         $convertedValues = [];
-        if (is_array($value) || ($value instanceof \Traversable)) {
+        if (is_array($value) || $value instanceof Traversable) {
             foreach ($value as $v) {
                 $v = self::valueToLdapDateTime($v, $utc);
                 if ($v !== null) {
@@ -312,11 +335,11 @@ class Attribute
      */
     private static function valueToLdapDateTime($value, $utc)
     {
-        if (is_int($value)) {
-            return Converter\Converter::toLdapDateTime($value, $utc);
+        if (! is_int($value)) {
+            return null;
         }
 
-        return;
+        return Converter\Converter::toLdapDateTime($value, $utc);
     }
 
     /**
@@ -355,14 +378,16 @@ class Attribute
     {
         if ($value instanceof DateTime) {
             return $value->format('U');
-        } elseif (is_string($value)) {
-            try {
-                return Converter\Converter::fromLdapDateTime($value, false)->format('U');
-            } catch (Converter\Exception\InvalidArgumentException $e) {
-                return;
-            }
         }
 
-        return;
+        if (! is_string($value)) {
+            return null;
+        }
+
+        try {
+            return Converter\Converter::fromLdapDateTime($value, false)->format('U');
+        } catch (Converter\Exception\InvalidArgumentException $e) {
+            return null;
+        }
     }
 }

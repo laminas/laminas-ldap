@@ -1,27 +1,37 @@
 <?php
+
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\TestAsset;
+
+use phpmock\Mock;
+
+use function fopen;
 
 class BuiltinFunctionMocks
 {
-    public static $ldap_connect_mock = null;
-    public static $ldap_bind_mock = null;
-    public static $ldap_set_option_mock = null;
+    /** @var Mock|null */
+    public static $ldap_connect_mock;
+    /** @var Mock|null */
+    public static $ldap_bind_mock;
+    /** @var Mock|null */
+    public static $ldap_set_option_mock;
 
     public static function createMocks()
     {
-        $ldap_connect_mock = new \phpmock\Mock(
+        $ldap_connect_mock = new Mock(
             'Laminas\\Ldap',
             'ldap_connect',
             function () {
-                static $a_resource = null;
-                if ($a_resource == null) {
-                    $a_resource = fopen(__FILE__, 'r');
+                static $resource = null;
+                if ($resource === null) {
+                    $resource = fopen(__FILE__, 'r');
                 }
-                return $a_resource;
+                return $resource;
             }
         );
 
-        $ldap_bind_mock = new \phpmock\Mock(
+        $ldap_bind_mock = new Mock(
             'Laminas\\Ldap',
             'ldap_bind',
             function () {
@@ -29,7 +39,7 @@ class BuiltinFunctionMocks
             }
         );
 
-        $ldap_set_option_mock = new \phpmock\Mock(
+        $ldap_set_option_mock = new Mock(
             'Laminas\\Ldap',
             'ldap_set_option',
             function () {
@@ -41,8 +51,8 @@ class BuiltinFunctionMocks
         $ldap_bind_mock->define();
         $ldap_set_option_mock->define();
 
-        static::$ldap_connect_mock = $ldap_connect_mock;
-        static::$ldap_bind_mock = $ldap_bind_mock;
+        static::$ldap_connect_mock    = $ldap_connect_mock;
+        static::$ldap_bind_mock       = $ldap_bind_mock;
         static::$ldap_set_option_mock = $ldap_set_option_mock;
     }
 }

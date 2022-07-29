@@ -1,23 +1,33 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
+use Closure;
 use Laminas\Ldap\ErrorHandler;
 use PHPUnit\Framework\TestCase;
+
+use function restore_error_handler;
+use function set_error_handler;
 
 /**
  * @group      Laminas_Ldap
  */
 class ErrorHandlerTest extends TestCase
 {
+    /** @var callable */
     protected $dummyErrorHandler;
 
     protected function setUp(): void
     {
+        parent::setUp();
+
         $this->dummyErrorHandler = function ($errno, $error) {
         };
     }
-    public function testErrorHandlerSettingWorks()
+
+    public function testErrorHandlerSettingWorks(): void
     {
         $errorHandler = new ErrorHandler();
 
@@ -27,13 +37,13 @@ class ErrorHandlerTest extends TestCase
         $errorHandler->startErrorHandling();
         $returnValue2 = set_error_handler($this->dummyErrorHandler);
         $this->assertIsObject($returnValue2);
-        $this->assertInstanceOf(\Closure::class, $returnValue2);
+        $this->assertInstanceOf(Closure::class, $returnValue2);
 
         restore_error_handler();
         restore_error_handler();
     }
 
-    public function testErrorHandlerRemovalWorks()
+    public function testErrorHandlerRemovalWorks(): void
     {
         $errorHandler = new ErrorHandler();
 

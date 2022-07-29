@@ -9,15 +9,14 @@ use Laminas\Ldap;
  */
 class Schema extends AbstractNode
 {
-    const OBJECTCLASS_TYPE_UNKNOWN    = 0;
-    const OBJECTCLASS_TYPE_STRUCTURAL = 1;
-    const OBJECTCLASS_TYPE_ABSTRACT   = 3;
-    const OBJECTCLASS_TYPE_AUXILIARY  = 4;
+    public const OBJECTCLASS_TYPE_UNKNOWN    = 0;
+    public const OBJECTCLASS_TYPE_STRUCTURAL = 1;
+    public const OBJECTCLASS_TYPE_ABSTRACT   = 3;
+    public const OBJECTCLASS_TYPE_AUXILIARY  = 4;
 
     /**
      * Factory method to create the Schema node.
      *
-     * @param  \Laminas\Ldap\Ldap $ldap
      * @return Schema
      */
     public static function create(Ldap\Ldap $ldap)
@@ -36,13 +35,9 @@ class Schema extends AbstractNode
     }
 
     /**
-     * Constructor.
-     *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param  \Laminas\Ldap\Dn   $dn
      * @param  array           $data
-     * @param  \Laminas\Ldap\Ldap $ldap
      */
     protected function __construct(Ldap\Dn $dn, array $data, Ldap\Ldap $ldap)
     {
@@ -53,8 +48,6 @@ class Schema extends AbstractNode
     /**
      * Parses the schema
      *
-     * @param  \Laminas\Ldap\Dn   $dn
-     * @param  \Laminas\Ldap\Ldap $ldap
      * @return Schema Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)

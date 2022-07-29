@@ -16,8 +16,6 @@ class NotFilter extends AbstractFilter
 
     /**
      * Creates a Laminas\Ldap\Filter\NotFilter.
-     *
-     * @param AbstractFilter $filter
      */
     public function __construct(AbstractFilter $filter)
     {

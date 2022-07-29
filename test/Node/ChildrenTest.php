@@ -1,8 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
+use Laminas\Ldap\Node;
+use Laminas\Ldap\Node\ChildrenIterator;
 use LaminasTest\Ldap as TestLdap;
+
+use function getenv;
+use function serialize;
+use function unserialize;
 
 /**
  * @group      Laminas_Ldap
@@ -26,9 +34,9 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
     {
         $node     = $this->getLDAP()->getBaseNode();
         $children = $node->getChildren();
-        $this->assertInstanceOf('Laminas\Ldap\Node\ChildrenIterator', $children);
+        $this->assertInstanceOf(ChildrenIterator::class, $children);
         $this->assertCount(6, $children);
-        $this->assertInstanceOf('Laminas\Ldap\Node', $children['ou=Node']);
+        $this->assertInstanceOf(Node::class, $children['ou=Node']);
     }
 
     public function testGetChildrenOnDetachedNode()
@@ -36,16 +44,16 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $node = $this->getLDAP()->getBaseNode();
         $node->detachLDAP();
         $children = $node->getChildren();
-        $this->assertInstanceOf('Laminas\Ldap\Node\ChildrenIterator', $children);
+        $this->assertInstanceOf(ChildrenIterator::class, $children);
         $this->assertCount(0, $children);
 
         $node->attachLDAP($this->getLDAP());
         $node->reload();
         $children = $node->getChildren();
 
-        $this->assertInstanceOf('Laminas\Ldap\Node\ChildrenIterator', $children);
+        $this->assertInstanceOf(ChildrenIterator::class, $children);
         $this->assertCount(6, $children);
-        $this->assertInstanceOf('Laminas\Ldap\Node', $children['ou=Node']);
+        $this->assertInstanceOf(Node::class, $children['ou=Node']);
     }
 
     public function testHasChildrenOnAttachedNode()

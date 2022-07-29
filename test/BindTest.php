@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
 use PHPUnit\Framework\TestCase;
+
+use function getenv;
+use function putenv;
+use function strstr;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -18,9 +24,25 @@ use PHPUnit\Framework\TestCase;
  */
 class BindTest extends TestCase
 {
-    protected $options = null;
+    /**
+     * @var array{
+     *     host: string,
+     *     username: string,
+     *     password: string,
+     *     baseDn: string,
+     *     port?: numeric-string,
+     *     useStartTls?: bool|string,
+     *     bindRequiresDn?: bool|string,
+     *     accountFilterFormat?: string,
+     *     accountDomainNameShort?: string,
+     * }
+     */
+    protected $options;
+    /** @var string */
     protected $altPrincipalName;
+    /** @var string */
     protected $altUsername;
+    /** @var bool|string */
     protected $bindRequiresDn = false;
 
     protected function setUp(): void
@@ -208,7 +230,8 @@ class BindTest extends TestCase
         try {
             $ldap->bind($this->altUsername, '');
         } catch (Exception\LdapException $zle) {
-            if ($zle->getMessage() ===
+            if (
+                $zle->getMessage() ===
                 'Empty password not allowed - see allowEmptyPassword option.'
             ) {
                 $this->fail('Exception for empty password');
@@ -269,10 +292,10 @@ class BindTest extends TestCase
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_USERNAME'), $ldap->getBoundUser());
     }
 
-    protected function getSslLdap($options)
+    protected function getSslLdap(array $options): Ldap\Ldap
     {
         $options['useSsl'] = true;
-        $options['port'] = 6360;
+        $options['port']   = 6360;
 
         return new Ldap\Ldap($options);
     }
@@ -283,11 +306,11 @@ class BindTest extends TestCase
         // The certificate seems not to be "good enough" for SASL-bind
         putenv('LDAPTLS_REQCERT=never');
 
-        $options = $this->options;
+        $options             = $this->options;
         $options['saslOpts'] = [
             'sasl_mech' => 'EXTERNAL',
         ];
-        $ldap = $this->getSslLdap($options);
+        $ldap                = $this->getSslLdap($options);
         $ldap->bind();
 
         $this->assertEquals(
@@ -310,7 +333,7 @@ class BindTest extends TestCase
         $options['saslOpts'] = [
             'sasl_mech' => 'EXTERNAL',
         ];
-        $ldap = $this->getSslLdap($options);
+        $ldap                = $this->getSslLdap($options);
         $ldap->bind();
         // The "pass" expectation here is just that no exception was thrown.
         // Getting to this point in the code is the "definition of pass".

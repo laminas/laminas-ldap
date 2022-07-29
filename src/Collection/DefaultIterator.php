@@ -7,7 +7,26 @@ use Iterator;
 use Laminas\Ldap;
 use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Handler;
+
+use function array_change_key_case;
+use function call_user_func;
+use function current;
+use function function_exists;
+use function is_array;
+use function is_callable;
+use function is_string;
+use function ksort;
+use function method_exists;
+use function next;
+use function reset;
+use function strtolower;
+use function strtoupper;
+use function usort;
+
+use const CASE_LOWER;
+use const SORT_LOCALE_STRING;
 
 /**
  * Laminas\Ldap\Collection\DefaultIterator is the default collection iterator implementation
@@ -15,30 +34,30 @@ use Laminas\Ldap\Handler;
  */
 class DefaultIterator implements Iterator, Countable
 {
-    const ATTRIBUTE_TO_LOWER = 1;
-    const ATTRIBUTE_TO_UPPER = 2;
-    const ATTRIBUTE_NATIVE   = 3;
+    public const ATTRIBUTE_TO_LOWER = 1;
+    public const ATTRIBUTE_TO_UPPER = 2;
+    public const ATTRIBUTE_NATIVE   = 3;
 
     /**
      * LDAP Connection
      *
      * @var \Laminas\Ldap\Ldap
      */
-    protected $ldap = null;
+    protected $ldap;
 
     /**
      * Result identifier resource
      *
      * @var resource
      */
-    protected $resultId = null;
+    protected $resultId;
 
     /**
      * Current result entry identifier
      *
      * @var resource
      */
-    protected $current = null;
+    protected $current;
 
     /**
      * Number of items in query result
@@ -76,18 +95,14 @@ class DefaultIterator implements Iterator, Countable
     protected $sortFunction;
 
     /**
-     * Constructor.
-     *
-     * @param  \Laminas\Ldap\Ldap $ldap
      * @param  resource $resultId
-     * @throws \Laminas\Ldap\Exception\LdapException if no entries was found.
-     * @return DefaultIterator
+     * @throws LdapException If no entries was found.
      */
     public function __construct(Ldap\Ldap $ldap, $resultId)
     {
         $this->setSortFunction('strnatcasecmp');
-        $this->ldap      = $ldap;
-        $this->resultId  = $resultId;
+        $this->ldap     = $ldap;
+        $this->resultId = $resultId;
 
         $resource = $ldap->getResource();
         ErrorHandler::start();
@@ -104,7 +119,7 @@ class DefaultIterator implements Iterator, Countable
 
         while (false !== $identifier) {
             $this->entries[] = [
-                'resource' => $identifier,
+                'resource'  => $identifier,
                 'sortValue' => '',
             ];
 
@@ -130,7 +145,7 @@ class DefaultIterator implements Iterator, Countable
         $isClosed = false;
         if (Handler::isResultHandle($this->resultId)) {
             ErrorHandler::start();
-            $isClosed       = ldap_free_result($this->resultId);
+            $isClosed = ldap_free_result($this->resultId);
             ErrorHandler::stop();
 
             $this->resultId = null;
@@ -167,7 +182,8 @@ class DefaultIterator implements Iterator, Countable
         if (is_callable($attributeNameTreatment)) {
             if (is_string($attributeNameTreatment) && ! function_exists($attributeNameTreatment)) {
                 $this->attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
-            } elseif (is_array($attributeNameTreatment)
+            } elseif (
+                is_array($attributeNameTreatment)
                 && ! method_exists($attributeNameTreatment[0], $attributeNameTreatment[1])
             ) {
                 $this->attributeNameTreatment = self::ATTRIBUTE_TO_LOWER;
@@ -207,7 +223,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return $this->itemCount;
@@ -218,9 +234,9 @@ class DefaultIterator implements Iterator, Countable
      * Implements Iterator
      *
      * @return array|null
-     * @throws \Laminas\Ldap\Exception\LdapException
+     * @throws LdapException
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         if (! Handler::isResultEntryHandle($this->current)) {
@@ -230,7 +246,7 @@ class DefaultIterator implements Iterator, Countable
             return;
         }
 
-        $entry         = ['dn' => $this->key()];
+        $entry = ['dn' => $this->key()];
 
         $resource = $this->ldap->getResource();
         ErrorHandler::start();
@@ -278,10 +294,10 @@ class DefaultIterator implements Iterator, Countable
      * Return the result item key
      * Implements Iterator
      *
-     * @throws \Laminas\Ldap\Exception\LdapException
+     * @throws LdapException
      * @return string|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         if (! Handler::isResultEntryHandle($this->current)) {
@@ -310,12 +326,12 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         next($this->entries);
-        $nextEntry = current($this->entries);
-        $this->current = isset($nextEntry['resource']) ? $nextEntry['resource'] : null;
+        $nextEntry     = current($this->entries);
+        $this->current = $nextEntry['resource'] ?? null;
     }
 
     /**
@@ -325,12 +341,12 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->entries);
-        $nextEntry = current($this->entries);
-        $this->current = isset($nextEntry['resource']) ? $nextEntry['resource'] : null;
+        $nextEntry     = current($this->entries);
+        $this->current = $nextEntry['resource'] ?? null;
     }
 
     /**
@@ -340,7 +356,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         return Handler::isResultEntryHandle($this->current);
@@ -352,7 +368,6 @@ class DefaultIterator implements Iterator, Countable
      * The callable has to accept two parameters that will be compared.
      *
      * @param callable $sortFunction The algorithm to be used for sorting
-     *
      * @return DefaultIterator Provides a fluent interface
      */
     public function setSortFunction(callable $sortFunction)
@@ -373,7 +388,6 @@ class DefaultIterator implements Iterator, Countable
      *
      * @param string $sortAttribute The attribute to sort by. If not given the
      *                              value set via setSortAttribute is used.
-     *
      * @return void
      */
     public function sort($sortAttribute)
@@ -393,7 +407,7 @@ class DefaultIterator implements Iterator, Countable
         }
 
         $sortFunction = $this->sortFunction;
-        $sorted = usort($this->entries, function ($a, $b) use ($sortFunction) {
+        $sorted       = usort($this->entries, function ($a, $b) use ($sortFunction) {
             return $sortFunction($a['sortValue'], $b['sortValue']);
         });
 

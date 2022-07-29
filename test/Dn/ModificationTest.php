@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
@@ -18,8 +20,10 @@ class ModificationTest extends TestCase
         $dn       = Ldap\Dn::fromString($dnString);
 
         $this->assertEquals(['cn' => 'Baker, Alice'], $dn->get(0));
-        $this->assertEquals(['cn' => 'Users',
-                                 'ou'  => 'Lab'], $dn->get(1));
+        $this->assertEquals([
+            'cn' => 'Users',
+            'ou' => 'Lab',
+        ], $dn->get(1));
         $this->assertEquals(['dc' => 'example'], $dn->get(2));
         $this->assertEquals(['dc' => 'com'], $dn->get(3));
         try {
@@ -42,61 +46,75 @@ class ModificationTest extends TestCase
         }
 
         $this->assertEquals([
-                                 ['cn' => 'Baker, Alice'],
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab']
-                            ], $dn->get(0, 2));
+            ['cn' => 'Baker, Alice'],
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+        ], $dn->get(0, 2));
         $this->assertEquals([
-                                 ['cn' => 'Baker, Alice'],
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab'],
-                                 ['dc' => 'example']
-                            ], $dn->get(0, 3));
+            ['cn' => 'Baker, Alice'],
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+            ['dc' => 'example'],
+        ], $dn->get(0, 3));
         $this->assertEquals([
-                                 ['cn' => 'Baker, Alice'],
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab'],
-                                 ['dc' => 'example'],
-                                 ['dc' => 'com']
-                            ], $dn->get(0, 4));
+            ['cn' => 'Baker, Alice'],
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+            ['dc' => 'example'],
+            ['dc' => 'com'],
+        ], $dn->get(0, 4));
         $this->assertEquals([
-                                 ['cn' => 'Baker, Alice'],
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab'],
-                                 ['dc' => 'example'],
-                                 ['dc' => 'com']
-                            ], $dn->get(0, 5));
+            ['cn' => 'Baker, Alice'],
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+            ['dc' => 'example'],
+            ['dc' => 'com'],
+        ], $dn->get(0, 5));
 
         $this->assertEquals([
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab'],
-                                 ['dc' => 'example']
-                            ], $dn->get(1, 2));
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+            ['dc' => 'example'],
+        ], $dn->get(1, 2));
         $this->assertEquals([
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab'],
-                                 ['dc' => 'example'],
-                                 ['dc' => 'com']
-                            ], $dn->get(1, 3));
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+            ['dc' => 'example'],
+            ['dc' => 'com'],
+        ], $dn->get(1, 3));
         $this->assertEquals([
-                                 ['cn' => 'Users',
-                                       'ou' => 'Lab'],
-                                 ['dc' => 'example'],
-                                 ['dc' => 'com']
-                            ], $dn->get(1, 4));
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
+            ['dc' => 'example'],
+            ['dc' => 'com'],
+        ], $dn->get(1, 4));
 
         $this->assertEquals([
-                                 ['dc' => 'example'],
-                                 ['dc' => 'com']
-                            ], $dn->get(2, 2));
+            ['dc' => 'example'],
+            ['dc' => 'com'],
+        ], $dn->get(2, 2));
         $this->assertEquals([
-                                 ['dc' => 'example'],
-                                 ['dc' => 'com']
-                            ], $dn->get(2, 3));
+            ['dc' => 'example'],
+            ['dc' => 'com'],
+        ], $dn->get(2, 3));
 
         $this->assertEquals([
-                                 ['dc' => 'com']
-                            ], $dn->get(3, 2));
+            ['dc' => 'com'],
+        ], $dn->get(3, 2));
     }
 
     public function testDnManipulationSet()
@@ -114,8 +132,10 @@ class ModificationTest extends TestCase
         );
         $this->assertEquals(
             'uid=abaker,ou=Lab,dc=example+ou=Test,dc=com',
-            $dn->set(2, ['dc' => 'example',
-                             'ou'  => 'Test'])->toString()
+            $dn->set(2, [
+                'dc' => 'example',
+                'ou' => 'Test',
+            ])->toString()
         );
         $this->assertEquals(
             'uid=abaker,ou=Lab,dc=example+ou=Test,dc=de\+fr',
@@ -297,8 +317,10 @@ class ModificationTest extends TestCase
         $this->assertEquals('cn=Baker\\, Alice,ou=Lab,dc=example,dc=com', $dn->toString());
 
         $dn    = Ldap\Dn::fromString($dnString);
-        $dn[2] = ['dc' => 'example',
-                       'ou' => 'Test'];
+        $dn[2] = [
+            'dc' => 'example',
+            'ou' => 'Test',
+        ];
         $this->assertEquals('cn=Baker\\, Alice,cn=Users,dc=example+ou=Test,dc=com', $dn->toString());
 
         $dn    = Ldap\Dn::fromString($dnString);

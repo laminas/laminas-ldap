@@ -2,20 +2,57 @@
 
 namespace Laminas\Ldap;
 
-use Laminas\Ldap\Handler;
-use Laminas\Ldap\Exception\LdapException;
+use Laminas\Ldap\Collection;
+use Laminas\Ldap\Exception;
 use Traversable;
+
+use function array_change_key_case;
+use function array_key_exists;
+use function array_merge;
+use function array_reverse;
+use function array_shift;
+use function array_values;
+use function class_exists;
+use function count;
+use function dechex;
+use function extension_loaded;
+use function function_exists;
+use function implode;
+use function in_array;
+use function is_array;
+use function is_scalar;
+use function is_string;
+use function is_subclass_of;
+use function iterator_to_array;
+use function key;
+use function mb_strtolower;
+use function min;
+use function pow;
+use function preg_match_all;
+use function sprintf;
+use function str_replace;
+use function strcasecmp;
+use function strlen;
+use function strpos;
+use function strtolower;
+use function substr;
+use function trim;
+use function usleep;
+
+use const CASE_LOWER;
+use const E_WARNING;
+use const PREG_SET_ORDER;
 
 class Ldap
 {
-    const SEARCH_SCOPE_SUB  = 1;
-    const SEARCH_SCOPE_ONE  = 2;
-    const SEARCH_SCOPE_BASE = 3;
+    public const SEARCH_SCOPE_SUB  = 1;
+    public const SEARCH_SCOPE_ONE  = 2;
+    public const SEARCH_SCOPE_BASE = 3;
 
-    const ACCTNAME_FORM_DN        = 1;
-    const ACCTNAME_FORM_USERNAME  = 2;
-    const ACCTNAME_FORM_BACKSLASH = 3;
-    const ACCTNAME_FORM_PRINCIPAL = 4;
+    public const ACCTNAME_FORM_DN        = 1;
+    public const ACCTNAME_FORM_USERNAME  = 2;
+    public const ACCTNAME_FORM_BACKSLASH = 3;
+    public const ACCTNAME_FORM_PRINCIPAL = 4;
 
     /**
      * String used with ldap_connect for error handling purposes.
@@ -29,14 +66,14 @@ class Ldap
      *
      * @var array
      */
-    protected $options = null;
+    protected $options;
 
     /**
      * The raw LDAP extension resource.
      *
      * @var resource
      */
-    protected $resource = null;
+    protected $resource;
 
     /**
      * FALSE if no user is bound to the LDAP resource
@@ -52,14 +89,14 @@ class Ldap
      *
      * @var Node\RootDse
      */
-    protected $rootDse = null;
+    protected $rootDse;
 
     /**
      * Caches the schema
      *
      * @var Node\Schema
      */
-    protected $schema = null;
+    protected $schema;
 
     /**
      * Current connection retry attempt counter.
@@ -75,14 +112,10 @@ class Ldap
      */
     protected $reconnectsAttempted = 0;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $lastConnectBindParams = [];
 
     /**
-     * Constructor.
-     *
      * @param  array|Traversable $options Options used in connecting, binding, etc.
      * @throws Exception\LdapException
      */
@@ -99,8 +132,6 @@ class Ldap
     }
 
     /**
-     * Destructor.
-     *
      * @return void
      */
     public function __destruct()
@@ -153,7 +184,7 @@ class Ldap
      * @param  array $errorMessages
      * @return string
      */
-    public function getLastError(&$errorCode = null, array &$errorMessages = null)
+    public function getLastError(&$errorCode = null, ?array &$errorMessages = null)
     {
         $errorCode     = $this->getLastErrorCode();
         $errorMessages = [];
@@ -289,9 +320,9 @@ class Ldap
                     case 'useStartTls':
                     case 'optReferrals':
                     case 'tryUsernameSplit':
-                        $permittedOptions[$key] = ($val === true
+                        $permittedOptions[$key] = $val === true
                             || $val === '1'
-                            || strcasecmp($val, 'true') == 0);
+                            || strcasecmp($val, 'true') === 0;
                         break;
                     case 'saslOpts':
                         $permittedOptions[$key] = $val;
@@ -319,11 +350,13 @@ class Ldap
         return $this->options;
     }
 
+    /** @return int */
     public function getReconnectsAttempted()
     {
         return $this->reconnectsAttempted;
     }
 
+    /** @return void */
     public function resetReconnectsAttempted()
     {
         $this->reconnectsAttempted = 0;
@@ -581,10 +614,10 @@ class Ldap
         if ($accountDomainName === null && $accountDomainNameShort === null) {
             return true;
         }
-        if (strcasecmp($dname, $accountDomainName) == 0) {
+        if (strcasecmp($dname, $accountDomainName) === 0) {
             return true;
         }
-        if (strcasecmp($dname, $accountDomainNameShort) == 0) {
+        if (strcasecmp($dname, $accountDomainNameShort) === 0) {
             return true;
         }
 
@@ -654,7 +687,7 @@ class Ldap
      * @return array  An array of the attributes representing the account
      * @throws Exception\LdapException
      */
-    protected function getAccount($acctname, array $attrs = null)
+    protected function getAccount($acctname, ?array $attrs = null)
     {
         $baseDn = $this->getBaseDn();
         if (! $baseDn) {
@@ -717,6 +750,13 @@ class Ldap
         }
     }
 
+    /**
+     * @template TA of mixed
+     * @template TB of mixed
+     * @param TA $a
+     * @param TB $b
+     * @psalm-return (TA is null ? TB : TA|TB)
+     */
     protected static function coalesce($a, $b)
     {
         if ($a !== null) {
@@ -735,6 +775,7 @@ class Ldap
         return $this;
     }
 
+    /** @return $this */
     protected function unbind()
     {
         if (Handler::isLdapHandle($this->resource) && is_string($this->boundUser)) {
@@ -767,11 +808,11 @@ class Ldap
     {
         if ($this->reconnectCount === 0) {
             $this->lastConnectBindParams[__METHOD__] = [
-                'host' => $host,
-                'port' => $port,
-                'useSsl' => $useSsl,
-                'useStartTls' => $useStartTls,
-                'networkTimeout' => $networkTimeout
+                'host'           => $host,
+                'port'           => $port,
+                'useSsl'         => $useSsl,
+                'useStartTls'    => $useStartTls,
+                'networkTimeout' => $networkTimeout,
             ];
         }
 
@@ -791,7 +832,7 @@ class Ldap
         }
 
         if ($port === 0) {
-            $port = ($useSsl) ? 636 : 389;
+            $port = $useSsl ? 636 : 389;
         }
 
         if ($useStartTls === null) {
@@ -817,7 +858,7 @@ class Ldap
         if (preg_match_all('~ldap(i|s)?://~', $host, $hosts, PREG_SET_ORDER) > 0) {
             $this->connectString = $host;
             // assign $useSsl to true in case of ldaps schema
-            $useSsl = (isset($hosts[0][1]) && $hosts[0][1] === 's') ? true : false;
+            $useSsl = isset($hosts[0][1]) && $hosts[0][1] === 's' ? true : false;
         } else {
             if ($useSsl) {
                 $this->connectString = 'ldaps://' . $host;
@@ -841,9 +882,10 @@ class Ldap
             $this->resource  = $resource;
             $this->boundUser = false;
 
-            $optReferrals = ($this->getOptReferrals()) ? 1 : 0;
+            $optReferrals = $this->getOptReferrals() ? 1 : 0;
             ErrorHandler::start(E_WARNING);
-            if (ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3)
+            if (
+                ldap_set_option($resource, LDAP_OPT_PROTOCOL_VERSION, 3)
                 && ldap_set_option($resource, LDAP_OPT_REFERRALS, $optReferrals)
             ) {
                 if ($networkTimeout) {
@@ -884,7 +926,7 @@ class Ldap
         if ($this->reconnectCount === 0) {
             $this->lastConnectBindParams[__METHOD__] = [
                 'username' => $username,
-                'password' => $password
+                'password' => $password,
             ];
         }
 
@@ -923,8 +965,8 @@ class Ldap
                             }
                             throw new Exception\LdapException(
                                 null,
-                                'Failed to retrieve DN for account: ' . $username .
-                                    ' [' . $zle->getMessage() . ']',
+                                'Failed to retrieve DN for account: ' . $username
+                                    . ' [' . $zle->getMessage() . ']',
                                 Exception\LdapException::LDAP_OPERATIONS_ERROR
                             );
                         }
@@ -952,11 +994,11 @@ class Ldap
         } else {
             ErrorHandler::start(E_WARNING);
             if (is_array($saslOpts)) {
-                $sasl_mech = array_key_exists('sasl_mech', $saslOpts) ? $saslOpts['sasl_mech'] : null;
-                $sasl_realm = array_key_exists('sasl_realm', $saslOpts) ? $saslOpts['sasl_realm'] : null;
+                $sasl_mech     = array_key_exists('sasl_mech', $saslOpts) ? $saslOpts['sasl_mech'] : null;
+                $sasl_realm    = array_key_exists('sasl_realm', $saslOpts) ? $saslOpts['sasl_realm'] : null;
                 $sasl_authc_id = array_key_exists('sasl_authc_id', $saslOpts) ? $saslOpts['sasl_authc_id'] : null;
                 $sasl_authz_id = array_key_exists('sasl_authz_id', $saslOpts) ? $saslOpts['sasl_authz_id'] : null;
-                $sasl_props = array_key_exists('props', $saslOpts) ? $saslOpts['props'] : null;
+                $sasl_props    = array_key_exists('props', $saslOpts) ? $saslOpts['props'] : null;
 
                 $bind = ldap_sasl_bind(
                     $this->resource,
@@ -984,7 +1026,7 @@ class Ldap
                 return $this;
             }
 
-            $message = ($username === null) ? $this->connectString : $username;
+            $message = $username ?? $this->connectString;
             switch ($this->getLastErrorCode()) {
                 case Exception\LdapException::LDAP_SERVER_DOWN:
                     /* If the error is related to establishing a connection rather than binding,
@@ -1000,13 +1042,18 @@ class Ldap
         throw $zle;
     }
 
+    /**
+     * @param resource $resource
+     * @return bool
+     */
     protected function shouldReconnect($resource)
     {
-        if ($this->reconnectCount >= $this->getReconnectsToAttempt()
+        if (
+            $this->reconnectCount >= $this->getReconnectsToAttempt()
             || ldap_errno($resource) !== -1
         ) {
             $this->reconnectsAttempted = $this->reconnectCount;
-            $this->reconnectCount = 0;
+            $this->reconnectCount      = 0;
             return false;
         }
 
@@ -1017,9 +1064,9 @@ class Ldap
             $this->connect();
             $this->bind();
             $this->reconnectsAttempted = $this->reconnectCount;
-            $this->reconnectCount = 0;
+            $this->reconnectCount      = 0;
             return true;
-        } catch (LdapException $e) {
+        } catch (Exception\LdapException $e) {
             if ($e->getCode() !== -1) {
                 return false;
             }
@@ -1139,7 +1186,6 @@ class Ldap
     /**
      * Extension point for collection creation
      *
-     * @param  Collection\DefaultIterator $iterator
      * @param  string|null                $collectionClass
      * @return Collection
      * @throws Exception\LdapException
@@ -1156,7 +1202,7 @@ class Ldap
                     "Class '$collectionClass' can not be found"
                 );
             }
-            if (! is_subclass_of($collectionClass, 'Laminas\Ldap\Collection')) {
+            if (! is_subclass_of($collectionClass, Collection::class)) {
                 throw new Exception\LdapException(
                     null,
                     "Class '$collectionClass' must subclass 'Laminas\\Ldap\\Collection'"
@@ -1211,7 +1257,7 @@ class Ldap
      */
     public function exists($dn)
     {
-        return ($this->count('(objectClass=*)', $dn, self::SEARCH_SCOPE_BASE) == 1);
+        return $this->count('(objectClass=*)', $dn, self::SEARCH_SCOPE_BASE) === 1;
     }
 
     /**
@@ -1249,7 +1295,6 @@ class Ldap
         $sizelimit = 0,
         $timelimit = 0
     ) {
-
         if (is_array($filter)) {
             $filter = array_change_key_case($filter, CASE_LOWER);
             if (isset($filter['collectionclass'])) {
@@ -1296,7 +1341,7 @@ class Ldap
             }
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -1320,7 +1365,7 @@ class Ldap
                         throw new Exception\InvalidArgumentException('Only scalar values allowed in LDAP data');
                     } else {
                         $v = (string) $v;
-                        if (strlen($v) == 0) {
+                        if (strlen($v) === 0) {
                             unset($value[$i]);
                         } else {
                             $value[$i] = $v;
@@ -1335,7 +1380,7 @@ class Ldap
                     throw new Exception\InvalidArgumentException('Only scalar values allowed in LDAP data');
                 } else {
                     $value = (string) $value;
-                    if (strlen($value) == 0) {
+                    if (strlen($value) === 0) {
                         $entry[$key] = [];
                     } else {
                         $entry[$key] = [$value];
@@ -1356,7 +1401,7 @@ class Ldap
      */
     public function add($dn, array $entry)
     {
-        if (! ($dn instanceof Dn)) {
+        if (! $dn instanceof Dn) {
             $dn = Dn::factory($dn, null);
         }
         static::prepareLdapEntryArray($entry);
@@ -1375,8 +1420,17 @@ class Ldap
                 $entry[$key] = array_merge([$value], $entry[$key]);
             }
         }
-        $adAttributes = ['distinguishedname', 'instancetype', 'name', 'objectcategory',
-                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated'];
+        $adAttributes = [
+            'distinguishedname',
+            'instancetype',
+            'name',
+            'objectcategory',
+            'objectguid',
+            'usnchanged',
+            'usncreated',
+            'whenchanged',
+            'whencreated',
+        ];
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);
@@ -1407,7 +1461,7 @@ class Ldap
      */
     public function update($dn, array $entry)
     {
-        if (! ($dn instanceof Dn)) {
+        if (! $dn instanceof Dn) {
             $dn = Dn::factory($dn, null);
         }
         static::prepareLdapEntryArray($entry);
@@ -1419,8 +1473,17 @@ class Ldap
                 $entry[$key] = array_merge([$value], $entry[$key]);
             }
         }
-        $adAttributes = ['distinguishedname', 'instancetype', 'name', 'objectcategory',
-                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated'];
+        $adAttributes = [
+            'distinguishedname',
+            'instancetype',
+            'name',
+            'objectcategory',
+            'objectguid',
+            'usnchanged',
+            'usncreated',
+            'whenchanged',
+            'whencreated',
+        ];
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);
@@ -1511,7 +1574,7 @@ class Ldap
      * @param  array     $attributes
      * @param bool       $allowEmptyAttributes
      * @return Ldap Provides a fluid interface
-     * @throws LdapException
+     * @throws Exception\LdapException
      */
     public function addAttributes($dn, array $attributes, $allowEmptyAttributes = false)
     {
@@ -1535,7 +1598,6 @@ class Ldap
             ErrorHandler::stop();
         } while ($entryAdded === false && $this->shouldReconnect($this->resource));
 
-
         if ($entryAdded === false) {
             throw new Exception\LdapException($this, 'adding attribute: ' . $dn);
         }
@@ -1550,7 +1612,7 @@ class Ldap
      * @param  array     $attributes
      * @param bool       $allowEmptyAttributes
      * @return Ldap Provides a fluid interface
-     * @throws LdapException
+     * @throws Exception\LdapException
      */
     public function updateAttributes($dn, array $attributes, $allowEmptyAttributes = false)
     {
@@ -1573,7 +1635,6 @@ class Ldap
             $entryUpdated = ldap_mod_replace($this->resource, $dn, $attributes);
             ErrorHandler::stop();
         } while ($entryUpdated === false && $this->shouldReconnect($this->resource));
-
 
         if ($entryUpdated === false) {
             throw new Exception\LdapException($this, 'updating attribute: ' . $dn);
@@ -1605,8 +1666,7 @@ class Ldap
      * @param bool      $allowEmptyAttributes Whether empty attribute-array
      *                                        should remove all attribute-
      *                                        values or not.
-     *
-     * @throws LdapException is thrown when the LDAP-server reported an error
+     * @throws Exception\LdapException Is thrown when the LDAP-server reported an error.
      * @return Ldap Provides a fluent interface
      */
     public function deleteAttributes($dn, array $attributes, $allowEmptyAttributes = false)
@@ -1667,9 +1727,11 @@ class Ldap
         }
 
         ErrorHandler::start(E_WARNING);
-        for ($entry = ldap_first_entry($resource, $search);
+        for (
+            $entry = ldap_first_entry($resource, $search);
             $entry !== false;
-            $entry = ldap_next_entry($resource, $entry)) {
+            $entry = ldap_next_entry($resource, $entry)
+        ) {
             $childDn = ldap_get_dn($resource, $entry);
             if ($childDn === false) {
                 ErrorHandler::stop();

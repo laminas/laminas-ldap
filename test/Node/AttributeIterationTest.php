@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
 use LaminasTest\Ldap as TestLdap;
@@ -25,10 +27,11 @@ class AttributeIterationTest extends TestLdap\AbstractTestCase
         $this->assertEquals(5, $i);
         $this->assertCount($i, $node);
         $this->assertEquals([
-                                 'boolean'     => [true, false],
-                                 'cn'          => ['name'],
-                                 'empty'       => [],
-                                 'host'        => ['a', 'b', 'c'],
-                                 'objectclass' => ['account', 'top']], $data);
+            'boolean'     => [true, false],
+            'cn'          => ['name'],
+            'empty'       => [],
+            'host'        => ['a', 'b', 'c'],
+            'objectclass' => ['account', 'top'],
+        ], $data);
     }
 }

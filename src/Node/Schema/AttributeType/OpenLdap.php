@@ -4,6 +4,8 @@ namespace Laminas\Ldap\Node\Schema\AttributeType;
 
 use Laminas\Ldap\Node\Schema;
 
+use function count;
+
 /**
  * Laminas\Ldap\Node\Schema\AttributeType\OpenLdap provides access to the attribute type
  * schema information on an OpenLDAP server.
@@ -100,6 +102,6 @@ class OpenLdap extends Schema\AbstractItem implements AttributeTypeInterface
             return $this->_parents[0];
         }
 
-        return;
+        return null;
     }
 }

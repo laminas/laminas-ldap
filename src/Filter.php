@@ -2,17 +2,19 @@
 
 namespace Laminas\Ldap;
 
+use function func_get_args;
+
 /**
  * Laminas\Ldap\Filter.
  */
 class Filter extends Filter\StringFilter
 {
-    const TYPE_EQUALS         = '=';
-    const TYPE_GREATER        = '>';
-    const TYPE_GREATEROREQUAL = '>=';
-    const TYPE_LESS           = '<';
-    const TYPE_LESSOREQUAL    = '<=';
-    const TYPE_APPROX         = '~=';
+    public const TYPE_EQUALS         = '=';
+    public const TYPE_GREATER        = '>';
+    public const TYPE_GREATEROREQUAL = '>=';
+    public const TYPE_LESS           = '<';
+    public const TYPE_LESSOREQUAL    = '<=';
+    public const TYPE_APPROX         = '~=';
 
     /**
      * Creates an 'equals' filter.

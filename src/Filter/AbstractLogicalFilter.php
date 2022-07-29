@@ -2,13 +2,15 @@
 
 namespace Laminas\Ldap\Filter;
 
+use function is_string;
+
 /**
  * Laminas\Ldap\Filter\AbstractLogicalFilter provides a base implementation for a grouping filter.
  */
 abstract class AbstractLogicalFilter extends AbstractFilter
 {
-    const TYPE_AND = '&';
-    const TYPE_OR  = '|';
+    public const TYPE_AND = '&';
+    public const TYPE_OR  = '|';
 
     /**
      * All the sub-filters for this grouping filter.
@@ -36,7 +38,7 @@ abstract class AbstractLogicalFilter extends AbstractFilter
         foreach ($subfilters as $key => $s) {
             if (is_string($s)) {
                 $subfilters[$key] = new StringFilter($s);
-            } elseif (! ($s instanceof AbstractFilter)) {
+            } elseif (! $s instanceof AbstractFilter) {
                 throw new Exception\FilterException('Only strings or Laminas\Ldap\Filter\AbstractFilter allowed.');
             }
         }
@@ -47,7 +49,6 @@ abstract class AbstractLogicalFilter extends AbstractFilter
     /**
      * Adds a filter to this grouping filter.
      *
-     * @param  AbstractFilter $filter
      * @return AbstractLogicalFilter
      */
     public function addFilter(AbstractFilter $filter)

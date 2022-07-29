@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
+use InvalidArgumentException;
 use Laminas\Ldap;
-use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
+use stdClass;
+
+use function array_merge;
 
 /**
  * @group      Laminas_Ldap
@@ -16,7 +21,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
             'ou'          => 'TestCreated',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -37,7 +42,7 @@ class CrudTest extends AbstractOnlineTestCase
         $data = [
             'ou'          => 'TestCreated',
             'l'           => 'mylocation1',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -61,7 +66,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,ou=Node2,');
         $data = [
             'ou'          => 'TestCreated',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
         $this->expectException(LdapException::class);
         $this->getLDAP()->add($dn, $data);
@@ -72,7 +77,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
             'ou'          => 'TestCreated',
-            'objectclass' => 'organizationalUnit'
+            'objectclass' => 'organizationalUnit',
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -111,21 +116,26 @@ class CrudTest extends AbstractOnlineTestCase
     {
         $topDn = $this->createDn('ou=RecursiveTest,');
         $dn    = $topDn;
-        $data  = ['ou'          => 'RecursiveTest',
-                       'objectclass' => 'organizationalUnit'
+        $data  = [
+            'ou'          => 'RecursiveTest',
+            'objectclass' => 'organizationalUnit',
         ];
         $this->getLDAP()->add($dn, $data);
         for ($level = 1; $level <= 5; $level++) {
             $name = 'Level' . $level;
             $dn   = 'ou=' . $name . ',' . $dn;
-            $data = ['ou'          => $name,
-                          'objectclass' => 'organizationalUnit'];
+            $data = [
+                'ou'          => $name,
+                'objectclass' => 'organizationalUnit',
+            ];
             $this->getLDAP()->add($dn, $data);
             for ($item = 1; $item <= 5; $item++) {
                 $uid   = 'Item' . $item;
                 $idn   = 'ou=' . $uid . ',' . $dn;
-                $idata = ['ou'          => $uid,
-                               'objectclass' => 'organizationalUnit'];
+                $idata = [
+                    'ou'          => $uid,
+                    'objectclass' => 'organizationalUnit',
+                ];
                 $this->getLDAP()->add($idn, $idata);
             }
         }
@@ -147,8 +157,10 @@ class CrudTest extends AbstractOnlineTestCase
     public function testSave()
     {
         $dn   = $this->createDn('ou=TestCreated,');
-        $data = ['ou'          => 'TestCreated',
-                      'objectclass' => 'organizationalUnit'];
+        $data = [
+            'ou'          => 'TestCreated',
+            'objectclass' => 'organizationalUnit',
+        ];
         try {
             $this->getLDAP()->save($dn, $data);
             $this->assertTrue($this->getLDAP()->exists($dn));
@@ -177,7 +189,8 @@ class CrudTest extends AbstractOnlineTestCase
             'a6' => ['account'],
             'a7' => [null],
             'a8' => [''],
-            'a9' => ['', null, 'account', '', null, 'TestCreated', '', null]];
+            'a9' => ['', null, 'account', '', null, 'TestCreated', '', null],
+        ];
         Ldap\Ldap::prepareLDAPEntryArray($data);
         $expected = [
             'a1' => ['TestCreated'],
@@ -188,7 +201,8 @@ class CrudTest extends AbstractOnlineTestCase
             'a6' => ['account'],
             'a7' => [],
             'a8' => [],
-            'a9' => ['account', 'TestCreated']];
+            'a9' => ['account', 'TestCreated'],
+        ];
         $this->assertEquals($expected, $data);
     }
 
@@ -216,7 +230,7 @@ class CrudTest extends AbstractOnlineTestCase
             'null'         => [],
             'empty'        => [],
             'nullarray'    => [],
-            'emptyarray'   => []
+            'emptyarray'   => [],
         ];
         $this->assertEquals($expected, $data);
     }
@@ -224,18 +238,20 @@ class CrudTest extends AbstractOnlineTestCase
     public function testPrepareLDAPEntryArrayArrayData()
     {
         $data = [
-            'a1' => [['account']]];
-        $this->expectException(\InvalidArgumentException::class);
+            'a1' => [['account']],
+        ];
+        $this->expectException(InvalidArgumentException::class);
         Ldap\Ldap::prepareLDAPEntryArray($data);
     }
 
     public function testPrepareLDAPEntryArrayObjectData()
     {
-        $class    = new \stdClass();
+        $class    = new stdClass();
         $class->a = 'b';
         $data     = [
-            'a1' => [$class]];
-        $this->expectException(\InvalidArgumentException::class);
+            'a1' => [$class],
+        ];
+        $this->expectException(InvalidArgumentException::class);
         Ldap\Ldap::prepareLDAPEntryArray($data);
     }
 
@@ -244,7 +260,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = Ldap\Dn::fromString($this->createDn('ou=TestCreated,'));
         $data = [
             'ou'          => 'TestCreated',
-            'objectclass' => 'organizationalUnit'
+            'objectclass' => 'organizationalUnit',
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -261,7 +277,7 @@ class CrudTest extends AbstractOnlineTestCase
         $data = [
             'ou'          => 'TestCreated',
             'l'           => 'mylocation1',
-            'objectclass' => 'organizationalUnit'
+            'objectclass' => 'organizationalUnit',
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -280,8 +296,10 @@ class CrudTest extends AbstractOnlineTestCase
     public function testSaveWithDnObject()
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=TestCreated,'));
-        $data = ['ou'          => 'TestCreated',
-                      'objectclass' => 'organizationalUnit'];
+        $data = [
+            'ou'          => 'TestCreated',
+            'objectclass' => 'organizationalUnit',
+        ];
         try {
             $this->getLDAP()->save($dn, $data);
             $this->assertTrue($this->getLDAP()->exists($dn));
@@ -305,7 +323,7 @@ class CrudTest extends AbstractOnlineTestCase
         $data = [
             'ou'          => 'TestCreated',
             'l'           => 'mylocation1',
-            'objectClass' => 'organizationalUnit'
+            'objectClass' => 'organizationalUnit',
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -334,7 +352,7 @@ class CrudTest extends AbstractOnlineTestCase
             'associatedDomain' => 'domain',
             'ou'               => 'TestCreated',
             'l'                => 'mylocation1',
-            'objectClass'      => ['organizationalUnit', 'domainRelatedObject']
+            'objectClass'      => ['organizationalUnit', 'domainRelatedObject'],
         ];
         try {
             $this->getLDAP()->add($dn, $data);
@@ -363,7 +381,7 @@ class CrudTest extends AbstractOnlineTestCase
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
-            'objectClass' => ['organizationalUnit']
+            'objectClass' => ['organizationalUnit'],
         ];
         try {
             $this->getLdap()->add($dn, $data);
@@ -386,7 +404,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
             'ou'          => ['SecondOu'],
-            'objectClass' => ['organizationalUnit']
+            'objectClass' => ['organizationalUnit'],
         ];
         try {
             $this->getLdap()->add($dn, $data);
@@ -409,7 +427,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
             'ou'          => ['TestCreated', 'SecondOu'],
-            'objectClass' => ['organizationalUnit']
+            'objectClass' => ['organizationalUnit'],
         ];
         try {
             $this->getLdap()->add($dn, $data);
@@ -432,7 +450,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
             'ou'          => ['TestCreated'],
-            'objectClass' => ['organizationalUnit']
+            'objectClass' => ['organizationalUnit'],
         ];
         try {
             $this->getLdap()->add($dn, $data);
@@ -459,7 +477,7 @@ class CrudTest extends AbstractOnlineTestCase
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
             'ou'          => ['TestCreated'],
-            'objectClass' => ['organizationalUnit']
+            'objectClass' => ['organizationalUnit'],
         ];
         try {
             $this->getLdap()->add($dn, $data);

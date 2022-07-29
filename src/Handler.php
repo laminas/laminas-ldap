@@ -2,16 +2,25 @@
 
 namespace Laminas\Ldap;
 
+use LDAP\Connection;
+use LDAP\Result;
+use LDAP\ResultEntry;
+
+use function is_a;
+use function is_object;
+use function is_resource;
+use function version_compare;
+
+use const PHP_VERSION;
+
 /**
  * Laminas\Ldap\Handler is a collection of LDAP handler related functions.
  */
 class Handler
 {
-
     /**
-     * @param resource|\LDAP\Connection|\LDAP\Result|\LDAP\ResultEntry $handle
+     * @param resource|Connection|Result|ResultEntry $handle
      * @param string $handleClassName
-     * @return bool
      */
     private static function isHandle($handle, $handleClassName): bool
     {

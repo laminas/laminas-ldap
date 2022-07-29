@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
 use PHPUnit\Framework\TestCase;
+
+use function chr;
 
 /**
  * @group      Laminas_Ldap

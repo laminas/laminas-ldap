@@ -1,9 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\ErrorHandlerInterface;
 use Laminas\Stdlib\ErrorHandler as DefaultErrorHandler;
+
+use const E_WARNING;
 
 class ErrorHandler implements ErrorHandlerInterface
 {
@@ -11,7 +15,6 @@ class ErrorHandler implements ErrorHandlerInterface
      * Start the ErrorHandling-process
      *
      * @param int $level
-     *
      * @return void
      */
     public function startErrorHandling($level = E_WARNING)
@@ -25,7 +28,6 @@ class ErrorHandler implements ErrorHandlerInterface
      * be thrown as Exceptions or not
      *
      * @param bool|false $throw
-     *
      * @return mixed
      */
     public function stopErrorHandling($throw = false)
