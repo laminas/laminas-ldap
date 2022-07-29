@@ -23,10 +23,8 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
 {
     /**
      * An array of Laminas\Ldap\Node objects
-     *
-     * @var array
      */
-    private $data;
+    private array $data;
 
     /**
      * @param array $data

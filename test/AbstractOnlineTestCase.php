@@ -15,8 +15,7 @@ use function substr;
  */
 abstract class AbstractOnlineTestCase extends AbstractTestCase
 {
-    /** @var Ldap\Ldap */
-    private static $ldap;
+    private static ?Ldap\Ldap $ldap;
 
     public static function setUpBeforeClass(): void
     {
@@ -67,6 +66,7 @@ abstract class AbstractOnlineTestCase extends AbstractTestCase
      */
     protected function getLDAP()
     {
+        assert(self::$ldap instanceof Ldap\Ldap);
         return self::$ldap;
     }
 

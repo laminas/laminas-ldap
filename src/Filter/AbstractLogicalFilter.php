@@ -14,17 +14,13 @@ abstract class AbstractLogicalFilter extends AbstractFilter
 
     /**
      * All the sub-filters for this grouping filter.
-     *
-     * @var array
      */
-    private $subfilters;
+    private array $subfilters;
 
     /**
      * The grouping symbol.
-     *
-     * @var string
      */
-    private $symbol;
+    private string $symbol;
 
     /**
      * Creates a new grouping filter.

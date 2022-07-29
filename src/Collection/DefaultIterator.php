@@ -9,6 +9,7 @@ use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Handler;
+use ReturnTypeWillChange;
 
 use function array_change_key_case;
 use function call_user_func;
@@ -407,9 +408,11 @@ class DefaultIterator implements Iterator, Countable
         }
 
         $sortFunction = $this->sortFunction;
-        $sorted       = usort($this->entries, function ($a, $b) use ($sortFunction) {
-            return $sortFunction($a['sortValue'], $b['sortValue']);
-        });
+        $sorted       = usort(
+            $this->entries,
+            static fn($a, $b) =>
+                $sortFunction($a['sortValue'], $b['sortValue'])
+        );
 
         if (! $sorted) {
             throw new Exception\LdapException($this, 'sorting result-set');

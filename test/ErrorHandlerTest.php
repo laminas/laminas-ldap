@@ -23,7 +23,7 @@ class ErrorHandlerTest extends TestCase
     {
         parent::setUp();
 
-        $this->dummyErrorHandler = function ($errno, $error) {
+        $this->dummyErrorHandler = static function ($errno, $error): void {
         };
     }
 

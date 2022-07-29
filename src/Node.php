@@ -7,6 +7,7 @@ use Iterator;
 use Laminas\EventManager\EventManager;
 use Laminas\Ldap\Node\Collection;
 use RecursiveIterator;
+use ReturnTypeWillChange;
 
 use function array_key_exists;
 use function array_merge;
@@ -66,10 +67,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
 
     /**
      * Controls iteration status
-     *
-     * @var bool
      */
-    private $iteratorRewind = false;
+    private bool $iteratorRewind = false;
 
     /** @var EventManager */
     protected $events;
