@@ -1,16 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\Attribute;
 use PHPUnit\Framework\TestCase;
+use stdClass;
+
+use function base64_decode;
+use function date;
+use function fclose;
+use function fopen;
+use function gmmktime;
+use function md5;
+use function mktime;
+use function serialize;
+use function sha1;
+use function str_replace;
+use function strlen;
+use function strpos;
+use function strtotime;
+use function substr;
 
 /**
  * @group      Laminas_Ldap
  */
 class AttributeTest extends TestCase
 {
-    protected function assertLocalDateTimeString($timestamp, $value)
+    protected function assertLocalDateTimeString(int $timestamp, string $value): void
     {
         $tsValue = date('YmdHisO', $timestamp);
 
@@ -24,28 +42,28 @@ class AttributeTest extends TestCase
         $this->assertEquals($tsValue, $value);
     }
 
-    protected function assertUtcDateTimeString($localTimestamp, $value)
+    protected function assertUtcDateTimeString(int $localTimestamp, string $value): void
     {
         $localOffset  = date('Z', $localTimestamp);
         $utcTimestamp = $localTimestamp - $localOffset;
         $this->assertEquals(date('YmdHis', $utcTimestamp) . 'Z', $value);
     }
 
-    public function testGetAttributeValue()
+    public function testGetAttributeValue(): void
     {
         $data  = ['uid' => ['value']];
         $value = Attribute::getAttribute($data, 'uid', 0);
         $this->assertEquals('value', $value);
     }
 
-    public function testGetNonExistentAttributeValue()
+    public function testGetNonExistentAttributeValue(): void
     {
         $data  = ['uid' => ['value']];
         $value = Attribute::getAttribute($data, 'uid', 1);
         $this->assertNull($value);
     }
 
-    public function testInvalidValue()
+    public function testInvalidValue(): void
     {
         $data  = ['uid' => ['45678+']];
         $value = Attribute::getAttribute($data, 'uid', 0);
@@ -53,7 +71,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('45678+', $value);
     }
 
-    public function testGetNonExistentAttribute()
+    public function testGetNonExistentAttribute(): void
     {
         $data  = ['uid' => ['value']];
         $value = Attribute::getAttribute($data, 'uid2', 0);
@@ -63,7 +81,7 @@ class AttributeTest extends TestCase
         $this->assertCount(0, $array);
     }
 
-    public function testGetAttributeWithWrongIndexType()
+    public function testGetAttributeWithWrongIndexType(): void
     {
         $data  = ['uid' => ['value']];
         $value = Attribute::getAttribute($data, 'uid', 'index');
@@ -72,7 +90,7 @@ class AttributeTest extends TestCase
         $this->assertNull($value);
     }
 
-    public function testGetAttributeArray()
+    public function testGetAttributeArray(): void
     {
         $data  = ['uid' => ['value']];
         $value = Attribute::getAttribute($data, 'uid');
@@ -81,7 +99,7 @@ class AttributeTest extends TestCase
         $this->assertContains('value', $value);
     }
 
-    public function testSimpleSetAttribute()
+    public function testSimpleSetAttribute(): void
     {
         $data = [];
         Attribute::setAttribute($data, 'uid', 'new', false);
@@ -91,7 +109,7 @@ class AttributeTest extends TestCase
         $this->assertContains('new', $data['uid']);
     }
 
-    public function testSimpleOverwriteAttribute()
+    public function testSimpleOverwriteAttribute(): void
     {
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', 'new', false);
@@ -101,7 +119,7 @@ class AttributeTest extends TestCase
         $this->assertContains('new', $data['uid']);
     }
 
-    public function testSimpleAppendAttribute()
+    public function testSimpleAppendAttribute(): void
     {
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', 'new', true);
@@ -114,11 +132,11 @@ class AttributeTest extends TestCase
         $this->assertEquals('new', $data['uid'][1]);
     }
 
-    public function testBooleanAttributeHandling()
+    public function testBooleanAttributeHandling(): void
     {
         $data = [
             'p1_true'  => ['TRUE'],
-            'p1_false' => ['FALSE']
+            'p1_false' => ['FALSE'],
         ];
         Attribute::setAttribute($data, 'p2_true', true);
         Attribute::setAttribute($data, 'p2_false', false);
@@ -128,7 +146,7 @@ class AttributeTest extends TestCase
         $this->assertEquals(false, Attribute::getAttribute($data, 'p1_false', 0));
     }
 
-    public function testArraySetAttribute()
+    public function testArraySetAttribute(): void
     {
         $data = [];
         Attribute::setAttribute($data, 'uid', ['new1', 'new2'], false);
@@ -141,7 +159,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('new2', $data['uid'][1]);
     }
 
-    public function testArrayOverwriteAttribute()
+    public function testArrayOverwriteAttribute(): void
     {
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', ['new1', 'new2'], false);
@@ -154,7 +172,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('new2', $data['uid'][1]);
     }
 
-    public function testArrayAppendAttribute()
+    public function testArrayAppendAttribute(): void
     {
         $data = ['uid' => ['old']];
         Attribute::setAttribute($data, 'uid', ['new1', 'new2'], true);
@@ -169,7 +187,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('new2', $data['uid'][2]);
     }
 
-    public function testPasswordSettingSHA()
+    public function testPasswordSettingSHA(): void
     {
         $data = [];
         Attribute::setPassword($data, 'pa$$w0rd', Attribute::PASSWORD_HASH_SHA);
@@ -177,7 +195,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('{SHA}vi3X+3ptD4ulrdErXo+3W72mRyE=', $password);
     }
 
-    public function testPasswordSettingMD5()
+    public function testPasswordSettingMD5(): void
     {
         $data = [];
         Attribute::setPassword($data, 'pa$$w0rd', Attribute::PASSWORD_HASH_MD5);
@@ -185,7 +203,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('{MD5}bJuLJ96h3bhF+WqiVnxnVA==', $password);
     }
 
-    public function testPasswordSettingUnicodePwd()
+    public function testPasswordSettingUnicodePwd(): void
     {
         $data = [];
         Attribute::setPassword($data, 'new', Attribute::PASSWORD_UNICODEPWD);
@@ -193,7 +211,7 @@ class AttributeTest extends TestCase
         $this->assertEquals("\x22\x00\x6E\x00\x65\x00\x77\x00\x22\x00", $password);
     }
 
-    public function testPasswordSettingCustomAttribute()
+    public function testPasswordSettingCustomAttribute(): void
     {
         $data = [];
         Attribute::setPassword(
@@ -206,10 +224,10 @@ class AttributeTest extends TestCase
         $this->assertNotNull($password);
     }
 
-    public function testSetAttributeWithObject()
+    public function testSetAttributeWithObject(): void
     {
         $data      = [];
-        $object    = new \stdClass();
+        $object    = new stdClass();
         $object->a = 1;
         $object->b = 1.23;
         $object->c = 'string';
@@ -217,7 +235,7 @@ class AttributeTest extends TestCase
         $this->assertEquals(serialize($object), $data['object'][0]);
     }
 
-    public function testSetAttributeWithFilestream()
+    public function testSetAttributeWithFilestream(): void
     {
         $data   = [];
         $stream = fopen(__DIR__ . '/_files/AttributeTest.input.txt', 'r');
@@ -226,7 +244,7 @@ class AttributeTest extends TestCase
         $this->assertEquals('String from file', $data['file'][0]);
     }
 
-    public function testSetDateTimeValueLocal()
+    public function testSetDateTimeValueLocal(): void
     {
         $ts   = mktime(12, 30, 30, 6, 25, 2008);
         $data = [];
@@ -234,7 +252,7 @@ class AttributeTest extends TestCase
         $this->assertLocalDateTimeString($ts, $data['ts'][0]);
     }
 
-    public function testSetDateTimeValueUtc()
+    public function testSetDateTimeValueUtc(): void
     {
         $ts   = mktime(12, 30, 30, 6, 25, 2008);
         $data = [];
@@ -242,7 +260,7 @@ class AttributeTest extends TestCase
         $this->assertUtcDateTimeString($ts, $data['ts'][0]);
     }
 
-    public function testSetDateTimeValueLocalArray()
+    public function testSetDateTimeValueLocalArray(): void
     {
         $ts   = [];
         $ts[] = mktime(12, 30, 30, 6, 25, 2008);
@@ -253,7 +271,7 @@ class AttributeTest extends TestCase
         $this->assertLocalDateTimeString($ts[1], $data['ts'][1]);
     }
 
-    public function testSetDateTimeValueIllegal()
+    public function testSetDateTimeValueIllegal(): void
     {
         $ts   = 'dummy';
         $data = [];
@@ -261,7 +279,7 @@ class AttributeTest extends TestCase
         $this->assertCount(0, $data['ts']);
     }
 
-    public function testGetDateTimeValueFromLocal()
+    public function testGetDateTimeValueFromLocal(): void
     {
         $ts   = mktime(12, 30, 30, 6, 25, 2008);
         $data = [];
@@ -271,7 +289,7 @@ class AttributeTest extends TestCase
         $this->assertEquals($ts, $retTs);
     }
 
-    public function testGetDateTimeValueFromUtc()
+    public function testGetDateTimeValueFromUtc(): void
     {
         $ts   = mktime(12, 30, 30, 6, 25, 2008);
         $data = [];
@@ -281,7 +299,7 @@ class AttributeTest extends TestCase
         $this->assertEquals($ts, $retTs);
     }
 
-    public function testGetDateTimeValueFromArray()
+    public function testGetDateTimeValueFromArray(): void
     {
         $ts   = [];
         $ts[] = mktime(12, 30, 30, 6, 25, 2008);
@@ -295,14 +313,14 @@ class AttributeTest extends TestCase
         $this->assertEquals($ts[1], $retTs[1]);
     }
 
-    public function testGetDateTimeValueIllegal()
+    public function testGetDateTimeValueIllegal(): void
     {
         $data  = ['ts' => ['dummy']];
         $retTs = Attribute::getDateTimeAttribute($data, 'ts', 0);
         $this->assertEquals('dummy', $retTs);
     }
 
-    public function testGetDateTimeValueNegativeOffet()
+    public function testGetDateTimeValueNegativeOffet(): void
     {
         $data      = ['ts' => ['20080612143045-0700']];
         $retTs     = Attribute::getDateTimeAttribute($data, 'ts', 0);
@@ -310,7 +328,7 @@ class AttributeTest extends TestCase
         $this->assertEquals($tsCompare, $retTs);
     }
 
-    public function testGetDateTimeValueNegativeOffet2()
+    public function testGetDateTimeValueNegativeOffet2(): void
     {
         $data      = ['ts' => ['20080612143045-0715']];
         $retTs     = Attribute::getDateTimeAttribute($data, 'ts', 0);
@@ -318,7 +336,7 @@ class AttributeTest extends TestCase
         $this->assertEquals($tsCompare, $retTs);
     }
 
-    public function testRemoveAttributeValueSimple()
+    public function testRemoveAttributeValueSimple(): void
     {
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', 'value2');
@@ -330,7 +348,7 @@ class AttributeTest extends TestCase
         $this->assertNotContains('value2', $data['test']);
     }
 
-    public function testRemoveAttributeValueArray()
+    public function testRemoveAttributeValueArray(): void
     {
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', ['value1', 'value2']);
@@ -342,7 +360,7 @@ class AttributeTest extends TestCase
         $this->assertNotContains('value2', $data['test']);
     }
 
-    public function testRemoveAttributeMultipleValueSimple()
+    public function testRemoveAttributeMultipleValueSimple(): void
     {
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', 'value3');
@@ -354,7 +372,7 @@ class AttributeTest extends TestCase
         $this->assertNotContains('value3', $data['test']);
     }
 
-    public function testRemoveAttributeMultipleValueArray()
+    public function testRemoveAttributeMultipleValueArray(): void
     {
         $data = ['test' => ['value1', 'value2', 'value3', 'value3']];
         Attribute::removeFromAttribute($data, 'test', ['value1', 'value3']);
@@ -366,7 +384,7 @@ class AttributeTest extends TestCase
         $this->assertNotContains('value3', $data['test']);
     }
 
-    public function testRemoveAttributeValueBoolean()
+    public function testRemoveAttributeValueBoolean(): void
     {
         $data = ['test' => ['TRUE', 'FALSE', 'TRUE', 'FALSE']];
         Attribute::removeFromAttribute($data, 'test', false);
@@ -377,7 +395,7 @@ class AttributeTest extends TestCase
         $this->assertNotContains('FALSE', $data['test']);
     }
 
-    public function testRemoveAttributeValueInteger()
+    public function testRemoveAttributeValueInteger(): void
     {
         $data = ['test' => ['1', '2', '3', '4']];
         Attribute::removeFromAttribute($data, 'test', [2, 4]);
@@ -390,7 +408,7 @@ class AttributeTest extends TestCase
         $this->assertNotContains('4', $data['test']);
     }
 
-    public function testRemoveDuplicates()
+    public function testRemoveDuplicates(): void
     {
         $data     = [
             'strings1' => ['value1', 'value2', 'value2', 'value3'],
@@ -411,7 +429,7 @@ class AttributeTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testHasValue()
+    public function testHasValue(): void
     {
         $data = [
             'strings1' => ['value1', 'value2', 'value2', 'value3'],
@@ -458,7 +476,7 @@ class AttributeTest extends TestCase
         ));
     }
 
-    public function testPasswordGenerationSSHA()
+    public function testPasswordGenerationSSHA(): void
     {
         $password = 'pa$$w0rd';
         $ssha     = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SSHA);
@@ -471,7 +489,7 @@ class AttributeTest extends TestCase
         $this->assertEquals(sha1($password . $salt, true), $hash);
     }
 
-    public function testPasswordGenerationSHA()
+    public function testPasswordGenerationSHA(): void
     {
         $password = 'pa$$w0rd';
         $sha      = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SHA);
@@ -481,7 +499,7 @@ class AttributeTest extends TestCase
         $this->assertEquals(sha1($password, true), $binary);
     }
 
-    public function testPasswordGenerationSMD5()
+    public function testPasswordGenerationSMD5(): void
     {
         $password = 'pa$$w0rd';
         $smd5     = Attribute::createPassword($password, Attribute::PASSWORD_HASH_SMD5);
@@ -494,7 +512,7 @@ class AttributeTest extends TestCase
         $this->assertEquals(md5($password . $salt, true), $hash);
     }
 
-    public function testPasswordGenerationMD5()
+    public function testPasswordGenerationMD5(): void
     {
         $password = 'pa$$w0rd';
         $md5      = Attribute::createPassword($password, Attribute::PASSWORD_HASH_MD5);
@@ -504,7 +522,7 @@ class AttributeTest extends TestCase
         $this->assertEquals(md5($password, true), $binary);
     }
 
-    public function testPasswordGenerationUnicodePwd()
+    public function testPasswordGenerationUnicodePwd(): void
     {
         $password   = 'new';
         $unicodePwd = Attribute::createPassword($password, Attribute::PASSWORD_UNICODEPWD);

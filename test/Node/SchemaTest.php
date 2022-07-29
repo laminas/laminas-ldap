@@ -1,9 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
+use BadMethodCallException;
 use Laminas\Ldap\Node;
+use Laminas\Ldap\Node\Schema;
+use Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap;
 use LaminasTest\Ldap as TestLdap;
+
+use function array_key_exists;
+use function serialize;
+use function unserialize;
 
 /**
  * @group      Laminas_Ldap
@@ -11,9 +20,7 @@ use LaminasTest\Ldap as TestLdap;
  */
 class SchemaTest extends TestLdap\AbstractOnlineTestCase
 {
-    /**
-     * @var Node\Schema
-     */
+    /** @var Node\Schema */
     private $schema;
 
     protected function setUp(): void
@@ -55,31 +62,32 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testSetterWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
         $this->schema->objectClass = 'illegal';
     }
 
     public function testOffsetSetWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
         $this->schema['objectClass'] = 'illegal';
     }
 
     public function testUnsetterWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
         unset($this->schema->objectClass);
     }
 
     public function testOffsetUnsetWillThrowException()
     {
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
         unset($this->schema['objectClass']);
     }
 
     public function testOpenLDAPSchema()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
@@ -90,18 +98,35 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
         $this->assertArrayHasKey('organizationalUnit', $objectClasses);
         $ou = $objectClasses['organizationalUnit'];
-        $this->assertInstanceOf('Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap', $ou);
+        $this->assertInstanceOf(OpenLdap::class, $ou);
         $this->assertEquals('organizationalUnit', $ou->getName());
         $this->assertEquals('2.5.6.5', $ou->getOid());
         $this->assertEquals(['objectClass', 'ou'], $ou->getMustContain());
-        $this->assertEquals(['businessCategory', 'description', 'destinationIndicator',
-                                 'facsimileTelephoneNumber', 'internationaliSDNNumber', 'l',
-                                 'physicalDeliveryOfficeName', 'postOfficeBox', 'postalAddress', 'postalCode',
-                                 'preferredDeliveryMethod', 'registeredAddress', 'searchGuide', 'seeAlso', 'st',
-                                 'street', 'telephoneNumber', 'teletexTerminalIdentifier', 'telexNumber',
-                                 'userPassword', 'x121Address'], $ou->getMayContain());
+        $this->assertEquals([
+            'businessCategory',
+            'description',
+            'destinationIndicator',
+            'facsimileTelephoneNumber',
+            'internationaliSDNNumber',
+            'l',
+            'physicalDeliveryOfficeName',
+            'postOfficeBox',
+            'postalAddress',
+            'postalCode',
+            'preferredDeliveryMethod',
+            'registeredAddress',
+            'searchGuide',
+            'seeAlso',
+            'st',
+            'street',
+            'telephoneNumber',
+            'teletexTerminalIdentifier',
+            'telexNumber',
+            'userPassword',
+            'x121Address',
+        ], $ou->getMayContain());
         $this->assertEquals('RFC2256: an organizational unit', $ou->getDescription());
-        $this->assertEquals(\Laminas\Ldap\Node\Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
+        $this->assertEquals(Schema::OBJECTCLASS_TYPE_STRUCTURAL, $ou->getType());
         $this->assertEquals(['top'], $ou->getParentClasses());
 
         $this->assertEquals('2.5.6.5', $ou->oid);
@@ -113,26 +138,43 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertTrue($ou->structural);
         $this->assertFalse($ou->auxiliary);
         $this->assertEquals(['ou'], $ou->must);
-        $this->assertEquals(['userPassword', 'searchGuide', 'seeAlso', 'businessCategory',
-                                 'x121Address', 'registeredAddress', 'destinationIndicator', 'preferredDeliveryMethod',
-                                 'telexNumber', 'teletexTerminalIdentifier', 'telephoneNumber',
-                                 'internationaliSDNNumber', 'facsimileTelephoneNumber', 'street', 'postOfficeBox',
-                                 'postalCode', 'postalAddress', 'physicalDeliveryOfficeName', 'st', 'l',
-                                 'description'], $ou->may);
-        $this->assertEquals("( 2.5.6.5 NAME 'organizationalUnit' " .
-                "DESC 'RFC2256: an organizational unit' SUP top STRUCTURAL MUST ou " .
-                "MAY ( userPassword $ searchGuide $ seeAlso $ businessCategory $ x121Address $ " .
-                "registeredAddress $ destinationIndicator $ preferredDeliveryMethod $ telexNumber $ " .
-                "teletexTerminalIdentifier $ telephoneNumber $ internationaliSDNNumber $ " .
-                "facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $ postalAddress $ " .
-                "physicalDeliveryOfficeName $ st $ l $ description ) )", $ou->_string);
+        $this->assertEquals([
+            'userPassword',
+            'searchGuide',
+            'seeAlso',
+            'businessCategory',
+            'x121Address',
+            'registeredAddress',
+            'destinationIndicator',
+            'preferredDeliveryMethod',
+            'telexNumber',
+            'teletexTerminalIdentifier',
+            'telephoneNumber',
+            'internationaliSDNNumber',
+            'facsimileTelephoneNumber',
+            'street',
+            'postOfficeBox',
+            'postalCode',
+            'postalAddress',
+            'physicalDeliveryOfficeName',
+            'st',
+            'l',
+            'description',
+        ], $ou->may);
+        $this->assertEquals("( 2.5.6.5 NAME 'organizationalUnit' "
+                . "DESC 'RFC2256: an organizational unit' SUP top STRUCTURAL MUST ou "
+                . "MAY ( userPassword $ searchGuide $ seeAlso $ businessCategory $ x121Address $ "
+                . "registeredAddress $ destinationIndicator $ preferredDeliveryMethod $ telexNumber $ "
+                . "teletexTerminalIdentifier $ telephoneNumber $ internationaliSDNNumber $ "
+                . "facsimileTelephoneNumber $ street $ postOfficeBox $ postalCode $ postalAddress $ "
+                . "physicalDeliveryOfficeName $ st $ l $ description ) )", $ou->_string);
 
         $this->assertEquals([], $ou->aliases);
         $this->assertSame($objectClasses['top'], $ou->_parents[0]);
 
         $this->assertArrayHasKey('ou', $attributeTypes);
         $ou = $attributeTypes['ou'];
-        $this->assertInstanceOf('Laminas\Ldap\Node\Schema\AttributeType\OpenLdap', $ou);
+        $this->assertInstanceOf(\Laminas\Ldap\Node\Schema\AttributeType\OpenLdap::class, $ou);
         $this->assertEquals('ou', $ou->getName());
         $this->assertEquals('2.5.4.11', $ou->getOid());
         $this->assertEquals('1.3.6.1.4.1.1466.115.121.1.15', $ou->getSyntax());
@@ -154,15 +196,16 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($ou->collective);
         $this->assertFalse($ou->{'no-user-modification'});
         $this->assertEquals('userApplications', $ou->usage);
-        $this->assertEquals("( 2.5.4.11 NAME ( 'ou' 'organizationalUnitName' ) " .
-                "DESC 'RFC2256: organizational unit this object belongs to' SUP name )", $ou->_string);
+        $this->assertEquals("( 2.5.4.11 NAME ( 'ou' 'organizationalUnitName' ) "
+                . "DESC 'RFC2256: organizational unit this object belongs to' SUP name )", $ou->_string);
         $this->assertEquals(['organizationalUnitName'], $ou->aliases);
         $this->assertSame($attributeTypes['name'], $ou->_parents[0]);
     }
 
     public function testActiveDirectorySchema()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY
         ) {
             $this->markTestSkipped('Test can only be run on an Active Directory server');
@@ -174,7 +217,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testeDirectorySchema()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_EDIRECTORY
         ) {
             $this->markTestSkipped('Test can only be run on an eDirectory server');
@@ -184,7 +228,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testOpenLDAPSchemaAttributeTypeInheritance()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
@@ -219,7 +264,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testOpenLDAPSchemaObjectClassInheritance()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
@@ -227,7 +273,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
         $objectClasses = $this->schema->getObjectClasses();
 
-        if (! array_key_exists('certificationAuthority', $objectClasses)
+        if (
+            ! array_key_exists('certificationAuthority', $objectClasses)
             || ! array_key_exists('certificationAuthority-V2', $objectClasses)
         ) {
             $this->markTestSkipped('This requires OpenLDAP core schema');
@@ -241,16 +288,27 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(['top'], $ca->sup);
         $this->assertEquals(['certificationAuthority'], $ca2->sup);
 
-        $this->assertEquals(['authorityRevocationList', 'certificateRevocationList',
-                                 'cACertificate'], $ca->must);
-        $this->assertEquals(['authorityRevocationList', 'cACertificate',
-                                 'certificateRevocationList', 'objectClass'], $ca->getMustContain());
+        $this->assertEquals([
+            'authorityRevocationList',
+            'certificateRevocationList',
+            'cACertificate',
+        ], $ca->must);
+        $this->assertEquals([
+            'authorityRevocationList',
+            'cACertificate',
+            'certificateRevocationList',
+            'objectClass',
+        ], $ca->getMustContain());
         $this->assertEquals(['crossCertificatePair'], $ca->may);
         $this->assertEquals(['crossCertificatePair'], $ca->getMayContain());
 
         $this->assertEquals([], $ca2->must);
-        $this->assertEquals(['authorityRevocationList', 'cACertificate',
-                                 'certificateRevocationList', 'objectClass'], $ca2->getMustContain());
+        $this->assertEquals([
+            'authorityRevocationList',
+            'cACertificate',
+            'certificateRevocationList',
+            'objectClass',
+        ], $ca2->getMustContain());
         $this->assertEquals(['deltaRevocationList'], $ca2->may);
         $this->assertEquals(
             ['crossCertificatePair', 'deltaRevocationList'],
@@ -260,7 +318,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testOpenLDAPSchemaAttributeTypeAliases()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
@@ -276,7 +335,8 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
 
     public function testOpenLDAPSchemaObjectClassAliases()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');

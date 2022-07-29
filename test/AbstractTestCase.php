@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\Node;
@@ -15,7 +17,7 @@ abstract class AbstractTestCase extends TestCase
      */
     protected function createTestArrayData()
     {
-        $data = [
+        return [
             'dn'          => 'cn=name,dc=example,dc=org',
             'cn'          => ['name'],
             'host'        => ['a', 'b', 'c'],
@@ -23,7 +25,6 @@ abstract class AbstractTestCase extends TestCase
             'boolean'     => ['TRUE', 'FALSE'],
             'objectclass' => ['account', 'top'],
         ];
-        return $data;
     }
 
     /**

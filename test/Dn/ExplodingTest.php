@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
@@ -12,9 +14,10 @@ use PHPUnit\Framework\TestCase;
  */
 class ExplodingTest extends TestCase
 {
-    public static function explodeDnOperationProvider()
+    /** @return non-empty-list<array{string, bool}> */
+    public static function explodeDnOperationProvider(): array
     {
-        $testData = [
+        return [
             ['CN=Alice Baker,CN=Users,DC=example,DC=com', true],
             ['CN=Baker\\, Alice,CN=Users,DC=example,DC=com', true],
             ['OU=Sales,DC=local', true],
@@ -45,19 +48,18 @@ class ExplodingTest extends TestCase
             ['+OU=Sales,O=Widget Inc.,C=US', false],
             ['OU=Sa+les,O=Widget Inc.,C=US', false],
         ];
-        return $testData;
     }
 
     /**
      * @dataProvider explodeDnOperationProvider
      */
-    public function testExplodeDnOperation($input, $expected)
+    public function testExplodeDnOperation(string $input, bool $expected): void
     {
         $ret = Ldap\Dn::checkDn($input);
         $this->assertEquals($expected, $ret);
     }
 
-    public function testExplodeDnCaseFold()
+    public function testExplodeDnCaseFold(): void
     {
         $dn = 'CN=Alice Baker,cn=Users,DC=example,dc=com';
         $k  = [];
@@ -72,7 +74,7 @@ class ExplodingTest extends TestCase
         $this->assertEquals(['CN', 'CN', 'DC', 'DC'], $k);
     }
 
-    public function testExplodeDn()
+    public function testExplodeDn(): void
     {
         $dn       = 'cn=name1,cn=name2,dc=example,dc=org';
         $k        = [];
@@ -82,7 +84,7 @@ class ExplodingTest extends TestCase
             ["cn" => "name1"],
             ["cn" => "name2"],
             ["dc" => "example"],
-            ["dc" => "org"]
+            ["dc" => "org"],
         ];
         $ke       = ['cn', 'cn', 'dc', 'dc'];
         $ve       = ['name1', 'name2', 'example', 'org'];
@@ -91,7 +93,7 @@ class ExplodingTest extends TestCase
         $this->assertEquals($ve, $v);
     }
 
-    public function testExplodeDnWithUtf8Characters()
+    public function testExplodeDnWithUtf8Characters(): void
     {
         $dn       = 'uid=rogasawara,ou=営業部,o=Airius';
         $k        = [];
@@ -109,7 +111,7 @@ class ExplodingTest extends TestCase
         $this->assertEquals($ve, $v);
     }
 
-    public function testExplodeDnWithSpaces()
+    public function testExplodeDnWithSpaces(): void
     {
         $dn       = 'cn=Barbara Jensen, ou=Product Development, dc=airius, dc=com';
         $k        = [];
@@ -128,7 +130,7 @@ class ExplodingTest extends TestCase
         $this->assertEquals($ve, $v);
     }
 
-    public function testCoreExplodeDnWithMultiValuedRdn()
+    public function testCoreExplodeDnWithMultiValuedRdn(): void
     {
         $dn = 'cn=name1+uid=user,cn=name2,dc=example,dc=org';
         $k  = [];
@@ -146,7 +148,7 @@ class ExplodingTest extends TestCase
         $this->assertFalse(Ldap\Dn::checkDn($dn));
     }
 
-    public function testExplodeDnWithMultiValuedRdn()
+    public function testExplodeDnWithMultiValuedRdn(): void
     {
         $dn      = 'cn=Surname\, Firstname+uid=userid,cn=name2,dc=example,dc=org';
         $k       = [];
@@ -157,16 +159,18 @@ class ExplodingTest extends TestCase
         $this->assertEquals($ke, $k);
         $this->assertEquals($ve, $v);
         $expected = [
-            ["cn"  => "Surname, Firstname",
-                  "uid" => "userid"],
+            [
+                "cn"  => "Surname, Firstname",
+                "uid" => "userid",
+            ],
             ["cn" => "name2"],
             ["dc" => "example"],
-            ["dc" => "org"]
+            ["dc" => "org"],
         ];
         $this->assertEquals($expected, $dnArray);
     }
 
-    public function testExplodeDnWithMultiValuedRdn2()
+    public function testExplodeDnWithMultiValuedRdn2(): void
     {
         $dn      = 'cn=Surname\, Firstname+uid=userid+sn=Surname,cn=name2,dc=example,dc=org';
         $k       = [];
@@ -177,63 +181,78 @@ class ExplodingTest extends TestCase
         $this->assertEquals($ke, $k);
         $this->assertEquals($ve, $v);
         $expected = [
-            ["cn"  => "Surname, Firstname",
-                  "uid" => "userid",
-                  "sn"  => "Surname"],
+            [
+                "cn"  => "Surname, Firstname",
+                "uid" => "userid",
+                "sn"  => "Surname",
+            ],
             ["cn" => "name2"],
             ["dc" => "example"],
-            ["dc" => "org"]
+            ["dc" => "org"],
         ];
         $this->assertEquals($expected, $dnArray);
     }
 
-    public function testCreateDnArrayIllegalDn()
+    public function testCreateDnArrayIllegalDn(): void
     {
-        $dn      = 'name1,cn=name2,dc=example,dc=org';
+        $dn = 'name1,cn=name2,dc=example,dc=org';
         $this->expectException(LdapException::class);
         $dnArray = Ldap\Dn::explodeDn($dn);
     }
 
-    public static function rfc2253DnProvider()
+    /** @return non-empty-list<array{non-empty-string, list<array<string, string>>}> */
+    public static function rfc2253DnProvider(): array
     {
-        $testData = [
-            ['CN=Steve Kille,O=Isode Limited,C=GB',
-                  [
-                      ['CN' => 'Steve Kille'],
-                      ['O'  => 'Isode Limited'],
-                      ['C'  => 'GB']
-                  ]],
-            ['OU=Sales+CN=J. Smith,O=Widget Inc.,C=US',
-                  [
-                      ['OU' => 'Sales',
-                            'CN' => 'J. Smith'],
-                      ['O'  => 'Widget Inc.'],
-                      ['C'  => 'US']
-                  ]],
-            ['CN=L. Eagle,O=Sue\, Grabbit and Runn,C=GB',
-                  [
-                      ['CN' => 'L. Eagle'],
-                      ['O'  => 'Sue, Grabbit and Runn'],
-                      ['C'  => 'GB']
-                  ]],
-            ['CN=Before\0DAfter,O=Test,C=GB',
-                  [
-                      ['CN' => "Before\rAfter"],
-                      ['O'  => 'Test'],
-                      ['C'  => 'GB']
-                  ]],
-            ['SN=Lu\C4\8Di\C4\87',
-                  [
-                      ['SN' => 'Lučić']
-                  ]]
+        return [
+            [
+                'CN=Steve Kille,O=Isode Limited,C=GB',
+                [
+                    ['CN' => 'Steve Kille'],
+                    ['O' => 'Isode Limited'],
+                    ['C' => 'GB'],
+                ],
+            ],
+            [
+                'OU=Sales+CN=J. Smith,O=Widget Inc.,C=US',
+                [
+                    [
+                        'OU' => 'Sales',
+                        'CN' => 'J. Smith',
+                    ],
+                    ['O' => 'Widget Inc.'],
+                    ['C' => 'US'],
+                ],
+            ],
+            [
+                'CN=L. Eagle,O=Sue\, Grabbit and Runn,C=GB',
+                [
+                    ['CN' => 'L. Eagle'],
+                    ['O' => 'Sue, Grabbit and Runn'],
+                    ['C' => 'GB'],
+                ],
+            ],
+            [
+                'CN=Before\0DAfter,O=Test,C=GB',
+                [
+                    ['CN' => "Before\rAfter"],
+                    ['O' => 'Test'],
+                    ['C' => 'GB'],
+                ],
+            ],
+            [
+                'SN=Lu\C4\8Di\C4\87',
+                [
+                    ['SN' => 'Lučić'],
+                ],
+            ],
         ];
-        return $testData;
     }
 
     /**
      * @dataProvider rfc2253DnProvider
+     * @param list<array<string, string>> $expected
      */
-    public function testExplodeDnsProvidedByRFC2253($input, $expected)
+    public function testExplodeDnsProvidedByRFC2253(string $input, array $expected): void
     {
         $dnArray = Ldap\Dn::explodeDn($input);
         $this->assertEquals($expected, $dnArray);

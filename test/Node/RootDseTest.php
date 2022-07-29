@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
+use BadMethodCallException;
 use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
 
@@ -34,29 +37,41 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
         switch ($root->getServerType()) {
             case Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY:
                 $this->assertIsBool($root->supportsControl('1.2.840.113556.1.4.319'));
-                $this->assertIsBool($root->supportsControl(['1.2.840.113556.1.4.319',
-                                                                                 '1.2.840.113556.1.4.473']));
+                $this->assertIsBool($root->supportsControl([
+                    '1.2.840.113556.1.4.319',
+                    '1.2.840.113556.1.4.473',
+                ]));
                 $this->assertIsBool($root->supportsCapability('1.3.6.1.4.1.4203.1.9.1.1'));
-                $this->assertIsBool($root->supportsCapability(['1.3.6.1.4.1.4203.1.9.1.1',
-                                                                                    '2.16.840.1.113730.3.4.18']));
+                $this->assertIsBool($root->supportsCapability([
+                    '1.3.6.1.4.1.4203.1.9.1.1',
+                    '2.16.840.1.113730.3.4.18',
+                ]));
                 $this->assertIsBool($root->supportsPolicy('unknown'));
                 $this->assertIsBool($root->supportsPolicy(['unknown', 'unknown']));
                 break;
             case Node\RootDse::SERVER_TYPE_EDIRECTORY:
                 $this->assertIsBool($root->supportsExtension('1.3.6.1.4.1.1466.20037'));
-                $this->assertIsBool($root->supportsExtension(['1.3.6.1.4.1.1466.20037',
-                                                                                   '1.3.6.1.4.1.4203.1.11.1']));
+                $this->assertIsBool($root->supportsExtension([
+                    '1.3.6.1.4.1.1466.20037',
+                    '1.3.6.1.4.1.4203.1.11.1',
+                ]));
                 break;
             case Node\RootDse::SERVER_TYPE_OPENLDAP:
                 $this->assertIsBool($root->supportsControl('1.3.6.1.4.1.4203.1.9.1.1'));
-                $this->assertIsBool($root->supportsControl(['1.3.6.1.4.1.4203.1.9.1.1',
-                                                                                 '2.16.840.1.113730.3.4.18']));
+                $this->assertIsBool($root->supportsControl([
+                    '1.3.6.1.4.1.4203.1.9.1.1',
+                    '2.16.840.1.113730.3.4.18',
+                ]));
                 $this->assertIsBool($root->supportsExtension('1.3.6.1.4.1.1466.20037'));
-                $this->assertIsBool($root->supportsExtension(['1.3.6.1.4.1.1466.20037',
-                                                                                   '1.3.6.1.4.1.4203.1.11.1']));
+                $this->assertIsBool($root->supportsExtension([
+                    '1.3.6.1.4.1.1466.20037',
+                    '1.3.6.1.4.1.4203.1.11.1',
+                ]));
                 $this->assertIsBool($root->supportsFeature('1.3.6.1.1.14'));
-                $this->assertIsBool($root->supportsFeature(['1.3.6.1.1.14',
-                                                                                 '1.3.6.1.4.1.4203.1.5.1']));
+                $this->assertIsBool($root->supportsFeature([
+                    '1.3.6.1.1.14',
+                    '1.3.6.1.4.1.4203.1.5.1',
+                ]));
                 break;
         }
     }
@@ -105,7 +120,8 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
         }
     }
 
-    protected function assertNullOrString($value)
+    /** @param mixed $value */
+    protected function assertNullOrString($value): void
     {
         if ($value === null) {
             $this->assertNull($value);
@@ -116,29 +132,29 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
 
     public function testSetterWillThrowException()
     {
-        $root              = $this->getLDAP()->getRootDse();
-        $this->expectException(\BadMethodCallException::class);
+        $root = $this->getLDAP()->getRootDse();
+        $this->expectException(BadMethodCallException::class);
         $root->objectClass = 'illegal';
     }
 
     public function testOffsetSetWillThrowException()
     {
-        $root                = $this->getLDAP()->getRootDse();
-        $this->expectException(\BadMethodCallException::class);
+        $root = $this->getLDAP()->getRootDse();
+        $this->expectException(BadMethodCallException::class);
         $root['objectClass'] = 'illegal';
     }
 
     public function testUnsetterWillThrowException()
     {
         $root = $this->getLDAP()->getRootDse();
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
         unset($root->objectClass);
     }
 
     public function testOffsetUnsetWillThrowException()
     {
         $root = $this->getLDAP()->getRootDse();
-        $this->expectException(\BadMethodCallException::class);
+        $this->expectException(BadMethodCallException::class);
         unset($root['objectClass']);
     }
 }

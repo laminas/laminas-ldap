@@ -1,11 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
-use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\ExceptionInterface;
+use Laminas\Ldap\Node;
+use Laminas\Ldap\Node\Collection;
 use LaminasTest\Ldap as TestLdap;
+
+use function getenv;
+use function key;
+use function serialize;
+use function unserialize;
 
 /**
  * @group      Laminas_Ldap
@@ -29,7 +37,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
-        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertTrue($node->isAttached());
     }
 
@@ -72,7 +80,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testLoadFromLDAPIllegalEntry()
     {
-        $dn   = $this->createDn('ou=Test99,');
+        $dn = $this->createDn('ou=Test99,');
         $this->expectException(ExceptionInterface::class);
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
     }
@@ -81,7 +89,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
-        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertTrue($node->isAttached());
         $node->detachLDAP();
         $this->assertFalse($node->isAttached());
@@ -163,7 +171,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testGetIllegalNode()
     {
-        $dn   = $this->createDn('ou=Test99,');
+        $dn = $this->createDn('ou=Test99,');
         $this->expectException(ExceptionInterface::class);
         $node = $this->getLDAP()->getNode($dn);
     }
@@ -189,14 +197,15 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
             [],
             'ou'
         );
-        $this->assertInstanceOf('Laminas\Ldap\Node\Collection', $items);
+        $this->assertInstanceOf(Collection::class, $items);
         $this->assertEquals(3, $items->count());
 
         $i   = 0;
         $dns = [
             $this->createDn('ou=Node,'),
             $this->createDn('ou=Test1,ou=Node,'),
-            $this->createDn('ou=Test2,ou=Node,')];
+            $this->createDn('ou=Test2,ou=Node,'),
+        ];
         foreach ($items as $key => $node) {
             $key = Ldap\Dn::fromString($key)->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $this->assertEquals($dns[$i], $key);
@@ -249,7 +258,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
 
     public function testGetNonexistentParent()
     {
-        $node  = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
+        $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->expectException(ExceptionInterface::class);
         $pnode = $node->getParent();
     }
@@ -258,7 +267,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=Test1,'));
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
-        $this->assertInstanceOf('Laminas\Ldap\Node', $node);
+        $this->assertInstanceOf(Node::class, $node);
         $this->assertTrue($node->isAttached());
     }
 }

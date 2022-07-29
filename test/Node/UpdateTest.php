@@ -1,9 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
 use LaminasTest\Ldap as TestLdap;
+
+use function array_key_exists;
+use function array_merge;
+use function count;
+use function getenv;
 
 /**
  * @group      Laminas_Ldap
@@ -30,10 +37,19 @@ class UpdateTest extends TestLdap\AbstractOnlineTestCase
         parent::tearDown();
     }
 
-    protected function stripActiveDirectorySystemAttributes(&$entry)
+    protected function stripActiveDirectorySystemAttributes(array &$entry): void
     {
-        $adAttributes = ['distinguishedname', 'instancetype', 'name', 'objectcategory',
-                              'objectguid', 'usnchanged', 'usncreated', 'whenchanged', 'whencreated'];
+        $adAttributes = [
+            'distinguishedname',
+            'instancetype',
+            'name',
+            'objectcategory',
+            'objectguid',
+            'usnchanged',
+            'usncreated',
+            'whenchanged',
+            'whencreated',
+        ];
         foreach ($adAttributes as $attr) {
             if (array_key_exists($attr, $entry)) {
                 unset($entry[$attr]);

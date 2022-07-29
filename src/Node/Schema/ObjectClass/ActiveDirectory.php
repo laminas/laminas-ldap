@@ -23,55 +23,61 @@ class ActiveDirectory extends Schema\AbstractItem implements ObjectClassInterfac
     /**
      * Gets the objectClass OID
      *
-     * @return string
+     * @return null
      */
     public function getOid()
     {
+        return null;
     }
 
     /**
      * Gets the attributes that this objectClass must contain
      *
-     * @return array
+     * @return null
      */
     public function getMustContain()
     {
+        return null;
     }
 
     /**
      * Gets the attributes that this objectClass may contain
      *
-     * @return array
+     * @return null
      */
     public function getMayContain()
     {
+        return null;
     }
 
     /**
      * Gets the objectClass description
      *
-     * @return string
+     * @return null
      */
     public function getDescription()
     {
+        return null;
     }
 
     /**
      * Gets the objectClass type
      *
-     * @return int
+     * @return null
      */
     public function getType()
     {
+        return null;
     }
 
     /**
      * Returns the parent objectClasses of this class.
      * This includes structural, abstract and auxiliary objectClasses
      *
-     * @return array
+     * @return null
      */
     public function getParentClasses()
     {
+        return null;
     }
 }

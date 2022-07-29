@@ -23,19 +23,21 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
     /**
      * Gets the attribute OID
      *
-     * @return string
+     * @return null
      */
     public function getOid()
     {
+        return null;
     }
 
     /**
      * Gets the attribute syntax
      *
-     * @return string
+     * @return null
      */
     public function getSyntax()
     {
+        return null;
     }
 
     /**
@@ -45,23 +47,26 @@ class ActiveDirectory extends Schema\AbstractItem implements AttributeTypeInterf
      */
     public function getMaxLength()
     {
+        return null;
     }
 
     /**
      * Returns if the attribute is single-valued.
      *
-     * @return bool
+     * @return null
      */
     public function isSingleValued()
     {
+        return null;
     }
 
     /**
      * Gets the attribute description
      *
-     * @return string
+     * @return null
      */
     public function getDescription()
     {
+        return null;
     }
 }

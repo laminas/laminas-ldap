@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
@@ -19,26 +21,35 @@ class CreationTest extends TestCase
         $dnString1 = 'CN=Baker\\, Alice,CN=Users+OU=Lab,DC=example,DC=com';
         $dnArray1  = [
             ['CN' => 'Baker, Alice'],
-            ['CN' => 'Users',
-                  'OU' => 'Lab'],
+            [
+                'CN' => 'Users',
+                'OU' => 'Lab',
+            ],
             ['DC' => 'example'],
-            ['DC' => 'com']];
+            ['DC' => 'com'],
+        ];
 
         $dnString2 = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
         $dnArray2  = [
             ['cn' => 'Baker, Alice'],
-            ['cn' => 'Users',
-                  'ou' => 'Lab'],
+            [
+                'cn' => 'Users',
+                'ou' => 'Lab',
+            ],
             ['dc' => 'example'],
-            ['dc' => 'com']];
+            ['dc' => 'com'],
+        ];
 
         $dnString3 = 'Cn=Baker\\, Alice,Cn=Users+Ou=Lab,Dc=example,Dc=com';
         $dnArray3  = [
             ['Cn' => 'Baker, Alice'],
-            ['Cn' => 'Users',
-                  'Ou' => 'Lab'],
+            [
+                'Cn' => 'Users',
+                'Ou' => 'Lab',
+            ],
             ['Dc' => 'example'],
-            ['Dc' => 'com']];
+            ['Dc' => 'com'],
+        ];
 
         $dn11 = Ldap\Dn::fromString($dnString1);
         $dn12 = Ldap\Dn::fromArray($dnArray1);
@@ -151,8 +162,10 @@ class CreationTest extends TestCase
 
         $dnString = 'Cn=Users+Ou=Lab,dc=example,dc=com';
         $dn       = Ldap\Dn::fromString($dnString);
-        $this->assertEquals(['Cn' => 'Users',
-                                 'Ou'  => 'Lab'], $dn->getRdn());
+        $this->assertEquals([
+            'Cn' => 'Users',
+            'Ou' => 'Lab',
+        ], $dn->getRdn());
         $this->assertEquals('Cn=Users+Ou=Lab', $dn->getRdnString());
     }
 

@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use PHPUnit\Framework\TestCase;
+
+use function getenv;
+use function strstr;
 
 /* Note: The ldap_connect function does not actually try to connect. This
  * is why many tests attempt to bind with invalid credentials. If the
@@ -17,9 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class CanonTest extends TestCase
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $options;
 
     protected function setUp(): void
@@ -260,8 +263,8 @@ class CanonTest extends TestCase
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertStringContainsString(
-                'Binding domain is not an authority for user: invalid@' .
-                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
+                'Binding domain is not an authority for user: invalid@'
+                    . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 $zle->getMessage()
             );
         }
@@ -277,8 +280,8 @@ class CanonTest extends TestCase
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertStringContainsString(
-                'Binding domain is not an authority for user: ' .
-                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
+                'Binding domain is not an authority for user: '
+                    . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\invalid',
                 $zle->getMessage()
             );
         }
@@ -316,8 +319,8 @@ class CanonTest extends TestCase
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertStringContainsString(
-                'Invalid account name syntax: 0@' .
-                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
+                'Invalid account name syntax: 0@'
+                    . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME'),
                 $zle->getMessage()
             );
         }
@@ -330,8 +333,8 @@ class CanonTest extends TestCase
             $this->fail('Expected exception not thrown');
         } catch (Exception\LdapException $zle) {
             $this->assertStringContainsString(
-                'Invalid account name syntax: ' .
-                    getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
+                'Invalid account name syntax: '
+                    . getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT') . '\\0',
                 $zle->getMessage()
             );
         }

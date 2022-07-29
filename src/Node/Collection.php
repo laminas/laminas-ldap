@@ -3,6 +3,7 @@
 namespace Laminas\Ldap\Node;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Node;
 
 /**
  * Laminas\Ldap\Node\Collection provides a collection of nodes.
@@ -13,7 +14,7 @@ class Collection extends Ldap\Collection
      * Creates the data structure for the given entry data
      *
      * @param  array $data
-     * @return \Laminas\Ldap\Node
+     * @return Node
      */
     protected function createEntry(array $data)
     {

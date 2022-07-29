@@ -3,21 +3,21 @@
 namespace Laminas\Ldap\Node;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Dn;
 
 /**
  * Laminas\Ldap\Node\RootDse provides a simple data-container for the RootDse node.
  */
 class RootDse extends AbstractNode
 {
-    const SERVER_TYPE_GENERIC         = 1;
-    const SERVER_TYPE_OPENLDAP        = 2;
-    const SERVER_TYPE_ACTIVEDIRECTORY = 3;
-    const SERVER_TYPE_EDIRECTORY      = 4;
+    public const SERVER_TYPE_GENERIC         = 1;
+    public const SERVER_TYPE_OPENLDAP        = 2;
+    public const SERVER_TYPE_ACTIVEDIRECTORY = 3;
+    public const SERVER_TYPE_EDIRECTORY      = 4;
 
     /**
      * Factory method to create the RootDse.
      *
-     * @param \Laminas\Ldap\Ldap $ldap
      * @return RootDse
      */
     public static function create(Ldap\Ldap $ldap)
@@ -28,7 +28,8 @@ class RootDse extends AbstractNode
             return new RootDse\ActiveDirectory($dn, $data);
         } elseif (isset($data['dsaname'])) {
             return new RootDse\eDirectory($dn, $data);
-        } elseif (isset($data['structuralobjectclass'])
+        } elseif (
+            isset($data['structuralobjectclass'])
             && $data['structuralobjectclass'][0] === 'OpenLDAProotDSE'
         ) {
             return new RootDse\OpenLdap($dn, $data);
@@ -38,11 +39,8 @@ class RootDse extends AbstractNode
     }
 
     /**
-     * Constructor.
-     *
      * Constructor is protected to enforce the use of factory methods.
      *
-     * @param \Laminas\Ldap\Dn $dn
      * @param array         $data
      */
     protected function __construct(Ldap\Dn $dn, array $data)
@@ -105,7 +103,7 @@ class RootDse extends AbstractNode
     /**
      * Returns the schema DN
      *
-     * @return \Laminas\Ldap\Dn
+     * @return Dn
      */
     public function getSchemaDn()
     {

@@ -6,7 +6,15 @@ use ArrayAccess;
 use Countable;
 use Iterator;
 use Laminas\Ldap;
+use Laminas\Ldap\Node;
 use RecursiveIterator;
+
+use function array_key_exists;
+use function count;
+use function current;
+use function key;
+use function next;
+use function reset;
 
 /**
  * Laminas\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
@@ -21,10 +29,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
     private $data;
 
     /**
-     * Constructor.
-     *
      * @param array $data
-     * @return \Laminas\Ldap\Node\ChildrenIterator
      */
     public function __construct(array $data)
     {
@@ -46,7 +51,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * Return the current child.
      * Implements Iterator
      *
-     * @return \Laminas\Ldap\Node
+     * @return Node
      */
     public function current()
     {
@@ -91,7 +96,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      */
     public function valid()
     {
-        return (current($this->data) !== false);
+        return current($this->data) !== false;
     }
 
     /**
@@ -120,7 +125,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
             return $this->current()->getChildren();
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -136,7 +141,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
             return $this->data[$rdn];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -148,14 +153,15 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      */
     public function offsetExists($rdn)
     {
-        return (array_key_exists($rdn, $this->data));
+        return array_key_exists($rdn, $this->data);
     }
 
     /**
      * Does nothing.
      * Implements ArrayAccess.
      *
-     * @param $name
+     * @param string $name
+     * @return void
      */
     public function offsetUnset($name)
     {
@@ -166,7 +172,8 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * Implements ArrayAccess.
      *
      * @param  string $name
-     * @param         $value
+     * @param  mixed  $value
+     * @return void
      */
     public function offsetSet($name, $value)
     {

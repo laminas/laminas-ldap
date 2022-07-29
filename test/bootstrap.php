@@ -1,5 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
+use LaminasTest\Ldap\TestAsset\BuiltinFunctionMocks;
+
 /*
  * Set error reporting to the level to which Laminas code must comply.
  */
@@ -40,4 +44,4 @@ putenv(sprintf("LDAPTLS_KEY=%s", getenv('TESTS_LAMINAS_LDAP_SASL_KEY')));
  * phpunit would find them and error while attempting to serialize global
  * variables.
  */
-\LaminasTest\Ldap\TestAsset\BuiltinFunctionMocks::createMocks();
+BuiltinFunctionMocks::createMocks();

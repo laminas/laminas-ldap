@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Node;
+
+use function strstr;
 
 /**
  * @group      Laminas_Ldap
@@ -14,7 +18,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 {
     public function testAddNewUserWithPasswordOpenLDAP()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
@@ -36,7 +41,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
         try {
             $this->getLDAP()->add($dn, $data);
 
-            $this->assertInstanceOf('Laminas\Ldap\Ldap', $this->getLDAP()->bind($dn, $password));
+            $this->assertInstanceOf(\Laminas\Ldap\Ldap::class, $this->getLDAP()->bind($dn, $password));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
@@ -51,7 +56,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
     public function testChangePasswordWithUserAccountOpenLDAP()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_OPENLDAP
         ) {
             $this->markTestSkipped('Test can only be run on an OpenLDAP server');
@@ -94,7 +100,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
                         || strstr($message, 'Server is unwilling to perform'));
             }
 
-            $this->assertInstanceOf('Laminas\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf(\Laminas\Ldap\Ldap::class, $this->getLDAP()->bind($dn, $newPasswd));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);
@@ -109,7 +115,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
     public function testAddNewUserWithPasswordActiveDirectory()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY
         ) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
@@ -154,7 +161,8 @@ class ChangePasswordTest extends AbstractOnlineTestCase
 
     public function testChangePasswordWithUserAccountActiveDirectory()
     {
-        if ($this->getLDAP()->getRootDse()->getServerType() !==
+        if (
+            $this->getLDAP()->getRootDse()->getServerType() !==
             Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY
         ) {
             $this->markTestSkipped('Test can only be run on an ActiveDirectory server');
@@ -200,7 +208,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
                         || strstr($message, 'Server is unwilling to perform'));
             }
 
-            $this->assertInstanceOf('\Laminas\Ldap\Ldap', $this->getLDAP()->bind($dn, $newPasswd));
+            $this->assertInstanceOf(\Laminas\Ldap\Ldap::class, $this->getLDAP()->bind($dn, $newPasswd));
 
             $this->getLDAP()->bind();
             $this->getLDAP()->delete($dn);

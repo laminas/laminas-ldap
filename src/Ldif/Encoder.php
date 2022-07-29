@@ -4,6 +4,32 @@ namespace Laminas\Ldap\Ldif;
 
 use Laminas\Ldap;
 
+use function array_change_key_case;
+use function array_key_exists;
+use function array_merge;
+use function base64_decode;
+use function base64_encode;
+use function chunk_split;
+use function count;
+use function explode;
+use function in_array;
+use function is_array;
+use function is_numeric;
+use function is_scalar;
+use function ksort;
+use function ord;
+use function preg_match;
+use function rtrim;
+use function sprintf;
+use function strlen;
+use function strtolower;
+use function substr;
+use function trim;
+
+use const CASE_LOWER;
+use const PHP_EOL;
+use const SORT_STRING;
+
 /**
  * Laminas\Ldap\Ldif\Encoder provides methods to encode and decode LDAP data into/from Ldif.
  */
@@ -17,17 +43,13 @@ class Encoder
     protected $options = [
         'sort'    => true,
         'version' => 1,
-        'wrap'    => 78
+        'wrap'    => 78,
     ];
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $versionWritten = false;
 
     /**
-     * Constructor.
-     *
      * @param  array $options Additional options used during encoding
      */
     protected function __construct(array $options = [])
@@ -57,9 +79,9 @@ class Encoder
     protected function _decode($string)
     {
         // @codingStandardsIgnoreEnd
-        $items = [];
-        $item  = [];
-        $last  = null;
+        $items     = [];
+        $item      = [];
+        $last      = null;
         $inComment = false;
         foreach (explode("\n", $string) as $line) {
             $line    = rtrim($line, "\x09\x0A\x0D\x00\x0B");
@@ -71,9 +93,9 @@ class Encoder
                 continue;
             } elseif (preg_match('/^([a-z0-9;-]+)(:[:<]?\s*)([^<]*)$/i', $line, $matches)) {
                 $inComment = false;
-                $name  = strtolower($matches[1]);
-                $type  = trim($matches[2]);
-                $value = $matches[3];
+                $name      = strtolower($matches[1]);
+                $type      = trim($matches[2]);
+                $value     = $matches[3];
                 if ($last !== null) {
                     $this->pushAttribute($last, $item);
                 }
@@ -93,7 +115,7 @@ class Encoder
         }
         $items[] = $item;
 
-        return (count($items) > 1) ? $items : $items[0];
+        return count($items) > 1 ? $items : $items[0];
     }
 
     /**
@@ -115,7 +137,7 @@ class Encoder
         } elseif (isset($entry[$name]) && $value !== '') {
             $entry[$name][] = $value;
         } else {
-            $entry[$name] = ($value !== '') ? [$value] : [];
+            $entry[$name] = $value !== '' ? [$value] : [];
         }
     }
 
@@ -152,7 +174,7 @@ class Encoder
             return $value->toLdif($this->options);
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -202,7 +224,7 @@ class Encoder
             }
         }
         // Test for ending space
-        if (substr($string, -1) == ' ') {
+        if (substr($string, -1) === ' ') {
             $base64 = true;
         }
 
@@ -264,10 +286,11 @@ class Encoder
     {
         $string     = '';
         $attributes = array_change_key_case($attributes, CASE_LOWER);
-        if (! $this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
+        if (
+            ! $this->versionWritten && array_key_exists('dn', $attributes) && isset($this->options['version'])
             && array_key_exists('objectclass', $attributes)
         ) {
-            $string .= sprintf('version: %d', $this->options['version']) . PHP_EOL;
+            $string              .= sprintf('version: %d', $this->options['version']) . PHP_EOL;
             $this->versionWritten = true;
         }
 

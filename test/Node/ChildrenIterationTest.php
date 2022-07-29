@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
+use RecursiveIteratorIterator;
+
+use function getenv;
 
 /**
  * @group      Laminas_Ldap
@@ -32,7 +38,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
         foreach ($children as $rdn => $n) {
             $dn  = $n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $rdn = Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
-            if ($i == 1) {
+            if ($i === 1) {
                 $this->assertEquals('ou=Node', $rdn);
                 $this->assertEquals($this->createDn('ou=Node,'), $dn);
             } else {
@@ -47,15 +53,15 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
     public function testSimpleRecursiveIteration()
     {
         $node = $this->getLDAP()->getBaseNode();
-        $ri   = new \RecursiveIteratorIterator($node, \RecursiveIteratorIterator::SELF_FIRST);
+        $ri   = new RecursiveIteratorIterator($node, RecursiveIteratorIterator::SELF_FIRST);
         $i    = 0;
         foreach ($ri as $rdn => $n) {
             $dn  = $n->getDn()->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER);
             $rdn = Ldap\Dn::implodeRdn($n->getRdnArray(), Ldap\Dn::ATTR_CASEFOLD_LOWER);
-            if ($i == 0) {
+            if ($i === 0) {
                 $this->assertEquals(Ldap\Dn::fromString(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'))
                         ->toString(Ldap\Dn::ATTR_CASEFOLD_LOWER), $dn);
-            } elseif ($i == 1) {
+            } elseif ($i === 1) {
                 $this->assertEquals('ou=Node', $rdn);
                 $this->assertEquals($this->createDn('ou=Node,'), $dn);
             } else {
@@ -84,10 +90,10 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
     {
         $node  = $this->getLDAP()->getBaseNode();
         $nodes = $node->searchChildren('(objectClass=*)');
-        foreach ($nodes as $rdn => $n) {
+        foreach ($nodes as $rdn => $n) { // phpcs:ignore
             // do nothing - just iterate
         }
         $nodes->next();
-        $this->assertInstanceOf(\Laminas\Ldap\Node::class, $nodes->current());
+        $this->assertInstanceOf(Node::class, $nodes->current());
     }
 }

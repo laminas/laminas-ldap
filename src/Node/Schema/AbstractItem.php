@@ -5,6 +5,10 @@ namespace Laminas\Ldap\Node\Schema;
 use ArrayAccess;
 use Countable;
 use Laminas\Ldap\Exception;
+use Laminas\Ldap\Exception\BadMethodCallException;
+
+use function array_key_exists;
+use function count;
 
 /**
  * This class provides a base implementation for managing schema
@@ -20,8 +24,6 @@ abstract class AbstractItem implements ArrayAccess, Countable
     protected $data;
 
     /**
-     * Constructor.
-     *
      * @param array $data
      */
     public function __construct(array $data)
@@ -63,7 +65,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
             return $this->data[$name];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -74,7 +76,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      */
     public function __isset($name)
     {
-        return (array_key_exists($name, $this->data));
+        return array_key_exists($name, $this->data);
     }
 
     /**
@@ -85,7 +87,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      *
      * @param  string $name
      * @param  mixed  $value
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function offsetSet($name, $value)
     {
@@ -110,7 +112,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      * This method is needed for a full implementation of ArrayAccess
      *
      * @param  string $name
-     * @throws \Laminas\Ldap\Exception\BadMethodCallException
+     * @throws BadMethodCallException
      */
     public function offsetUnset($name)
     {

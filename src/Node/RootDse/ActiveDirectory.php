@@ -3,6 +3,7 @@
 namespace Laminas\Ldap\Node\RootDse;
 
 use Laminas\Ldap;
+use Laminas\Ldap\Dn;
 use Laminas\Ldap\Node;
 
 /**
@@ -207,7 +208,7 @@ class ActiveDirectory extends Node\RootDse
     /**
      * Returns the schema DN
      *
-     * @return \Laminas\Ldap\Dn
+     * @return Dn
      */
     public function getSchemaDn()
     {

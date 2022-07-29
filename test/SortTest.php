@@ -1,8 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\Collection\DefaultIterator;
+use ReflectionObject;
+
+use function bin2hex;
+use function decbin;
+use function getenv;
+use function str_replace;
+use function strlen;
+use function strnatcasecmp;
 
 class SortTest extends AbstractOnlineTestCase
 {
@@ -30,12 +40,12 @@ class SortTest extends AbstractOnlineTestCase
             ['l']
         );
 
-        $iterator = new DefaultIterator($this->getLdap(), $search);
+        $iterator     = new DefaultIterator($this->getLdap(), $search);
         $sortFunction = function ($a, $b) {
             return 1;
         };
 
-        $reflectionObject = new \ReflectionObject($iterator);
+        $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
         $reflectionProperty->setAccessible(true);
         $this->assertEquals('strnatcasecmp', $reflectionProperty->getValue($iterator));
@@ -59,7 +69,7 @@ class SortTest extends AbstractOnlineTestCase
 
         $iterator = new DefaultIterator($this->getLdap(), $search);
 
-        $reflectionObject = new \ReflectionObject($iterator);
+        $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
         $reflectionProperty->setAccessible(true);
         $this->assertEquals('strnatcasecmp', $reflectionProperty->getValue($iterator));
@@ -89,8 +99,8 @@ class SortTest extends AbstractOnlineTestCase
             ['l']
         );
 
-        $iterator = new DefaultIterator($this->getLdap(), $search);
-        $sortFunction = function ($a, $b) use ($lSorted) {
+        $iterator     = new DefaultIterator($this->getLdap(), $search);
+        $sortFunction = function ($a, $b) {
             // Sort values by the number of "1" in their binary representation
             // and when that is equals by their position in the alphabet.
             $f = strlen(str_replace('0', '', decbin(bin2hex($a)))) -
@@ -104,7 +114,7 @@ class SortTest extends AbstractOnlineTestCase
         };
         $iterator->setSortFunction($sortFunction);
 
-        $reflectionObject = new \ReflectionObject($iterator);
+        $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
         $reflectionProperty->setAccessible(true);
         $this->assertEquals($sortFunction, $reflectionProperty->getValue($iterator));

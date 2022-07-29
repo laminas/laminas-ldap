@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
@@ -27,7 +29,7 @@ class ImplodingTest extends TestCase
             ["cn" => "name1"],
             ["cn" => "name2"],
             ["dc" => "example"],
-            ["dc" => "org"]
+            ["dc" => "org"],
         ];
         $dn       = Ldap\Dn::implodeDn($dnArray);
         $this->assertEquals($expected, $dn);
@@ -57,17 +59,21 @@ class ImplodingTest extends TestCase
 
     public function testImplodeRdnMultiValuedRdn()
     {
-        $a        = ['cn'  => 'value',
-                          'uid' => 'testUser'];
+        $a        = [
+            'cn'  => 'value',
+            'uid' => 'testUser',
+        ];
         $expected = 'cn=value+uid=testUser';
         $this->assertEquals($expected, Ldap\Dn::implodeRdn($a));
     }
 
     public function testImplodeRdnMultiValuedRdn2()
     {
-        $a        = ['cn'  => 'value',
-                          'uid' => 'testUser',
-                          'ou'  => 'myDep'];
+        $a        = [
+            'cn'  => 'value',
+            'uid' => 'testUser',
+            'ou'  => 'myDep',
+        ];
         $expected = 'cn=value+ou=myDep+uid=testUser';
         $this->assertEquals($expected, Ldap\Dn::implodeRdn($a));
     }
@@ -90,17 +96,21 @@ class ImplodingTest extends TestCase
 
     public function testImplodeRdnMultiValuedRdnCaseFold()
     {
-        $a        = ['cn'  => 'value',
-                          'uid' => 'testUser',
-                          'ou'  => 'myDep'];
+        $a        = [
+            'cn'  => 'value',
+            'uid' => 'testUser',
+            'ou'  => 'myDep',
+        ];
         $expected = 'CN=value+OU=myDep+UID=testUser';
         $this->assertEquals(
             $expected,
             Ldap\Dn::implodeRdn($a, Ldap\Dn::ATTR_CASEFOLD_UPPER)
         );
-        $a        = ['CN'  => 'value',
-                          'uID' => 'testUser',
-                          'ou'  => 'myDep'];
+        $a        = [
+            'CN'  => 'value',
+            'uID' => 'testUser',
+            'ou'  => 'myDep',
+        ];
         $expected = 'cn=value+ou=myDep+uid=testUser';
         $this->assertEquals(
             $expected,

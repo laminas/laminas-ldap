@@ -2,6 +2,11 @@
 
 namespace Laminas\Ldap\Filter;
 
+use function array_shift;
+use function count;
+use function func_get_args;
+use function vsprintf;
+
 /**
  * Laminas\Ldap\Filter\MaskFilter provides a simple string filter to be used with a mask.
  */

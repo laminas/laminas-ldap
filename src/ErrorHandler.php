@@ -2,16 +2,17 @@
 
 namespace Laminas\Ldap;
 
+use function restore_error_handler;
+use function set_error_handler;
+
+use const E_WARNING;
+
 /**
  * Handle Errors that might occur during execution of ldap_*-functions
- *
- * @package Laminas\Ldap\ErrorHandler
  */
 class ErrorHandler implements ErrorHandlerInterface
 {
-    /**
-     * @var ErrorHandlerInterface The Errror-Handler instance
-     */
+    /** @var ErrorHandlerInterface The Errror-Handler instance */
     protected static $errorHandler;
 
     /**
@@ -21,7 +22,6 @@ class ErrorHandler implements ErrorHandlerInterface
      * Error-constants like E_WARNING or E_NOTICE or E_WARNING ^ E_DEPRECATED
      *
      * @param int $level The Error-level(s) to handle by this ErrorHandler
-     *
      * @return void
      */
     public static function start($level = E_WARNING)
@@ -31,7 +31,6 @@ class ErrorHandler implements ErrorHandlerInterface
 
     /**
      * @param bool|false $throw
-     *
      * @return mixed
      */
     public static function stop($throw = false)
@@ -56,9 +55,9 @@ class ErrorHandler implements ErrorHandlerInterface
     /**
      * This method does nothing on purpose.
      *
-     * @param int $level
-     *
      * @see ErrorHandlerInterface::startErrorHandling()
+     *
+     * @param int $level
      * @return void
      */
     public function startErrorHandling($level = E_WARNING)
@@ -70,9 +69,9 @@ class ErrorHandler implements ErrorHandlerInterface
     /**
      * This method does nothing on purpose.
      *
-     * @param bool|false $throw
-     *
      * @see ErrorHandlerInterface::stopErrorHandling()
+     *
+     * @param bool|false $throw
      * @return void
      */
     public function stopErrorHandling($throw = false)
@@ -82,8 +81,6 @@ class ErrorHandler implements ErrorHandlerInterface
 
     /**
      * Set the error handler to be used
-     *
-     * @param ErrorHandlerInterface $errorHandler
      *
      * @return void
      */

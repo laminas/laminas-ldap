@@ -27,26 +27,28 @@ class ActiveDirectory extends Node\Schema
     /**
      * Parses the schema
      *
-     * @param \Laminas\Ldap\Dn   $dn
-     * @param \Laminas\Ldap\Ldap $ldap
      * @return ActiveDirectory Provides a fluid interface
      */
     protected function parseSchema(Ldap\Dn $dn, Ldap\Ldap $ldap)
     {
         parent::parseSchema($dn, $ldap);
-        foreach ($ldap->search(
-            '(objectClass=classSchema)',
-            $dn,
-            Ldap\Ldap::SEARCH_SCOPE_ONE
-        ) as $node) {
+        foreach (
+            $ldap->search(
+                '(objectClass=classSchema)',
+                $dn,
+                Ldap\Ldap::SEARCH_SCOPE_ONE
+            ) as $node
+        ) {
             $val                                  = new ObjectClass\ActiveDirectory($node);
             $this->objectClasses[$val->getName()] = $val;
         }
-        foreach ($ldap->search(
-            '(objectClass=attributeSchema)',
-            $dn,
-            Ldap\Ldap::SEARCH_SCOPE_ONE
-        ) as $node) {
+        foreach (
+            $ldap->search(
+                '(objectClass=attributeSchema)',
+                $dn,
+                Ldap\Ldap::SEARCH_SCOPE_ONE
+            ) as $node
+        ) {
             $val                                   = new AttributeType\ActiveDirectory($node);
             $this->attributeTypes[$val->getName()] = $val;
         }

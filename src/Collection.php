@@ -4,6 +4,9 @@ namespace Laminas\Ldap;
 
 use Countable;
 use Iterator;
+use ReturnTypeWillChange;
+
+use function array_key_exists;
 
 /**
  * Laminas\Ldap\Collection wraps a list of LDAP entries.
@@ -15,7 +18,7 @@ class Collection implements Iterator, Countable
      *
      * @var Collection\DefaultIterator
      */
-    protected $iterator = null;
+    protected $iterator;
 
     /**
      * Current item number
@@ -31,11 +34,6 @@ class Collection implements Iterator, Countable
      */
     protected $cache = [];
 
-    /**
-     * Constructor.
-     *
-     * @param Collection\DefaultIterator $iterator
-     */
     public function __construct(Collection\DefaultIterator $iterator)
     {
         $this->iterator = $iterator;
@@ -73,7 +71,7 @@ class Collection implements Iterator, Countable
     /**
      * Get first entry
      *
-     * @return array
+     * @return array|null
      */
     public function getFirst()
     {
@@ -81,7 +79,7 @@ class Collection implements Iterator, Countable
             $this->rewind();
             return $this->current();
         }
-        return;
+        return null;
     }
 
     /**
@@ -100,7 +98,7 @@ class Collection implements Iterator, Countable
      *
      * @return int
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return $this->iterator->count();
@@ -113,7 +111,7 @@ class Collection implements Iterator, Countable
      * @return array|null
      * @throws Exception\LdapException
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         if ($this->count() > 0) {
@@ -123,13 +121,13 @@ class Collection implements Iterator, Countable
             if (! array_key_exists($this->current, $this->cache)) {
                 $current = $this->iterator->current();
                 if ($current === null) {
-                    return;
+                    return null;
                 }
                 $this->cache[$this->current] = $this->createEntry($current);
             }
             return $this->cache[$this->current];
         }
-        return;
+        return null;
     }
 
     /**
@@ -156,7 +154,7 @@ class Collection implements Iterator, Countable
             }
             return $this->iterator->key();
         }
-        return;
+        return null;
     }
 
     /**
@@ -165,7 +163,7 @@ class Collection implements Iterator, Countable
      *
      * @return int|null
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         if ($this->count() > 0) {
@@ -174,7 +172,7 @@ class Collection implements Iterator, Countable
             }
             return $this->current;
         }
-        return;
+        return null;
     }
 
     /**
@@ -183,7 +181,7 @@ class Collection implements Iterator, Countable
      *
      * @throws Exception\LdapException
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         $this->iterator->next();
@@ -196,7 +194,7 @@ class Collection implements Iterator, Countable
      *
      * @throws Exception\LdapException
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->iterator->rewind();
@@ -210,7 +208,7 @@ class Collection implements Iterator, Countable
      *
      * @return bool
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         if (isset($this->cache[$this->current])) {
