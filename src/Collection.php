@@ -75,11 +75,12 @@ class Collection implements Iterator, Countable
      */
     public function getFirst()
     {
-        if ($this->count() > 0) {
-            $this->rewind();
-            return $this->current();
+        if ($this->count() < 1) {
+            return null;
         }
-        return null;
+
+        $this->rewind();
+        return $this->current();
     }
 
     /**
@@ -114,20 +115,23 @@ class Collection implements Iterator, Countable
     #[ReturnTypeWillChange]
     public function current()
     {
-        if ($this->count() > 0) {
-            if ($this->current < 0) {
-                $this->rewind();
-            }
-            if (! array_key_exists($this->current, $this->cache)) {
-                $current = $this->iterator->current();
-                if ($current === null) {
-                    return null;
-                }
-                $this->cache[$this->current] = $this->createEntry($current);
-            }
-            return $this->cache[$this->current];
+        if ($this->count() < 1) {
+            return null;
         }
-        return null;
+
+        if ($this->current < 0) {
+            $this->rewind();
+        }
+
+        if (! array_key_exists($this->current, $this->cache)) {
+            $current = $this->iterator->current();
+            if ($current === null) {
+                return null;
+            }
+            $this->cache[$this->current] = $this->createEntry($current);
+        }
+
+        return $this->cache[$this->current];
     }
 
     /**
