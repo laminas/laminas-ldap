@@ -223,7 +223,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return int
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return $this->itemCount;
@@ -236,7 +236,7 @@ class DefaultIterator implements Iterator, Countable
      * @return array|null
      * @throws LdapException
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function current()
     {
         if (! Handler::isResultEntryHandle($this->current)) {
@@ -297,7 +297,7 @@ class DefaultIterator implements Iterator, Countable
      * @throws LdapException
      * @return string|null
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function key()
     {
         if (! Handler::isResultEntryHandle($this->current)) {
@@ -326,7 +326,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function next()
     {
         next($this->entries);
@@ -341,7 +341,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return void
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->entries);
@@ -356,7 +356,7 @@ class DefaultIterator implements Iterator, Countable
      *
      * @return bool
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return Handler::isResultEntryHandle($this->current);
