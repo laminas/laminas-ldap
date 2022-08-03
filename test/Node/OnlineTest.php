@@ -44,6 +44,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
     public function testChangeReadOnlySystemAttributes()
     {
         $node = $this->getLDAP()->getBaseNode();
+
         try {
             $node->setAttribute('createTimestamp', false);
             $this->fail('Expected exception for modification of read-only attribute createTimestamp');

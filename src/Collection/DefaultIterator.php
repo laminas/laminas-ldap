@@ -408,9 +408,11 @@ class DefaultIterator implements Iterator, Countable
         }
 
         $sortFunction = $this->sortFunction;
-        $sorted       = usort($this->entries, function ($a, $b) use ($sortFunction) {
-            return $sortFunction($a['sortValue'], $b['sortValue']);
-        });
+        $sorted       = usort(
+            $this->entries,
+            static fn($a, $b) =>
+                $sortFunction($a['sortValue'], $b['sortValue'])
+        );
 
         if (! $sorted) {
             throw new Exception\LdapException($this, 'sorting result-set');

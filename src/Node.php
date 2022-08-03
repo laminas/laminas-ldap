@@ -67,10 +67,8 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
 
     /**
      * Controls iteration status
-     *
-     * @var bool
      */
-    private $iteratorRewind = false;
+    private bool $iteratorRewind = false;
 
     /** @var EventManager */
     protected $events;

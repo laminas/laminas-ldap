@@ -14,16 +14,11 @@ use function getenv;
  */
 class CopyRenameTest extends AbstractOnlineTestCase
 {
-    /** @var string */
-    private $orgDn;
-    /** @var string */
-    private $newDn;
-    /** @var string */
-    private $orgSubTreeDn;
-    /** @var string */
-    private $newSubTreeDn;
-    /** @var string */
-    private $targetSubTreeDn;
+    private string $orgDn;
+    private string $newDn;
+    private string $orgSubTreeDn;
+    private string $newSubTreeDn;
+    private string $targetSubTreeDn;
 
     /** @var array */
     private $nodes;

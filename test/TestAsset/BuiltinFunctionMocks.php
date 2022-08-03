@@ -22,7 +22,7 @@ class BuiltinFunctionMocks
         $ldap_connect_mock = new Mock(
             'Laminas\\Ldap',
             'ldap_connect',
-            function () {
+            static function () {
                 static $resource = null;
                 if ($resource === null) {
                     $resource = fopen(__FILE__, 'r');
@@ -34,17 +34,13 @@ class BuiltinFunctionMocks
         $ldap_bind_mock = new Mock(
             'Laminas\\Ldap',
             'ldap_bind',
-            function () {
-                return true;
-            }
+            static fn(): bool => true
         );
 
         $ldap_set_option_mock = new Mock(
             'Laminas\\Ldap',
             'ldap_set_option',
-            function () {
-                return true;
-            }
+            static fn(): bool => true
         );
 
         $ldap_connect_mock->define();
