@@ -9,6 +9,7 @@ use Laminas\Ldap\Dn;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\BadMethodCallException;
 use Laminas\Ldap\Exception\LdapException;
+use ReturnTypeWillChange;
 
 use function array_key_exists;
 use function array_merge;

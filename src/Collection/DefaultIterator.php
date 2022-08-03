@@ -9,6 +9,7 @@ use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Handler;
+use ReturnTypeWillChange;
 
 use function array_change_key_case;
 use function call_user_func;

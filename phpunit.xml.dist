@@ -4,6 +4,7 @@
          bootstrap="test/bootstrap.php"
          colors="true"
          defaultTestSuite="default"
+         convertDeprecationsToExceptions="true"
 >
   <coverage processUncoveredFiles="true">
     <include>
@@ -13,7 +14,7 @@
   <testsuites>
     <testsuite name="default">
       <directory>./test</directory>
-      <exclude>./test/ConnectTest.php</exclude>>
+      <exclude>./test/ConnectTest.php</exclude>
       <exclude>./test/OfflineReconnectTest.php</exclude>
       <exclude>./test/ReconnectTest.php</exclude>
     </testsuite>
