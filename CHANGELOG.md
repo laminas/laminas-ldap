@@ -2,27 +2,25 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.14.1 - TBD
+## 2.14.1 - 2022-08-03
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [2.14.1](https://github.com/laminas/laminas-ldap/milestone/10)
 
-- Nothing.
+2.14.x bugfix release (patch)
 
-### Deprecated
+### 2.14.1
 
-- Nothing.
+- Total issues resolved: **0**
+- Total pull requests resolved: **2**
+- Total contributors: **2**
 
-### Removed
+#### Bug
 
-- Nothing.
-
-### Fixed
-
-- Nothing.
+ - [37: Make deprecations loud in test suite, to highlight problems from #36](https://github.com/laminas/laminas-ldap/pull/37) thanks to @Ocramius
+ - [36: Add backslash to the ReturnTypeWillChange annotation to fix a new php 8.1 compatibility issue](https://github.com/laminas/laminas-ldap/pull/36) thanks to @tbl0605
 
 ## 2.14.0 - 2022-07-29
 
