@@ -1006,7 +1006,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * @return bool
      * @throws Exception\LdapException
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function hasChildren()
     {
         if (! is_array($this->children)) {
@@ -1026,7 +1026,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * @return Node\ChildrenIterator
      * @throws Exception\LdapException
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         if (! is_array($this->children)) {
@@ -1065,7 +1065,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * @return array
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this;
@@ -1077,7 +1077,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * @return string
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->getRdnString();
@@ -1087,7 +1087,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * Move forward to next attribute.
      * Implements Iterator
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->iteratorRewind = false;
@@ -1097,7 +1097,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * Rewind the Iterator to the first attribute.
      * Implements Iterator
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->iteratorRewind = true;
@@ -1110,7 +1110,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      *
      * @return bool
      */
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->iteratorRewind;
