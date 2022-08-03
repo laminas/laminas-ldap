@@ -7,6 +7,7 @@ use Iterator;
 use Laminas\EventManager\EventManager;
 use Laminas\Ldap\Node\Collection;
 use RecursiveIterator;
+use ReturnTypeWillChange;
 
 use function array_key_exists;
 use function array_merge;
