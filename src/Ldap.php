@@ -68,7 +68,7 @@ class Ldap
     /**
      * The raw LDAP extension resource.
      *
-     * @var resource
+     * @var resource|null
      */
     protected $resource;
 

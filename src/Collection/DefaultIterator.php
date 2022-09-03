@@ -49,14 +49,14 @@ class DefaultIterator implements Iterator, Countable
     /**
      * Result identifier resource
      *
-     * @var resource
+     * @var resource|null
      */
     protected $resultId;
 
     /**
      * Current result entry identifier
      *
-     * @var resource
+     * @var resource|null
      */
     protected $current;
 
