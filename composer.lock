@@ -1110,16 +1110,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.14.0",
+            "version": "v4.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "34bea19b6e03d8153165d8f30bba4c3be86184c1"
+                "reference": "0ef6c55a3f47f89d7a374e6f835197a0b5fcf900"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/34bea19b6e03d8153165d8f30bba4c3be86184c1",
-                "reference": "34bea19b6e03d8153165d8f30bba4c3be86184c1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/0ef6c55a3f47f89d7a374e6f835197a0b5fcf900",
+                "reference": "0ef6c55a3f47f89d7a374e6f835197a0b5fcf900",
                 "shasum": ""
             },
             "require": {
@@ -1160,9 +1160,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.14.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.1"
             },
-            "time": "2022-05-31T20:59:12+00:00"
+            "time": "2022-09-04T07:30:47+00:00"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -1462,22 +1462,25 @@
         },
         {
             "name": "php-mock/php-mock-phpunit",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mock/php-mock-phpunit.git",
-                "reference": "2877a0e58f12e91b64bf36ccd080a209dcbf6c30"
+                "reference": "b9ba2db21e7e1c7deba98bc86dcfc6425fb4647d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mock/php-mock-phpunit/zipball/2877a0e58f12e91b64bf36ccd080a209dcbf6c30",
-                "reference": "2877a0e58f12e91b64bf36ccd080a209dcbf6c30",
+                "url": "https://api.github.com/repos/php-mock/php-mock-phpunit/zipball/b9ba2db21e7e1c7deba98bc86dcfc6425fb4647d",
+                "reference": "b9ba2db21e7e1c7deba98bc86dcfc6425fb4647d",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7",
                 "php-mock/php-mock-integration": "^2.1",
                 "phpunit/phpunit": "^6 || ^7 || ^8 || ^9"
+            },
+            "require-dev": {
+                "phpspec/prophecy": "^1.10.3"
             },
             "type": "library",
             "autoload": {
@@ -1514,9 +1517,15 @@
             ],
             "support": {
                 "issues": "https://github.com/php-mock/php-mock-phpunit/issues",
-                "source": "https://github.com/php-mock/php-mock-phpunit/tree/2.6.0"
+                "source": "https://github.com/php-mock/php-mock-phpunit/tree/2.6.1"
             },
-            "time": "2020-02-08T15:44:47+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/michalbundyra",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-09-07T20:40:07+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
