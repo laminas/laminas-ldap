@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/api/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/intro/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/ldif/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/node/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/server/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/tools/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-ldap/usage/</loc>
-         <lastmod>2022-09-03</lastmod>
+         <lastmod>2022-10-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
