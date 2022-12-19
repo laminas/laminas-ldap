@@ -233,7 +233,6 @@ class DefaultIterator implements Iterator, Countable
 
     /**
      * @inheritDoc
-     *
      * @throws LdapException
      */
     #[ReturnTypeWillChange]
@@ -292,7 +291,6 @@ class DefaultIterator implements Iterator, Countable
 
     /**
      * @inheritDoc
-     *
      * @throws LdapException
      */
     #[ReturnTypeWillChange]

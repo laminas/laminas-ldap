@@ -87,9 +87,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      * Always throws {@see BadMethodCallException}
      *
      * This method is needed for a full implementation of ArrayAccess
-     *
-     * @return never
-     *
+     * @psalm-return never
      * @throws BadMethodCallException
      */
     public function offsetSet($offset, $value)
@@ -114,9 +112,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
-     *
-     * @return never
-     *
+     * @psalm-return never
      * @throws BadMethodCallException
      */
     public function offsetUnset($offset)

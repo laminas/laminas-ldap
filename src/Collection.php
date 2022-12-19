@@ -12,7 +12,6 @@ use function array_key_exists;
  * Laminas\Ldap\Collection wraps a list of LDAP entries.
  *
  * @template TItem
- *
  * @template-implements Iterator<int, TItem>
  */
 class Collection implements Iterator, Countable
@@ -106,7 +105,6 @@ class Collection implements Iterator, Countable
 
     /**
      * @inheritDoc
-     *
      * @throws Exception\LdapException
      */
     #[ReturnTypeWillChange]
@@ -134,7 +132,8 @@ class Collection implements Iterator, Countable
     /**
      * Creates the data structure for the given entry data
      *
-     * @param  array{dn: string, ...} $data
+     * @param array $data
+     * @psalm-param array{dn: string, ...} $data
      * @return TItem
      */
     protected function createEntry(array $data)
@@ -173,7 +172,6 @@ class Collection implements Iterator, Countable
 
     /**
      * @inheritDoc
-     *
      * @throws Exception\LdapException
      */
     #[ReturnTypeWillChange]
@@ -185,7 +183,6 @@ class Collection implements Iterator, Countable
 
     /**
      * @inheritDoc
-     *
      * @throws Exception\LdapException
      */
     #[ReturnTypeWillChange]

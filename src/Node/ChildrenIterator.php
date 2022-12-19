@@ -18,7 +18,7 @@ use function reset;
 
 /**
  * Laminas\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
- * 
+ *
  * @template-implements Iterator<string, Node>
  * @template-implements RecursiveIterator<string, Node>
  * @template-implements ArrayAccess<string, Node>
@@ -28,7 +28,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
     /**
      * An array of Laminas\Ldap\Node objects
      *
-     * @var array<string, Node> 
+     * @var array<string, Node>
      */
     private array $data;
 
@@ -92,7 +92,6 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
 
     /**
      * @inheritDoc
-     *
      * @return ChildrenIterator|null
      */
     public function getChildren()

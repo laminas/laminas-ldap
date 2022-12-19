@@ -871,9 +871,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * Sets a LDAP attribute.
      *
      * This is an offline method.
-     *
      * @return void
-     *
      * @throws Exception\LdapException
      */
     public function offsetSet($offset, $value)
@@ -889,9 +887,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
      * This method deletes the attribute.
      *
      * This is an offline method.
-     *
      * @return void
-     *
      * @throws Exception\LdapException
      */
     public function offsetUnset($offset)
@@ -1003,11 +999,12 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     }
 
     /**
+     * @inheritDoc
+     *
      * Checks if current node has children.
      * Returns whether the current element has children.
      *
      * Can be used offline but returns false if children have not been retrieved yet.
-     *
      * @throws Exception\LdapException
      */
     #[ReturnTypeWillChange]

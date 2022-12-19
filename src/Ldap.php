@@ -1099,7 +1099,8 @@ class Ldap
      * @param  string|null                        $collectionClass
      * @param  int                            $sizelimit
      * @param  int                            $timelimit
-     * @return Collection<array{dn: string, ...}>
+     * @return Collection
+     * @psalm-return Collection<array{dn: string, ...}>
      * @throws Exception\LdapException
      */
     public function search(
@@ -1184,7 +1185,8 @@ class Ldap
      * Extension point for collection creation
      *
      * @param  class-string<Collection>|null $collectionClass
-     * @return Collection<array{dn: string, ...}>
+     * @return Collection
+     * @psalm-return Collection<array{dn: string, ...}>
      * @throws Exception\LdapException
      */
     protected function createCollection(Collection\DefaultIterator $iterator, $collectionClass)

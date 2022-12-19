@@ -418,9 +418,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * Sets a LDAP attribute.
      *
      * This is an offline method.
-     *
-     * @return never
-     *
+     * @psalm-return never
      * @throws BadMethodCallException
      */
     #[ReturnTypeWillChange]
@@ -435,7 +433,6 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * Gets a LDAP attribute.
      *
      * This is an offline method.
-     *
      * @throws LdapException
      */
     #[ReturnTypeWillChange]
@@ -452,9 +449,7 @@ abstract class AbstractNode implements ArrayAccess, Countable
      * This method deletes the attribute.
      *
      * This is an offline method.
-     *
-     * @return never
-     *
+     * @psalm-return never
      * @throws BadMethodCallException
      */
     #[ReturnTypeWillChange]
