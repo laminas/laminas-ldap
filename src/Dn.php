@@ -33,6 +33,8 @@ use const SORT_STRING;
 
 /**
  * Laminas\Ldap\Dn provides an API for DN manipulation
+ *
+ * @template-implements ArrayAccess<int, array>
  */
 class Dn implements ArrayAccess
 {
@@ -93,7 +95,7 @@ class Dn implements ArrayAccess
         if (empty($dn)) {
             $dnArray = [];
         } else {
-            $dnArray = static::explodeDn((string) $dn);
+            $dnArray = static::explodeDn($dn);
         }
         return new static($dnArray, $caseFold);
     }
@@ -391,12 +393,7 @@ class Dn implements ArrayAccess
         return $this->toString();
     }
 
-    /**
-     * Required by the ArrayAccess implementation
-     *
-     * @param  int $offset
-     * @return bool
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
@@ -407,38 +404,21 @@ class Dn implements ArrayAccess
         return true;
     }
 
-    /**
-     * Proxy to {@see get()}
-     * Required by the ArrayAccess implementation
-     *
-     * @param  int $offset
-     * @return array
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->get($offset, 1, null);
     }
 
-    /**
-     * Proxy to {@see set()}
-     * Required by the ArrayAccess implementation
-     *
-     * @param int   $offset
-     * @param array $value
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         $this->set($offset, $value);
     }
 
-    /**
-     * Proxy to {@see remove()}
-     * Required by the ArrayAccess implementation
-     *
-     * @param int $offset
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
@@ -529,8 +509,11 @@ class Dn implements ArrayAccess
      * @link   http://pear.php.net/package/Net_LDAP2
      * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
      *
-     * @param  string|array $values Array of DN Values
-     * @return array Same as $values, but unescaped
+     * @template TInput of string|array<string>
+     *
+     * @param TInput $values Array of DN Values
+     *
+     * @return ($values is string ? string : ($values is array{string} ? string : string|array<string>))
      */
     public static function unescapeValue($values = [])
     {

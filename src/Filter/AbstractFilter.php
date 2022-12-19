@@ -80,8 +80,11 @@ abstract class AbstractFilter
      * @link   http://pear.php.net/package/Net_LDAP2
      * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
      *
-     * @param  string|array $values Array of values to escape
-     * @return array Array $values, but escaped
+     * @template TInput of string|array<string>
+     *
+     * @param TInput $values Array of DN Values
+     *
+     * @return ($values is string ? string : ($values is array{string} ? string : string|array<string>))
      */
     public static function escapeValue($values = [])
     {
@@ -109,8 +112,11 @@ abstract class AbstractFilter
      * @link   http://pear.php.net/package/Net_LDAP2
      * @see    Net_LDAP2_Util::escape_filter_value() from Benedikt Hallinger <beni@php.net>
      *
-     * @param  string|array $values Array of values to escape
-     * @return array Array $values, but unescaped
+     * @template TInput of string|array<string>
+     *
+     * @param TInput $values Array of DN Values
+     *
+     * @return ($values is string ? string : ($values is array{string} ? string : string|array<string>))
      */
     public static function unescapeValue($values = [])
     {

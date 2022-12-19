@@ -20,6 +20,9 @@ use function strtolower;
 
 /**
  * Laminas\Ldap\Node provides an object oriented view into a LDAP node.
+ *
+ * @template-implements Iterator<string, Node>
+ * @template-implements RecursiveIterator<string, Node>
  */
 class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
 {
@@ -61,7 +64,7 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     /**
      * Holds an array of the current node's children.
      *
-     * @var Node[]
+     * @var array<string, Node>|null
      */
     protected $children;
 
@@ -863,34 +866,33 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     }
 
     /**
+     * @inheritDoc
+     *
      * Sets a LDAP attribute.
-     * Implements ArrayAccess.
      *
      * This is an offline method.
-     *
-     * @param  string $name
-     * @param  mixed  $value
+     * @return void
      * @throws Exception\LdapException
      */
-    public function offsetSet($name, $value)
+    public function offsetSet($offset, $value)
     {
-        $this->setAttribute($name, $value);
+        $this->setAttribute($offset, $value);
     }
 
     /**
+     * @inheritDoc
+     *
      * Deletes a LDAP attribute.
-     * Implements ArrayAccess.
      *
      * This method deletes the attribute.
      *
      * This is an offline method.
-     *
-     * @param  string $name
+     * @return void
      * @throws Exception\LdapException
      */
-    public function offsetUnset($name)
+    public function offsetUnset($offset)
     {
-        $this->deleteAttribute($name);
+        $this->deleteAttribute($offset);
     }
 
     /**
@@ -997,12 +999,12 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
     }
 
     /**
+     * @inheritDoc
+     *
      * Checks if current node has children.
      * Returns whether the current element has children.
      *
      * Can be used offline but returns false if children have not been retrieved yet.
-     *
-     * @return bool
      * @throws Exception\LdapException
      */
     #[ReturnTypeWillChange]
@@ -1058,57 +1060,35 @@ class Node extends Node\AbstractNode implements Iterator, RecursiveIterator
         return static::fromLdap($parentDn, $ldap);
     }
 
-    /**
-     * Return the current attribute.
-     * Implements Iterator
-     *
-     * @return array
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function current()
     {
         return $this;
     }
 
-    /**
-     * Return the attribute name.
-     * Implements Iterator
-     *
-     * @return string
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function key()
     {
         return $this->getRdnString();
     }
 
-    /**
-     * Move forward to next attribute.
-     * Implements Iterator
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function next()
     {
         $this->iteratorRewind = false;
     }
 
-    /**
-     * Rewind the Iterator to the first attribute.
-     * Implements Iterator
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function rewind()
     {
         $this->iteratorRewind = true;
     }
 
-    /**
-     * Check if there is a current attribute
-     * after calls to rewind() or next().
-     * Implements Iterator
-     *
-     * @return bool
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function valid()
     {
