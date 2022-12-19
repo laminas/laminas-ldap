@@ -23,6 +23,8 @@ use const SORT_STRING;
 
 /**
  * This class provides a base implementation for LDAP nodes
+ *
+ * @template-implements ArrayAccess<string, mixed>
  */
 abstract class AbstractNode implements ArrayAccess, Countable
 {
@@ -411,74 +413,73 @@ abstract class AbstractNode implements ArrayAccess, Countable
     }
 
     /**
+     * @inheritDoc
+     *
      * Sets a LDAP attribute.
-     * Implements ArrayAccess.
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @return never
+     *
      * @throws BadMethodCallException
      */
     #[ReturnTypeWillChange]
-    public function offsetSet($name, $value)
+    public function offsetSet($offset, $value)
     {
         throw new Exception\BadMethodCallException();
     }
 
     /**
+     * @inheritDoc
+     *
      * Gets a LDAP attribute.
-     * Implements ArrayAccess.
      *
      * This is an offline method.
      *
-     * @param  string $name
-     * @return mixed
      * @throws LdapException
      */
     #[ReturnTypeWillChange]
-    public function offsetGet($name)
+    public function offsetGet($offset)
     {
-        return $this->getAttribute($name, null);
+        return $this->getAttribute($offset, null);
     }
 
     /**
+     * @inheritDoc
+     *
      * Deletes a LDAP attribute.
-     * Implements ArrayAccess.
      *
      * This method deletes the attribute.
      *
      * This is an offline method.
      *
-     * @param  string $name
+     * @return never
+     *
      * @throws BadMethodCallException
      */
     #[ReturnTypeWillChange]
-    public function offsetUnset($name)
+    public function offsetUnset($offset)
     {
         throw new Exception\BadMethodCallException();
     }
 
     /**
+     * @inheritDoc
+     *
      * Checks whether a given attribute exists.
-     * Implements ArrayAccess.
      *
      * Empty attributes will be treated as non-existent.
-     *
-     * @param  string $name
-     * @return bool
      */
     #[ReturnTypeWillChange]
-    public function offsetExists($name)
+    public function offsetExists($offset)
     {
-        return $this->existsAttribute($name, false);
+        return $this->existsAttribute($offset, false);
     }
 
     /**
-     * Returns the number of attributes in node.
-     * Implements Countable
+     * @inheritDoc
      *
-     * @return int
+     * Returns the number of attributes in node.
      */
     #[ReturnTypeWillChange]
     public function count()

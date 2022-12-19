@@ -32,6 +32,8 @@ use const SORT_LOCALE_STRING;
 /**
  * Laminas\Ldap\Collection\DefaultIterator is the default collection iterator implementation
  * using ext/ldap
+ *
+ * @template-implements Iterator<string, array{dn: string, ...}>
  */
 class DefaultIterator implements Iterator, Countable
 {
@@ -219,10 +221,9 @@ class DefaultIterator implements Iterator, Countable
     }
 
     /**
-     * Returns the number of items in current result
-     * Implements Countable
+     * @inheritDoc
      *
-     * @return int
+     * Returns the number of items in current result
      */
     #[ReturnTypeWillChange]
     public function count()
@@ -231,10 +232,8 @@ class DefaultIterator implements Iterator, Countable
     }
 
     /**
-     * Return the current result item
-     * Implements Iterator
+     * @inheritDoc
      *
-     * @return array|null
      * @throws LdapException
      */
     #[ReturnTypeWillChange]
@@ -244,7 +243,7 @@ class DefaultIterator implements Iterator, Countable
             $this->rewind();
         }
         if (! Handler::isResultEntryHandle($this->current)) {
-            return;
+            return null;
         }
 
         $entry = ['dn' => $this->key()];
@@ -292,11 +291,9 @@ class DefaultIterator implements Iterator, Countable
     }
 
     /**
-     * Return the result item key
-     * Implements Iterator
+     * @inheritDoc
      *
      * @throws LdapException
-     * @return string|null
      */
     #[ReturnTypeWillChange]
     public function key()
@@ -304,29 +301,24 @@ class DefaultIterator implements Iterator, Countable
         if (! Handler::isResultEntryHandle($this->current)) {
             $this->rewind();
         }
-        if (Handler::isResultEntryHandle($this->current)) {
-            $resource = $this->ldap->getResource();
-            ErrorHandler::start();
-            $currentDn = ldap_get_dn($resource, $this->current);
-            ErrorHandler::stop();
 
-            if ($currentDn === false) {
-                throw new Exception\LdapException($this->ldap, 'getting dn');
-            }
-
-            return $currentDn;
-        } else {
-            return;
+        if (! Handler::isResultEntryHandle($this->current)) {
+            return null;
         }
+
+        $resource = $this->ldap->getResource();
+        ErrorHandler::start();
+        $currentDn = ldap_get_dn($resource, $this->current);
+        ErrorHandler::stop();
+
+        if ($currentDn === false) {
+            throw new Exception\LdapException($this->ldap, 'getting dn');
+        }
+
+        return $currentDn;
     }
 
-    /**
-     * Move forward to next result item
-     *
-     * @see Iterator
-     *
-     * @return void
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function next()
     {
@@ -335,13 +327,7 @@ class DefaultIterator implements Iterator, Countable
         $this->current = $nextEntry['resource'] ?? null;
     }
 
-    /**
-     * Rewind the Iterator to the first result item
-     *
-     * @see Iterator
-     *
-     * @return void
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function rewind()
     {
@@ -350,13 +336,7 @@ class DefaultIterator implements Iterator, Countable
         $this->current = $nextEntry['resource'] ?? null;
     }
 
-    /**
-     * Check if there is a current result item
-     * after calls to rewind() or next()
-     * Implements Iterator
-     *
-     * @return bool
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function valid()
     {

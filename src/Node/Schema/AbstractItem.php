@@ -13,6 +13,8 @@ use function count;
 /**
  * This class provides a base implementation for managing schema
  * items like objectClass and attributeType.
+ *
+ * @template-implements ArrayAccess<array-key, mixed>
  */
 abstract class AbstractItem implements ArrayAccess, Countable
 {
@@ -80,50 +82,52 @@ abstract class AbstractItem implements ArrayAccess, Countable
     }
 
     /**
-     * Always throws Laminas\Ldap\Exception\BadMethodCallException
-     * Implements ArrayAccess.
+     * @inheritDoc
+     *
+     * Always throws {@see BadMethodCallException}
      *
      * This method is needed for a full implementation of ArrayAccess
      *
-     * @param  string $name
-     * @param  mixed  $value
+     * @return never
+     *
      * @throws BadMethodCallException
      */
-    public function offsetSet($name, $value)
+    public function offsetSet($offset, $value)
     {
         throw new Exception\BadMethodCallException();
     }
 
     /**
+     * @inheritDoc
+     *
      * Gets a specific attribute from this item
-     *
-     * @param  string $name
-     * @return mixed
      */
-    public function offsetGet($name)
+    public function offsetGet($offset)
     {
-        return $this->__get($name);
+        return $this->__get($offset);
     }
 
     /**
-     * Always throws Laminas\Ldap\Exception\BadMethodCallException
+     * @inheritDoc
+     *
+     * Always throws {@see BadMethodCallException}
      * Implements ArrayAccess.
      *
      * This method is needed for a full implementation of ArrayAccess
      *
-     * @param  string $name
+     * @return never
+     *
      * @throws BadMethodCallException
      */
-    public function offsetUnset($name)
+    public function offsetUnset($offset)
     {
         throw new Exception\BadMethodCallException();
     }
 
     /**
-     * Checks whether a specific attribute exists.
+     * @inheritDoc
      *
-     * @param  string $name
-     * @return bool
+     * Checks whether a specific attribute exists.
      */
     public function offsetExists($name)
     {
@@ -131,10 +135,9 @@ abstract class AbstractItem implements ArrayAccess, Countable
     }
 
     /**
-     * Returns the number of attributes.
-     * Implements Countable
+     * @inheritDoc
      *
-     * @return int
+     * Returns the number of attributes.
      */
     public function count()
     {

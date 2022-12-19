@@ -182,7 +182,7 @@ class Encoder
      *
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
-     * @param  string  $string
+     * @param  scalar $string
      * @param  bool $base64
      * @return string
      */

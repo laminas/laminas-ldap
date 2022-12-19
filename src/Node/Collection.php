@@ -7,6 +7,8 @@ use Laminas\Ldap\Node;
 
 /**
  * Laminas\Ldap\Node\Collection provides a collection of nodes.
+ *
+ * @template-extends Ldap\Collection<Node>
  */
 class Collection extends Ldap\Collection
 {

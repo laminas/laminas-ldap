@@ -18,91 +18,69 @@ use function reset;
 
 /**
  * Laminas\Ldap\Node\ChildrenIterator provides an iterator to a collection of children nodes.
+ * 
+ * @template-implements Iterator<string, Node>
+ * @template-implements RecursiveIterator<string, Node>
+ * @template-implements ArrayAccess<string, Node>
  */
 class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayAccess
 {
     /**
      * An array of Laminas\Ldap\Node objects
+     *
+     * @var array<string, Node> 
      */
     private array $data;
 
     /**
-     * @param array $data
+     * @param array<string, Node> $data
      */
     public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    /**
-     * Returns the number of child nodes.
-     * Implements Countable
-     *
-     * @return int
-     */
+    /** @inheritDoc */
     public function count()
     {
         return count($this->data);
     }
 
-    /**
-     * Return the current child.
-     * Implements Iterator
-     *
-     * @return Node
-     */
+    /** @inheritDoc */
     public function current()
     {
         return current($this->data);
     }
 
     /**
-     * Return the child'd RDN.
-     * Implements Iterator
+     * @inheritDoc
      *
-     * @return string
+     * Return the child'd RDN.
      */
     public function key()
     {
         return key($this->data);
     }
 
-    /**
-     * Move forward to next child.
-     * Implements Iterator
-     */
+    /** @inheritDoc */
     public function next()
     {
         next($this->data);
     }
 
-    /**
-     * Rewind the Iterator to the first child.
-     * Implements Iterator
-     */
+    /** @inheritDoc */
     public function rewind()
     {
         reset($this->data);
     }
 
-    /**
-     * Check if there is a current child
-     * after calls to rewind() or next().
-     * Implements Iterator
-     *
-     * @return bool
-     */
+    /** @inheritDoc */
     public function valid()
     {
         return current($this->data) !== false;
     }
 
-    /**
-     * Checks if current node has children.
-     * Returns whether the current element has children.
-     *
-     * @return bool
-     */
+    /** @inheritDoc */
     public function hasChildren()
     {
         if ($this->current() instanceof Ldap\Node) {
@@ -113,9 +91,9 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
     }
 
     /**
-     * Returns the children for the current node.
+     * @inheritDoc
      *
-     * @return ChildrenIterator
+     * @return ChildrenIterator|null
      */
     public function getChildren()
     {
@@ -127,60 +105,51 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
     }
 
     /**
-     * Returns a child with a given RDN.
-     * Implements ArrayAccess.
+     * @inheritDoc
      *
-     * @param  string $rdn
-     * @return array|null
+     * Returns a child with a given RDN.
      */
-    public function offsetGet($rdn)
+    public function offsetGet($offset)
     {
-        if ($this->offsetExists($rdn)) {
-            return $this->data[$rdn];
+        if ($this->offsetExists($offset)) {
+            return $this->data[$offset];
         }
 
         return null;
     }
 
     /**
+     * @inheritDoc
+     *
      * Checks whether a given rdn exists.
-     * Implements ArrayAccess.
-     *
-     * @param  string $rdn
-     * @return bool
      */
-    public function offsetExists($rdn)
+    public function offsetExists($offset)
     {
-        return array_key_exists($rdn, $this->data);
+        return array_key_exists($offset, $this->data);
     }
 
     /**
-     * Does nothing.
-     * Implements ArrayAccess.
+     * @inheritDoc
      *
-     * @param string $name
-     * @return void
+     * Does nothing.
      */
-    public function offsetUnset($name)
+    public function offsetUnset($offset)
     {
     }
 
     /**
-     * Does nothing.
-     * Implements ArrayAccess.
+     * @inheritDoc
      *
-     * @param  string $name
-     * @param  mixed  $value
-     * @return void
+     * Does nothing.
      */
-    public function offsetSet($name, $value)
+    public function offsetSet($offset, $value)
     {
     }
 
     /**
      * Get all children as an array
      *
-     * @return array
+     * @return array<string, Node>
      */
     public function toArray()
     {
