@@ -6,6 +6,7 @@ use ArrayAccess;
 use Countable;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\BadMethodCallException;
+use ReturnTypeWillChange;
 
 use function array_key_exists;
 use function count;
@@ -90,6 +91,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      * @psalm-return never
      * @throws BadMethodCallException
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         throw new Exception\BadMethodCallException();
@@ -100,6 +102,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      *
      * Gets a specific attribute from this item
      */
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->__get($offset);
@@ -115,6 +118,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      * @psalm-return never
      * @throws BadMethodCallException
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         throw new Exception\BadMethodCallException();
@@ -125,6 +129,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      *
      * Checks whether a specific attribute exists.
      */
+    #[ReturnTypeWillChange]
     public function offsetExists($name)
     {
         return $this->__isset($name);
@@ -135,6 +140,7 @@ abstract class AbstractItem implements ArrayAccess, Countable
      *
      * Returns the number of attributes.
      */
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->data);

@@ -465,14 +465,17 @@ class Dn implements ArrayAccess
      * @link   http://pear.php.net/package/Net_LDAP2
      * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
      *
-     * @param  string|array $values An array containing the DN values that should be escaped
-     * @return array The array $values, but escaped
+     * @param string|string[] $values Array of DN Values to escape
+     *
+     * @psalm-return ($values is string ? string : ($values is array{string} ? string : string|array<string>))
+     * @return string|string[] Single value always returned as string.
      */
     public static function escapeValue($values = [])
     {
         if (! is_array($values)) {
             $values = [$values];
         }
+        /** @psalm-var string[] $values */
         foreach ($values as $key => $val) {
             // Escaping of filter meta characters
             $val = str_replace(
@@ -503,23 +506,23 @@ class Dn implements ArrayAccess
     /**
      * Undoes the conversion done by {@link escapeValue()}.
      *
-     * Any escape sequence starting with a baskslash - hexpair or special character -
+     * Any escape sequence starting with a backslash - hexpair or special character -
      * will be transformed back to the corresponding character.
      *
      * @link   http://pear.php.net/package/Net_LDAP2
      * @see    Net_LDAP2_Util::escape_dn_value() from Benedikt Hallinger <beni@php.net>
      *
-     * @template TInput of string|array<string>
+     * @param string|string[] $values Array of DN Values
      *
-     * @param TInput $values Array of DN Values
-     *
-     * @return ($values is string ? string : ($values is array{string} ? string : string|array<string>))
+     * @psalm-return ($values is string ? string : ($values is array{string} ? string : string|array<string>))
+     * @return string|string[]
      */
     public static function unescapeValue($values = [])
     {
         if (! is_array($values)) {
             $values = [$values];
         }
+        /** @psalm-var string[] $values */
         foreach ($values as $key => $val) {
             // strip slashes from special chars
             $val          = str_replace(

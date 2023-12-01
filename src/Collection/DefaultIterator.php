@@ -9,6 +9,8 @@ use Laminas\Ldap\ErrorHandler;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Handler;
+use LDAP\Result;
+use LDAP\ResultEntry;
 use ReturnTypeWillChange;
 
 use function array_change_key_case;
@@ -51,14 +53,14 @@ class DefaultIterator implements Iterator, Countable
     /**
      * Result identifier resource
      *
-     * @var resource|null
+     * @var Result|null
      */
     protected $resultId;
 
     /**
      * Current result entry identifier
      *
-     * @var resource|null
+     * @var ResultEntry|null
      */
     protected $current;
 
@@ -87,6 +89,7 @@ class DefaultIterator implements Iterator, Countable
      * on sorting.
      *
      * @var array
+     * @psalm-var array<array{resource: ResultEntry, sortValue: string}>
      */
     protected $entries = [];
 
@@ -98,7 +101,7 @@ class DefaultIterator implements Iterator, Countable
     protected $sortFunction;
 
     /**
-     * @param  resource $resultId
+     * @param  Result $resultId
      * @throws LdapException If no entries was found.
      */
     public function __construct(Ldap\Ldap $ldap, $resultId)
@@ -380,8 +383,8 @@ class DefaultIterator implements Iterator, Countable
             $attributes = array_change_key_case($attributes, CASE_LOWER);
 
             if (isset($attributes[$sortAttribute][0])) {
-                $this->entries[$key]['sortValue'] =
-                    $attributes[$sortAttribute][0];
+                $sortValue                        = (string) $attributes[$sortAttribute][0];
+                $this->entries[$key]['sortValue'] = $sortValue;
             }
         }
 
@@ -393,7 +396,7 @@ class DefaultIterator implements Iterator, Countable
         );
 
         if (! $sorted) {
-            throw new Exception\LdapException($this, 'sorting result-set');
+            throw new Exception\LdapException($this->ldap, 'sorting result-set');
         }
     }
 }

@@ -8,6 +8,7 @@ use Iterator;
 use Laminas\Ldap;
 use Laminas\Ldap\Node;
 use RecursiveIterator;
+use ReturnTypeWillChange;
 
 use function array_key_exists;
 use function count;
@@ -41,12 +42,14 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
     }
 
     /** @inheritDoc */
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->data);
     }
 
     /** @inheritDoc */
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->data);
@@ -57,30 +60,35 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      *
      * Return the child'd RDN.
      */
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->data);
     }
 
     /** @inheritDoc */
+    #[ReturnTypeWillChange]
     public function next()
     {
         next($this->data);
     }
 
     /** @inheritDoc */
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->data);
     }
 
     /** @inheritDoc */
+    #[ReturnTypeWillChange]
     public function valid()
     {
         return current($this->data) !== false;
     }
 
     /** @inheritDoc */
+    #[ReturnTypeWillChange]
     public function hasChildren()
     {
         if ($this->current() instanceof Ldap\Node) {
@@ -94,6 +102,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      * @inheritDoc
      * @return ChildrenIterator|null
      */
+    #[ReturnTypeWillChange]
     public function getChildren()
     {
         if ($this->current() instanceof Ldap\Node) {
@@ -108,6 +117,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      *
      * Returns a child with a given RDN.
      */
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if ($this->offsetExists($offset)) {
@@ -122,6 +132,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      *
      * Checks whether a given rdn exists.
      */
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->data);
@@ -132,6 +143,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      *
      * Does nothing.
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
     }
@@ -141,6 +153,7 @@ class ChildrenIterator implements Iterator, Countable, RecursiveIterator, ArrayA
      *
      * Does nothing.
      */
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
     }
