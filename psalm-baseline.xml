@@ -659,20 +659,6 @@
     <ImplementedReturnTypeMismatch>
       <code>ChildrenIterator|null</code>
     </ImplementedReturnTypeMismatch>
-    <MethodSignatureMustProvideReturnType>
-      <code>count</code>
-      <code>current</code>
-      <code>getChildren</code>
-      <code>hasChildren</code>
-      <code>key</code>
-      <code>next</code>
-      <code>offsetExists</code>
-      <code>offsetGet</code>
-      <code>offsetSet</code>
-      <code>offsetUnset</code>
-      <code>rewind</code>
-      <code>valid</code>
-    </MethodSignatureMustProvideReturnType>
     <PossiblyUnusedMethod>
       <code>toArray</code>
     </PossiblyUnusedMethod>
@@ -824,13 +810,6 @@
     </UnsafeInstantiation>
   </file>
   <file src="src/Node/Schema/AbstractItem.php">
-    <MethodSignatureMustProvideReturnType>
-      <code>count</code>
-      <code>offsetExists</code>
-      <code>offsetGet</code>
-      <code>offsetSet</code>
-      <code>offsetUnset</code>
-    </MethodSignatureMustProvideReturnType>
     <MissingParamType>
       <code>$offset</code>
       <code>$offset</code>
