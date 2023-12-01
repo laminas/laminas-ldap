@@ -45,7 +45,6 @@ class SortTest extends AbstractOnlineTestCase
 
         $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
-        $reflectionProperty->setAccessible(true);
         $this->assertEquals('strnatcasecmp', $reflectionProperty->getValue($iterator));
         $iterator->setSortFunction($sortFunction);
         $this->assertEquals($sortFunction, $reflectionProperty->getValue($iterator));
@@ -69,11 +68,9 @@ class SortTest extends AbstractOnlineTestCase
 
         $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
-        $reflectionProperty->setAccessible(true);
         $this->assertEquals('strnatcasecmp', $reflectionProperty->getValue($iterator));
 
         $reflectionProperty = $reflectionObject->getProperty('entries');
-        $reflectionProperty->setAccessible(true);
 
         $iterator->sort('l');
 
@@ -114,11 +111,9 @@ class SortTest extends AbstractOnlineTestCase
 
         $reflectionObject   = new ReflectionObject($iterator);
         $reflectionProperty = $reflectionObject->getProperty('sortFunction');
-        $reflectionProperty->setAccessible(true);
         $this->assertEquals($sortFunction, $reflectionProperty->getValue($iterator));
 
         $reflectionProperty = $reflectionObject->getProperty('entries');
-        $reflectionProperty->setAccessible(true);
 
         $iterator->sort('l');
 

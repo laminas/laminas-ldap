@@ -4,6 +4,7 @@ namespace Laminas\Ldap;
 
 use Laminas\Ldap\Collection;
 use Laminas\Ldap\Exception;
+use LDAP\Connection;
 use Traversable;
 
 use function array_change_key_case;
@@ -68,7 +69,7 @@ class Ldap
     /**
      * The raw LDAP extension resource.
      *
-     * @var resource|null
+     * @var Connection|null
      */
     protected $resource;
 
@@ -137,7 +138,7 @@ class Ldap
     }
 
     /**
-     * @return resource The raw LDAP extension resource.
+     * @return Connection The raw LDAP extension resource.
      */
     public function getResource()
     {
@@ -209,6 +210,7 @@ class Ldap
         $estr2 = "getLastError: could not call ldap_get_option because LDAP resource was not of type resource";
         if (Handler::isLdapHandle($this->resource)) {
             ldap_get_option($this->resource, LDAP_OPT_ERROR_STRING, $estr2);
+            /** @psalm-var string $estr2 */
         }
         ErrorHandler::stop();
         if (! empty($estr2) && ! in_array($estr2, $errorMessages)) {
@@ -1040,7 +1042,7 @@ class Ldap
     }
 
     /**
-     * @param resource $resource
+     * @param Connection $resource
      * @return bool
      */
     protected function shouldReconnect($resource)
@@ -1168,7 +1170,8 @@ class Ldap
             ErrorHandler::stop();
         } while ($search === false && $this->shouldReconnect($resource));
 
-        if ($search === false) {
+        if ($search === false || is_array($search)) {
+            // TODO: determine under which conditions array of results could be returned and if it is possible here
             throw new Exception\LdapException($this, 'searching: ' . $filter);
         }
 
@@ -1721,7 +1724,8 @@ class Ldap
             ErrorHandler::stop();
         } while ($search === false && $this->shouldReconnect($resource));
 
-        if ($search === false) {
+        if ($search === false || is_array($search)) {
+            // TODO: determine under which conditions array of results could be returned and if it is possible here
             throw new Exception\LdapException($this, 'listing: ' . $parentDn);
         }
 

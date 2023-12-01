@@ -2,9 +2,7 @@
 
 namespace Laminas\Ldap\Filter;
 
-use function array_shift;
 use function count;
-use function func_get_args;
 use function vsprintf;
 
 /**
@@ -16,16 +14,14 @@ class MaskFilter extends StringFilter
      * Creates a Laminas\Ldap\Filter\MaskFilter.
      *
      * @param string $mask
-     * @param string $value,...
+     * @param string $values
      */
-    public function __construct($mask, $value)
+    public function __construct($mask, ...$values)
     {
-        $args = func_get_args();
-        array_shift($args);
-        for ($i = 0, $count = count($args); $i < $count; $i++) {
-            $args[$i] = static::escapeValue($args[$i]);
+        for ($i = 0, $count = count($values); $i < $count; $i++) {
+            $values[$i] = static::escapeValue($values[$i]);
         }
-        $filter = vsprintf($mask, $args);
+        $filter = vsprintf($mask, $values);
         parent::__construct($filter);
     }
 
