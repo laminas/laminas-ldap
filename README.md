@@ -1,7 +1,8 @@
 # laminas-ldap
 
 [![Build Status](https://github.com/laminas/laminas-ldap/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/laminas/laminas-ldap/actions/workflows/continuous-integration.yml)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-ldap/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-ldap?branch=master)
+[![type-coverage](https://shepherd.dev/github/laminas/laminas-ldap/coverage.svg)](https://shepherd.dev/github/laminas/laminas-ldap)
+[![Psalm level](https://shepherd.dev/github/laminas/laminas-ldap/level.svg)](https://shepherd.dev/github/laminas/laminas-ldap)
 
 > ## 🇷🇺 Русским гражданам
 >
