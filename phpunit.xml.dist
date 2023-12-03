@@ -60,6 +60,7 @@
     <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="false"/>
     <env name="TESTS_LAMINAS_LDAP_HOST" value="localhost"/>
     <env name="TESTS_LAMINAS_LDAP_PORT" value="3890"/>
+    <env name="TESTS_LAMINAS_LDAPS_PORT" value="6360"/>
     <env name="TESTS_LAMINAS_LDAP_SCRIPTS_PORT" value="3891"/>
     <env name="TESTS_LAMINAS_LDAP_USE_START_TLS" value="false"/>
     <env name="TESTS_LAMINAS_LDAP_USE_SSL" value="false"/>

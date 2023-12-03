@@ -294,8 +294,12 @@ class BindTest extends TestCase
 
     protected function getSslLdap(array $options): Ldap\Ldap
     {
+        $port = '636';
+        if (getenv('TESTS_LAMINAS_LDAPS_PORT')) {
+            $port = getenv('TESTS_LAMINAS_LDAPS_PORT');
+        }
         $options['useSsl'] = true;
-        $options['port']   = 6360;
+        $options['port']   = $port;
 
         return new Ldap\Ldap($options);
     }
