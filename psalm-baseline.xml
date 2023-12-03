@@ -276,8 +276,6 @@
   </file>
   <file src="src/Ldap.php">
     <DocblockTypeContradiction>
-      <code>$accountDomainName === null</code>
-      <code>$accountDomainNameShort === null</code>
       <code>$dname === null</code>
       <code><![CDATA[$this->rootDse === null]]></code>
       <code><![CDATA[$this->schema === null]]></code>
@@ -362,8 +360,8 @@
       <code>int</code>
       <code>int</code>
       <code>int</code>
-      <code>string</code>
-      <code>string</code>
+      <code>null|string</code>
+      <code>null|string</code>
       <code>string</code>
       <code>string</code>
       <code>string</code>
@@ -2146,10 +2144,6 @@
     </UnusedVariable>
   </file>
   <file src="test/SortTest.php">
-    <InvalidScalarArgument>
-      <code>bin2hex($a)</code>
-      <code>bin2hex($b)</code>
-    </InvalidScalarArgument>
     <MissingClosureParamType>
       <code>$a</code>
       <code>$a</code>
@@ -2169,13 +2163,14 @@
     </MixedArgument>
     <MixedArrayAccess>
       <code>$reflectionEntries[$index]</code>
-      <code>$reflectionEntries[$index]</code>
       <code><![CDATA[$reflectionEntries[$index]["sortValue"]]]></code>
-      <code><![CDATA[$reflectionEntries[$index]["sortValue"]]]></code>
+      <code><![CDATA[$value['sortValue']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
+      <code>$actual[]</code>
       <code>$reflectionEntries</code>
       <code>$reflectionEntries</code>
+      <code>$value</code>
     </MixedAssignment>
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
