@@ -1,0 +1,16 @@
+services:
+  ldap:
+    image: osixia/openldap:1.5.0
+    command: --copy-service --loglevel debug
+    ports:
+      - 3890:389
+      - 6360:636
+    volumes:
+      - .ci/ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom:z
+      - .ci/certs:/container/service/slapd/assets/certs:z
+    environment:
+      LDAP_DOMAIN: "example.com"
+      LDAP_ADMIN_PASSWORD: "insecure"
+      LDAP_TLS_CA_CRT_FILENAME: "root-ca.crt"
+      LDAP_TLS_CRT_FILENAME: "server.crt"
+      LDAP_TLS_KEY_FILENAME: "server.key"
