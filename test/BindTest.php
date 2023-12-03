@@ -7,6 +7,7 @@ namespace LaminasTest\Ldap;
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
+use LDAP\Connection;
 use PHPUnit\Framework\TestCase;
 
 use function getenv;
@@ -287,8 +288,7 @@ class BindTest extends TestCase
     public function testResourceIsAlwaysReturned()
     {
         $ldap = new Ldap\Ldap($this->options);
-        $this->assertNotNull($ldap->getResource());
-        $this->assertIsResource($ldap->getResource());
+        $this->assertInstanceOf(Connection::class, $ldap->getResource());
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_USERNAME'), $ldap->getBoundUser());
     }
 
