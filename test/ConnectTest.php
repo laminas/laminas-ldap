@@ -142,11 +142,14 @@ class ConnectTest extends TestCase
     public function testExplicitPortConnect(): void
     {
         $port = 389;
-        if (getenv('TESTS_LAMINAS_LDAP_PORT') && getenv('TESTS_LAMINAS_LDAP_PORT')) {
+        if (getenv('TESTS_LAMINAS_LDAP_PORT')) {
             $port = getenv('TESTS_LAMINAS_LDAP_PORT');
         }
-        if (getenv('TESTS_LAMINAS_LDAP_USE_SSL') && getenv('TESTS_LAMINAS_LDAP_USE_SSL')) {
+        if (getenv('TESTS_LAMINAS_LDAP_USE_SSL')) {
             $port = 636;
+            if (getenv('TESTS_LAMINAS_LDAPS_PORT')) {
+                $port = getenv('TESTS_LAMINAS_LDAPS_PORT');
+            }
         }
 
         $ldap = new Ldap\Ldap($this->options);

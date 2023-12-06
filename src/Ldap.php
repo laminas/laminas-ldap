@@ -461,7 +461,7 @@ class Ldap
     }
 
     /**
-     * @return string The account domain name
+     * @return null|string The account domain name
      */
     protected function getAccountDomainName()
     {
@@ -469,7 +469,7 @@ class Ldap
     }
 
     /**
-     * @return string The short account domain name
+     * @return null|string The short account domain name
      */
     protected function getAccountDomainNameShort()
     {
@@ -613,10 +613,10 @@ class Ldap
         if ($accountDomainName === null && $accountDomainNameShort === null) {
             return true;
         }
-        if (strcasecmp($dname, $accountDomainName) === 0) {
+        if ($accountDomainName !== null && strcasecmp($dname, $accountDomainName) === 0) {
             return true;
         }
-        if (strcasecmp($dname, $accountDomainNameShort) === 0) {
+        if ($accountDomainNameShort !== null && strcasecmp($dname, $accountDomainNameShort) === 0) {
             return true;
         }
 

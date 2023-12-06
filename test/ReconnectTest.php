@@ -52,6 +52,8 @@ class ReconnectTest extends AbstractOnlineTestCase
 
     protected function setUp(): void
     {
+        self::markTestIncomplete('Reconnect test setup is not available');
+
         parent::setUp();
 
         if (! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')) {

@@ -10,6 +10,7 @@ use ReflectionObject;
 use function bin2hex;
 use function decbin;
 use function getenv;
+use function hexdec;
 use function str_replace;
 use function strlen;
 use function strnatcasecmp;
@@ -85,7 +86,7 @@ class SortTest extends AbstractOnlineTestCase
      */
     public function testCustomSorting()
     {
-        $lSorted = ['d', 'e', 'a', 'b', 'c'];
+        $lSorted = ['a', 'b', 'd', 'c', 'e'];
 
         $search = ldap_search(
             $this->getLDAP()->getResource(),
@@ -98,8 +99,8 @@ class SortTest extends AbstractOnlineTestCase
         $sortFunction = static function ($a, $b): int {
             // Sort values by the number of "1" in their binary representation
             // and when that is equals by their position in the alphabet.
-            $f = strlen(str_replace('0', '', decbin(bin2hex($a)))) -
-                 strlen(str_replace('0', '', decbin(bin2hex($b))));
+            $f = strlen(str_replace('0', '', decbin(hexdec(bin2hex($a))))) -
+                 strlen(str_replace('0', '', decbin(hexdec(bin2hex($b)))));
             if ($f < 0) {
                 return -1;
             } elseif ($f > 0) {
@@ -118,8 +119,11 @@ class SortTest extends AbstractOnlineTestCase
         $iterator->sort('l');
 
         $reflectionEntries = $reflectionProperty->getValue($iterator);
-        foreach ($lSorted as $index => $value) {
-            $this->assertEquals($value, $reflectionEntries[$index]["sortValue"]);
+
+        $actual = [];
+        foreach ($reflectionEntries as $value) {
+            $actual[] = $value['sortValue'];
         }
+        self::assertSame($lSorted, $actual);
     }
 }

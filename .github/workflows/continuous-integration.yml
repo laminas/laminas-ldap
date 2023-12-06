@@ -7,5 +7,57 @@ on:
     tags:
 
 jobs:
-  ci:
-    uses: laminas/workflow-continuous-integration/.github/workflows/continuous-integration.yml@1.x
+  matrix:
+    name: Generate job matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Gather CI configuration
+        id: matrix
+        uses: laminas/laminas-ci-matrix-action@v1
+
+  qa:
+    name: QA Checks
+    needs: [matrix]
+    runs-on: ${{ matrix.operatingSystem }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare LDAP test server
+        if: contains( matrix.job, 'vendor/bin/phpunit' )
+        shell: bash
+        run: |
+          docker run --rm -d \
+            --network ${{ job.container.network }} \
+            -v "$PWD"/.ci/ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom:z \
+            -v "$PWD"/.ci/certs:/container/service/slapd/assets/certs:z \
+            --name service-ldap \
+            --network-alias service-ldap \
+            -e LDAP_DOMAIN="example.com" \
+            -e LDAP_ADMIN_PASSWORD="insecure" \
+            -e LDAP_TLS_CA_CRT_FILENAME="root-ca.crt" \
+            -e LDAP_TLS_CRT_FILENAME="server.crt" \
+            -e LDAP_TLS_KEY_FILENAME="server.key" \
+            osixia/openldap:1.5.0 \
+            --copy-service --loglevel debug
+          # wait for slapd to start. TODO: add real health check
+          sleep 2
+          docker logs service-ldap
+      - name: ${{ matrix.name }}
+        uses: laminas/laminas-continuous-integration-action@v1
+        with:
+          job: ${{ matrix.job }}
+        env:
+          TESTS_LAMINAS_LDAP_ONLINE_ENABLED: "true"
+          TESTS_LAMINAS_LDAP_HOST: "service-ldap"
+          TESTS_LAMINAS_LDAP_PORT: "389"
+          TESTS_LAMINAS_LDAPS_PORT: "636"
+      - name: Stop LDAP test server
+        if: always()
+        run: docker rm -f -v service-ldap || /bin/true
+    services:
+      network-sleeper:
+        image: wardsco/sleep:latest
