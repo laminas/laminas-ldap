@@ -60,10 +60,11 @@
     <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="false"/>
     <env name="TESTS_LAMINAS_LDAP_HOST" value="localhost"/>
     <env name="TESTS_LAMINAS_LDAP_PORT" value="3890"/>
+    <env name="TESTS_LAMINAS_LDAPS_PORT" value="6360"/>
     <env name="TESTS_LAMINAS_LDAP_SCRIPTS_PORT" value="3891"/>
     <env name="TESTS_LAMINAS_LDAP_USE_START_TLS" value="false"/>
     <env name="TESTS_LAMINAS_LDAP_USE_SSL" value="false"/>
-    <env name="TESTS_LAMINAS_LDAP_USERNAME" value="cn=Manager,dc=example,dc=com"/>
+    <env name="TESTS_LAMINAS_LDAP_USERNAME" value="cn=admin,dc=example,dc=com"/>
     <env name="TESTS_LAMINAS_LDAP_PASSWORD" value="insecure"/>
     <env name="TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN" value="true"/>
     <env name="TESTS_LAMINAS_LDAP_BASE_DN" value="dc=example,dc=com"/>
@@ -75,9 +76,9 @@
     <env name="TESTS_LAMINAS_LDAP_ALT_DN" value="uid=user1,dc=example,dc=com"/>
     <env name="TESTS_LAMINAS_LDAP_ALT_PASSWORD" value="user1"/>
     <env name="TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE" value="ou=test,dc=example,dc=com"/>
-    <env name="TESTS_LAMINAS_LDAP_ANONYMOUS_BIND_ALLOWED" value="true"/>
-    <env name="TESTS_LAMINAS_LDAP_SASL_CERTIFICATE" value="/tmp/client.crt"/>
-    <env name="TESTS_LAMINAS_LDAP_SASL_KEY" value="/tmp/client.key"/>
+    <env name="TESTS_LAMINAS_LDAP_ANONYMOUS_BIND_ALLOWED" value="false"/>
+    <env name="TESTS_LAMINAS_LDAP_SASL_CERTIFICATE" value=".ci/certs/client.crt"/>
+    <env name="TESTS_LAMINAS_LDAP_SASL_KEY" value=".ci/certs/client.key"/>
     <env name="TESTS_LAMINAS_LDAP_IDLE_TIMEOUT" value="4"/>
   </php>
 </phpunit>

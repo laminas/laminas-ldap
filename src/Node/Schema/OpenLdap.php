@@ -182,7 +182,7 @@ class OpenLdap extends Node\Schema
         $attributeType['oid'] = array_shift($tokens); // first token is the oid
         $this->parseLdapSchemaSyntax($attributeType, $tokens);
 
-        if (array_key_exists('syntax', $attributeType)) {
+        if (! empty($attributeType['syntax'])) {
             // get max length from syntax
             if (preg_match('/^(.+){(\d+)}$/', $attributeType['syntax'], $matches)) {
                 $attributeType['syntax']     = $matches[1];
