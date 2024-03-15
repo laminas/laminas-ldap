@@ -37,7 +37,7 @@
         "laminas/laminas-stdlib": "^3.15.0",
         "php-mock/php-mock-phpunit": "^2.6.1",
         "phpunit/phpunit": "^9.5.26",
-        "psalm/plugin-phpunit": "^0.18.4",
+        "psalm/plugin-phpunit": "^0.19.0",
         "vimeo/psalm": "^5.16"
     },
     "suggest": {
