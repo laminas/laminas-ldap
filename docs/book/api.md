@@ -34,39 +34,39 @@ Class names are relative to the `Laminas\Ldap` namespace, unless otherwise noted
 `Laminas\Ldap\Ldap` is the base interface into a LDAP server. It provides connection and binding
 methods as well as methods to operate on the LDAP tree.
 
-Method signature                                                                                | Description
------------------------------------------------------------------------------------------------ | -----------
-`__construct(array|Traversable $options = null) : void`                                         | If no options are provided at instantiation, the connection parameters must be passed to the instance using `setOptions()`. The allowed options are specified in the [options section](#configuration-options).
-`getResource() : resource`                                                                      | Returns the raw LDAP extension (ext/ldap) resource.
-`getLastErrorCode() : int`                                                                      | Returns the LDAP error number of the last LDAP command.
-`getLastError(int &$errorCode = null, array &$errorMessages = null) : string`                   | Returns the LDAP error message of the last LDAP command. The optional `$errorCode` parameter is set to the LDAP error number when given. The optional `$errorMessages` array will be filled with the raw error messages when given. The various LDAP error retrieval functions can return different things, so they are all collected if `$errorMessages` is given.
-`setOptions(array|Traversable $options) : void`                                                 | Sets the LDAP connection and binding parameters. Allowed options are specified in the [options section](#configuration-options).
-`getOptions() : array`                                                                          | Returns the current connection and binding parameters.
-`getBaseDn() : string`                                                                          | Returns the base DN this LDAP connection is bound to.
-`getCanonicalAccountName(string $acctname, int $form) : string`                                 | Returns the canonical account name of the given account name `$acctname`. `$form` specifies the format into which the account name is canonicalized. See [Account Name Canonicalization](intro.md#account-name-canonicalization) for more details.
-`disconnect() : void`                                                                           | Disconnects the instance from the LDAP server.
-`connect(string $host, int $port, bool $useSsl, bool $useStartTls, int $networkTimeout) : void` | Connects the instance to the given LDAP server. All parameters are optional and will be taken from the LDAP connection and binding parameters passed to the instance via the constructor or via `setOptions()` if `null`.
-`bind(string $username, string $password) : void`                                               | Authenticates `$username` with `$password` on the LDAP server. If both parameters are omitted, the binding will be carried out with the credentials given in the connection and binding parameters. If no credentials are given in the connection and binding parameters, an anonymous bind will be performed. Note that this requires anonymous binds to be allowed on the LDAP server. An empty string, `''`, can be passed as `$password` together with a username if, and only if, `allowEmptyPassword` is set to `true` in the connection and binding parameters.
-`search(/* ... */) : Collection`                                                                | Searches the LDAP tree with the given `$filter` and the given search parameters; see below for full details.
-`count(string|Filter\AbstractFilter $filter, string|Dn $basedn, int $scope) : int`              | Counts the elements returned by the given search parameters. See [search()](#search) for a detailed description of the method parameters.
-`countChildren(string|Dn $dn) : int`                                                            | Counts the direct descendants (children) of the entry identified by the given `$dn`.
-`exists(string|Dn $dn) : bool`                                                                  | Checks whether the entry identified by the given `$dn` exists.
-`searchEntries(/* ... */) : array`                                                              | Performs a search operation and returns the result as an PHP array. This is essentially the same method as `search()` except for the return type. See [search()](#search) and [searchEntries()](#searchentries) below for more details.
-`getEntry(string|Dn $dn, array $attributes, bool $throwOnNotFound) : array`                     | Retrieves the LDAP entry identified by `$dn` with the attributes specified in `$attributes`. if `$attributes` is omitted, all attributes (`[]`) are included in the result. `$throwOnNotFound` is `false` by default, so the method will return `null` if the specified entry cannot be found. If set to `true`, a `Laminas\Ldap\Exception\LdapException` will be thrown instead.
-`prepareLdapEntryArray(array &$entry) : void`                                                   | Prepare an array for the use in LDAP modification operations. This method does not need to be called by the end-user as it's implicitly called on every data modification method.
-`add(string|Dn $dn, array $entry) : void`                                                       | Adds the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be added.
-`update(string|Dn $dn, array $entry) : void`                                                    | Updates the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be modified.
-`save(string|Dn $dn, array $entry) : void`                                                      | Saves the entry identified by `$dn` with its attributes $entry to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be saved. This method decides by querying the LDAP tree if the entry will be added or updated.
-`delete(string|Dn $dn, boolean $recursively) : void`                                            | Deletes the entry identified by `$dn` from the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be deleted. `$recursively` is `false` by default. If set to `true` the deletion will be carried out recursively and will effectively delete a complete subtree. Deletion will fail if $recursively is `false` and the entry `$dn` is not a leaf entry.
-`moveToSubtree(string|Dn $from, string|Dn $to, bool $recursively, bool $alwaysEmulate) : void`  | Moves the entry identified by `$from` to a location below `$to` keeping its RDN unchanged. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be moved. Moving will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry. `$alwaysEmulate` controls whether the ext/ldap function `ldap_rename()` should be used if available. This can only work for leaf entries and for servers and for ext/ldap supporting this function. Set to `true` to always use an emulated rename operation. All move-operations are carried out by copying and then deleting the corresponding entries in the LDAP tree. These operations are not atomic so that failures during the operation will result in an inconsistent state on the LDAP server. The same is true for all recursive operations. They also are by no means atomic. Please keep this in mind.
-`move(string|Dn $from, string|Dn $to, bool $recursively, bool $alwaysEmulate) : void`           | This is an alias for `rename()`.
-`rename(string|Dn $from, string|Dn $to, bool $recursively, bool $alwaysEmulate) : void`         | Renames the entry identified by `$from` to `$to`. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be moved. Moving will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry. `$alwaysEmulate` controls whether the ext/ldap function `ldap_rename()` should be used if available. This can only work for leaf entries and for servers and for ext/ldap supporting this function. Set to `TRUE` to always use an emulated rename operation.
-`copyToSubtree(string|Dn $from, string|Dn $to, bool $recursively) : void`                       | Copies the entry identified by `$from` to a location below `$to` keeping its RDN unchanged. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be copied. Copying will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry.
-`copy(string|Dn $from, string|Dn $to, bool $recursively) : void`                                | Copies the entry identified by `$from` to `$to`. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be copied. Copying will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry.
-`getNode(string|Dn $dn) : Node`                                                                 | Returns the entry `$dn` wrapped in a `Laminas\Ldap\Node`.
-`getBaseNode() : Node`                                                                          | Returns the entry for the base DN `$baseDn` wrapped in a `Laminas\Ldap\Node`.
-`getRootDse() : Node\RootDse`                                                                   | Returns the RootDSE for the current server.
-`getSchema() : Node\Schema`                                                                     | Returns the LDAP schema for the current server.
+ Method signature                                                                                 | Description
+--------------------------------------------------------------------------------------------------| -----------
+ `__construct(array\|Traversable $options = null) : void`                                         | If no options are provided at instantiation, the connection parameters must be passed to the instance using `setOptions()`. The allowed options are specified in the [options section](#configuration-options).
+ `getResource() : resource`                                                                       | Returns the raw LDAP extension (ext/ldap) resource.
+ `getLastErrorCode() : int`                                                                       | Returns the LDAP error number of the last LDAP command.
+ `getLastError(int &$errorCode = null, array &$errorMessages = null) : string`                    | Returns the LDAP error message of the last LDAP command. The optional `$errorCode` parameter is set to the LDAP error number when given. The optional `$errorMessages` array will be filled with the raw error messages when given. The various LDAP error retrieval functions can return different things, so they are all collected if `$errorMessages` is given.
+ `setOptions(array\|Traversable $options) : void`                                                 | Sets the LDAP connection and binding parameters. Allowed options are specified in the [options section](#configuration-options).
+ `getOptions() : array`                                                                           | Returns the current connection and binding parameters.
+ `getBaseDn() : string`                                                                           | Returns the base DN this LDAP connection is bound to.
+ `getCanonicalAccountName(string $acctname, int $form) : string`                                  | Returns the canonical account name of the given account name `$acctname`. `$form` specifies the format into which the account name is canonicalized. See [Account Name Canonicalization](intro.md#account-name-canonicalization) for more details.
+ `disconnect() : void`                                                                            | Disconnects the instance from the LDAP server.
+ `connect(string $host, int $port, bool $useSsl, bool $useStartTls, int $networkTimeout) : void`  | Connects the instance to the given LDAP server. All parameters are optional and will be taken from the LDAP connection and binding parameters passed to the instance via the constructor or via `setOptions()` if `null`.
+ `bind(string $username, string $password) : void`                                                | Authenticates `$username` with `$password` on the LDAP server. If both parameters are omitted, the binding will be carried out with the credentials given in the connection and binding parameters. If no credentials are given in the connection and binding parameters, an anonymous bind will be performed. Note that this requires anonymous binds to be allowed on the LDAP server. An empty string, `''`, can be passed as `$password` together with a username if, and only if, `allowEmptyPassword` is set to `true` in the connection and binding parameters.
+ `search(/* ... */) : Collection`                                                                 | Searches the LDAP tree with the given `$filter` and the given search parameters; see below for full details.
+ `count(string\|Filter\AbstractFilter $filter, string\|Dn $basedn, int $scope) : int`             | Counts the elements returned by the given search parameters. See [search()](#search) for a detailed description of the method parameters.
+ `countChildren(string\|Dn $dn) : int`                                                            | Counts the direct descendants (children) of the entry identified by the given `$dn`.
+ `exists(string\|Dn $dn) : bool`                                                                  | Checks whether the entry identified by the given `$dn` exists.
+ `searchEntries(/* ... */) : array`                                                               | Performs a search operation and returns the result as an PHP array. This is essentially the same method as `search()` except for the return type. See [search()](#search) and [searchEntries()](#searchentries) below for more details.
+ `getEntry(string\|Dn $dn, array $attributes, bool $throwOnNotFound) : array`                     | Retrieves the LDAP entry identified by `$dn` with the attributes specified in `$attributes`. if `$attributes` is omitted, all attributes (`[]`) are included in the result. `$throwOnNotFound` is `false` by default, so the method will return `null` if the specified entry cannot be found. If set to `true`, a `Laminas\Ldap\Exception\LdapException` will be thrown instead.
+ `prepareLdapEntryArray(array &$entry) : void`                                                    | Prepare an array for the use in LDAP modification operations. This method does not need to be called by the end-user as it's implicitly called on every data modification method.
+ `add(string\|Dn $dn, array $entry) : void`                                                       | Adds the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be added.
+ `update(string\|Dn $dn, array $entry) : void`                                                    | Updates the entry identified by `$dn` with its attributes `$entry` to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be modified.
+ `save(string\|Dn $dn, array $entry) : void`                                                      | Saves the entry identified by `$dn` with its attributes $entry to the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be saved. This method decides by querying the LDAP tree if the entry will be added or updated.
+ `delete(string\|Dn $dn, boolean $recursively) : void`                                            | Deletes the entry identified by `$dn` from the LDAP tree. Throws a `Laminas\Ldap\Exception\LdapException` if the entry could not be deleted. `$recursively` is `false` by default. If set to `true` the deletion will be carried out recursively and will effectively delete a complete subtree. Deletion will fail if $recursively is `false` and the entry `$dn` is not a leaf entry.
+ `moveToSubtree(string\|Dn $from, string\|Dn $to, bool $recursively, bool $alwaysEmulate) : void` | Moves the entry identified by `$from` to a location below `$to` keeping its RDN unchanged. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be moved. Moving will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry. `$alwaysEmulate` controls whether the ext/ldap function `ldap_rename()` should be used if available. This can only work for leaf entries and for servers and for ext/ldap supporting this function. Set to `true` to always use an emulated rename operation. All move-operations are carried out by copying and then deleting the corresponding entries in the LDAP tree. These operations are not atomic so that failures during the operation will result in an inconsistent state on the LDAP server. The same is true for all recursive operations. They also are by no means atomic. Please keep this in mind.
+ `move(string\|Dn $from, string\|Dn $to, bool $recursively, bool $alwaysEmulate) : void`          | This is an alias for `rename()`.
+ `rename(string\|Dn $from, string\|Dn $to, bool $recursively, bool $alwaysEmulate) : void`        | Renames the entry identified by `$from` to `$to`. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be moved. Moving will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry. `$alwaysEmulate` controls whether the ext/ldap function `ldap_rename()` should be used if available. This can only work for leaf entries and for servers and for ext/ldap supporting this function. Set to `TRUE` to always use an emulated rename operation.
+ `copyToSubtree(string\|Dn $from, string\|Dn $to, bool $recursively) : void`                      | Copies the entry identified by `$from` to a location below `$to` keeping its RDN unchanged. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be copied. Copying will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry.
+ `copy(string\|Dn $from, string\|Dn $to, bool $recursively) : void`                               | Copies the entry identified by `$from` to `$to`. `$recursively` specifies if the operation will be carried out recursively (`false` by default) so that the entry `$from` and all its descendants will be copied. Copying will fail if `$recursively` is `false` and the entry `$from` is not a leaf entry.
+ `getNode(string\|Dn $dn) : Node`                                                                 | Returns the entry `$dn` wrapped in a `Laminas\Ldap\Node`.
+ `getBaseNode() : Node`                                                                           | Returns the entry for the base DN `$baseDn` wrapped in a `Laminas\Ldap\Node`.
+ `getRootDse() : Node\RootDse`                                                                    | Returns the RootDSE for the current server.
+ `getSchema() : Node\Schema`                                                                      | Returns the LDAP schema for the current server.
 
 #### search()
 
@@ -91,11 +91,11 @@ where:
 - `$basedn`: The search base for the search. If omitted or `null`, the `baseDn`
   from the connection and binding parameters is used.
 - `$scope`: The search scope:
-  - `Ldap::SEARCH_SCOPE_SUB` searches the complete subtree including the
-    `$baseDn` node. This is the default value.
-  - `Ldap::SEARCH_SCOPE_ONE` restricts search to one level below `$baseDn`.
-  - `Ldap::SEARCH_SCOPE_BASE` restricts search to the `$baseDn` itself; this
-    can be used to efficiently retrieve a single entry by its DN.
+    - `Ldap::SEARCH_SCOPE_SUB` searches the complete subtree including the
+      `$baseDn` node. This is the default value.
+    - `Ldap::SEARCH_SCOPE_ONE` restricts search to one level below `$baseDn`.
+    - `Ldap::SEARCH_SCOPE_BASE` restricts search to the `$baseDn` itself; this
+       can be used to efficiently retrieve a single entry by its DN.
 - `$attributes`: Specifies the attributes contained in the returned entries. To
   include all possible attributes (ACL restrictions can disallow certain
   attribute to be retrieved by a given user), pass either an empty array (`[]`)
@@ -158,17 +158,17 @@ manipulate arrays suitable to the structure used in `Laminas\Ldap\Ldap` data
 modification methods, and to the data format required by the LDAP server. PHP
 data types are converted using `Laminas\Ldap\Converter\Converter` methods.
 
-Method signature                                                                           | Description
------------------------------------------------------------------------------------------- | -----------
-`static setAttribute(array &$data, string $attribName, mixed $value, bool $append) : void` | Sets the attribute `$attribName` in `$data` to the value `$value`. If `$append` is `true` (`false` by default) `$value` will be appended to the attribute. `$value` can be a scalar value or an array of scalar values. Conversion will take place.
-`static getAttribute(array $data, string $attribName, int|null $index) : array|mixed`      | Returns the attribute `$attribName` from `$data`. If `$index` is `null` (default), an array will be returned containing all the values for the given attribute. An empty array will be returned if the attribute does not exist in the given array. If an integer index is specified the corresponding value at the given index will be returned. If the index is out of bounds, `null` will be returned. Conversion will take place.
-`static attributeHasValue(array &$data, string $attribName, mixed|array $value) : bool`    | Checks if the attribute `$attribName` in `$data` has the value(s) given in `$value`. The method returns `true` only if all values in `$value` are present in the attribute. Comparison is done strictly (respecting the data type).
-`static removeDuplicatesFromAttribute(array &$data, string $attribName) : void`            | Removes all duplicates from the attribute `$attribName` in `$data`.
-`static removeFromAttribute(array &$data, string $attribName, mixed|array $value) : void`  | Removes the value(s) given in `$value` from the attribute `$attribName` in `$data`.
-`static setPassword(/* ... */) : void`                                                     | See [setPassword](#setpassword) below for details.
-`static createPassword(string $password, string $hashType) : string`                       | Creates an LDAP password. The password hash can be specified with `$hashType`. The default value here is `Attribute::PASSWORD_HASH_MD5` with `Attribute::PASSWORD_HASH_SHA` as the other possibility.
-`static setDateTimeAttribute(/* ... */) : void`                                            | See [setDateTimeAttribute()](#setdatetimeattribute) below for details.
-`static getDateTimeAttribute(/* ... */) : array|int`                                       | See [getDateTimeAttribute()](#getdatetimeattribute) below for details.
+ Method signature                                                                           | Description
+--------------------------------------------------------------------------------------------| -----------
+ `static setAttribute(array &$data, string $attribName, mixed $value, bool $append) : void` | Sets the attribute `$attribName` in `$data` to the value `$value`. If `$append` is `true` (`false` by default) `$value` will be appended to the attribute. `$value` can be a scalar value or an array of scalar values. Conversion will take place.
+ `static getAttribute(array $data, string $attribName, int\|null $index) : array\|mixed`    | Returns the attribute `$attribName` from `$data`. If `$index` is `null` (default), an array will be returned containing all the values for the given attribute. An empty array will be returned if the attribute does not exist in the given array. If an integer index is specified the corresponding value at the given index will be returned. If the index is out of bounds, `null` will be returned. Conversion will take place.
+ `static attributeHasValue(array &$data, string $attribName, mixed\|array $value) : bool`   | Checks if the attribute `$attribName` in `$data` has the value(s) given in `$value`. The method returns `true` only if all values in `$value` are present in the attribute. Comparison is done strictly (respecting the data type).
+ `static removeDuplicatesFromAttribute(array &$data, string $attribName) : void`            | Removes all duplicates from the attribute `$attribName` in `$data`.
+ `static removeFromAttribute(array &$data, string $attribName, mixed\|array $value) : void` | Removes the value(s) given in `$value` from the attribute `$attribName` in `$data`.
+ `static setPassword(/* ... */) : void`                                                     | See [setPassword](#setpassword) below for details.
+ `static createPassword(string $password, string $hashType) : string`                       | Creates an LDAP password. The password hash can be specified with `$hashType`. The default value here is `Attribute::PASSWORD_HASH_MD5` with `Attribute::PASSWORD_HASH_SHA` as the other possibility.
+ `static setDateTimeAttribute(/* ... */) : void`                                            | See [setDateTimeAttribute()](#setdatetimeattribute) below for details.
+ `static getDateTimeAttribute(/* ... */) : array\|int`                                      | See [getDateTimeAttribute()](#getdatetimeattribute) below for details.
 
 #### setPassword()
 
@@ -252,18 +252,18 @@ On reading values, the following conversion will take place:
 - `'FALSE'`: Converted to `false`.
 - Others: All other strings won't be automatically converted and are passed as they are.
 
-Method signature                                                              | Description
------------------------------------------------------------------------------ | -----------
-`static ascToHex32(string $string) : string`                                  | Convert all Ascii characters with decimal value less than 32 to hexadecimal value.
-`static hex32ToAsc(string $string) : string`                                  | Convert all hexadecimal characters to Ascii values.
-`static toLdap(mixed $value, int $type) : string|null`                        | Converts a PHP data type into its LDAP representation. `$type` argument is used to set the conversion method. The default, `Converter::STANDARD`, allows the function to try to guess the conversion method to use. Others possibilities are `Converter::BOOLEAN` and `Converter::GENERALIZED_TIME`. See the introduction for details.
-`static fromLdap(string $value, int $type, bool $dateTimeAsUtc) : mixed`      | Converts an LDAP value into its PHP data type. See introduction and `toLdap()` and `toLdapDateTime()` for details.
-`static toLdapDateTime(int|string|DateTime $date, bool $asUtc) : string|null` | Converts a timestamp, a `DateTime` instance, or a string that is parseable by `strtotime()` into its LDAP date/time representation. If `$asUtc` is `true` (`false` by default), the resulting LDAP date/time string will be in UTC; otherwise a local date/time string will be returned.
-`static fromLdapDateTime(string $date, boolean $asUtc) : DateTime`            | Converts LDAP date/time representation into a PHP `DateTime` object.
-`static toLdapBoolean(bool|int|string $value) : string`                       | Converts a PHP data type into its LDAP boolean representation. By default, always return `false` except if the value is `true`, `'true'`, or `1`.
-`static fromLdapBoolean(string $value) : bool`                                | Converts LDAP boolean representation into a PHP boolean data type.
-`static toLdapSerialize(mixed $value) : string`                               | The value will be converted to a string by using `serialize()`.
-`static fromLdapUnserialize(string $value) : mixed`                           | The value will be converted from a string by using `unserialize()`.
+ Method signature                                                                 | Description
+----------------------------------------------------------------------------------| -----------
+ `static ascToHex32(string $string) : string`                                     | Convert all Ascii characters with decimal value less than 32 to hexadecimal value.
+ `static hex32ToAsc(string $string) : string`                                     | Convert all hexadecimal characters to Ascii values.
+ `static toLdap(mixed $value, int $type) : string\|null`                          | Converts a PHP data type into its LDAP representation. `$type` argument is used to set the conversion method. The default, `Converter::STANDARD`, allows the function to try to guess the conversion method to use. Others possibilities are `Converter::BOOLEAN` and `Converter::GENERALIZED_TIME`. See the introduction for details.
+ `static fromLdap(string $value, int $type, bool $dateTimeAsUtc) : mixed`         | Converts an LDAP value into its PHP data type. See introduction and `toLdap()` and `toLdapDateTime()` for details.
+ `static toLdapDateTime(int\|string\|DateTime $date, bool $asUtc) : string\|null` | Converts a timestamp, a `DateTime` instance, or a string that is parseable by `strtotime()` into its LDAP date/time representation. If `$asUtc` is `true` (`false` by default), the resulting LDAP date/time string will be in UTC; otherwise a local date/time string will be returned.
+ `static fromLdapDateTime(string $date, boolean $asUtc) : DateTime`               | Converts LDAP date/time representation into a PHP `DateTime` object.
+ `static toLdapBoolean(bool\|int\|string $value) : string`                        | Converts a PHP data type into its LDAP boolean representation. By default, always return `false` except if the value is `true`, `'true'`, or `1`.
+ `static fromLdapBoolean(string $value) : bool`                                   | Converts LDAP boolean representation into a PHP boolean data type.
+ `static toLdapSerialize(mixed $value) : string`                                  | The value will be converted to a string by using `serialize()`.
+ `static fromLdapUnserialize(string $value) : mixed`                              | The value will be converted from a string by using `unserialize()`.
 
 ### Laminas\\Ldap\\Dn
 
@@ -287,32 +287,32 @@ for `offsetGet(int $offset)`, to `Dn::set($offset, $value)` for `offsetSet()`,
 and to `Dn::remove($offset, 1)` for `offsetUnset()`. `offsetExists()` simply
 checks if the index is within the bounds.
 
-Method signature                                                                   | Description
----------------------------------------------------------------------------------- | -----------
-`static factory(string|array $dn, string|null $caseFold) : Dn`                     | Creates an instance from an array or a string. The array must conform to the array structure detailed under `Dn::implodeDn()`.
-`static fromString(string $dn, string|null $caseFold) : Dn`                        | Creates an instance from a string.
-`static fromArray(array $dn, string|null $caseFold) : Dn`                          | Creates an instance from an array. The array must conform to the array structure detailed under `Dn::implodeDn()`.
-`getRdn(string|null $caseFold) : array`                                            | Gets the RDN of the current DN. The return value is an array with the RDN attribute names its keys and the RDN attribute values.
-`getRdnString(string|null $caseFold) : string`                                     | Gets the RDN of the current DN. The return value is a string.
-`getParentDn(integer $levelUp) : Dn`                                               | Gets the DN of the current DN’s ancestor `$levelUp` levels up the tree. `$levelUp` defaults to `1`.
-`get(int $index, int $length, string|null $caseFold) : array`                      | Returns a slice of the current DN determined by `$index` and `$length`. `$index` starts with `0` on the DN part from the left.
-`set(int $index, array $value) : void`                                             | Replaces a DN part in the current DN. This operation manipulates the current instance.
-`remove(int $index, int $length) : void`                                           | Removes a DN part from the current DN. This operation manipulates the current instance. $length defaults to 1
-`append(array $value) : void`                                                      | Appends a DN part to the current DN. This operation manipulates the current instance.
-`prepend(array $value) : void`                                                     | Prepends a DN part to the current DN. This operation manipulates the current instance.
-`insert(int $index, array $value) : void`                                          | Inserts a DN part after the index `$index` to the current DN. This operation manipulates the current instance.
-`setCaseFold(string|null $caseFold) : void`                                        | Sets the case-folding option to the current DN instance. If `$caseFold` is `null`, the default case-folding setting is used for the current instance.
-`toString(string|null $caseFold) : string`                                         | Returns DN as a string.
-`toArray(string|null $caseFold) : array`                                           | Returns DN as an array.
-`__toString() : string`                                                            | Returns DN as a string; proxies to `Dn::toString(null)`.
-`static setDefaultCaseFold(string $caseFold) : void`                               | Sets the default case-folding option used by all instances on creation by default. Already existing instances are not affected by this setting.
-`escapeValue(string|array $values) : array`                                        | Escapes a DN value according to RFC 2253.
-`unescapeValue(string|array $values) : array`                                      | Undoes the conversion done by `Dn::escapeValue()`.
-`explodeDn(string $dn, array &$keys, array &$vals, string|null $caseFold) : array` | Explodes the DN `$dn` into an array containing all parts of the given DN. `$keys` optionally receive DN keys (e.g. CN, OU, DC, ...). `$vals` optionally receive DN values. The resulting array will be of type `[ ['cn' => 'name1', 'uid' => 'user'], ['cn' => 'name2'), ['dc' => 'example'], ['dc' => 'org'] ]` for a DN of `cn=name1+uid=user,cn=name2,dc=example,dc=org`.
-`checkDn(string $dn, array &$keys, array &$vals, string|null $caseFold) : bool`    | Checks if a given DN `$dn` is malformed. If `$keys` or `$keys` and `$vals` are given, these arrays will be filled with the appropriate DN keys and values.
-`implodeRdn(array $part, string|null $caseFold) : string`                          | Returns a DN part in the form `$attribute=$value`
-`implodeDn(array $dnArray, string|null $caseFold, string $separator) : string`     | Implodes an array in the form delivered by `Dn::explodeDn()` to a DN string.  `$separator` defaults to `,` but some LDAP servers also understand `;`.  `$dnArray` must of type `[ ['cn' => 'name1', 'uid' => 'user'], ['cn' => 'name2'], ['dc' => 'example'], ['dc' => 'org'] ]`
-`isChildOf(string|Dn $childDn, string|Dn $parentDn) : bool`                        | Checks if given `$childDn` is beneath `$parentDn` subtree.
+ Method signature                                                                    | Description
+-------------------------------------------------------------------------------------| -----------
+ `static factory(string\|array $dn, string\|null $caseFold) : Dn`                    | Creates an instance from an array or a string. The array must conform to the array structure detailed under `Dn::implodeDn()`.
+ `static fromString(string $dn, string\|null $caseFold) : Dn`                        | Creates an instance from a string.
+ `static fromArray(array $dn, string\|null $caseFold) : Dn`                          | Creates an instance from an array. The array must conform to the array structure detailed under `Dn::implodeDn()`.
+ `getRdn(string\|null $caseFold) : array`                                            | Gets the RDN of the current DN. The return value is an array with the RDN attribute names its keys and the RDN attribute values.
+ `getRdnString(string\|null $caseFold) : string`                                     | Gets the RDN of the current DN. The return value is a string.
+ `getParentDn(integer $levelUp) : Dn`                                                | Gets the DN of the current DN’s ancestor `$levelUp` levels up the tree. `$levelUp` defaults to `1`.
+ `get(int $index, int $length, string\|null $caseFold) : array`                      | Returns a slice of the current DN determined by `$index` and `$length`. `$index` starts with `0` on the DN part from the left.
+ `set(int $index, array $value) : void`                                              | Replaces a DN part in the current DN. This operation manipulates the current instance.
+ `remove(int $index, int $length) : void`                                            | Removes a DN part from the current DN. This operation manipulates the current instance. $length defaults to 1
+ `append(array $value) : void`                                                       | Appends a DN part to the current DN. This operation manipulates the current instance.
+ `prepend(array $value) : void`                                                      | Prepends a DN part to the current DN. This operation manipulates the current instance.
+ `insert(int $index, array $value) : void`                                           | Inserts a DN part after the index `$index` to the current DN. This operation manipulates the current instance.
+ `setCaseFold(string\|null $caseFold) : void`                                        | Sets the case-folding option to the current DN instance. If `$caseFold` is `null`, the default case-folding setting is used for the current instance.
+ `toString(string\|null $caseFold) : string`                                         | Returns DN as a string.
+ `toArray(string\|null $caseFold) : array`                                           | Returns DN as an array.
+ `__toString() : string`                                                             | Returns DN as a string; proxies to `Dn::toString(null)`.
+ `static setDefaultCaseFold(string $caseFold) : void`                                | Sets the default case-folding option used by all instances on creation by default. Already existing instances are not affected by this setting.
+ `escapeValue(string\|array $values) : array`                                        | Escapes a DN value according to RFC 2253.
+ `unescapeValue(string\|array $values) : array`                                      | Undoes the conversion done by `Dn::escapeValue()`.
+ `explodeDn(string $dn, array &$keys, array &$vals, string\|null $caseFold) : array` | Explodes the DN `$dn` into an array containing all parts of the given DN. `$keys` optionally receive DN keys (e.g. CN, OU, DC, ...). `$vals` optionally receive DN values. The resulting array will be of type `[ ['cn' => 'name1', 'uid' => 'user'], ['cn' => 'name2'), ['dc' => 'example'], ['dc' => 'org'] ]` for a DN of `cn=name1+uid=user,cn=name2,dc=example,dc=org`.
+ `checkDn(string $dn, array &$keys, array &$vals, string\|null $caseFold) : bool`    | Checks if a given DN `$dn` is malformed. If `$keys` or `$keys` and `$vals` are given, these arrays will be filled with the appropriate DN keys and values.
+ `implodeRdn(array $part, string\|null $caseFold) : string`                          | Returns a DN part in the form `$attribute=$value`
+ `implodeDn(array $dnArray, string\|null $caseFold, string $separator) : string`     | Implodes an array in the form delivered by `Dn::explodeDn()` to a DN string.  `$separator` defaults to `,` but some LDAP servers also understand `;`.  `$dnArray` must of type `[ ['cn' => 'name1', 'uid' => 'user'], ['cn' => 'name2'], ['dc' => 'example'], ['dc' => 'org'] ]`
+ `isChildOf(string\|Dn $childDn, string\|Dn $parentDn) : bool`                       | Checks if given `$childDn` is beneath `$parentDn` subtree.
 
 ### Laminas\\Ldap\\Filter
 
@@ -326,30 +326,30 @@ Method signature                                                                
 implements `Iterator` and `RecursiveIterator` to allow for recursive
 tree-traversal.
 
-Method signature                                                | Description
---------------------------------------------------------------- | -----------
-`static equals(string $attr, string $value) : Filter`           | Creates an "equals" filter: `(attr=value)`.
-`begins(string $attr, string $value) : Filter`                  | Creates a "begins with" filter: `(attr=value*)`.
-`ends(string $attr, string $value) : Filter`                    | Creates an "ends with" filter: `(attr=*value)`.
-`contains(string $attr, string $value) : Filter`                | Creates a "contains" filter: `(attr=*value*)`.
-`greater(string $attr, string $value) : Filter`                 | Creates a "greater than" filter: `(attr>value)`.
-`greaterOrEqual(string $attr, string $value) : Filter`          | Creates a "greater than or equal" filter: `(attr>=value)`.
-`less(string $attr, string $value) : Filter`                    | Creates a "less than" filter: `(attr<value)`.
-`lessOrEqual(string $attr, string $value) : Filter`             | Creates a "less than or equal" filter: `(attr<=value)`.
-`approx(string $attr, string $value) : Filter`                  | Creates an "approx" filter: `(attr~=value)`.
-`any(string $attr) : Filter`                                    | Creates an "any" filter: `(attr=*)`.
-`string(string $filter) : Filter`                               | Creates a simple custom string filter. The user is responsible for all value-escaping as the filter is used as is.
-`mask(string $mask, string $value, ...) : Filter`               | Creates a filter from a string mask. All `$value` parameters will be escaped and substituted into `$mask` by using `sprintf()`.
-`andFilterFilter\AbstractFilter $filter, ...) : Filter`         | Creates an "and" filter from all arguments given.
-`orFilter(Filter\AbstractFilter $filter, ...) : Filter`         | Creates an "or" filter from all arguments given.
-`__construct(/* ... */) : void`                                 | Create an arbitrary filter according to the parameters supplied; see the [Node constructor](#node-constructor) below for the full signature.
-`toString() : string`                                           | Returns a string representation of the filter.
-`__toString() : string`                                         | Returns a string representation of the filter. Proxies to `Filter::toString()`.
-`negate() : Filter\NotFilter`                                   | Creates and returns a new filter that is a negation of the current filter.
-`addAnd(Filter\AbstractFilter $filter, ...) : Filter\AndFilter` | Creates an "and" filter from the current filter and all filters passed in as the arguments.
-`addOr(Filter\AbstractFilter $filter, ...) : Filter\OrFilter`   | Creates an "or" filter from the current filter and all filters passed in as the arguments.
-`escapeValue(string|array $values) : string|array`              | Escapes the given `$values` according to RFC 2254 so that they can be safely used in LDAP filters. If a single string is given, a string is returned, otherwise an array is returned.  Any control characters with an ASCII code `< 32` as well as characters with special meaning in LDAP filters (`*`, `(`, `)`, and `\\` (the backslash)) are converted into the representation of a backslash followed by two hex digits representing the hexadecimal value of the character.
-`unescapeValue(string|array $values) : string|array`            | Undoes the conversion done by `Filter::escapeValue()`. Converts any sequences of a backslash followed by two hex digits into the corresponding character.
+ Method signature                                                | Description
+-----------------------------------------------------------------| -----------
+ `static equals(string $attr, string $value) : Filter`           | Creates an "equals" filter: `(attr=value)`.
+ `begins(string $attr, string $value) : Filter`                  | Creates a "begins with" filter: `(attr=value*)`.
+ `ends(string $attr, string $value) : Filter`                    | Creates an "ends with" filter: `(attr=*value)`.
+ `contains(string $attr, string $value) : Filter`                | Creates a "contains" filter: `(attr=*value*)`.
+ `greater(string $attr, string $value) : Filter`                 | Creates a "greater than" filter: `(attr>value)`.
+ `greaterOrEqual(string $attr, string $value) : Filter`          | Creates a "greater than or equal" filter: `(attr>=value)`.
+ `less(string $attr, string $value) : Filter`                    | Creates a "less than" filter: `(attr<value)`.
+ `lessOrEqual(string $attr, string $value) : Filter`             | Creates a "less than or equal" filter: `(attr<=value)`.
+ `approx(string $attr, string $value) : Filter`                  | Creates an "approx" filter: `(attr~=value)`.
+ `any(string $attr) : Filter`                                    | Creates an "any" filter: `(attr=*)`.
+ `string(string $filter) : Filter`                               | Creates a simple custom string filter. The user is responsible for all value-escaping as the filter is used as is.
+ `mask(string $mask, string $value, ...) : Filter`               | Creates a filter from a string mask. All `$value` parameters will be escaped and substituted into `$mask` by using `sprintf()`.
+ `andFilterFilter\AbstractFilter $filter, ...) : Filter`         | Creates an "and" filter from all arguments given.
+ `orFilter(Filter\AbstractFilter $filter, ...) : Filter`         | Creates an "or" filter from all arguments given.
+ `__construct(/* ... */) : void`                                 | Create an arbitrary filter according to the parameters supplied; see the [Node constructor](#node-constructor) below for the full signature.
+ `toString() : string`                                           | Returns a string representation of the filter.
+ `__toString() : string`                                         | Returns a string representation of the filter. Proxies to `Filter::toString()`.
+ `negate() : Filter\NotFilter`                                   | Creates and returns a new filter that is a negation of the current filter.
+ `addAnd(Filter\AbstractFilter $filter, ...) : Filter\AndFilter` | Creates an "and" filter from the current filter and all filters passed in as the arguments.
+ `addOr(Filter\AbstractFilter $filter, ...) : Filter\OrFilter`   | Creates an "or" filter from the current filter and all filters passed in as the arguments.
+ `escapeValue(string\|array $values) : string\|array`            | Escapes the given `$values` according to RFC 2254 so that they can be safely used in LDAP filters. If a single string is given, a string is returned, otherwise an array is returned.  Any control characters with an ASCII code `< 32` as well as characters with special meaning in LDAP filters (`*`, `(`, `)`, and `\\` (the backslash)) are converted into the representation of a backslash followed by two hex digits representing the hexadecimal value of the character.
+ `unescapeValue(string\|array $values) : string\|array`          | Undoes the conversion done by `Filter::escapeValue()`. Converts any sequences of a backslash followed by two hex digits into the corresponding character.
 
 #### Node constructor
 
@@ -382,33 +382,33 @@ Furthermore the class implements `ArrayAccess` for array-style access to the
 attributes.  `offsetSet()` and `offsetUnset()` also throw a
 `BadMethodCallException`.
 
-Method signature                                                  | Description
------------------------------------------------------------------ | -----------
-`getDn() : Dn`                                                    | Gets the DN of the current node as a `Laminas\Ldap\Dn` instance.
-`getDnString(string $caseFold) : string`                          | Gets the DN of the current node as a string.
-`getDnArray(string $caseFold) : array`                            | Gets the DN of the current node as an array.
-`getRdnString(string $caseFold) : string`                         | Gets the RDN of the current node as a string.
-`getRdnArray(string $caseFold) : array`                           | Gets the RDN of the current node as an array.
-`getObjectClass() : array`                                        | Returns the `objectClass` of the node.
-`toString() : string`                                             | Returns the DN of the current node; proxies to `Laminas\Ldap\Dn::getDnString()`.
-`__toString() : string`                                           | Casts to string representation; proxies to `Laminas\Ldap\Dn::toString()`.
-`toArray(bool $includeSystemAttributes) : array`                  | Returns an array representation of the current node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array. Unlike `getAttributes()`, the resulting array contains the DN with key ‘dn’.
-`toJson(bool $includeSystemAttributes) : string`                  | Returns a JSON representation of the current node using `toArray()`.
-`getData(bool $includeSystemAttributes) : array`                  | Returns the node's attributes. The array contains all attributes in its internal format (no conversion).
-`existsAttribute(string $name, bool $emptyExists) : bool`         | Checks whether a given attribute exists. If `$emptyExists` is `false`, empty attributes (containing only `[]`) are treated as non-existent, returning `false`. If `$emptyExists` is `true`, empty attributes are treated as existent, returning `true`. In this case, the method returns `false` only if the attribute name is missing in the key-collection.
-`attributeHasValue(string $name, mixed|array $value) : bool`      | Checks if the given value(s) exist in the attribute. The method returns `true` only if all values in `$value` are present in the attribute. Comparison is done strictly (respecting the data type).
-`count() : int`                                                   | Returns the number of attributes in the node. Implements `Countable`.
-`getAttribute(string $name, int|null $index) : mixed`             | Gets an LDAP attribute. Data conversion is applied using `Attribute::getAttribute()`.
-`getAttributes(bool $includeSystemAttributes) : array`            | Gets all attributes of node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array.
-`getDateTimeAttribute(string $name, int|null $index) : array|int` | Gets an LDAP date/time attribute. Data conversion is applied using `Attribute::getDateTimeAttribute()`.
-`reload(Ldap $ldap) : void`                                       | Reloads the current node's attributes from the given LDAP server.
-`static create(Ldap $ldap) : RootDse`                             | Factory method to create the RootDSE.
-`getNamingContexts() : array`                                     | Gets the `namingContexts`.
-`getSubschemaSubentry() : string|null`                            | Gets the `subschemaSubentry`.
-`supportsVersion(string|int|array $versions) : bool`              | Determines if the LDAP version is supported.
-`supportsSaslMechanism(string|array $mechlist) : bool`            | Determines if the SASL mechanism is supported.
-`getServerType() : int`                                           | Gets the server type. Returns `RootDse::SERVER_TYPE_GENERIC` for unknown LDAP servers, `RootDse::SERVER_TYPE_OPENLDAP` for OpenLDAP servers, `RootDse::SERVER_TYPE_ACTIVEDIRECTORY` for Microsoft ActiveDirectory servers, and `RootDse::SERVER_TYPE_EDIRECTORY` for Novell eDirectory servers.
-`getSchemaDn() : Dn`                                              | Returns the schema DN.
+ Method signature                                                    | Description
+---------------------------------------------------------------------| -----------
+ `getDn() : Dn`                                                      | Gets the DN of the current node as a `Laminas\Ldap\Dn` instance.
+ `getDnString(string $caseFold) : string`                            | Gets the DN of the current node as a string.
+ `getDnArray(string $caseFold) : array`                              | Gets the DN of the current node as an array.
+ `getRdnString(string $caseFold) : string`                           | Gets the RDN of the current node as a string.
+ `getRdnArray(string $caseFold) : array`                             | Gets the RDN of the current node as an array.
+ `getObjectClass() : array`                                          | Returns the `objectClass` of the node.
+ `toString() : string`                                               | Returns the DN of the current node; proxies to `Laminas\Ldap\Dn::getDnString()`.
+ `__toString() : string`                                             | Casts to string representation; proxies to `Laminas\Ldap\Dn::toString()`.
+ `toArray(bool $includeSystemAttributes) : array`                    | Returns an array representation of the current node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array. Unlike `getAttributes()`, the resulting array contains the DN with key ‘dn’.
+ `toJson(bool $includeSystemAttributes) : string`                    | Returns a JSON representation of the current node using `toArray()`.
+ `getData(bool $includeSystemAttributes) : array`                    | Returns the node's attributes. The array contains all attributes in its internal format (no conversion).
+ `existsAttribute(string $name, bool $emptyExists) : bool`           | Checks whether a given attribute exists. If `$emptyExists` is `false`, empty attributes (containing only `[]`) are treated as non-existent, returning `false`. If `$emptyExists` is `true`, empty attributes are treated as existent, returning `true`. In this case, the method returns `false` only if the attribute name is missing in the key-collection.
+ `attributeHasValue(string $name, mixed\|array $value) : bool`       | Checks if the given value(s) exist in the attribute. The method returns `true` only if all values in `$value` are present in the attribute. Comparison is done strictly (respecting the data type).
+ `count() : int`                                                     | Returns the number of attributes in the node. Implements `Countable`.
+ `getAttribute(string $name, int\|null $index) : mixed`              | Gets an LDAP attribute. Data conversion is applied using `Attribute::getAttribute()`.
+ `getAttributes(bool $includeSystemAttributes) : array`              | Gets all attributes of node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array.
+ `getDateTimeAttribute(string $name, int\|null $index) : array\|int` | Gets an LDAP date/time attribute. Data conversion is applied using `Attribute::getDateTimeAttribute()`.
+ `reload(Ldap $ldap) : void`                                         | Reloads the current node's attributes from the given LDAP server.
+ `static create(Ldap $ldap) : RootDse`                               | Factory method to create the RootDSE.
+ `getNamingContexts() : array`                                       | Gets the `namingContexts`.
+ `getSubschemaSubentry() : string\|null`                             | Gets the `subschemaSubentry`.
+ `supportsVersion(string\|int\|array $versions) : bool`              | Determines if the LDAP version is supported.
+ `supportsSaslMechanism(string\|array $mechlist) : bool`             | Determines if the SASL mechanism is supported.
+ `getServerType() : int`                                             | Gets the server type. Returns `RootDse::SERVER_TYPE_GENERIC` for unknown LDAP servers, `RootDse::SERVER_TYPE_OPENLDAP` for OpenLDAP servers, `RootDse::SERVER_TYPE_ACTIVEDIRECTORY` for Microsoft ActiveDirectory servers, and `RootDse::SERVER_TYPE_EDIRECTORY` for Novell eDirectory servers.
+ `getSchemaDn() : Dn`                                                | Returns the schema DN.
 
 #### OpenLDAP
 
@@ -417,14 +417,14 @@ Additionally the common methods above apply to instances of `Laminas\Ldap\Node\R
 Refer to [LDAP Operational Attributes and Objects](http://www.zytrax.com/books/ldap/ch3/#operational)
 specification for information on the attributes of OpenLDAP RootDSE.
 
-Method signature                               | Description
----------------------------------------------- | -----------
-`getServerType() : int`                        | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_OPENLDAP`
-`getConfigContext() : string|null`             | Gets the `configContext`.
-`getMonitorContext() : string|null`            | Gets the `monitorContext`.
-`supportsControl(string|array $oids) : bool`   | Determines if the control is supported.
-`supportsExtension(string|array $oids) : bool` | Determines if the extension is supported.
-`supportsFeature(string|array $oids) : bool`   | Determines if the feature is supported.
+Method signature                                | Description
+----------------------------------------------- | -----------
+`getServerType() : int`                         | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_OPENLDAP`
+`getConfigContext() : string\|null`             | Gets the `configContext`.
+`getMonitorContext() : string\|null`            | Gets the `monitorContext`.
+`supportsControl(string\|array $oids) : bool`   | Determines if the control is supported.
+`supportsExtension(string\|array $oids) : bool` | Determines if the extension is supported.
+`supportsFeature(string\|array $oids) : bool`   | Determines if the feature is supported.
 
 #### ActiveDirectory
 
@@ -435,27 +435,27 @@ Refer to the [RootDSE](http://msdn.microsoft.com/en-us/library/ms684291(VS.85).a
 specification for information on the attributes of Microsoft ActiveDirectory
 RootDSE.
 
-Method signature                                   | Description
--------------------------------------------------- | -----------
-`getServerType() : int`                            | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY`
-`getConfigurationNamingContext() : string|null`    | Gets the `configurationNamingContext`.
-`getCurrentTime() : string|null`                   | Gets the `currentTime`.
-`getDefaultNamingContext() : string|null`          | Gets the `defaultNamingContext`.
-`getDnsHostName() : string|null`                   | Gets the `dnsHostName`.
-`getDomainControllerFunctionality() : string|null` | Gets the `domainControllerFunctionality`.
-`getDomainFunctionality() : string|null`           | Gets the `domainFunctionality`.
-`getDsServiceName() : string|null`                 | Gets the `dsServiceName`.
-`getForestFunctionality() : string|null`           | Gets the `forestFunctionality`.
-`getHighestCommittedUSN() : string|null`           | Gets the `highestCommittedUSN`.
-`getIsGlobalCatalogReady() : string|null`          | Gets the `isGlobalCatalogReady`.
-`getIsSynchronized() : string|null`                | Gets the `isSynchronized`.
-`getLdapServiceName() : string|null`               | Gets the `ldapServiceName`.
-`getRootDomainNamingContext() : string|null`       | Gets the `rootDomainNamingContext`.
-`getSchemaNamingContext() : string|null`           | Gets the `schemaNamingContext`.
-`getServerName() : string|null`                    | Gets the `serverName`.
-`supportsCapability(string|array $oids) : bool`    | Determines if the capability is supported.
-`supportsControl(string|array $oids) : bool`       | Determines if the control is supported.
-`supportsPolicy(string|array $policies) : bool`    | Determines if the version is supported.
+Method signature                                    | Description
+--------------------------------------------------- | -----------
+`getServerType() : int`                             | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_ACTIVEDIRECTORY`
+`getConfigurationNamingContext() : string\|null`    | Gets the `configurationNamingContext`.
+`getCurrentTime() : string\|null`                   | Gets the `currentTime`.
+`getDefaultNamingContext() : string\|null`          | Gets the `defaultNamingContext`.
+`getDnsHostName() : string\|null`                   | Gets the `dnsHostName`.
+`getDomainControllerFunctionality() : string\|null` | Gets the `domainControllerFunctionality`.
+`getDomainFunctionality() : string\|null`           | Gets the `domainFunctionality`.
+`getDsServiceName() : string\|null`                 | Gets the `dsServiceName`.
+`getForestFunctionality() : string\|null`           | Gets the `forestFunctionality`.
+`getHighestCommittedUSN() : string\|null`           | Gets the `highestCommittedUSN`.
+`getIsGlobalCatalogReady() : string\|null`          | Gets the `isGlobalCatalogReady`.
+`getIsSynchronized() : string\|null`                | Gets the `isSynchronized`.
+`getLdapServiceName() : string\|null`               | Gets the `ldapServiceName`.
+`getRootDomainNamingContext() : string\|null`       | Gets the `rootDomainNamingContext`.
+`getSchemaNamingContext() : string\|null`           | Gets the `schemaNamingContext`.
+`getServerName() : string\|null`                    | Gets the `serverName`.
+`supportsCapability(string\|array $oids) : bool`    | Determines if the capability is supported.
+`supportsControl(string\|array $oids) : bool`       | Determines if the control is supported.
+`supportsPolicy(string\|array $policies) : bool`    | Determines if the version is supported.
 
 #### eDirectory
 
@@ -465,20 +465,20 @@ Additionally the common methods above apply to instances of
 Refer to [Getting Information about the LDAP Server](http://www.novell.com/documentation/edir88/edir88/index.html?page=/documentation/edir88/edir88/data/ah59jqq.html)
 for information on the attributes of Novell eDirectory RootDSE.
 
-Method signature                                     | Description
----------------------------------------------------- | -----------
-`getServerType() : int`                              | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_EDIRECTORY`
-`supportsExtension(string|array $oids) : bool`       | Determines if the extension is supported.
-`getVendorName() : string|null`                      | Gets the `vendorName`.
-`getVendorVersion() : string|null`                   | Gets the `vendorVersion`.
-`getDsaName() : string|null`                         | Gets the `dsaName`.
-`getStatisticsErrors() : string|null`                | Gets the server statistics `errors`.
-`getStatisticsSecurityErrors() : string|null`        | Gets the server statistics `securityErrors`.
-`getStatisticsChainings() : string|null`             | Gets the server statistics `chainings`.
-`getStatisticsReferralsReturned() : string|null`     | Gets the server statistics `referralsReturned`.
-`getStatisticsExtendedOps() : string|null`           | Gets the server statistics `extendedOps`.
-`getStatisticsAbandonOps() : string|null`            | Gets the server statistics `abandonOps`.
-`getStatisticsWholeSubtreeSearchOps() : string|null` | Gets the server statistics `wholeSubtreeSearchOps`.
+Method signature                                      | Description
+----------------------------------------------------- | -----------
+`getServerType() : int`                               | Gets the server type. Returns `Laminas\Ldap\Node\RootDse::SERVER_TYPE_EDIRECTORY`
+`supportsExtension(string\|array $oids) : bool`       | Determines if the extension is supported.
+`getVendorName() : string\|null`                      | Gets the `vendorName`.
+`getVendorVersion() : string\|null`                   | Gets the `vendorVersion`.
+`getDsaName() : string\|null`                         | Gets the `dsaName`.
+`getStatisticsErrors() : string\|null`                | Gets the server statistics `errors`.
+`getStatisticsSecurityErrors() : string\|null`        | Gets the server statistics `securityErrors`.
+`getStatisticsChainings() : string\|null`             | Gets the server statistics `chainings`.
+`getStatisticsReferralsReturned() : string\|null`     | Gets the server statistics `referralsReturned`.
+`getStatisticsExtendedOps() : string\|null`           | Gets the server statistics `extendedOps`.
+`getStatisticsAbandonOps() : string\|null`            | Gets the server statistics `abandonOps`.
+`getStatisticsWholeSubtreeSearchOps() : string\|null` | Gets the server statistics `wholeSubtreeSearchOps`.
 
 ### Laminas\\Ldap\\Node\\Schema
 
@@ -491,40 +491,40 @@ implemented, but they throw a `BadMethodCallException`, as modifications are not
 nodes. Furthermore the class implements `ArrayAccess` for array-style access to the attributes.
 `offsetSet()` and `offsetUnset()` also throw a `BadMethodCallException`.
 
-Method signature                                                  | Description
------------------------------------------------------------------ | -----------
-`getDn() : Dn`                                                    | Gets the DN of the current node as a `Laminas\Ldap\Dn` instance.
-`getDnString(string $caseFold) : string`                          | Gets the DN of the current node as a string.
-`getDnArray(string $caseFold) : array`                            | Gets the DN of the current node as an array.
-`getRdnString(string $caseFold) : string`                         | Gets the RDN of the current node as a string.
-`getRdnArray(string $caseFold) : array`                           | Gets the RDN of the current node as an array.
-`getObjectClass() : array`                                        | Returns the `objectClass` of the node.
-`toString() : string`                                             | Returns the DN of the current node; proxies to `Laminas\Ldap\Dn::getDnString()`.
-`__toString() : string`                                           | Casts to string representation; proxies to `Laminas\Ldap\Dn::toString()`.
-`toArray(bool $includeSystemAttributes) : array`                  | Returns an array representation of the current node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array. Unlike `Node\Schema::getAttributes()`, the resulting array contains the DN with key `dn`.
-`toJson(bool $includeSystemAttributes) : string`                  | Returns a JSON representation of the current node using `Node\Schema::toArray()`.
-`getData(bool $includeSystemAttributes) : array`                  | Returns the node’s attributes. The array contains all attributes in its internal format (no conversion).
-`existsAttribute(string $name, bool $emptyExists) : bool`         | Checks whether a given attribute exists. If `$emptyExists` is `false`, empty attributes (containing only `[]`) are treated as non-existent, returning `false`. If `$emptyExists` is `true`, empty attributes are treated as existent, returning `true`. In this case, the method returns `false` only if the attribute name is missing in the key-collection.
-`attributeHasValue(string $name, mixed|array $value) : bool`      | Checks if the given value(s) exist in the attribute. The method returns `true` only if all values in $value are present in the attribute. Comparison is done strictly (respecting the data type).
-`count() : int`                                                   | Returns the number of attributes in the node. Implements `Countable`.
-`getAttribute(string $name, int|null $index) : mixed`             | Gets an LDAP attribute.  Data conversion is applied using `Attribute::getAttribute()`.
-`getAttributes(bool $includeSystemAttributes) : array`            | Gets all attributes of node. If `$includeSystemAttributes` is `false` (defaults to `true`) the system specific attributes are stripped from the array.
-`getDateTimeAttribute(string $name, int|null $index) : array|int` | Gets a LDAP date/time attribute. Data conversion is applied using `Attribute::getDateTimeAttribute()`.
-`reload(Ldap $ldap) : void`                                       | Reloads the current node’s attributes from the given LDAP server.
-`static create(Ldap $ldap) : Node\Schema`                         | Factory method to create the `Schema` node.
-`getAttributeTypes() : array`                                     | Gets the attribute types as an array.
-`getObjectClasses() : array`                                      | Gets the object classes as an array of `Laminas\Ldap\Node\Schema\ObjectClass\ObjectClassInterface` instances.
+ Method signature                                                    | Description
+---------------------------------------------------------------------| -----------
+ `getDn() : Dn`                                                      | Gets the DN of the current node as a `Laminas\Ldap\Dn` instance.
+ `getDnString(string $caseFold) : string`                            | Gets the DN of the current node as a string.
+ `getDnArray(string $caseFold) : array`                              | Gets the DN of the current node as an array.
+ `getRdnString(string $caseFold) : string`                           | Gets the RDN of the current node as a string.
+ `getRdnArray(string $caseFold) : array`                             | Gets the RDN of the current node as an array.
+ `getObjectClass() : array`                                          | Returns the `objectClass` of the node.
+ `toString() : string`                                               | Returns the DN of the current node; proxies to `Laminas\Ldap\Dn::getDnString()`.
+ `__toString() : string`                                             | Casts to string representation; proxies to `Laminas\Ldap\Dn::toString()`.
+ `toArray(bool $includeSystemAttributes) : array`                    | Returns an array representation of the current node. If `$includeSystemAttributes` is `false` (defaults to `true`), the system specific attributes are stripped from the array. Unlike `Node\Schema::getAttributes()`, the resulting array contains the DN with key `dn`.
+ `toJson(bool $includeSystemAttributes) : string`                    | Returns a JSON representation of the current node using `Node\Schema::toArray()`.
+ `getData(bool $includeSystemAttributes) : array`                    | Returns the node’s attributes. The array contains all attributes in its internal format (no conversion).
+ `existsAttribute(string $name, bool $emptyExists) : bool`           | Checks whether a given attribute exists. If `$emptyExists` is `false`, empty attributes (containing only `[]`) are treated as non-existent, returning `false`. If `$emptyExists` is `true`, empty attributes are treated as existent, returning `true`. In this case, the method returns `false` only if the attribute name is missing in the key-collection.
+ `attributeHasValue(string $name, mixed\|array $value) : bool`       | Checks if the given value(s) exist in the attribute. The method returns `true` only if all values in $value are present in the attribute. Comparison is done strictly (respecting the data type).
+ `count() : int`                                                     | Returns the number of attributes in the node. Implements `Countable`.
+ `getAttribute(string $name, int\|null $index) : mixed`              | Gets an LDAP attribute.  Data conversion is applied using `Attribute::getAttribute()`.
+ `getAttributes(bool $includeSystemAttributes) : array`              | Gets all attributes of node. If `$includeSystemAttributes` is `false` (defaults to `true`) the system specific attributes are stripped from the array.
+ `getDateTimeAttribute(string $name, int\|null $index) : array\|int` | Gets a LDAP date/time attribute. Data conversion is applied using `Attribute::getDateTimeAttribute()`.
+ `reload(Ldap $ldap) : void`                                         | Reloads the current node’s attributes from the given LDAP server.
+ `static create(Ldap $ldap) : Node\Schema`                           | Factory method to create the `Schema` node.
+ `getAttributeTypes() : array`                                       | Gets the attribute types as an array.
+ `getObjectClasses() : array`                                        | Gets the object classes as an array of `Laminas\Ldap\Node\Schema\ObjectClass\ObjectClassInterface` instances.
 
 #### AttributeTypeInterface
 
-Method signature            | Description
---------------------------- | -----------
-`getName() : string`        | Gets the attribute name.
-`getOid() : string`         | Gets the attribute OID.
-`getSyntax() : string`      | Gets the attribute syntax.
-`getMaxLength() : int|null` | Gets the attribute maximum length.
-`isSingleValued() : bool`   | Returns if the attribute is single-valued.
-`getDescription() : string` | Gets the attribute description
+Method signature             | Description
+---------------------------- | -----------
+`getName() : string`         | Gets the attribute name.
+`getOid() : string`          | Gets the attribute OID.
+`getSyntax() : string`       | Gets the attribute syntax.
+`getMaxLength() : int\|null` | Gets the attribute maximum length.
+`isSingleValued() : bool`    | Returns if the attribute is single-valued.
+`getDescription() : string`  | Gets the attribute description
 
 #### ObjectClassInterface
 
@@ -567,9 +567,9 @@ Method signature               | Description
 
 `Laminas\Ldap\Node\Schema\AttributeType\OpenLDAP` has the following API:
 
-Method signature                                        | Description
-------------------------------------------------------- | -----------
-`getParent() : Node\Schema\AttributeType\OpenLdap|null` | Returns the parent attribute type in the inheritance tree if one exists.
+Method signature                                         | Description
+-------------------------------------------------------- | -----------
+`getParent() : Node\Schema\AttributeType\OpenLdap\|null` | Returns the parent attribute type in the inheritance tree if one exists.
 
 `Laminas\Ldap\Node\Schema\ObjectClass\OpenLDAP` has the following API:
 
@@ -593,10 +593,10 @@ methods.
 
 ### Laminas\\Ldap\\Ldif\\Encoder
 
-Method signature                                            | Description
------------------------------------------------------------ | -----------
-`decode(string $string) : array`                            | Decodes the string `$string` into an array of LDIF items.
-`encode(scalar|array|Node $value, array $options) : string` | Encode `$value` into a LDIF representation.
+ Method signature                                              | Description
+---------------------------------------------------------------| -----------
+ `decode(string $string) : array`                              | Decodes the string `$string` into an array of LDIF items.
+ `encode(scalar\|array\|Node $value, array $options) : string` | Encode `$value` into a LDIF representation.
 
 The `$options` argument to `encode()` may contain the following keys:
 

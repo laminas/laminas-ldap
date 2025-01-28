@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Attribute.php">
     <DocblockTypeContradiction>
-      <code>is_int($value)</code>
-      <code>is_string($value)</code>
+      <code><![CDATA[is_int($value)]]></code>
+      <code><![CDATA[is_string($value)]]></code>
     </DocblockTypeContradiction>
     <InvalidReturnStatement>
       <code><![CDATA[$value->format('U')]]></code>
       <code><![CDATA[Converter\Converter::fromLdapDateTime($value, false)->format('U')]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
-      <code>int|null</code>
+      <code><![CDATA[int|null]]></code>
     </InvalidReturnType>
     <InvalidScalarArgument>
-      <code>mt_rand()</code>
-      <code>mt_rand()</code>
+      <code><![CDATA[mt_rand()]]></code>
+      <code><![CDATA[mt_rand()]]></code>
     </InvalidScalarArgument>
     <MissingReturnType>
-      <code>setDateTimeAttribute</code>
-      <code>setPassword</code>
+      <code><![CDATA[setDateTimeAttribute]]></code>
+      <code><![CDATA[setPassword]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$data[$attribName]</code>
-      <code>$data[$attribName]</code>
-      <code>$data[$attribName]</code>
-      <code>$data[$attribName]</code>
-      <code>$data[$attribName][$index]</code>
-      <code>$resultArray</code>
-      <code>$resultArray</code>
-      <code>$v</code>
-      <code>$v</code>
-      <code>$values</code>
-      <code>$values[$i]</code>
+      <code><![CDATA[$data[$attribName]]]></code>
+      <code><![CDATA[$data[$attribName]]]></code>
+      <code><![CDATA[$data[$attribName]]]></code>
+      <code><![CDATA[$data[$attribName]]]></code>
+      <code><![CDATA[$data[$attribName][$index]]]></code>
+      <code><![CDATA[$resultArray]]></code>
+      <code><![CDATA[$resultArray]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$values]]></code>
+      <code><![CDATA[$values[$i]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code>$data[$attribName][$index]</code>
-      <code>$resultArray[$k]</code>
+      <code><![CDATA[$data[$attribName][$index]]]></code>
+      <code><![CDATA[$resultArray[$k]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$resultArray</code>
-      <code>$retArray[]</code>
-      <code>$return</code>
-      <code>$v</code>
-      <code>$v</code>
-      <code>$v</code>
-      <code>$v</code>
-      <code>$v</code>
-      <code>$values</code>
+      <code><![CDATA[$resultArray]]></code>
+      <code><![CDATA[$retArray[]]]></code>
+      <code><![CDATA[$return]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$values]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>array|int</code>
+      <code><![CDATA[array|int]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
-      <code>$values</code>
-      <code>$values</code>
+      <code><![CDATA[$values]]></code>
+      <code><![CDATA[$values]]></code>
     </MixedReturnStatement>
     <RedundantConditionGivenDocblockType>
-      <code>$value !== null</code>
-      <code>$value !== null</code>
-      <code>is_int($index)</code>
+      <code><![CDATA[$value !== null]]></code>
+      <code><![CDATA[$value !== null]]></code>
+      <code><![CDATA[is_int($index)]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Collection.php">
     <InvalidReturnStatement>
-      <code>$data</code>
+      <code><![CDATA[$data]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
-      <code>TItem</code>
+      <code><![CDATA[TItem]]></code>
     </InvalidReturnType>
     <PossiblyUnusedReturnValue>
-      <code>bool</code>
+      <code><![CDATA[bool]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Collection/DefaultIterator.php">
@@ -77,8 +77,8 @@
       <code><![CDATA[static fn($a, $b) =>]]></code>
     </MissingClosureReturnType>
     <MixedArgument>
-      <code>$attributeNameTreatment[0]</code>
-      <code>$attributeNameTreatment[1]</code>
+      <code><![CDATA[$attributeNameTreatment[0]]]></code>
+      <code><![CDATA[$attributeNameTreatment[1]]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[static fn($a, $b) =>
@@ -89,30 +89,30 @@
       <code><![CDATA[$b['sortValue']]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$entry[$attrName]</code>
+      <code><![CDATA[$entry[$attrName]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$attrName</code>
+      <code><![CDATA[$attrName]]></code>
     </MixedAssignment>
-    <MixedPropertyTypeCoercion>
-      <code>$attributeNameTreatment</code>
-    </MixedPropertyTypeCoercion>
     <PossiblyInvalidFunctionCall>
       <code><![CDATA[call_user_func($this->attributeNameTreatment, $name)]]></code>
     </PossiblyInvalidFunctionCall>
     <PossiblyUnusedMethod>
-      <code>getAttributeNameTreatment</code>
+      <code><![CDATA[getAttributeNameTreatment]]></code>
     </PossiblyUnusedMethod>
     <RedundantCastGivenDocblockType>
-      <code>(int) $attributeNameTreatment</code>
+      <code><![CDATA[(int) $attributeNameTreatment]]></code>
     </RedundantCastGivenDocblockType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $data]]></code>
+    </RiskyTruthyFalsyComparison>
     <TypeDoesNotContainType>
       <code><![CDATA[$this->itemCount === false]]></code>
     </TypeDoesNotContainType>
   </file>
   <file src="src/Converter/Converter.php">
     <DocblockTypeContradiction>
-      <code>is_scalar($value)</code>
+      <code><![CDATA[is_scalar($value)]]></code>
     </DocblockTypeContradiction>
     <InvalidScalarArgument>
       <code><![CDATA[$time['day']]]></code>
@@ -124,151 +124,154 @@
       <code><![CDATA[$time['second']]]></code>
     </InvalidScalarArgument>
     <MixedArgument>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$v</code>
+      <code><![CDATA[$v]]></code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
       <code><![CDATA[$e->getCode()]]></code>
     </PossiblyInvalidArgument>
     <RedundantConditionGivenDocblockType>
-      <code>is_string($date)</code>
+      <code><![CDATA[is_string($date)]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Dn.php">
     <DocblockTypeContradiction>
-      <code>null === $val</code>
+      <code><![CDATA[null === $val]]></code>
     </DocblockTypeContradiction>
     <InvalidArgument>
-      <code>[$key, $value]</code>
+      <code><![CDATA[[$key, $value]]]></code>
     </InvalidArgument>
     <MissingReturnType>
-      <code>setCaseFold</code>
-      <code>setDefaultCaseFold</code>
+      <code><![CDATA[setCaseFold]]></code>
+      <code><![CDATA[setDefaultCaseFold]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$p</code>
-      <code>$part</code>
+      <code><![CDATA[$p]]></code>
+      <code><![CDATA[$part]]></code>
       <code><![CDATA[$this->dn[$index]]]></code>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayOffset>
-      <code>$multi[$key]</code>
+      <code><![CDATA[$multi[$key]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$key</code>
-      <code>$multi[$key]</code>
-      <code>$p</code>
-      <code>$part</code>
-      <code>$val</code>
-      <code>$value</code>
+      <code><![CDATA[$key]]></code>
+      <code><![CDATA[$multi[$key]]]></code>
+      <code><![CDATA[$p]]></code>
+      <code><![CDATA[$part]]></code>
+      <code><![CDATA[$val]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <NullArgument>
-      <code>null</code>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
     </NullArgument>
     <PossiblyInvalidArgument>
-      <code>$lastKey</code>
+      <code><![CDATA[$lastKey]]></code>
     </PossiblyInvalidArgument>
     <PossiblyNullArgument>
-      <code>$caseFold</code>
-      <code>$caseFold</code>
-      <code>$caseFold</code>
-      <code>$caseFold</code>
-      <code>$caseFold</code>
-      <code>$caseFold</code>
-      <code>$caseFold</code>
-      <code>$k</code>
-      <code>$offset</code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$caseFold]]></code>
+      <code><![CDATA[$k]]></code>
+      <code><![CDATA[$offset]]></code>
     </PossiblyNullArgument>
     <PossiblyNullArrayAccess>
-      <code>$k[$i]</code>
-      <code>$k[$i]</code>
-      <code>$v[$i]</code>
-      <code>$v[$i]</code>
+      <code><![CDATA[$k[$i]]]></code>
+      <code><![CDATA[$k[$i]]]></code>
+      <code><![CDATA[$v[$i]]]></code>
+      <code><![CDATA[$v[$i]]]></code>
     </PossiblyNullArrayAccess>
     <PossiblyUnusedReturnValue>
-      <code>bool</code>
+      <code><![CDATA[bool]]></code>
     </PossiblyUnusedReturnValue>
     <RedundantCastGivenDocblockType>
-      <code>(int) $length</code>
-      <code>(int) $length</code>
-      <code>(int) $levelUp</code>
-      <code>(int) $offset</code>
+      <code><![CDATA[(int) $length]]></code>
+      <code><![CDATA[(int) $length]]></code>
+      <code><![CDATA[(int) $levelUp]]></code>
+      <code><![CDATA[(int) $offset]]></code>
     </RedundantCastGivenDocblockType>
     <RedundantConditionGivenDocblockType>
-      <code>is_string($dn)</code>
+      <code><![CDATA[is_string($dn)]]></code>
     </RedundantConditionGivenDocblockType>
     <UnsafeInstantiation>
-      <code>new static($dn, $caseFold)</code>
-      <code>new static($dnArray, $caseFold)</code>
+      <code><![CDATA[new static($dn, $caseFold)]]></code>
+      <code><![CDATA[new static($dnArray, $caseFold)]]></code>
       <code><![CDATA[new static($newDn, $this->caseFold)]]></code>
     </UnsafeInstantiation>
   </file>
   <file src="src/ErrorHandler.php">
     <DocblockTypeContradiction>
-      <code>! self::$errorHandler</code>
-      <code>! self::$errorHandler</code>
+      <code><![CDATA[! self::$errorHandler]]></code>
+      <code><![CDATA[! self::$errorHandler]]></code>
     </DocblockTypeContradiction>
     <InvalidArgument>
-      <code>static function ($errNo, $errString): void {
-        }</code>
+      <code><![CDATA[static function ($errNo, $errString): void {
+        }]]></code>
     </InvalidArgument>
     <PossiblyUnusedMethod>
-      <code>setErrorHandler</code>
+      <code><![CDATA[setErrorHandler]]></code>
     </PossiblyUnusedMethod>
     <PossiblyUnusedReturnValue>
-      <code>mixed</code>
+      <code><![CDATA[mixed]]></code>
     </PossiblyUnusedReturnValue>
     <UnusedClosureParam>
-      <code>$errNo</code>
-      <code>$errString</code>
+      <code><![CDATA[$errNo]]></code>
+      <code><![CDATA[$errString]]></code>
     </UnusedClosureParam>
   </file>
   <file src="src/Exception/LdapException.php">
     <PossiblyNullArgument>
-      <code>$code</code>
+      <code><![CDATA[$code]]></code>
     </PossiblyNullArgument>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[empty($str)]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Filter.php">
     <MissingParamType>
-      <code>$filter</code>
-      <code>$filter</code>
+      <code><![CDATA[$filter]]></code>
+      <code><![CDATA[$filter]]></code>
     </MissingParamType>
     <UnsafeInstantiation>
-      <code>new static($attr, $value, self::TYPE_APPROX, null, null)</code>
+      <code><![CDATA[new static($attr, $value, self::TYPE_APPROX, null, null)]]></code>
       <code><![CDATA[new static($attr, $value, self::TYPE_EQUALS, '*', '*')]]></code>
       <code><![CDATA[new static($attr, $value, self::TYPE_EQUALS, '*', null)]]></code>
       <code><![CDATA[new static($attr, $value, self::TYPE_EQUALS, null, '*')]]></code>
-      <code>new static($attr, $value, self::TYPE_EQUALS, null, null)</code>
-      <code>new static($attr, $value, self::TYPE_GREATER, null, null)</code>
-      <code>new static($attr, $value, self::TYPE_GREATEROREQUAL, null, null)</code>
-      <code>new static($attr, $value, self::TYPE_LESS, null, null)</code>
-      <code>new static($attr, $value, self::TYPE_LESSOREQUAL, null, null)</code>
+      <code><![CDATA[new static($attr, $value, self::TYPE_EQUALS, null, null)]]></code>
+      <code><![CDATA[new static($attr, $value, self::TYPE_GREATER, null, null)]]></code>
+      <code><![CDATA[new static($attr, $value, self::TYPE_GREATEROREQUAL, null, null)]]></code>
+      <code><![CDATA[new static($attr, $value, self::TYPE_LESS, null, null)]]></code>
+      <code><![CDATA[new static($attr, $value, self::TYPE_LESSOREQUAL, null, null)]]></code>
       <code><![CDATA[new static($attr, '', self::TYPE_EQUALS, '*', null)]]></code>
     </UnsafeInstantiation>
   </file>
   <file src="src/Filter/AbstractFilter.php">
     <DocblockTypeContradiction>
-      <code>null === $val</code>
+      <code><![CDATA[null === $val]]></code>
     </DocblockTypeContradiction>
     <MissingParamType>
-      <code>$filter</code>
-      <code>$filter</code>
+      <code><![CDATA[$filter]]></code>
+      <code><![CDATA[$filter]]></code>
     </MissingParamType>
   </file>
   <file src="src/Filter/AbstractLogicalFilter.php">
     <MixedAssignment>
-      <code>$s</code>
-      <code>$sub</code>
+      <code><![CDATA[$s]]></code>
+      <code><![CDATA[$sub]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>toString</code>
+      <code><![CDATA[toString]]></code>
     </MixedMethodCall>
     <MixedOperand>
       <code><![CDATA[$sub->toString()]]></code>
@@ -276,113 +279,113 @@
   </file>
   <file src="src/Ldap.php">
     <DocblockTypeContradiction>
-      <code>$dname === null</code>
+      <code><![CDATA[$dname === null]]></code>
       <code><![CDATA[$this->rootDse === null]]></code>
       <code><![CDATA[$this->schema === null]]></code>
     </DocblockTypeContradiction>
     <InvalidNullableReturnType>
-      <code>Connection</code>
-      <code>array</code>
-      <code>array</code>
+      <code><![CDATA[Connection]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array]]></code>
     </InvalidNullableReturnType>
     <InvalidScalarArgument>
-      <code>$duration * 1000000</code>
+      <code><![CDATA[$duration * 1000000]]></code>
     </InvalidScalarArgument>
     <MissingReturnType>
-      <code>reconnectSleep</code>
+      <code><![CDATA[reconnectSleep]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$c</code>
-      <code>$c</code>
-      <code>$c</code>
-      <code>$collectionClass</code>
-      <code>$entry[$key]</code>
-      <code>$entry[$key]</code>
-      <code>$entry[$key]</code>
-      <code>$entry[$key]</code>
-      <code>$host</code>
-      <code>$message</code>
-      <code>$password</code>
-      <code>$password</code>
+      <code><![CDATA[$c]]></code>
+      <code><![CDATA[$c]]></code>
+      <code><![CDATA[$c]]></code>
+      <code><![CDATA[$collectionClass]]></code>
+      <code><![CDATA[$entry[$key]]]></code>
+      <code><![CDATA[$entry[$key]]]></code>
+      <code><![CDATA[$entry[$key]]]></code>
+      <code><![CDATA[$entry[$key]]]></code>
+      <code><![CDATA[$host]]></code>
+      <code><![CDATA[$message]]></code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$password]]></code>
       <code><![CDATA[$this->connectString]]></code>
-      <code>$username</code>
-      <code>$username</code>
-      <code>$username</code>
-      <code>$username</code>
-      <code>$username</code>
-      <code>$val</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>array_shift($newDnParts)</code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$val]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[array_shift($newDnParts)]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$this->lastConnectBindParams[$method][$parameter]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$$key</code>
-      <code>$accountCanonicalForm</code>
-      <code>$c</code>
-      <code>$c</code>
-      <code>$collectionClass</code>
-      <code>$err</code>
-      <code>$host</code>
-      <code>$message</code>
-      <code>$networkTimeout</code>
-      <code>$password</code>
-      <code>$permittedOptions[$key]</code>
-      <code>$port</code>
-      <code>$reverseSort</code>
+      <code><![CDATA[$$key]]></code>
+      <code><![CDATA[$accountCanonicalForm]]></code>
+      <code><![CDATA[$c]]></code>
+      <code><![CDATA[$c]]></code>
+      <code><![CDATA[$collectionClass]]></code>
+      <code><![CDATA[$err]]></code>
+      <code><![CDATA[$host]]></code>
+      <code><![CDATA[$message]]></code>
+      <code><![CDATA[$networkTimeout]]></code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$permittedOptions[$key]]]></code>
+      <code><![CDATA[$port]]></code>
+      <code><![CDATA[$reverseSort]]></code>
       <code><![CDATA[$this->boundUser]]></code>
       <code><![CDATA[$this->connectString]]></code>
-      <code>$useSsl</code>
-      <code>$useStartTls</code>
-      <code>$username</code>
-      <code>$v</code>
-      <code>$val</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$useSsl]]></code>
+      <code><![CDATA[$useStartTls]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$val]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>bool</code>
-      <code>bool</code>
-      <code>bool</code>
-      <code>bool</code>
-      <code>bool</code>
-      <code>bool</code>
-      <code>int</code>
-      <code>int</code>
-      <code>int</code>
-      <code>int</code>
-      <code>int</code>
-      <code>null|string</code>
-      <code>null|string</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string[]|null</code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[int]]></code>
+      <code><![CDATA[int]]></code>
+      <code><![CDATA[int]]></code>
+      <code><![CDATA[int]]></code>
+      <code><![CDATA[int]]></code>
+      <code><![CDATA[null|string]]></code>
+      <code><![CDATA[null|string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string[]|null]]></code>
     </MixedInferredReturnType>
     <MixedOperand>
-      <code>$host</code>
-      <code>$host</code>
-      <code>$port</code>
-      <code>$username</code>
-      <code>-$err</code>
-      <code>-$err - 1</code>
+      <code><![CDATA[$host]]></code>
+      <code><![CDATA[$host]]></code>
+      <code><![CDATA[$port]]></code>
+      <code><![CDATA[$username]]></code>
+      <code><![CDATA[-$err]]></code>
+      <code><![CDATA[-$err - 1]]></code>
     </MixedOperand>
     <MixedReturnStatement>
-      <code>$accountCanonicalForm</code>
-      <code>$accountCanonicalForm</code>
+      <code><![CDATA[$accountCanonicalForm]]></code>
+      <code><![CDATA[$accountCanonicalForm]]></code>
       <code><![CDATA[$acct['dn']]]></code>
-      <code>$err</code>
+      <code><![CDATA[$err]]></code>
       <code><![CDATA[$this->options['accountDomainName']]]></code>
       <code><![CDATA[$this->options['accountDomainNameShort']]]></code>
       <code><![CDATA[$this->options['accountFilterFormat']]]></code>
@@ -403,20 +406,20 @@
     </MixedReturnStatement>
     <MixedReturnTypeCoercion>
       <code><![CDATA[Collection<array{dn: string, ...}>]]></code>
-      <code>new $collectionClass($iterator)</code>
-      <code>new Collection($iterator)</code>
+      <code><![CDATA[new $collectionClass($iterator)]]></code>
+      <code><![CDATA[new Collection($iterator)]]></code>
     </MixedReturnTypeCoercion>
     <NullableReturnStatement>
-      <code>$acct</code>
+      <code><![CDATA[$acct]]></code>
       <code><![CDATA[$result->getFirst()]]></code>
       <code><![CDATA[$this->resource]]></code>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
     </NullableReturnStatement>
     <PossiblyInvalidOperand>
-      <code>$filter</code>
+      <code><![CDATA[$filter]]></code>
     </PossiblyInvalidOperand>
     <PossiblyNullArgument>
-      <code>$attrs</code>
+      <code><![CDATA[$attrs]]></code>
       <code><![CDATA[$this->resource]]></code>
       <code><![CDATA[$this->resource]]></code>
       <code><![CDATA[$this->resource]]></code>
@@ -428,102 +431,114 @@
       <code><![CDATA[$this->resource]]></code>
     </PossiblyNullArgument>
     <PossiblyUndefinedVariable>
-      <code>$err</code>
+      <code><![CDATA[$err]]></code>
     </PossiblyUndefinedVariable>
     <PossiblyUnusedReturnValue>
-      <code>Ldap</code>
-      <code>Ldap</code>
-      <code>Ldap</code>
+      <code><![CDATA[Ldap]]></code>
+      <code><![CDATA[Ldap]]></code>
+      <code><![CDATA[Ldap]]></code>
     </PossiblyUnusedReturnValue>
     <PropertyNotSetInConstructor>
-      <code>$rootDse</code>
-      <code>$schema</code>
+      <code><![CDATA[$rootDse]]></code>
+      <code><![CDATA[$schema]]></code>
     </PropertyNotSetInConstructor>
     <RedundantCastGivenDocblockType>
-      <code>(bool) $alwaysEmulate</code>
-      <code>(bool) $useSsl</code>
-      <code>(bool) $useStartTls</code>
-      <code>(int) $networkTimeout</code>
-      <code>(int) $port</code>
-      <code>(string) $collectionClass</code>
+      <code><![CDATA[(bool) $alwaysEmulate]]></code>
+      <code><![CDATA[(bool) $useSsl]]></code>
+      <code><![CDATA[(bool) $useStartTls]]></code>
+      <code><![CDATA[(int) $networkTimeout]]></code>
+      <code><![CDATA[(int) $port]]></code>
+      <code><![CDATA[(string) $collectionClass]]></code>
     </RedundantCastGivenDocblockType>
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[$sort !== null && is_string($sort)]]></code>
-      <code>is_string($sort)</code>
+      <code><![CDATA[is_string($sort)]]></code>
     </RedundantConditionGivenDocblockType>
     <ReferenceConstraintViolation>
-      <code>$dname</code>
-      <code>return;</code>
+      <code><![CDATA[$dname]]></code>
+      <code><![CDATA[return;]]></code>
     </ReferenceConstraintViolation>
     <ReservedWord>
-      <code>null|Exception\LdapException</code>
+      <code><![CDATA[null|Exception\LdapException]]></code>
     </ReservedWord>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! $accountDomainName]]></code>
+      <code><![CDATA[! $accountDomainNameShort]]></code>
+      <code><![CDATA[! $useStartTls]]></code>
+      <code><![CDATA[$accountDomainName]]></code>
+      <code><![CDATA[$accountDomainNameShort]]></code>
+      <code><![CDATA[$pos]]></code>
+      <code><![CDATA[$pos]]></code>
+      <code><![CDATA[$useSsl]]></code>
+      <code><![CDATA[$useSsl]]></code>
+      <code><![CDATA[$useSsl]]></code>
+    </RiskyTruthyFalsyComparison>
     <UnsafeInstantiation>
-      <code>new $collectionClass($iterator)</code>
+      <code><![CDATA[new $collectionClass($iterator)]]></code>
     </UnsafeInstantiation>
     <UnusedForeachValue>
-      <code>$val</code>
+      <code><![CDATA[$val]]></code>
     </UnusedForeachValue>
     <UnusedFunctionCall>
-      <code>ldap_free_result</code>
-      <code>ldap_unbind</code>
+      <code><![CDATA[ldap_free_result]]></code>
+      <code><![CDATA[ldap_unbind]]></code>
     </UnusedFunctionCall>
   </file>
   <file src="src/Ldif/Encoder.php">
     <InvalidNullableReturnType>
-      <code>string</code>
+      <code><![CDATA[string]]></code>
     </InvalidNullableReturnType>
     <MissingReturnType>
-      <code>pushAttribute</code>
+      <code><![CDATA[pushAttribute]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$this->options['version']]]></code>
       <code><![CDATA[$this->options['wrap']]]></code>
-      <code>$v</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAssignment>
-      <code>$entry[$name][]</code>
+      <code><![CDATA[$entry[$name][]]]></code>
     </MixedArrayAssignment>
     <MixedArrayOffset>
-      <code>$entry[$name]</code>
-      <code>$entry[$name]</code>
-      <code>$entry[$name]</code>
+      <code><![CDATA[$entry[$name]]]></code>
+      <code><![CDATA[$entry[$name]]]></code>
+      <code><![CDATA[$entry[$name]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$dn</code>
-      <code>$entry[$name]</code>
-      <code>$entry[$name][]</code>
-      <code>$name</code>
-      <code>$oc</code>
-      <code>$type</code>
-      <code>$v</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$dn]]></code>
+      <code><![CDATA[$entry[$name]]]></code>
+      <code><![CDATA[$entry[$name][]]]></code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$oc]]></code>
+      <code><![CDATA[$type]]></code>
+      <code><![CDATA[$v]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <NullableReturnStatement>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
     </NullableReturnStatement>
     <UnsafeInstantiation>
-      <code>new static($options)</code>
-      <code>new static([])</code>
+      <code><![CDATA[new static($options)]]></code>
+      <code><![CDATA[new static([])]]></code>
     </UnsafeInstantiation>
   </file>
   <file src="src/Node.php">
     <DocblockTypeContradiction>
-      <code>$data === null</code>
+      <code><![CDATA[$data === null]]></code>
       <code><![CDATA[$this->ldap === null]]></code>
     </DocblockTypeContradiction>
     <ImplementedReturnTypeMismatch>
-      <code>void</code>
-      <code>void</code>
+      <code><![CDATA[void]]></code>
+      <code><![CDATA[void]]></code>
     </ImplementedReturnTypeMismatch>
     <InvalidNullableReturnType>
-      <code>Node</code>
+      <code><![CDATA[Node]]></code>
     </InvalidNullableReturnType>
     <LessSpecificReturnStatement>
       <code><![CDATA[$this->getLdap()->search(
@@ -536,137 +551,137 @@
         )]]></code>
     </LessSpecificReturnStatement>
     <MethodSignatureMustProvideReturnType>
-      <code>offsetSet</code>
-      <code>offsetUnset</code>
+      <code><![CDATA[offsetSet]]></code>
+      <code><![CDATA[offsetUnset]]></code>
     </MethodSignatureMustProvideReturnType>
     <MissingParamType>
-      <code>$offset</code>
-      <code>$offset</code>
-      <code>$value</code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$value]]></code>
     </MissingParamType>
     <MissingReturnType>
-      <code>_setAttribute</code>
-      <code>_setDateTimeAttribute</code>
-      <code>loadData</code>
-      <code>markAsNew</code>
-      <code>markAsToBeDeleted</code>
-      <code>triggerEvent</code>
+      <code><![CDATA[_setAttribute]]></code>
+      <code><![CDATA[_setDateTimeAttribute]]></code>
+      <code><![CDATA[loadData]]></code>
+      <code><![CDATA[markAsNew]]></code>
+      <code><![CDATA[markAsToBeDeleted]]></code>
+      <code><![CDATA[triggerEvent]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$offset</code>
-      <code>$offset</code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$offset]]></code>
       <code><![CDATA[$this->currentData[$key]]]></code>
       <code><![CDATA[$this->originalData[$key]]]></code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$key</code>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$changed[$key]</code>
-      <code>$changed[$key]</code>
+      <code><![CDATA[$changed[$key]]]></code>
+      <code><![CDATA[$changed[$key]]]></code>
       <code><![CDATA[$changes['add'][$key]]]></code>
       <code><![CDATA[$changes['add'][$key]]]></code>
       <code><![CDATA[$changes['delete'][$key]]]></code>
       <code><![CDATA[$changes['replace'][$key]]]></code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MoreSpecificReturnType>
-      <code>Collection</code>
+      <code><![CDATA[Collection]]></code>
     </MoreSpecificReturnType>
     <NullableReturnStatement>
-      <code>static::fromLdap($parentDn, $ldap)</code>
+      <code><![CDATA[static::fromLdap($parentDn, $ldap)]]></code>
     </NullableReturnStatement>
     <PossiblyNullPropertyAssignmentValue>
-      <code>null</code>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
     </PossiblyNullPropertyAssignmentValue>
     <PossiblyUnusedReturnValue>
-      <code>Node</code>
-      <code>Node</code>
-      <code>bool</code>
+      <code><![CDATA[Node]]></code>
+      <code><![CDATA[Node]]></code>
+      <code><![CDATA[bool]]></code>
     </PossiblyUnusedReturnValue>
     <PropertyNotSetInConstructor>
-      <code>$events</code>
-      <code>$ldap</code>
-      <code>$newDn</code>
+      <code><![CDATA[$events]]></code>
+      <code><![CDATA[$ldap]]></code>
+      <code><![CDATA[$newDn]]></code>
     </PropertyNotSetInConstructor>
     <RedundantCastGivenDocblockType>
-      <code>(bool) $delete</code>
-      <code>(bool) $new</code>
+      <code><![CDATA[(bool) $delete]]></code>
+      <code><![CDATA[(bool) $new]]></code>
     </RedundantCastGivenDocblockType>
     <RedundantConditionGivenDocblockType>
-      <code>$dn instanceof Dn</code>
-      <code>$dn instanceof Dn</code>
+      <code><![CDATA[$dn instanceof Dn]]></code>
+      <code><![CDATA[$dn instanceof Dn]]></code>
       <code><![CDATA[$this->events]]></code>
       <code><![CDATA[$this->ldap !== null]]></code>
       <code><![CDATA[$this->newDn !== null]]></code>
     </RedundantConditionGivenDocblockType>
     <RedundantPropertyInitializationCheck>
       <code><![CDATA[$this->newDn]]></code>
-      <code>parent::_getDn()</code>
+      <code><![CDATA[parent::_getDn()]]></code>
     </RedundantPropertyInitializationCheck>
     <UnsafeInstantiation>
-      <code>new static($dn, $data, $fromDataSource, null)</code>
-      <code>new static($dn, $data, true, $ldap)</code>
-      <code>new static($dn, [], false, null)</code>
+      <code><![CDATA[new static($dn, $data, $fromDataSource, null)]]></code>
+      <code><![CDATA[new static($dn, $data, true, $ldap)]]></code>
+      <code><![CDATA[new static($dn, [], false, null)]]></code>
     </UnsafeInstantiation>
     <UnusedForeachValue>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </UnusedForeachValue>
   </file>
   <file src="src/Node/AbstractNode.php">
     <MissingParamType>
-      <code>$offset</code>
-      <code>$offset</code>
-      <code>$value</code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$value]]></code>
     </MissingParamType>
     <MissingReturnType>
-      <code>loadData</code>
+      <code><![CDATA[loadData]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$this->currentData[$name]]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$name</code>
+      <code><![CDATA[$name]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$data[$key]</code>
-      <code>$data[$name]</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$data[$key]]]></code>
+      <code><![CDATA[$data[$name]]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>array</code>
+      <code><![CDATA[array]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->getAttribute($offset, null)]]></code>
       <code><![CDATA[$this->getAttribute('objectClass', null)]]></code>
     </MixedReturnStatement>
     <UnusedForeachValue>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </UnusedForeachValue>
   </file>
   <file src="src/Node/ChildrenIterator.php">
     <ImplementedReturnTypeMismatch>
-      <code>ChildrenIterator|null</code>
+      <code><![CDATA[ChildrenIterator|null]]></code>
     </ImplementedReturnTypeMismatch>
     <PossiblyUnusedMethod>
-      <code>toArray</code>
+      <code><![CDATA[toArray]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Node/Collection.php">
     <ImplementedReturnTypeMismatch>
-      <code>string</code>
+      <code><![CDATA[string]]></code>
     </ImplementedReturnTypeMismatch>
     <MethodSignatureMustProvideReturnType>
-      <code>key</code>
+      <code><![CDATA[key]]></code>
     </MethodSignatureMustProvideReturnType>
   </file>
   <file src="src/Node/RootDse.php">
@@ -674,37 +689,37 @@
       <code><![CDATA[$data['structuralobjectclass'][0]]]></code>
     </MixedArrayAccess>
     <MixedInferredReturnType>
-      <code>array</code>
-      <code>string|null</code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[string|null]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->getAttribute('namingContexts', null)]]></code>
       <code><![CDATA[$this->getAttribute('subschemaSubentry', 0)]]></code>
     </MixedReturnStatement>
     <PossiblyNullArgument>
-      <code>$schemaDn</code>
+      <code><![CDATA[$schemaDn]]></code>
     </PossiblyNullArgument>
     <UnsafeInstantiation>
-      <code>new static($dn, $data)</code>
+      <code><![CDATA[new static($dn, $data)]]></code>
     </UnsafeInstantiation>
   </file>
   <file src="src/Node/RootDse/ActiveDirectory.php">
     <MixedInferredReturnType>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->getAttribute('configurationNamingContext', 0)]]></code>
@@ -724,57 +739,57 @@
       <code><![CDATA[$this->getAttribute('serverName', 0)]]></code>
     </MixedReturnStatement>
     <PossiblyNullArgument>
-      <code>$schemaDn</code>
+      <code><![CDATA[$schemaDn]]></code>
     </PossiblyNullArgument>
     <PossiblyUnusedMethod>
-      <code>getConfigurationNamingContext</code>
-      <code>getCurrentTime</code>
-      <code>getDefaultNamingContext</code>
-      <code>getDnsHostName</code>
-      <code>getDomainControllerFunctionality</code>
-      <code>getDomainFunctionality</code>
-      <code>getDsServiceName</code>
-      <code>getForestFunctionality</code>
-      <code>getHighestCommittedUSN</code>
-      <code>getIsGlobalCatalogReady</code>
-      <code>getIsSynchronized</code>
-      <code>getLDAPServiceName</code>
-      <code>getRootDomainNamingContext</code>
-      <code>getServerName</code>
-      <code>supportsCapability</code>
-      <code>supportsControl</code>
-      <code>supportsPolicy</code>
+      <code><![CDATA[getConfigurationNamingContext]]></code>
+      <code><![CDATA[getCurrentTime]]></code>
+      <code><![CDATA[getDefaultNamingContext]]></code>
+      <code><![CDATA[getDnsHostName]]></code>
+      <code><![CDATA[getDomainControllerFunctionality]]></code>
+      <code><![CDATA[getDomainFunctionality]]></code>
+      <code><![CDATA[getDsServiceName]]></code>
+      <code><![CDATA[getForestFunctionality]]></code>
+      <code><![CDATA[getHighestCommittedUSN]]></code>
+      <code><![CDATA[getIsGlobalCatalogReady]]></code>
+      <code><![CDATA[getIsSynchronized]]></code>
+      <code><![CDATA[getLDAPServiceName]]></code>
+      <code><![CDATA[getRootDomainNamingContext]]></code>
+      <code><![CDATA[getServerName]]></code>
+      <code><![CDATA[supportsCapability]]></code>
+      <code><![CDATA[supportsControl]]></code>
+      <code><![CDATA[supportsPolicy]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Node/RootDse/OpenLdap.php">
     <MixedInferredReturnType>
-      <code>string|null</code>
-      <code>string|null</code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->getAttribute('configContext', 0)]]></code>
       <code><![CDATA[$this->getAttribute('monitorContext', 0)]]></code>
     </MixedReturnStatement>
     <PossiblyUnusedMethod>
-      <code>getConfigContext</code>
-      <code>getMonitorContext</code>
-      <code>supportsControl</code>
-      <code>supportsExtension</code>
-      <code>supportsFeature</code>
+      <code><![CDATA[getConfigContext]]></code>
+      <code><![CDATA[getMonitorContext]]></code>
+      <code><![CDATA[supportsControl]]></code>
+      <code><![CDATA[supportsExtension]]></code>
+      <code><![CDATA[supportsFeature]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Node/RootDse/eDirectory.php">
     <MixedInferredReturnType>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
-      <code>string|null</code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
+      <code><![CDATA[string|null]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->getAttribute('abandonOps', 0)]]></code>
@@ -789,33 +804,33 @@
       <code><![CDATA[$this->getAttribute('wholeSubtreeSearchOps', 0)]]></code>
     </MixedReturnStatement>
     <PossiblyUnusedMethod>
-      <code>getDsaName</code>
-      <code>getStatisticsAbandonOps</code>
-      <code>getStatisticsChainings</code>
-      <code>getStatisticsErrors</code>
-      <code>getStatisticsExtendedOps</code>
-      <code>getStatisticsReferralsReturned</code>
-      <code>getStatisticsSecurityErrors</code>
-      <code>getStatisticsWholeSubtreeSearchOps</code>
-      <code>getVendorName</code>
-      <code>getVendorVersion</code>
-      <code>supportsExtension</code>
+      <code><![CDATA[getDsaName]]></code>
+      <code><![CDATA[getStatisticsAbandonOps]]></code>
+      <code><![CDATA[getStatisticsChainings]]></code>
+      <code><![CDATA[getStatisticsErrors]]></code>
+      <code><![CDATA[getStatisticsExtendedOps]]></code>
+      <code><![CDATA[getStatisticsReferralsReturned]]></code>
+      <code><![CDATA[getStatisticsSecurityErrors]]></code>
+      <code><![CDATA[getStatisticsWholeSubtreeSearchOps]]></code>
+      <code><![CDATA[getVendorName]]></code>
+      <code><![CDATA[getVendorVersion]]></code>
+      <code><![CDATA[supportsExtension]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Node/Schema.php">
     <UnsafeInstantiation>
-      <code>new static($dn, $data, $ldap)</code>
+      <code><![CDATA[new static($dn, $data, $ldap)]]></code>
     </UnsafeInstantiation>
   </file>
   <file src="src/Node/Schema/AbstractItem.php">
     <MissingParamType>
-      <code>$offset</code>
-      <code>$offset</code>
-      <code>$value</code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$offset]]></code>
+      <code><![CDATA[$value]]></code>
     </MissingParamType>
     <MixedArgumentTypeCoercion>
-      <code>$name</code>
-      <code>$offset</code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$offset]]></code>
     </MixedArgumentTypeCoercion>
     <MixedReturnStatement>
       <code><![CDATA[$this->__get($offset)]]></code>
@@ -823,16 +838,16 @@
   </file>
   <file src="src/Node/Schema/AttributeType/ActiveDirectory.php">
     <ImplementedReturnTypeMismatch>
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
     </ImplementedReturnTypeMismatch>
     <MixedArrayAccess>
       <code><![CDATA[$this->ldapdisplayname[0]]]></code>
     </MixedArrayAccess>
     <MixedInferredReturnType>
-      <code>string</code>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->ldapdisplayname[0]]]></code>
@@ -846,15 +861,15 @@
       <code><![CDATA[$this->_parents[0]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$maxLength</code>
+      <code><![CDATA[$maxLength]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>OpenLdap|null</code>
-      <code>bool</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
+      <code><![CDATA[OpenLdap|null]]></code>
+      <code><![CDATA[bool]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->_parents[0]]]></code>
@@ -867,18 +882,18 @@
   </file>
   <file src="src/Node/Schema/ObjectClass/ActiveDirectory.php">
     <ImplementedReturnTypeMismatch>
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
+      <code><![CDATA[null]]></code>
     </ImplementedReturnTypeMismatch>
     <MixedArrayAccess>
       <code><![CDATA[$this->ldapdisplayname[0]]]></code>
     </MixedArrayAccess>
     <MixedInferredReturnType>
-      <code>string</code>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->ldapdisplayname[0]]]></code>
@@ -890,28 +905,28 @@
       <code><![CDATA[$this->inheritedMust === null]]></code>
     </DocblockTypeContradiction>
     <MixedArgument>
-      <code>$may</code>
-      <code>$may</code>
-      <code>$must</code>
-      <code>$must</code>
+      <code><![CDATA[$may]]></code>
+      <code><![CDATA[$may]]></code>
+      <code><![CDATA[$must]]></code>
+      <code><![CDATA[$must]]></code>
       <code><![CDATA[$p->getMayContain()]]></code>
       <code><![CDATA[$p->getMustContain()]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$may</code>
-      <code>$must</code>
-      <code>$p</code>
+      <code><![CDATA[$may]]></code>
+      <code><![CDATA[$must]]></code>
+      <code><![CDATA[$p]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>array</code>
-      <code>array</code>
-      <code>string</code>
-      <code>string</code>
-      <code>string</code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[array]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
     </MixedInferredReturnType>
     <MixedMethodCall>
-      <code>getMayContain</code>
-      <code>getMustContain</code>
+      <code><![CDATA[getMayContain]]></code>
+      <code><![CDATA[getMustContain]]></code>
     </MixedMethodCall>
     <MixedReturnStatement>
       <code><![CDATA[$this->_parents]]></code>
@@ -921,31 +936,31 @@
       <code><![CDATA[$this->sup]]></code>
     </MixedReturnStatement>
     <PropertyNotSetInConstructor>
-      <code>$inheritedMay</code>
-      <code>$inheritedMust</code>
+      <code><![CDATA[$inheritedMay]]></code>
+      <code><![CDATA[$inheritedMust]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Node/Schema/OpenLdap.php">
     <MissingReturnType>
-      <code>ensureNameAttribute</code>
-      <code>resolveInheritance</code>
+      <code><![CDATA[ensureNameAttribute]]></code>
+      <code><![CDATA[resolveInheritance]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$attributeType['syntax']]]></code>
-      <code>$data[$token]</code>
-      <code>$parent</code>
-      <code>$tmp</code>
+      <code><![CDATA[$data[$token]]]></code>
+      <code><![CDATA[$parent]]></code>
+      <code><![CDATA[$tmp]]></code>
       <code><![CDATA[$val->sup]]></code>
       <code><![CDATA[$val->sup]]></code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>array_shift($tokens)</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[array_shift($tokens)]]></code>
     </MixedArgument>
     <MixedArrayAssignment>
-      <code>$data[$token][]</code>
+      <code><![CDATA[$data[$token][]]]></code>
     </MixedArrayAssignment>
     <MixedArrayOffset>
       <code><![CDATA[$this->attributeTypes[$alias]]]></code>
@@ -955,12 +970,12 @@
       <code><![CDATA[$this->objectClasses[$alias]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$alias</code>
-      <code>$alias</code>
+      <code><![CDATA[$alias]]></code>
+      <code><![CDATA[$alias]]></code>
       <code><![CDATA[$attributeType['oid']]]></code>
-      <code>$data[$token]</code>
-      <code>$data[$token]</code>
-      <code>$data[$token][]</code>
+      <code><![CDATA[$data[$token]]]></code>
+      <code><![CDATA[$data[$token]]]></code>
+      <code><![CDATA[$data[$token][]]]></code>
       <code><![CDATA[$data['_parents'][]]]></code>
       <code><![CDATA[$data['name']]]></code>
       <code><![CDATA[$data['name']]]></code>
@@ -968,48 +983,59 @@
       <code><![CDATA[$matchingRuleUse['oid']]]></code>
       <code><![CDATA[$matchingRule['oid']]]></code>
       <code><![CDATA[$objectClass['oid']]]></code>
-      <code>$parent</code>
-      <code>$tmp</code>
-      <code>$tmp</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$parent]]></code>
+      <code><![CDATA[$tmp]]></code>
+      <code><![CDATA[$tmp]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <PossiblyInvalidArrayOffset>
-      <code>$tokens[count($tokens) - 1]</code>
+      <code><![CDATA[$tokens[count($tokens) - 1]]]></code>
     </PossiblyInvalidArrayOffset>
     <PossiblyUnusedMethod>
-      <code>getLdapSyntaxes</code>
-      <code>getMatchingRuleUse</code>
-      <code>getMatchingRules</code>
+      <code><![CDATA[getLdapSyntaxes]]></code>
+      <code><![CDATA[getMatchingRuleUse]]></code>
+      <code><![CDATA[getMatchingRules]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="test/AbstractOnlineTestCase.php">
     <MissingReturnType>
-      <code>cleanupLDAPServer</code>
+      <code><![CDATA[cleanupLDAPServer]]></code>
     </MissingReturnType>
     <PossiblyFalseOperand>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
     </PossiblyFalseOperand>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_START_TLS')]]></code>
+    </RiskyTruthyFalsyComparison>
     <UnusedForeachValue>
-      <code>$entry</code>
+      <code><![CDATA[$entry]]></code>
     </UnusedForeachValue>
     <UnusedFunctionCall>
-      <code>ldap_add</code>
-      <code>ldap_delete</code>
+      <code><![CDATA[ldap_add]]></code>
+      <code><![CDATA[ldap_delete]]></code>
     </UnusedFunctionCall>
   </file>
   <file src="test/AttributeTest.php">
     <InvalidArgument>
-      <code>$object</code>
-      <code>$stream</code>
-      <code>$ts</code>
+      <code><![CDATA[$object]]></code>
+      <code><![CDATA[$stream]]></code>
+      <code><![CDATA[$ts]]></code>
       <code><![CDATA['index']]></code>
-      <code>3.1415</code>
-      <code>false</code>
-      <code>true</code>
+      <code><![CDATA[3.1415]]></code>
+      <code><![CDATA[false]]></code>
+      <code><![CDATA[true]]></code>
     </InvalidArgument>
     <MixedArgument>
       <code><![CDATA[$data['ts']]]></code>
@@ -1037,13 +1063,13 @@
       <code><![CDATA[$data['ts'][1]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$password</code>
-      <code>$password</code>
-      <code>$password</code>
-      <code>$password</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$password]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <PossiblyFalseArgument>
       <code><![CDATA[strpos($md5, '}')]]></code>
@@ -1052,11 +1078,11 @@
       <code><![CDATA[strpos($ssha, '}')]]></code>
     </PossiblyFalseArgument>
     <PossiblyInvalidArgument>
-      <code>$utcTimestamp</code>
+      <code><![CDATA[$utcTimestamp]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidArrayAccess>
-      <code>$retTs[0]</code>
-      <code>$retTs[1]</code>
+      <code><![CDATA[$retTs[0]]]></code>
+      <code><![CDATA[$retTs[1]]]></code>
     </PossiblyInvalidArrayAccess>
   </file>
   <file src="test/BindTest.php">
@@ -1068,30 +1094,30 @@
       <code><![CDATA[$this->options]]></code>
     </InvalidPropertyAssignmentValue>
     <MissingReturnType>
-      <code>testAnonymousBind</code>
-      <code>testBindWithEmptyPassword</code>
-      <code>testBindWithNullPassword</code>
-      <code>testBindWithoutDnUsernameAndDnRequired</code>
-      <code>testBoundUserIsFalseIfNotBoundToLDAP</code>
-      <code>testBoundUserIsReturnedAfterBinding</code>
-      <code>testConnectBind</code>
-      <code>testEmptyOptionsBind</code>
-      <code>testExplicitParamsBind</code>
-      <code>testNoBaseDnBind</code>
-      <code>testNoDomainNameBind</code>
-      <code>testPlainBind</code>
-      <code>testRequiresDnBind</code>
-      <code>testRequiresDnWithoutDnBind</code>
-      <code>testResourceIsAlwaysReturned</code>
-      <code>testSaslBind</code>
-      <code>testSaslBindNoExplicitUsername</code>
+      <code><![CDATA[testAnonymousBind]]></code>
+      <code><![CDATA[testBindWithEmptyPassword]]></code>
+      <code><![CDATA[testBindWithNullPassword]]></code>
+      <code><![CDATA[testBindWithoutDnUsernameAndDnRequired]]></code>
+      <code><![CDATA[testBoundUserIsFalseIfNotBoundToLDAP]]></code>
+      <code><![CDATA[testBoundUserIsReturnedAfterBinding]]></code>
+      <code><![CDATA[testConnectBind]]></code>
+      <code><![CDATA[testEmptyOptionsBind]]></code>
+      <code><![CDATA[testExplicitParamsBind]]></code>
+      <code><![CDATA[testNoBaseDnBind]]></code>
+      <code><![CDATA[testNoDomainNameBind]]></code>
+      <code><![CDATA[testPlainBind]]></code>
+      <code><![CDATA[testRequiresDnBind]]></code>
+      <code><![CDATA[testRequiresDnWithoutDnBind]]></code>
+      <code><![CDATA[testResourceIsAlwaysReturned]]></code>
+      <code><![CDATA[testSaslBind]]></code>
+      <code><![CDATA[testSaslBindNoExplicitUsername]]></code>
     </MissingReturnType>
     <PossiblyFalsePropertyAssignmentValue>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ALT_PRINCIPAL_NAME')]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')]]></code>
     </PossiblyFalsePropertyAssignmentValue>
     <PossiblyUnusedProperty>
-      <code>$bindRequiresDn</code>
+      <code><![CDATA[$bindRequiresDn]]></code>
     </PossiblyUnusedProperty>
     <PropertyTypeCoercion>
       <code><![CDATA[$this->options]]></code>
@@ -1106,35 +1132,50 @@
             'baseDn'   => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
         ]]]></code>
     </PropertyTypeCoercion>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAPS_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ANONYMOUS_BIND_ALLOWED')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_START_TLS')]]></code>
+      <code><![CDATA[strstr($message, 'Invalid credentials')]]></code>
+      <code><![CDATA[strstr($message, 'Server is unwilling to perform')]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/CanonTest.php">
     <MissingReturnType>
-      <code>testAccountCanonization</code>
-      <code>testDefaultAccountFilterFormat</code>
-      <code>testDnCanon</code>
-      <code>testGetUnavailableCanoncialForm</code>
-      <code>testGetUnknownCanonicalForm</code>
-      <code>testInvalidAccountCanon</code>
-      <code>testInvalidAccountName</code>
-      <code>testMismatchDomainBind</code>
-      <code>testPlainCanon</code>
-      <code>testPossibleAuthority</code>
-      <code>testSpecialCharacterInUsername</code>
-      <code>testSplittingOption</code>
+      <code><![CDATA[testAccountCanonization]]></code>
+      <code><![CDATA[testDefaultAccountFilterFormat]]></code>
+      <code><![CDATA[testDnCanon]]></code>
+      <code><![CDATA[testGetUnavailableCanoncialForm]]></code>
+      <code><![CDATA[testGetUnknownCanonicalForm]]></code>
+      <code><![CDATA[testInvalidAccountCanon]]></code>
+      <code><![CDATA[testInvalidAccountName]]></code>
+      <code><![CDATA[testMismatchDomainBind]]></code>
+      <code><![CDATA[testPlainCanon]]></code>
+      <code><![CDATA[testPossibleAuthority]]></code>
+      <code><![CDATA[testSpecialCharacterInUsername]]></code>
+      <code><![CDATA[testSplittingOption]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$form</code>
-      <code>$name</code>
+      <code><![CDATA[$form]]></code>
+      <code><![CDATA[$name]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code>$names[$form]</code>
+      <code><![CDATA[$names[$form]]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$names[$form]</code>
+      <code><![CDATA[$names[$form]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$form</code>
-      <code>$name</code>
+      <code><![CDATA[$form]]></code>
+      <code><![CDATA[$name]]></code>
     </MixedAssignment>
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')]]></code>
@@ -1183,22 +1224,38 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')]]></code>
     </PossiblyFalseOperand>
     <PossiblyUndefinedVariable>
-      <code>$names</code>
-      <code>$names</code>
-      <code>$names</code>
+      <code><![CDATA[$names]]></code>
+      <code><![CDATA[$names]]></code>
+      <code><![CDATA[$names]]></code>
     </PossiblyUndefinedVariable>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ALT_USERNAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_START_TLS')]]></code>
+      <code><![CDATA[strstr($msg, 'Invalid credentials')]]></code>
+      <code><![CDATA[strstr($msg, 'No object found')]]></code>
+      <code><![CDATA[strstr($msg, 'No such object')]]></code>
+    </RiskyTruthyFalsyComparison>
     <UnusedVariable>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
-      <code>$canon</code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
+      <code><![CDATA[$canon]]></code>
     </UnusedVariable>
   </file>
   <file src="test/ChangePasswordTest.php">
@@ -1206,31 +1263,37 @@
       <code><![CDATA['Laminas\Ldap']]></code>
     </ArgumentTypeCoercion>
     <InvalidArgument>
-      <code>512</code>
-      <code>512</code>
+      <code><![CDATA[512]]></code>
+      <code><![CDATA[512]]></code>
     </InvalidArgument>
     <MissingReturnType>
-      <code>testAddNewUserWithPasswordActiveDirectory</code>
-      <code>testAddNewUserWithPasswordOpenLDAP</code>
-      <code>testChangePasswordWithUserAccountActiveDirectory</code>
-      <code>testChangePasswordWithUserAccountOpenLDAP</code>
+      <code><![CDATA[testAddNewUserWithPasswordActiveDirectory]]></code>
+      <code><![CDATA[testAddNewUserWithPasswordOpenLDAP]]></code>
+      <code><![CDATA[testChangePasswordWithUserAccountActiveDirectory]]></code>
+      <code><![CDATA[testChangePasswordWithUserAccountOpenLDAP]]></code>
     </MissingReturnType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[strstr($message, 'Invalid credentials')]]></code>
+      <code><![CDATA[strstr($message, 'Invalid credentials')]]></code>
+      <code><![CDATA[strstr($message, 'Server is unwilling to perform')]]></code>
+      <code><![CDATA[strstr($message, 'Server is unwilling to perform')]]></code>
+    </RiskyTruthyFalsyComparison>
     <UndefinedClass>
       <code><![CDATA['Laminas\Ldap']]></code>
     </UndefinedClass>
   </file>
   <file src="test/ConnectTest.php">
     <PossiblyFalseArgument>
-      <code>$host</code>
+      <code><![CDATA[$host]]></code>
     </PossiblyFalseArgument>
     <PossiblyFalseOperand>
-      <code>$host</code>
-      <code>$host</code>
+      <code><![CDATA[$host]]></code>
+      <code><![CDATA[$host]]></code>
     </PossiblyFalseOperand>
     <PossiblyInvalidArgument>
-      <code>$port</code>
-      <code>$port</code>
-      <code>$useSsl</code>
+      <code><![CDATA[$port]]></code>
+      <code><![CDATA[$port]]></code>
+      <code><![CDATA[$useSsl]]></code>
     </PossiblyInvalidArgument>
     <PropertyTypeCoercion>
       <code><![CDATA[$this->options]]></code>
@@ -1242,77 +1305,94 @@
             'baseDn'   => getenv('TESTS_LAMINAS_LDAP_BASE_DN'),
         ]]]></code>
     </PropertyTypeCoercion>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+      <code><![CDATA[$port]]></code>
+      <code><![CDATA[$useSsl]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAPS_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/Converter/ConverterTest.php">
     <MissingReturnType>
-      <code>testFromLdapDateTimeThrowsException</code>
+      <code><![CDATA[testFromLdapDateTimeThrowsException]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$convert</code>
+      <code><![CDATA[$convert]]></code>
       <code><![CDATA[$convert['type']]]></code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <PossiblyInvalidArgument>
       <code><![CDATA[$convert['date']]]></code>
-      <code>testToLdap</code>
+      <code><![CDATA[testToLdap]]></code>
     </PossiblyInvalidArgument>
   </file>
   <file src="test/CopyRenameTest.php">
     <MissingReturnType>
-      <code>testRecursiveCopy</code>
-      <code>testRecursiveCopyToSubtree</code>
-      <code>testRecursiveCopyToSubtreeWithDnObjects</code>
-      <code>testRecursiveCopyWithDnObjects</code>
-      <code>testRecursiveMoveToSubtree</code>
-      <code>testRecursiveMoveToSubtreeWithDnObjects</code>
-      <code>testRecursiveRename</code>
-      <code>testRecursiveRenameWithDnObjects</code>
-      <code>testRenameEmulationSourceNotExists</code>
-      <code>testRenameEmulationTargetExists</code>
-      <code>testRenameEmulationTargetParentNotExists</code>
-      <code>testRenameSourceNotExists</code>
-      <code>testRenameTargetExists</code>
-      <code>testRenameTargetParentNotExists</code>
-      <code>testSimpleLeafCopy</code>
-      <code>testSimpleLeafCopyToSubtree</code>
-      <code>testSimpleLeafCopyToSubtreeWithDnObjects</code>
-      <code>testSimpleLeafCopyWithDnObjects</code>
-      <code>testSimpleLeafMoveAlias</code>
-      <code>testSimpleLeafMoveToSubtree</code>
-      <code>testSimpleLeafMoveToSubtreeWithDnObjects</code>
-      <code>testSimpleLeafRename</code>
-      <code>testSimpleLeafRenameEmulation</code>
-      <code>testSimpleLeafRenameEmulationWithDnObjects</code>
-      <code>testSimpleLeafRenameWithDnObjects</code>
+      <code><![CDATA[testRecursiveCopy]]></code>
+      <code><![CDATA[testRecursiveCopyToSubtree]]></code>
+      <code><![CDATA[testRecursiveCopyToSubtreeWithDnObjects]]></code>
+      <code><![CDATA[testRecursiveCopyWithDnObjects]]></code>
+      <code><![CDATA[testRecursiveMoveToSubtree]]></code>
+      <code><![CDATA[testRecursiveMoveToSubtreeWithDnObjects]]></code>
+      <code><![CDATA[testRecursiveRename]]></code>
+      <code><![CDATA[testRecursiveRenameWithDnObjects]]></code>
+      <code><![CDATA[testRenameEmulationSourceNotExists]]></code>
+      <code><![CDATA[testRenameEmulationTargetExists]]></code>
+      <code><![CDATA[testRenameEmulationTargetParentNotExists]]></code>
+      <code><![CDATA[testRenameSourceNotExists]]></code>
+      <code><![CDATA[testRenameTargetExists]]></code>
+      <code><![CDATA[testRenameTargetParentNotExists]]></code>
+      <code><![CDATA[testSimpleLeafCopy]]></code>
+      <code><![CDATA[testSimpleLeafCopyToSubtree]]></code>
+      <code><![CDATA[testSimpleLeafCopyToSubtreeWithDnObjects]]></code>
+      <code><![CDATA[testSimpleLeafCopyWithDnObjects]]></code>
+      <code><![CDATA[testSimpleLeafMoveAlias]]></code>
+      <code><![CDATA[testSimpleLeafMoveToSubtree]]></code>
+      <code><![CDATA[testSimpleLeafMoveToSubtreeWithDnObjects]]></code>
+      <code><![CDATA[testSimpleLeafRename]]></code>
+      <code><![CDATA[testSimpleLeafRenameEmulation]]></code>
+      <code><![CDATA[testSimpleLeafRenameEmulationWithDnObjects]]></code>
+      <code><![CDATA[testSimpleLeafRenameWithDnObjects]]></code>
     </MissingReturnType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+    </RiskyTruthyFalsyComparison>
     <UnusedFunctionCall>
-      <code>ldap_add</code>
+      <code><![CDATA[ldap_add]]></code>
     </UnusedFunctionCall>
   </file>
   <file src="test/CrudTest.php">
     <MissingReturnType>
-      <code>testAddAndDelete</code>
-      <code>testAddObjectClass</code>
-      <code>testAddWithDnObject</code>
-      <code>testAddingEntryThatHasMultipleValuesOnRdnAttribute</code>
-      <code>testAddingEntryWithMissingRdnAttribute</code>
-      <code>testAddingEntryWithMissingRdnAttributeValue</code>
-      <code>testDeleteRecursively</code>
-      <code>testIllegalAdd</code>
-      <code>testIllegalDelete</code>
-      <code>testIllegalUpdate</code>
-      <code>testPrepareLDAPEntryArray</code>
-      <code>testPrepareLDAPEntryArrayArrayData</code>
-      <code>testPrepareLDAPEntryArrayObjectData</code>
-      <code>testRemoveObjectClass</code>
-      <code>testSave</code>
-      <code>testSaveWithDnObject</code>
-      <code>testUpdate</code>
-      <code>testUpdateWithDnObject</code>
-      <code>testUpdatingEntryWithAttributeThatIsAnRdnAttribute</code>
-      <code>testUpdatingEntryWithRdnAttributeValueMissingInData</code>
-      <code>testZeroValueMakesItThroughSanitationProcess</code>
+      <code><![CDATA[testAddAndDelete]]></code>
+      <code><![CDATA[testAddObjectClass]]></code>
+      <code><![CDATA[testAddWithDnObject]]></code>
+      <code><![CDATA[testAddingEntryThatHasMultipleValuesOnRdnAttribute]]></code>
+      <code><![CDATA[testAddingEntryWithMissingRdnAttribute]]></code>
+      <code><![CDATA[testAddingEntryWithMissingRdnAttributeValue]]></code>
+      <code><![CDATA[testDeleteRecursively]]></code>
+      <code><![CDATA[testIllegalAdd]]></code>
+      <code><![CDATA[testIllegalDelete]]></code>
+      <code><![CDATA[testIllegalUpdate]]></code>
+      <code><![CDATA[testPrepareLDAPEntryArray]]></code>
+      <code><![CDATA[testPrepareLDAPEntryArrayArrayData]]></code>
+      <code><![CDATA[testPrepareLDAPEntryArrayObjectData]]></code>
+      <code><![CDATA[testRemoveObjectClass]]></code>
+      <code><![CDATA[testSave]]></code>
+      <code><![CDATA[testSaveWithDnObject]]></code>
+      <code><![CDATA[testUpdate]]></code>
+      <code><![CDATA[testUpdateWithDnObject]]></code>
+      <code><![CDATA[testUpdatingEntryWithAttributeThatIsAnRdnAttribute]]></code>
+      <code><![CDATA[testUpdatingEntryWithRdnAttributeValueMissingInData]]></code>
+      <code><![CDATA[testZeroValueMakesItThroughSanitationProcess]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$entry['objectclass']]]></code>
@@ -1336,58 +1416,58 @@
       <code><![CDATA[$entry['objectclass'][]]]></code>
     </MixedArrayAssignment>
     <UnusedVariable>
-      <code>$entry</code>
+      <code><![CDATA[$entry]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Dn/CreationTest.php">
     <InvalidArgument>
-      <code>1</code>
+      <code><![CDATA[1]]></code>
     </InvalidArgument>
     <MissingReturnType>
-      <code>testDnCreation</code>
-      <code>testDnCreationWithDifferentCaseFoldings</code>
-      <code>testEmptyStringDn</code>
-      <code>testGetParentDn</code>
-      <code>testGetRdn</code>
+      <code><![CDATA[testDnCreation]]></code>
+      <code><![CDATA[testDnCreationWithDifferentCaseFoldings]]></code>
+      <code><![CDATA[testEmptyStringDn]]></code>
+      <code><![CDATA[testGetParentDn]]></code>
+      <code><![CDATA[testGetRdn]]></code>
     </MissingReturnType>
     <NullArgument>
-      <code>null</code>
+      <code><![CDATA[null]]></code>
     </NullArgument>
   </file>
   <file src="test/Dn/EscapingTest.php">
     <MissingReturnType>
-      <code>testEscapeValues</code>
-      <code>testUnescapeValues</code>
+      <code><![CDATA[testEscapeValues]]></code>
+      <code><![CDATA[testUnescapeValues]]></code>
     </MissingReturnType>
   </file>
   <file src="test/Dn/ExplodingTest.php">
     <UnusedVariable>
-      <code>$dnArray</code>
+      <code><![CDATA[$dnArray]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Dn/ImplodingTest.php">
     <MissingReturnType>
-      <code>testDnWithMultiValuedRdnRoundTrip</code>
-      <code>testImplodeDn</code>
-      <code>testImplodeDnWithUtf8Characters</code>
-      <code>testImplodeRdn</code>
-      <code>testImplodeRdnCaseFold</code>
-      <code>testImplodeRdnInvalidOne</code>
-      <code>testImplodeRdnInvalidThree</code>
-      <code>testImplodeRdnMultiValuedRdn</code>
-      <code>testImplodeRdnMultiValuedRdn2</code>
-      <code>testImplodeRdnMultiValuedRdnCaseFold</code>
+      <code><![CDATA[testDnWithMultiValuedRdnRoundTrip]]></code>
+      <code><![CDATA[testImplodeDn]]></code>
+      <code><![CDATA[testImplodeDnWithUtf8Characters]]></code>
+      <code><![CDATA[testImplodeRdn]]></code>
+      <code><![CDATA[testImplodeRdnCaseFold]]></code>
+      <code><![CDATA[testImplodeRdnInvalidOne]]></code>
+      <code><![CDATA[testImplodeRdnInvalidThree]]></code>
+      <code><![CDATA[testImplodeRdnMultiValuedRdn]]></code>
+      <code><![CDATA[testImplodeRdnMultiValuedRdn2]]></code>
+      <code><![CDATA[testImplodeRdnMultiValuedRdnCaseFold]]></code>
     </MissingReturnType>
   </file>
   <file src="test/Dn/MiscTest.php">
     <MissingReturnType>
-      <code>testIsChildOf</code>
-      <code>testIsChildOfIllegalBothDn</code>
-      <code>testIsChildOfIllegalDn1</code>
-      <code>testIsChildOfIllegalDn2</code>
-      <code>testIsChildOfOtherSubtree</code>
-      <code>testIsChildOfParentDnLonger</code>
-      <code>testIsChildOfWithDnObjects</code>
+      <code><![CDATA[testIsChildOf]]></code>
+      <code><![CDATA[testIsChildOfIllegalBothDn]]></code>
+      <code><![CDATA[testIsChildOfIllegalDn1]]></code>
+      <code><![CDATA[testIsChildOfIllegalDn2]]></code>
+      <code><![CDATA[testIsChildOfOtherSubtree]]></code>
+      <code><![CDATA[testIsChildOfParentDnLonger]]></code>
+      <code><![CDATA[testIsChildOfWithDnObjects]]></code>
     </MissingReturnType>
   </file>
   <file src="test/Dn/ModificationTest.php">
@@ -1395,18 +1475,18 @@
       <code><![CDATA['string']]></code>
     </InvalidArgument>
     <MissingReturnType>
-      <code>testArrayAccessImplementation</code>
-      <code>testDnManipulationAppendAndPrepend</code>
-      <code>testDnManipulationGet</code>
-      <code>testDnManipulationInsert</code>
-      <code>testDnManipulationRemove</code>
-      <code>testDnManipulationSet</code>
+      <code><![CDATA[testArrayAccessImplementation]]></code>
+      <code><![CDATA[testDnManipulationAppendAndPrepend]]></code>
+      <code><![CDATA[testDnManipulationGet]]></code>
+      <code><![CDATA[testDnManipulationInsert]]></code>
+      <code><![CDATA[testDnManipulationRemove]]></code>
+      <code><![CDATA[testDnManipulationSet]]></code>
     </MissingReturnType>
   </file>
   <file src="test/ErrorHandlerTest.php">
     <MissingClosureParamType>
-      <code>$errno</code>
-      <code>$error</code>
+      <code><![CDATA[$errno]]></code>
+      <code><![CDATA[$error]]></code>
     </MissingClosureParamType>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$this->dummyErrorHandler]]></code>
@@ -1415,48 +1495,48 @@
       <code><![CDATA[$this->dummyErrorHandler]]></code>
     </MixedArgumentTypeCoercion>
     <UnusedClosureParam>
-      <code>$errno</code>
-      <code>$error</code>
+      <code><![CDATA[$errno]]></code>
+      <code><![CDATA[$error]]></code>
     </UnusedClosureParam>
   </file>
   <file src="test/Exception/LdapExceptionTest.php">
     <MissingReturnType>
-      <code>testException</code>
+      <code><![CDATA[testException]]></code>
     </MissingReturnType>
   </file>
   <file src="test/FilterTest.php">
     <MissingReturnType>
-      <code>testChaining</code>
-      <code>testComplexFilter</code>
-      <code>testEscapeValues</code>
-      <code>testFilterCreation</code>
-      <code>testFilterEscapeBasicOperation</code>
-      <code>testFilterValueUtf8</code>
-      <code>testGroupingFilter</code>
-      <code>testIllegalGroupingFilter</code>
-      <code>testNegate</code>
-      <code>testRealFilterString</code>
-      <code>testToStringImplementation</code>
-      <code>testUnescapeValues</code>
+      <code><![CDATA[testChaining]]></code>
+      <code><![CDATA[testComplexFilter]]></code>
+      <code><![CDATA[testEscapeValues]]></code>
+      <code><![CDATA[testFilterCreation]]></code>
+      <code><![CDATA[testFilterEscapeBasicOperation]]></code>
+      <code><![CDATA[testFilterValueUtf8]]></code>
+      <code><![CDATA[testGroupingFilter]]></code>
+      <code><![CDATA[testIllegalGroupingFilter]]></code>
+      <code><![CDATA[testNegate]]></code>
+      <code><![CDATA[testRealFilterString]]></code>
+      <code><![CDATA[testToStringImplementation]]></code>
+      <code><![CDATA[testUnescapeValues]]></code>
     </MissingReturnType>
     <UnusedVariable>
-      <code>$f</code>
+      <code><![CDATA[$f]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Ldif/SimpleDecoderTest.php">
     <MissingReturnType>
-      <code>testDecodeSimpleSingleItem</code>
-      <code>testDecodeSimpleSingleItemWithMultilineComment</code>
-      <code>testDecodeSimpleSingleItemWithUri</code>
-      <code>testDecodeSingleItemWithBase64Attributes</code>
-      <code>testDecodeSingleItemWithFoldedAttribute</code>
-      <code>testDecodeSingleItemWithFoldedAttributesAndEmptyLinesBetween</code>
-      <code>testDecodeSingleItemWithFoldedBase64Attribute</code>
-      <code>testDecodeStringContainingBase64EncodedValue</code>
-      <code>testDecodeStringContainingEntriesWithUtf8EncodedAttributeValues</code>
-      <code>testDecodeStringContainingEntryWithFoldedAttributeValue</code>
-      <code>testDecodeTwoItems</code>
-      <code>testRoundtripEncoding</code>
+      <code><![CDATA[testDecodeSimpleSingleItem]]></code>
+      <code><![CDATA[testDecodeSimpleSingleItemWithMultilineComment]]></code>
+      <code><![CDATA[testDecodeSimpleSingleItemWithUri]]></code>
+      <code><![CDATA[testDecodeSingleItemWithBase64Attributes]]></code>
+      <code><![CDATA[testDecodeSingleItemWithFoldedAttribute]]></code>
+      <code><![CDATA[testDecodeSingleItemWithFoldedAttributesAndEmptyLinesBetween]]></code>
+      <code><![CDATA[testDecodeSingleItemWithFoldedBase64Attribute]]></code>
+      <code><![CDATA[testDecodeStringContainingBase64EncodedValue]]></code>
+      <code><![CDATA[testDecodeStringContainingEntriesWithUtf8EncodedAttributeValues]]></code>
+      <code><![CDATA[testDecodeStringContainingEntryWithFoldedAttributeValue]]></code>
+      <code><![CDATA[testDecodeTwoItems]]></code>
+      <code><![CDATA[testRoundtripEncoding]]></code>
     </MissingReturnType>
     <MixedArrayAccess>
       <code><![CDATA[$actual[0]['description']]]></code>
@@ -1517,77 +1597,77 @@
   </file>
   <file src="test/Node/AttributeIterationTest.php">
     <MissingReturnType>
-      <code>testSimpleIteration</code>
+      <code><![CDATA[testSimpleIteration]]></code>
     </MissingReturnType>
     <MixedAssignment>
-      <code>$data[$k]</code>
-      <code>$v</code>
+      <code><![CDATA[$data[$k]]]></code>
+      <code><![CDATA[$v]]></code>
     </MixedAssignment>
     <RedundantConditionGivenDocblockType>
-      <code>assertNotNull</code>
+      <code><![CDATA[assertNotNull]]></code>
     </RedundantConditionGivenDocblockType>
   </file>
   <file src="test/Node/ChildrenIterationTest.php">
     <MissingReturnType>
-      <code>testCallingNextAfterIterationShouldNotThrowException</code>
-      <code>testSimpleIteration</code>
-      <code>testSimpleRecursiveIteration</code>
+      <code><![CDATA[testCallingNextAfterIterationShouldNotThrowException]]></code>
+      <code><![CDATA[testSimpleIteration]]></code>
+      <code><![CDATA[testSimpleRecursiveIteration]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$n->getRdnArray()]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$dn</code>
-      <code>$n</code>
-      <code>$rdn</code>
+      <code><![CDATA[$dn]]></code>
+      <code><![CDATA[$n]]></code>
+      <code><![CDATA[$rdn]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>getDn</code>
-      <code>getRdnArray</code>
-      <code>toString</code>
+      <code><![CDATA[getDn]]></code>
+      <code><![CDATA[getRdnArray]]></code>
+      <code><![CDATA[toString]]></code>
     </MixedMethodCall>
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
     </PossiblyFalseArgument>
     <UnusedForeachValue>
-      <code>$n</code>
+      <code><![CDATA[$n]]></code>
     </UnusedForeachValue>
     <UnusedVariable>
-      <code>$rdn</code>
-      <code>$rdn</code>
-      <code>$rdn</code>
+      <code><![CDATA[$rdn]]></code>
+      <code><![CDATA[$rdn]]></code>
+      <code><![CDATA[$rdn]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Node/ChildrenTest.php">
     <MissingReturnType>
-      <code>testCascadingAttachAndDetach</code>
-      <code>testChildrenCollectionSerialization</code>
-      <code>testGetChildrenOnAttachedNode</code>
-      <code>testGetChildrenOnDetachedNode</code>
-      <code>testHasChildrenOnAttachedNode</code>
-      <code>testHasChildrenOnDetachedNodeWithPriorGetChildren</code>
-      <code>testHasChildrenOnDetachedNodeWithoutPriorGetChildren</code>
+      <code><![CDATA[testCascadingAttachAndDetach]]></code>
+      <code><![CDATA[testChildrenCollectionSerialization]]></code>
+      <code><![CDATA[testGetChildrenOnAttachedNode]]></code>
+      <code><![CDATA[testGetChildrenOnDetachedNode]]></code>
+      <code><![CDATA[testHasChildrenOnAttachedNode]]></code>
+      <code><![CDATA[testHasChildrenOnDetachedNodeWithPriorGetChildren]]></code>
+      <code><![CDATA[testHasChildrenOnDetachedNodeWithoutPriorGetChildren]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$children2</code>
-      <code>$children2</code>
+      <code><![CDATA[$children2]]></code>
+      <code><![CDATA[$children2]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$children2</code>
-      <code>$children2</code>
-      <code>$node2</code>
-      <code>$node2</code>
+      <code><![CDATA[$children2]]></code>
+      <code><![CDATA[$children2]]></code>
+      <code><![CDATA[$node2]]></code>
+      <code><![CDATA[$node2]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>attachLDAP</code>
-      <code>attachLDAP</code>
-      <code>getChildren</code>
-      <code>getChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
+      <code><![CDATA[attachLDAP]]></code>
+      <code><![CDATA[attachLDAP]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
     </MixedMethodCall>
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
@@ -1595,69 +1675,69 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
     </PossiblyFalseArgument>
     <PossiblyNullReference>
-      <code>detachLDAP</code>
-      <code>detachLDAP</code>
-      <code>detachLDAP</code>
-      <code>detachLDAP</code>
-      <code>getChildren</code>
-      <code>getChildren</code>
-      <code>getChildren</code>
-      <code>getChildren</code>
-      <code>getChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
+      <code><![CDATA[detachLDAP]]></code>
+      <code><![CDATA[detachLDAP]]></code>
+      <code><![CDATA[detachLDAP]]></code>
+      <code><![CDATA[detachLDAP]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[getChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
     </PossiblyNullReference>
   </file>
   <file src="test/Node/OfflineTest.php">
     <MissingReturnType>
-      <code>testAppendToAttributeFirstTime</code>
-      <code>testArrayAccess</code>
-      <code>testAttributeAccessDnGet</code>
-      <code>testCreateEmptyNode</code>
-      <code>testCreateFromArrayAndEnsureRdnValues</code>
-      <code>testCreateFromArrayIllegalDn</code>
-      <code>testCreateFromArrayMalformedDn</code>
-      <code>testCreateFromArrayMissingDn</code>
-      <code>testCreateFromArrayObjectDn</code>
-      <code>testCreateFromArrayStringDn</code>
-      <code>testDeleteUnusedAttribute</code>
-      <code>testDnObjectCloning</code>
-      <code>testExistsAttribute</code>
-      <code>testGetAttributes</code>
-      <code>testGetChangedData</code>
-      <code>testGetChanges</code>
-      <code>testGetData</code>
-      <code>testGetDnArray</code>
-      <code>testGetDnObject</code>
-      <code>testGetDnString</code>
-      <code>testGetObjectClass</code>
-      <code>testGetRdnArray</code>
-      <code>testGetRdnString</code>
-      <code>testGetSetAndDeleteMethods</code>
-      <code>testHasValue</code>
-      <code>testIllegalAttributeAccessDnSet</code>
-      <code>testIllegalAttributeAccessRdnAttributeSet</code>
-      <code>testModifyObjectClass</code>
-      <code>testOverloading</code>
-      <code>testRdnAttributesHandleMultiValuedAttribute</code>
-      <code>testRdnAttributesHandleMultiValuedAttribute2</code>
-      <code>testRdnAttributesHandleMultiValuedAttribute3</code>
-      <code>testRemoveDuplicates</code>
-      <code>testRemoveFromAttributeArray</code>
-      <code>testRemoveFromAttributeMultipleArray</code>
-      <code>testRemoveFromAttributeMultipleSimple</code>
-      <code>testRemoveFromAttributeSimple</code>
-      <code>testRenameNodeArray</code>
-      <code>testRenameNodeDnObject</code>
-      <code>testRenameNodeFromDataSource</code>
-      <code>testRenameNodeString</code>
-      <code>testSerialize</code>
-      <code>testToArray</code>
-      <code>testToJson</code>
-      <code>testToString</code>
+      <code><![CDATA[testAppendToAttributeFirstTime]]></code>
+      <code><![CDATA[testArrayAccess]]></code>
+      <code><![CDATA[testAttributeAccessDnGet]]></code>
+      <code><![CDATA[testCreateEmptyNode]]></code>
+      <code><![CDATA[testCreateFromArrayAndEnsureRdnValues]]></code>
+      <code><![CDATA[testCreateFromArrayIllegalDn]]></code>
+      <code><![CDATA[testCreateFromArrayMalformedDn]]></code>
+      <code><![CDATA[testCreateFromArrayMissingDn]]></code>
+      <code><![CDATA[testCreateFromArrayObjectDn]]></code>
+      <code><![CDATA[testCreateFromArrayStringDn]]></code>
+      <code><![CDATA[testDeleteUnusedAttribute]]></code>
+      <code><![CDATA[testDnObjectCloning]]></code>
+      <code><![CDATA[testExistsAttribute]]></code>
+      <code><![CDATA[testGetAttributes]]></code>
+      <code><![CDATA[testGetChangedData]]></code>
+      <code><![CDATA[testGetChanges]]></code>
+      <code><![CDATA[testGetData]]></code>
+      <code><![CDATA[testGetDnArray]]></code>
+      <code><![CDATA[testGetDnObject]]></code>
+      <code><![CDATA[testGetDnString]]></code>
+      <code><![CDATA[testGetObjectClass]]></code>
+      <code><![CDATA[testGetRdnArray]]></code>
+      <code><![CDATA[testGetRdnString]]></code>
+      <code><![CDATA[testGetSetAndDeleteMethods]]></code>
+      <code><![CDATA[testHasValue]]></code>
+      <code><![CDATA[testIllegalAttributeAccessDnSet]]></code>
+      <code><![CDATA[testIllegalAttributeAccessRdnAttributeSet]]></code>
+      <code><![CDATA[testModifyObjectClass]]></code>
+      <code><![CDATA[testOverloading]]></code>
+      <code><![CDATA[testRdnAttributesHandleMultiValuedAttribute]]></code>
+      <code><![CDATA[testRdnAttributesHandleMultiValuedAttribute2]]></code>
+      <code><![CDATA[testRdnAttributesHandleMultiValuedAttribute3]]></code>
+      <code><![CDATA[testRemoveDuplicates]]></code>
+      <code><![CDATA[testRemoveFromAttributeArray]]></code>
+      <code><![CDATA[testRemoveFromAttributeMultipleArray]]></code>
+      <code><![CDATA[testRemoveFromAttributeMultipleSimple]]></code>
+      <code><![CDATA[testRemoveFromAttributeSimple]]></code>
+      <code><![CDATA[testRenameNodeArray]]></code>
+      <code><![CDATA[testRenameNodeDnObject]]></code>
+      <code><![CDATA[testRenameNodeFromDataSource]]></code>
+      <code><![CDATA[testRenameNodeString]]></code>
+      <code><![CDATA[testSerialize]]></code>
+      <code><![CDATA[testToArray]]></code>
+      <code><![CDATA[testToJson]]></code>
+      <code><![CDATA[testToString]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$data['dn']]]></code>
@@ -1676,31 +1756,31 @@
       <code><![CDATA[$node['key'][0]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$cn</code>
-      <code>$cn</code>
-      <code>$newObject</code>
+      <code><![CDATA[$cn]]></code>
+      <code><![CDATA[$cn]]></code>
+      <code><![CDATA[$newObject]]></code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
-      <code>$utcTimestamp</code>
+      <code><![CDATA[$utcTimestamp]]></code>
     </PossiblyInvalidArgument>
     <UnusedVariable>
-      <code>$node</code>
-      <code>$node</code>
-      <code>$node</code>
+      <code><![CDATA[$node]]></code>
+      <code><![CDATA[$node]]></code>
+      <code><![CDATA[$node]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Node/OnlineTest.php">
     <InvalidArgument>
-      <code>ExceptionInterface::class</code>
-      <code>ExceptionInterface::class</code>
-      <code>ExceptionInterface::class</code>
-      <code>ExceptionInterface::class</code>
-      <code>[]</code>
-      <code>[]</code>
-      <code>[]</code>
+      <code><![CDATA[ExceptionInterface::class]]></code>
+      <code><![CDATA[ExceptionInterface::class]]></code>
+      <code><![CDATA[ExceptionInterface::class]]></code>
+      <code><![CDATA[ExceptionInterface::class]]></code>
+      <code><![CDATA[[]]]></code>
+      <code><![CDATA[[]]]></code>
+      <code><![CDATA[[]]]></code>
     </InvalidArgument>
     <InvalidArrayOffset>
-      <code>$dns[$i]</code>
+      <code><![CDATA[$dns[$i]]]></code>
     </InvalidArrayOffset>
     <InvalidCatch>
       <code><![CDATA[try {
@@ -1737,38 +1817,38 @@
         }]]></code>
     </InvalidCatch>
     <MissingReturnType>
-      <code>testAttachToInvalidLDAP</code>
-      <code>testAttachToValidLDAP</code>
-      <code>testChangeReadOnlySystemAttributes</code>
-      <code>testCountChildren</code>
-      <code>testCountSubtree</code>
-      <code>testDetachAndReattach</code>
-      <code>testExistsDn</code>
-      <code>testGetBaseNode</code>
-      <code>testGetIllegalNode</code>
-      <code>testGetNode</code>
-      <code>testGetNonexistentParent</code>
-      <code>testGetParent</code>
-      <code>testLoadFromLDAP</code>
-      <code>testLoadFromLDAPIllegalEntry</code>
-      <code>testLoadFromLDAPWithDnObject</code>
-      <code>testReload</code>
-      <code>testSearchChildren</code>
-      <code>testSearchSubtree</code>
-      <code>testSerialize</code>
+      <code><![CDATA[testAttachToInvalidLDAP]]></code>
+      <code><![CDATA[testAttachToValidLDAP]]></code>
+      <code><![CDATA[testChangeReadOnlySystemAttributes]]></code>
+      <code><![CDATA[testCountChildren]]></code>
+      <code><![CDATA[testCountSubtree]]></code>
+      <code><![CDATA[testDetachAndReattach]]></code>
+      <code><![CDATA[testExistsDn]]></code>
+      <code><![CDATA[testGetBaseNode]]></code>
+      <code><![CDATA[testGetIllegalNode]]></code>
+      <code><![CDATA[testGetNode]]></code>
+      <code><![CDATA[testGetNonexistentParent]]></code>
+      <code><![CDATA[testGetParent]]></code>
+      <code><![CDATA[testLoadFromLDAP]]></code>
+      <code><![CDATA[testLoadFromLDAPIllegalEntry]]></code>
+      <code><![CDATA[testLoadFromLDAPWithDnObject]]></code>
+      <code><![CDATA[testReload]]></code>
+      <code><![CDATA[testSearchChildren]]></code>
+      <code><![CDATA[testSearchSubtree]]></code>
+      <code><![CDATA[testSerialize]]></code>
     </MissingReturnType>
     <MixedArgumentTypeCoercion>
-      <code>$attr</code>
+      <code><![CDATA[$attr]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$node->ou[0]]]></code>
       <code><![CDATA[$node->ou[0]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$newObject</code>
+      <code><![CDATA[$newObject]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>isAttached</code>
+      <code><![CDATA[isAttached]]></code>
     </MixedMethodCall>
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
@@ -1779,129 +1859,129 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
     </PossiblyFalseArgument>
     <PossiblyNullReference>
-      <code>countChildren</code>
-      <code>countChildren</code>
-      <code>countSubtree</code>
-      <code>exists</code>
-      <code>getDn</code>
-      <code>getParent</code>
-      <code>getParent</code>
-      <code>isAttached</code>
-      <code>reload</code>
-      <code>searchChildren</code>
-      <code>searchChildren</code>
-      <code>searchSubtree</code>
+      <code><![CDATA[countChildren]]></code>
+      <code><![CDATA[countChildren]]></code>
+      <code><![CDATA[countSubtree]]></code>
+      <code><![CDATA[exists]]></code>
+      <code><![CDATA[getDn]]></code>
+      <code><![CDATA[getParent]]></code>
+      <code><![CDATA[getParent]]></code>
+      <code><![CDATA[isAttached]]></code>
+      <code><![CDATA[reload]]></code>
+      <code><![CDATA[searchChildren]]></code>
+      <code><![CDATA[searchChildren]]></code>
+      <code><![CDATA[searchSubtree]]></code>
     </PossiblyNullReference>
     <TooManyArguments>
-      <code>searchChildren</code>
-      <code>searchChildren</code>
-      <code>searchSubtree</code>
+      <code><![CDATA[searchChildren]]></code>
+      <code><![CDATA[searchChildren]]></code>
+      <code><![CDATA[searchSubtree]]></code>
     </TooManyArguments>
     <UnusedVariable>
-      <code>$node</code>
-      <code>$node</code>
-      <code>$pnode</code>
+      <code><![CDATA[$node]]></code>
+      <code><![CDATA[$node]]></code>
+      <code><![CDATA[$pnode]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Node/RootDseTest.php">
     <MissingReturnType>
-      <code>testGetters</code>
-      <code>testLoadRootDseNode</code>
-      <code>testOffsetSetWillThrowException</code>
-      <code>testOffsetUnsetWillThrowException</code>
-      <code>testSetterWillThrowException</code>
-      <code>testSupportCheckMethods</code>
-      <code>testUnsetterWillThrowException</code>
+      <code><![CDATA[testGetters]]></code>
+      <code><![CDATA[testLoadRootDseNode]]></code>
+      <code><![CDATA[testOffsetSetWillThrowException]]></code>
+      <code><![CDATA[testOffsetUnsetWillThrowException]]></code>
+      <code><![CDATA[testSetterWillThrowException]]></code>
+      <code><![CDATA[testSupportCheckMethods]]></code>
+      <code><![CDATA[testUnsetterWillThrowException]]></code>
     </MissingReturnType>
     <UndefinedMethod>
-      <code>getConfigContext</code>
-      <code>getConfigurationNamingContext</code>
-      <code>getCurrentTime</code>
-      <code>getDefaultNamingContext</code>
-      <code>getDnsHostName</code>
-      <code>getDomainControllerFunctionality</code>
-      <code>getDomainFunctionality</code>
-      <code>getDsServiceName</code>
-      <code>getDsaName</code>
-      <code>getForestFunctionality</code>
-      <code>getHighestCommittedUSN</code>
-      <code>getIsGlobalCatalogReady</code>
-      <code>getIsSynchronized</code>
-      <code>getLDAPServiceName</code>
-      <code>getMonitorContext</code>
-      <code>getRootDomainNamingContext</code>
-      <code>getSchemaNamingContext</code>
-      <code>getServerName</code>
-      <code>getStatisticsAbandonOps</code>
-      <code>getStatisticsChainings</code>
-      <code>getStatisticsErrors</code>
-      <code>getStatisticsExtendedOps</code>
-      <code>getStatisticsReferralsReturned</code>
-      <code>getStatisticsSecurityErrors</code>
-      <code>getStatisticsWholeSubtreeSearchOps</code>
-      <code>getVendorName</code>
-      <code>getVendorVersion</code>
-      <code>supportsCapability</code>
-      <code>supportsCapability</code>
-      <code>supportsControl</code>
-      <code>supportsControl</code>
-      <code>supportsControl</code>
-      <code>supportsControl</code>
-      <code>supportsExtension</code>
-      <code>supportsExtension</code>
-      <code>supportsExtension</code>
-      <code>supportsExtension</code>
-      <code>supportsFeature</code>
-      <code>supportsFeature</code>
-      <code>supportsPolicy</code>
-      <code>supportsPolicy</code>
+      <code><![CDATA[getConfigContext]]></code>
+      <code><![CDATA[getConfigurationNamingContext]]></code>
+      <code><![CDATA[getCurrentTime]]></code>
+      <code><![CDATA[getDefaultNamingContext]]></code>
+      <code><![CDATA[getDnsHostName]]></code>
+      <code><![CDATA[getDomainControllerFunctionality]]></code>
+      <code><![CDATA[getDomainFunctionality]]></code>
+      <code><![CDATA[getDsServiceName]]></code>
+      <code><![CDATA[getDsaName]]></code>
+      <code><![CDATA[getForestFunctionality]]></code>
+      <code><![CDATA[getHighestCommittedUSN]]></code>
+      <code><![CDATA[getIsGlobalCatalogReady]]></code>
+      <code><![CDATA[getIsSynchronized]]></code>
+      <code><![CDATA[getLDAPServiceName]]></code>
+      <code><![CDATA[getMonitorContext]]></code>
+      <code><![CDATA[getRootDomainNamingContext]]></code>
+      <code><![CDATA[getSchemaNamingContext]]></code>
+      <code><![CDATA[getServerName]]></code>
+      <code><![CDATA[getStatisticsAbandonOps]]></code>
+      <code><![CDATA[getStatisticsChainings]]></code>
+      <code><![CDATA[getStatisticsErrors]]></code>
+      <code><![CDATA[getStatisticsExtendedOps]]></code>
+      <code><![CDATA[getStatisticsReferralsReturned]]></code>
+      <code><![CDATA[getStatisticsSecurityErrors]]></code>
+      <code><![CDATA[getStatisticsWholeSubtreeSearchOps]]></code>
+      <code><![CDATA[getVendorName]]></code>
+      <code><![CDATA[getVendorVersion]]></code>
+      <code><![CDATA[supportsCapability]]></code>
+      <code><![CDATA[supportsCapability]]></code>
+      <code><![CDATA[supportsControl]]></code>
+      <code><![CDATA[supportsControl]]></code>
+      <code><![CDATA[supportsControl]]></code>
+      <code><![CDATA[supportsControl]]></code>
+      <code><![CDATA[supportsExtension]]></code>
+      <code><![CDATA[supportsExtension]]></code>
+      <code><![CDATA[supportsExtension]]></code>
+      <code><![CDATA[supportsExtension]]></code>
+      <code><![CDATA[supportsFeature]]></code>
+      <code><![CDATA[supportsFeature]]></code>
+      <code><![CDATA[supportsPolicy]]></code>
+      <code><![CDATA[supportsPolicy]]></code>
     </UndefinedMethod>
   </file>
   <file src="test/Node/SchemaTest.php">
     <MissingReturnType>
-      <code>testActiveDirectorySchema</code>
-      <code>testGetters</code>
-      <code>testOffsetSetWillThrowException</code>
-      <code>testOffsetUnsetWillThrowException</code>
-      <code>testOpenLDAPSchema</code>
-      <code>testOpenLDAPSchemaAttributeTypeAliases</code>
-      <code>testOpenLDAPSchemaAttributeTypeInheritance</code>
-      <code>testOpenLDAPSchemaObjectClassAliases</code>
-      <code>testOpenLDAPSchemaObjectClassInheritance</code>
-      <code>testSchemaNode</code>
-      <code>testSetterWillThrowException</code>
-      <code>testUnsetterWillThrowException</code>
-      <code>testeDirectorySchema</code>
+      <code><![CDATA[testActiveDirectorySchema]]></code>
+      <code><![CDATA[testGetters]]></code>
+      <code><![CDATA[testOffsetSetWillThrowException]]></code>
+      <code><![CDATA[testOffsetUnsetWillThrowException]]></code>
+      <code><![CDATA[testOpenLDAPSchema]]></code>
+      <code><![CDATA[testOpenLDAPSchemaAttributeTypeAliases]]></code>
+      <code><![CDATA[testOpenLDAPSchemaAttributeTypeInheritance]]></code>
+      <code><![CDATA[testOpenLDAPSchemaObjectClassAliases]]></code>
+      <code><![CDATA[testOpenLDAPSchemaObjectClassInheritance]]></code>
+      <code><![CDATA[testSchemaNode]]></code>
+      <code><![CDATA[testSetterWillThrowException]]></code>
+      <code><![CDATA[testUnsetterWillThrowException]]></code>
+      <code><![CDATA[testeDirectorySchema]]></code>
     </MissingReturnType>
     <MixedArrayAccess>
       <code><![CDATA[$ou->_parents[0]]]></code>
       <code><![CDATA[$ou->_parents[0]]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$ca</code>
-      <code>$ca2</code>
-      <code>$cn</code>
-      <code>$name</code>
-      <code>$ob1</code>
-      <code>$ob1</code>
-      <code>$ob2</code>
-      <code>$ob2</code>
-      <code>$ou</code>
-      <code>$schemaUn</code>
+      <code><![CDATA[$ca]]></code>
+      <code><![CDATA[$ca2]]></code>
+      <code><![CDATA[$cn]]></code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$ob1]]></code>
+      <code><![CDATA[$ob1]]></code>
+      <code><![CDATA[$ob2]]></code>
+      <code><![CDATA[$ob2]]></code>
+      <code><![CDATA[$ou]]></code>
+      <code><![CDATA[$schemaUn]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>getMaxLength</code>
-      <code>getMaxLength</code>
-      <code>getMayContain</code>
-      <code>getMayContain</code>
-      <code>getMustContain</code>
-      <code>getMustContain</code>
-      <code>getOid</code>
-      <code>getOid</code>
-      <code>getOid</code>
-      <code>getOid</code>
-      <code>getSyntax</code>
-      <code>getSyntax</code>
+      <code><![CDATA[getMaxLength]]></code>
+      <code><![CDATA[getMaxLength]]></code>
+      <code><![CDATA[getMayContain]]></code>
+      <code><![CDATA[getMayContain]]></code>
+      <code><![CDATA[getMustContain]]></code>
+      <code><![CDATA[getMustContain]]></code>
+      <code><![CDATA[getOid]]></code>
+      <code><![CDATA[getOid]]></code>
+      <code><![CDATA[getOid]]></code>
+      <code><![CDATA[getOid]]></code>
+      <code><![CDATA[getSyntax]]></code>
+      <code><![CDATA[getSyntax]]></code>
     </MixedMethodCall>
     <MixedPropertyFetch>
       <code><![CDATA[$ca->may]]></code>
@@ -1924,26 +2004,26 @@
       <code><![CDATA[$name->{'max-length'}]]></code>
     </MixedPropertyFetch>
     <UndefinedMethod>
-      <code>getLDAPSyntaxes</code>
-      <code>getMatchingRuleUse</code>
-      <code>getMatchingRules</code>
+      <code><![CDATA[getLDAPSyntaxes]]></code>
+      <code><![CDATA[getMatchingRuleUse]]></code>
+      <code><![CDATA[getMatchingRules]]></code>
     </UndefinedMethod>
     <UnusedVariable>
-      <code>$attributeTypes</code>
-      <code>$objectClasses</code>
+      <code><![CDATA[$attributeTypes]]></code>
+      <code><![CDATA[$objectClasses]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Node/UpdateTest.php">
     <MissingReturnType>
-      <code>testAddDeletedNode</code>
-      <code>testAddNewNode</code>
-      <code>testModifyDeletedNode</code>
-      <code>testMoveDeletedExistingNode</code>
-      <code>testMoveDeletedNewNode</code>
-      <code>testMoveExistingNode</code>
-      <code>testMoveNewNode</code>
-      <code>testMoveNode</code>
-      <code>testSimpleUpdateOneValue</code>
+      <code><![CDATA[testAddDeletedNode]]></code>
+      <code><![CDATA[testAddNewNode]]></code>
+      <code><![CDATA[testModifyDeletedNode]]></code>
+      <code><![CDATA[testMoveDeletedExistingNode]]></code>
+      <code><![CDATA[testMoveDeletedNewNode]]></code>
+      <code><![CDATA[testMoveExistingNode]]></code>
+      <code><![CDATA[testMoveNewNode]]></code>
+      <code><![CDATA[testMoveNode]]></code>
+      <code><![CDATA[testSimpleUpdateOneValue]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$entry['objectclass']]]></code>
@@ -1953,32 +2033,35 @@
       <code><![CDATA[$entry['objectclass'][0]]]></code>
     </MixedArrayAccess>
     <PossiblyNullPropertyAssignment>
-      <code>$node1</code>
-      <code>$node1</code>
+      <code><![CDATA[$node1]]></code>
+      <code><![CDATA[$node1]]></code>
     </PossiblyNullPropertyAssignment>
     <PossiblyNullReference>
-      <code>move</code>
-      <code>rename</code>
-      <code>setDn</code>
-      <code>setDn</code>
-      <code>setDn</code>
-      <code>update</code>
+      <code><![CDATA[move]]></code>
+      <code><![CDATA[rename]]></code>
+      <code><![CDATA[setDn]]></code>
+      <code><![CDATA[setDn]]></code>
+      <code><![CDATA[setDn]]></code>
+      <code><![CDATA[update]]></code>
     </PossiblyNullReference>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/OfflineReconnectTest.php">
     <PossiblyNullReference>
-      <code>enable</code>
-      <code>enable</code>
-      <code>enable</code>
+      <code><![CDATA[enable]]></code>
+      <code><![CDATA[enable]]></code>
+      <code><![CDATA[enable]]></code>
     </PossiblyNullReference>
   </file>
   <file src="test/OfflineTest.php">
     <MissingReturnType>
-      <code>testAddingAttributes</code>
-      <code>testAddingAttributesFails</code>
-      <code>testRemovingAttributesFails</code>
-      <code>testUpdatingAttributes</code>
-      <code>testUpdatingAttributesFails</code>
+      <code><![CDATA[testAddingAttributes]]></code>
+      <code><![CDATA[testAddingAttributesFails]]></code>
+      <code><![CDATA[testRemovingAttributesFails]]></code>
+      <code><![CDATA[testUpdatingAttributes]]></code>
+      <code><![CDATA[testUpdatingAttributesFails]]></code>
     </MissingReturnType>
   </file>
   <file src="test/ReconnectTest.php">
@@ -1987,7 +2070,7 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
     </InvalidArgument>
     <InvalidReturnStatement>
-      <code>$options</code>
+      <code><![CDATA[$options]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
       <code><![CDATA[non-empty-array<string, string>]]></code>
@@ -2019,56 +2102,66 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_BASE_DN')]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_BASE_DN')]]></code>
     </PossiblyFalseOperand>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[! getenv('TESTS_LAMINAS_LDAP_ONLINE_ENABLED')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_DOMAIN_NAME_SHORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_ACCOUNT_FILTER_FORMAT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_BIND_REQUIRES_DN')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_PORT')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
+      <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_START_TLS')]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/SearchTest.php">
     <DocblockTypeContradiction>
-      <code>assertNull</code>
+      <code><![CDATA[assertNull]]></code>
     </DocblockTypeContradiction>
     <MissingReturnType>
-      <code>testAttributeNameTreatmentCustomFunction</code>
-      <code>testAttributeNameTreatmentCustomInstanceMethod</code>
-      <code>testAttributeNameTreatmentCustomStaticMethod</code>
-      <code>testAttributeNameTreatmentNative</code>
-      <code>testAttributeNameTreatmentToLower</code>
-      <code>testAttributeNameTreatmentToUpper</code>
-      <code>testCallingCurrentOnCollectionReturnsFirstElement</code>
-      <code>testCallingCurrentOnEmptyCollectionReturnsNull</code>
-      <code>testCallingCurrentOnEmptyIteratorReturnsNull</code>
-      <code>testCallingCurrentOnIteratorReturnsFirstElement</code>
-      <code>testCallingNextAfterIterationShouldNotThrowException</code>
-      <code>testCollectionClassNotSubclassingLaminasLDAPCollectionThrowsException</code>
-      <code>testCountBase</code>
-      <code>testCountChildren</code>
-      <code>testCountChildrenWithDnObject</code>
-      <code>testCountOne</code>
-      <code>testCountSub</code>
-      <code>testCountSubWithDnObjectAndFilterObject</code>
-      <code>testExistsDn</code>
-      <code>testExistsDnWithDnObject</code>
-      <code>testGetSingleEntry</code>
-      <code>testGetSingleEntryWithDnObject</code>
-      <code>testGetSingleIllegalEntry</code>
-      <code>testGetSingleIllegalEntryWithException</code>
-      <code>testIllegalSearch</code>
-      <code>testInnerIteratorIsOfRequiredType</code>
-      <code>testMultipleResultIteration</code>
-      <code>testResultIteration</code>
-      <code>testResultIterationAfterCallingCurrent</code>
-      <code>testReverseSortingWithSearchEntriesShortcut</code>
-      <code>testReverseSortingWithSearchEntriesShortcutWithOptionsArray</code>
-      <code>testSearchEntriesShortcut</code>
-      <code>testSearchEntriesShortcutWithDnObjectAndFilterObject</code>
-      <code>testSearchEntriesShortcutWithOptionsArray</code>
-      <code>testSearchNoResult</code>
-      <code>testSearchNothingGetFirst</code>
-      <code>testSearchNothingIteration</code>
-      <code>testSearchNothingToArray</code>
-      <code>testSearchWithDnObjectAndFilterObject</code>
-      <code>testSearchWithOptionsArray</code>
-      <code>testSorting</code>
-      <code>testUnknownCollectionClassThrowsException</code>
-      <code>testUserIsAutomaticallyBoundOnOperationInDisconnectedState</code>
-      <code>testUserIsAutomaticallyBoundOnOperationInUnboundState</code>
+      <code><![CDATA[testAttributeNameTreatmentCustomFunction]]></code>
+      <code><![CDATA[testAttributeNameTreatmentCustomInstanceMethod]]></code>
+      <code><![CDATA[testAttributeNameTreatmentCustomStaticMethod]]></code>
+      <code><![CDATA[testAttributeNameTreatmentNative]]></code>
+      <code><![CDATA[testAttributeNameTreatmentToLower]]></code>
+      <code><![CDATA[testAttributeNameTreatmentToUpper]]></code>
+      <code><![CDATA[testCallingCurrentOnCollectionReturnsFirstElement]]></code>
+      <code><![CDATA[testCallingCurrentOnEmptyCollectionReturnsNull]]></code>
+      <code><![CDATA[testCallingCurrentOnEmptyIteratorReturnsNull]]></code>
+      <code><![CDATA[testCallingCurrentOnIteratorReturnsFirstElement]]></code>
+      <code><![CDATA[testCallingNextAfterIterationShouldNotThrowException]]></code>
+      <code><![CDATA[testCollectionClassNotSubclassingLaminasLDAPCollectionThrowsException]]></code>
+      <code><![CDATA[testCountBase]]></code>
+      <code><![CDATA[testCountChildren]]></code>
+      <code><![CDATA[testCountChildrenWithDnObject]]></code>
+      <code><![CDATA[testCountOne]]></code>
+      <code><![CDATA[testCountSub]]></code>
+      <code><![CDATA[testCountSubWithDnObjectAndFilterObject]]></code>
+      <code><![CDATA[testExistsDn]]></code>
+      <code><![CDATA[testExistsDnWithDnObject]]></code>
+      <code><![CDATA[testGetSingleEntry]]></code>
+      <code><![CDATA[testGetSingleEntryWithDnObject]]></code>
+      <code><![CDATA[testGetSingleIllegalEntry]]></code>
+      <code><![CDATA[testGetSingleIllegalEntryWithException]]></code>
+      <code><![CDATA[testIllegalSearch]]></code>
+      <code><![CDATA[testInnerIteratorIsOfRequiredType]]></code>
+      <code><![CDATA[testMultipleResultIteration]]></code>
+      <code><![CDATA[testResultIteration]]></code>
+      <code><![CDATA[testResultIterationAfterCallingCurrent]]></code>
+      <code><![CDATA[testReverseSortingWithSearchEntriesShortcut]]></code>
+      <code><![CDATA[testReverseSortingWithSearchEntriesShortcutWithOptionsArray]]></code>
+      <code><![CDATA[testSearchEntriesShortcut]]></code>
+      <code><![CDATA[testSearchEntriesShortcutWithDnObjectAndFilterObject]]></code>
+      <code><![CDATA[testSearchEntriesShortcutWithOptionsArray]]></code>
+      <code><![CDATA[testSearchNoResult]]></code>
+      <code><![CDATA[testSearchNothingGetFirst]]></code>
+      <code><![CDATA[testSearchNothingIteration]]></code>
+      <code><![CDATA[testSearchNothingToArray]]></code>
+      <code><![CDATA[testSearchWithDnObjectAndFilterObject]]></code>
+      <code><![CDATA[testSearchWithOptionsArray]]></code>
+      <code><![CDATA[testSorting]]></code>
+      <code><![CDATA[testUnknownCollectionClassThrowsException]]></code>
+      <code><![CDATA[testUserIsAutomaticallyBoundOnOperationInDisconnectedState]]></code>
+      <code><![CDATA[testUserIsAutomaticallyBoundOnOperationInUnboundState]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$entry['ou']]]></code>
@@ -2082,17 +2175,17 @@
       <code><![CDATA[$item['l'][0]]]></code>
     </MixedArrayAccess>
     <MixedArrayTypeCoercion>
-      <code>$lSorted[$key]</code>
-      <code>$lSorted[$key]</code>
+      <code><![CDATA[$lSorted[$key]]]></code>
+      <code><![CDATA[$lSorted[$key]]]></code>
     </MixedArrayTypeCoercion>
     <MixedAssignment>
-      <code>$item</code>
-      <code>$item</code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
     </MixedAssignment>
     <PossiblyFalseArgument>
-      <code>$dn2</code>
-      <code>$dn2</code>
-      <code>$dn2</code>
+      <code><![CDATA[$dn2]]></code>
+      <code><![CDATA[$dn2]]></code>
+      <code><![CDATA[$dn2]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
@@ -2117,60 +2210,60 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
     </PossiblyFalseArgument>
     <RedundantConditionGivenDocblockType>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
+      <code><![CDATA[assertIsArray]]></code>
+      <code><![CDATA[assertIsArray]]></code>
     </RedundantConditionGivenDocblockType>
     <UnusedForeachValue>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
-      <code>$item</code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$item]]></code>
     </UnusedForeachValue>
     <UnusedVariable>
-      <code>$entry</code>
-      <code>$items</code>
-      <code>$items</code>
-      <code>$items</code>
-      <code>$key</code>
-      <code>$key</code>
-      <code>$key</code>
+      <code><![CDATA[$entry]]></code>
+      <code><![CDATA[$items]]></code>
+      <code><![CDATA[$items]]></code>
+      <code><![CDATA[$items]]></code>
+      <code><![CDATA[$key]]></code>
+      <code><![CDATA[$key]]></code>
+      <code><![CDATA[$key]]></code>
     </UnusedVariable>
   </file>
   <file src="test/SortTest.php">
     <MissingClosureParamType>
-      <code>$a</code>
-      <code>$a</code>
-      <code>$b</code>
-      <code>$b</code>
+      <code><![CDATA[$a]]></code>
+      <code><![CDATA[$a]]></code>
+      <code><![CDATA[$b]]></code>
+      <code><![CDATA[$b]]></code>
     </MissingClosureParamType>
     <MissingReturnType>
-      <code>testCustomSorting</code>
-      <code>testSettingCallable</code>
-      <code>testSorting</code>
+      <code><![CDATA[testCustomSorting]]></code>
+      <code><![CDATA[testSettingCallable]]></code>
+      <code><![CDATA[testSorting]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$a</code>
-      <code>$a</code>
-      <code>$b</code>
-      <code>$b</code>
+      <code><![CDATA[$a]]></code>
+      <code><![CDATA[$a]]></code>
+      <code><![CDATA[$b]]></code>
+      <code><![CDATA[$b]]></code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code>$reflectionEntries[$index]</code>
+      <code><![CDATA[$reflectionEntries[$index]]]></code>
       <code><![CDATA[$reflectionEntries[$index]["sortValue"]]]></code>
       <code><![CDATA[$value['sortValue']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$actual[]</code>
-      <code>$reflectionEntries</code>
-      <code>$reflectionEntries</code>
-      <code>$value</code>
+      <code><![CDATA[$actual[]]]></code>
+      <code><![CDATA[$reflectionEntries]]></code>
+      <code><![CDATA[$reflectionEntries]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
@@ -2178,24 +2271,24 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE')]]></code>
     </PossiblyFalseArgument>
     <PossiblyInvalidArgument>
-      <code>$search</code>
-      <code>$search</code>
-      <code>$search</code>
+      <code><![CDATA[$search]]></code>
+      <code><![CDATA[$search]]></code>
+      <code><![CDATA[$search]]></code>
     </PossiblyInvalidArgument>
     <UnusedClosureParam>
-      <code>$a</code>
-      <code>$b</code>
+      <code><![CDATA[$a]]></code>
+      <code><![CDATA[$b]]></code>
     </UnusedClosureParam>
   </file>
   <file src="test/TestAsset/BuiltinFunctionMocks.php">
     <MissingReturnType>
-      <code>createMocks</code>
+      <code><![CDATA[createMocks]]></code>
     </MissingReturnType>
   </file>
   <file src="test/TestAsset/CustomNaming.php">
     <PossiblyUnusedReturnValue>
-      <code>string</code>
-      <code>string</code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="test/bootstrap.php">
