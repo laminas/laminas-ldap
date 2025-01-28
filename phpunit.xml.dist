@@ -4,13 +4,7 @@
          bootstrap="test/bootstrap.php"
          colors="true"
          defaultTestSuite="default"
-         convertDeprecationsToExceptions="true"
->
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-  </coverage>
+         cacheDirectory=".phpunit.cache">
   <testsuites>
     <testsuite name="default">
       <directory>./test</directory>
@@ -81,4 +75,9 @@
     <env name="TESTS_LAMINAS_LDAP_SASL_KEY" value=".ci/certs/client.key"/>
     <env name="TESTS_LAMINAS_LDAP_IDLE_TIMEOUT" value="4"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+  </source>
 </phpunit>

@@ -7,7 +7,7 @@ use LaminasTest\Ldap\TestAsset\BuiltinFunctionMocks;
 /*
  * Set error reporting to the level to which Laminas code must comply.
  */
-error_reporting(E_ALL | E_STRICT);
+error_reporting(E_ALL);
 
 /**
  * Setup autoloading

@@ -33,7 +33,7 @@ class ErrorHandlerTest extends TestCase
 
         $returnValue1 = set_error_handler($this->dummyErrorHandler);
         $this->assertIsObject($returnValue1);
-        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $returnValue1);
+        $this->assertInstanceOf(\PHPUnit\Runner\ErrorHandler::class, $returnValue1);
         $errorHandler->startErrorHandling();
         $returnValue2 = set_error_handler($this->dummyErrorHandler);
         $this->assertIsObject($returnValue2);
@@ -49,11 +49,11 @@ class ErrorHandlerTest extends TestCase
 
         $returnValue1 = set_error_handler($this->dummyErrorHandler);
         $this->assertIsObject($returnValue1);
-        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $returnValue1);
+        $this->assertInstanceOf(\PHPUnit\Runner\ErrorHandler::class, $returnValue1);
         $errorHandler->stopErrorHandling();
         $returnValue2 = set_error_handler($this->dummyErrorHandler);
         $this->assertIsObject($returnValue2);
-        $this->assertInstanceOf(\PHPUnit\Util\ErrorHandler::class, $returnValue2);
+        $this->assertInstanceOf(\PHPUnit\Runner\ErrorHandler::class, $returnValue2);
 
         restore_error_handler();
     }
