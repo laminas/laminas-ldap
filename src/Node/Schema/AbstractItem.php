@@ -26,9 +26,6 @@ abstract class AbstractItem implements ArrayAccess, Countable
      */
     protected $data;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data)
     {
         $this->setData($data);
@@ -37,7 +34,6 @@ abstract class AbstractItem implements ArrayAccess, Countable
     /**
      * Sets the data
      *
-     * @param  array $data
      * @return AbstractItem Provides a fluid interface
      */
     public function setData(array $data)

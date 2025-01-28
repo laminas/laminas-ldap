@@ -2,8 +2,6 @@
 
 namespace Laminas\Ldap;
 
-use Laminas\Ldap\Collection;
-use Laminas\Ldap\Exception;
 use LDAP\Connection;
 use Traversable;
 
@@ -179,7 +177,6 @@ class Ldap
      * Return the LDAP error message of the last LDAP command
      *
      * @param  int   $errorCode
-     * @param  array $errorMessages
      * @return string
      */
     public function getLastError(&$errorCode = null, ?array &$errorMessages = null)
@@ -1096,7 +1093,6 @@ class Ldap
      * @param  string|Filter\AbstractFilter|array $filter
      * @param  string|Dn|null                     $basedn
      * @param  int                            $scope
-     * @param  array                              $attributes
      * @param  string|null                        $sort
      * @param  string|null                        $collectionClass
      * @param  int                            $sizelimit
@@ -1279,7 +1275,6 @@ class Ldap
      * @param  string|Filter\AbstractFilter|array $filter
      * @param  string|Dn|null                     $basedn
      * @param  int                            $scope
-     * @param  array                              $attributes
      * @param  string|null                        $sort
      * @param  bool                            $reverseSort
      * @param  int                            $sizelimit
@@ -1320,7 +1315,6 @@ class Ldap
      * Get LDAP entry by DN
      *
      * @param  string|Dn $dn
-     * @param  array     $attributes
      * @param  bool   $throwOnNotFound
      * @return array
      * @throws null|Exception\LdapException
@@ -1349,7 +1343,6 @@ class Ldap
     /**
      * Prepares an ldap data entry array for insert/update operation
      *
-     * @param  array $entry
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -1397,7 +1390,6 @@ class Ldap
      * Add new information to the LDAP repository
      *
      * @param  string|Dn $dn
-     * @param  array     $entry
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1457,7 +1449,6 @@ class Ldap
      * Update LDAP registry
      *
      * @param  string|Dn $dn
-     * @param  array     $entry
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1515,7 +1506,6 @@ class Ldap
      * {@link exists()}.
      *
      * @param  string|Dn $dn
-     * @param  array     $entry
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
      */
@@ -1573,7 +1563,6 @@ class Ldap
      * Add one or more attributes to the specified dn
      *
      * @param  string|Dn $dn
-     * @param  array     $attributes
      * @param bool       $allowEmptyAttributes
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException
@@ -1611,7 +1600,6 @@ class Ldap
      * Update one or more attributes to the specified dn
      *
      * @param  string|Dn $dn
-     * @param  array     $attributes
      * @param bool       $allowEmptyAttributes
      * @return Ldap Provides a fluid interface
      * @throws Exception\LdapException

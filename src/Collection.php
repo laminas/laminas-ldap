@@ -132,7 +132,6 @@ class Collection implements Iterator, Countable
     /**
      * Creates the data structure for the given entry data
      *
-     * @param array $data
      * @psalm-param array{dn: string, ...} $data
      * @return TItem
      */
