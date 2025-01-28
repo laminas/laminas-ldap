@@ -40,8 +40,6 @@ class RootDse extends AbstractNode
 
     /**
      * Constructor is protected to enforce the use of factory methods.
-     *
-     * @param array         $data
      */
     protected function __construct(Ldap\Dn $dn, array $data)
     {

@@ -9,8 +9,6 @@ class AndFilter extends AbstractLogicalFilter
 {
     /**
      * Creates an 'and' grouping filter.
-     *
-     * @param array $subfilters
      */
     public function __construct(array $subfilters)
     {

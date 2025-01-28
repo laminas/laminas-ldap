@@ -103,7 +103,6 @@ class Dn implements ArrayAccess
     /**
      * Creates a DN from an array
      *
-     * @param  array       $dn
      * @param  string|null $caseFold
      * @return Dn
      * @throws Exception\LdapException
@@ -116,7 +115,6 @@ class Dn implements ArrayAccess
     /**
      * Constructor
      *
-     * @param array       $dn
      * @param string|null $caseFold
      */
     protected function __construct(array $dn, $caseFold)
@@ -195,7 +193,6 @@ class Dn implements ArrayAccess
      * Set a DN part
      *
      * @param  int   $index
-     * @param  array $value
      * @return Dn Provides a fluent interface
      * @throws Exception\LdapException If index is illegal.
      */
@@ -229,7 +226,6 @@ class Dn implements ArrayAccess
     /**
      * Append a DN part
      *
-     * @param  array $value
      * @return Dn Provides a fluent interface
      */
     public function append(array $value)
@@ -242,7 +238,6 @@ class Dn implements ArrayAccess
     /**
      * Prepend a DN part
      *
-     * @param  array $value
      * @return Dn Provides a fluent interface
      */
     public function prepend(array $value)
@@ -256,7 +251,6 @@ class Dn implements ArrayAccess
      * Insert a DN part
      *
      * @param  int   $index
-     * @param  array $value
      * @return Dn Provides a fluent interface
      * @throws Exception\LdapException If index is illegal.
      */
@@ -291,7 +285,6 @@ class Dn implements ArrayAccess
     /**
      * Assert if value is in a correct RDN format
      *
-     * @param  array $value
      * @return void
      * @throws Exception\LdapException
      */
@@ -350,7 +343,6 @@ class Dn implements ArrayAccess
     /**
      * Do a case folding on a RDN
      *
-     * @param  array  $part
      * @param  string $caseFold
      * @return array
      */
@@ -370,7 +362,6 @@ class Dn implements ArrayAccess
     /**
      * Do a case folding on a DN ort part of it
      *
-     * @param  array  $dn
      * @param  string $caseFold
      * @return array
      */
@@ -688,7 +679,6 @@ class Dn implements ArrayAccess
      * This method supports the creation of multi-valued RDNs
      * $part must contain an even number of elements.
      *
-     * @param  array  $part
      * @param  string $caseFold
      * @return string
      * @throws Exception\LdapException
@@ -720,7 +710,6 @@ class Dn implements ArrayAccess
      *      array("dc" => "org")
      * )
      *
-     * @param  array  $dnArray
      * @param  string $caseFold
      * @param  string $separator
      * @return string

@@ -120,9 +120,6 @@ class Encoder
 
     /**
      * Pushes a decoded attribute to the stack
-     *
-     * @param array $attribute
-     * @param array $entry
      */
     protected function pushAttribute(array $attribute, array &$entry)
     {
@@ -279,7 +276,6 @@ class Encoder
      *
      * @link http://www.faqs.org/rfcs/rfc2849.html
      *
-     * @param  array $attributes
      * @return string
      */
     protected function encodeAttributes(array $attributes)

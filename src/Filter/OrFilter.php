@@ -9,8 +9,6 @@ class OrFilter extends AbstractLogicalFilter
 {
     /**
      * Creates an 'or' grouping filter.
-     *
-     * @param array $subfilters
      */
     public function __construct(array $subfilters)
     {
