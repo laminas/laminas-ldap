@@ -243,12 +243,6 @@
       <code><![CDATA[$filter]]></code>
       <code><![CDATA[$filter]]></code>
     </MissingParamType>
-    <MixedArgument>
-      <code><![CDATA[LDAP_ESCAPE_FILTER]]></code>
-    </MixedArgument>
-    <UndefinedConstant>
-      <code><![CDATA[LDAP_ESCAPE_FILTER]]></code>
-    </UndefinedConstant>
     <UnsafeInstantiation>
       <code><![CDATA[new static($attr, $value, self::TYPE_APPROX, null, null)]]></code>
       <code><![CDATA[new static($attr, $value, self::TYPE_EQUALS, '*', '*')]]></code>
@@ -322,11 +316,6 @@
       <code><![CDATA[$val]]></code>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
-      <code><![CDATA[LDAP_OPT_ERROR_NUMBER]]></code>
-      <code><![CDATA[LDAP_OPT_ERROR_STRING]]></code>
-      <code><![CDATA[LDAP_OPT_NETWORK_TIMEOUT]]></code>
-      <code><![CDATA[LDAP_OPT_PROTOCOL_VERSION]]></code>
-      <code><![CDATA[LDAP_OPT_REFERRALS]]></code>
       <code><![CDATA[array_shift($newDnParts)]]></code>
     </MixedArgument>
     <MixedArrayAccess>
@@ -484,13 +473,6 @@
       <code><![CDATA[$useSsl]]></code>
       <code><![CDATA[$useSsl]]></code>
     </RiskyTruthyFalsyComparison>
-    <UndefinedConstant>
-      <code><![CDATA[LDAP_OPT_ERROR_NUMBER]]></code>
-      <code><![CDATA[LDAP_OPT_ERROR_STRING]]></code>
-      <code><![CDATA[LDAP_OPT_NETWORK_TIMEOUT]]></code>
-      <code><![CDATA[LDAP_OPT_PROTOCOL_VERSION]]></code>
-      <code><![CDATA[LDAP_OPT_REFERRALS]]></code>
-    </UndefinedConstant>
     <UnsafeInstantiation>
       <code><![CDATA[new $collectionClass($iterator)]]></code>
     </UnsafeInstantiation>
@@ -1301,10 +1283,6 @@
     </UndefinedClass>
   </file>
   <file src="test/ConnectTest.php">
-    <MixedArgument>
-      <code><![CDATA[LDAP_OPT_NETWORK_TIMEOUT]]></code>
-      <code><![CDATA[LDAP_OPT_NETWORK_TIMEOUT]]></code>
-    </MixedArgument>
     <PossiblyFalseArgument>
       <code><![CDATA[$host]]></code>
     </PossiblyFalseArgument>
@@ -1341,10 +1319,6 @@
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
       <code><![CDATA[getenv('TESTS_LAMINAS_LDAP_USE_SSL')]]></code>
     </RiskyTruthyFalsyComparison>
-    <UndefinedConstant>
-      <code><![CDATA[LDAP_OPT_NETWORK_TIMEOUT]]></code>
-      <code><![CDATA[LDAP_OPT_NETWORK_TIMEOUT]]></code>
-    </UndefinedConstant>
   </file>
   <file src="test/Converter/ConverterTest.php">
     <MissingReturnType>
