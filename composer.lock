@@ -1324,16 +1324,16 @@
         },
         {
             "name": "php-mock/php-mock",
-            "version": "2.6.0",
+            "version": "2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mock/php-mock.git",
-                "reference": "406752143e97e3da8765f414f658e72bbcbe15d7"
+                "reference": "c7b6789056dfc3c45389cabbe9930dc33aeb2bf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mock/php-mock/zipball/406752143e97e3da8765f414f658e72bbcbe15d7",
-                "reference": "406752143e97e3da8765f414f658e72bbcbe15d7",
+                "url": "https://api.github.com/repos/php-mock/php-mock/zipball/c7b6789056dfc3c45389cabbe9930dc33aeb2bf0",
+                "reference": "c7b6789056dfc3c45389cabbe9930dc33aeb2bf0",
                 "shasum": ""
             },
             "require": {
@@ -1388,7 +1388,7 @@
             ],
             "support": {
                 "issues": "https://github.com/php-mock/php-mock/issues",
-                "source": "https://github.com/php-mock/php-mock/tree/2.6.0"
+                "source": "https://github.com/php-mock/php-mock/tree/2.6.1"
             },
             "funding": [
                 {
@@ -1396,29 +1396,29 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-21T18:55:53+00:00"
+            "time": "2025-02-28T18:11:56+00:00"
         },
         {
             "name": "php-mock/php-mock-integration",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-mock/php-mock-integration.git",
-                "reference": "ec6a00a8129d50ed0f07907c91e3274ca4ade877"
+                "reference": "0ea2fb4b69598eed8a300271f8e8117b143c7b2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-mock/php-mock-integration/zipball/ec6a00a8129d50ed0f07907c91e3274ca4ade877",
-                "reference": "ec6a00a8129d50ed0f07907c91e3274ca4ade877",
+                "url": "https://api.github.com/repos/php-mock/php-mock-integration/zipball/0ea2fb4b69598eed8a300271f8e8117b143c7b2c",
+                "reference": "0ea2fb4b69598eed8a300271f8e8117b143c7b2c",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6",
                 "php-mock/php-mock": "^2.5",
-                "phpunit/php-text-template": "^1 || ^2 || ^3 || ^4"
+                "phpunit/php-text-template": "^1 || ^2 || ^3 || ^4 || ^5"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7.27 || ^6 || ^7 || ^8 || ^9 || ^10 || ^11"
+                "phpunit/phpunit": "^5.7.27 || ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12"
             },
             "type": "library",
             "autoload": {
@@ -1451,7 +1451,7 @@
             ],
             "support": {
                 "issues": "https://github.com/php-mock/php-mock-integration/issues",
-                "source": "https://github.com/php-mock/php-mock-integration/tree/2.3.0"
+                "source": "https://github.com/php-mock/php-mock-integration/tree/2.4.0"
             },
             "funding": [
                 {
@@ -1459,7 +1459,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-10T21:37:25+00:00"
+            "time": "2025-02-24T14:51:05+00:00"
         },
         {
             "name": "php-mock/php-mock-phpunit",
