@@ -6,7 +6,6 @@ namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
 use LaminasTest\Ldap as TestLdap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function array_key_exists;

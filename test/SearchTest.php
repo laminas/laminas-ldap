@@ -10,7 +10,6 @@ use Laminas\Ldap\Collection\DefaultIterator;
 use Laminas\Ldap\Exception\LdapException;
 use LaminasTest\Ldap\TestAsset\CollectionClassNotSubclassingLaminasLDAPCollection;
 use LaminasTest\Ldap\TestAsset\CustomNaming;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function getenv;

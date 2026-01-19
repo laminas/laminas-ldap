@@ -6,7 +6,6 @@ namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function getenv;

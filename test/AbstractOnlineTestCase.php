@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function array_reverse;
