@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace LaminasTest\Ldap\Node;
 
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class AttributeIterationTest extends TestLdap\AbstractTestCase
 {
     public function testSimpleIteration()

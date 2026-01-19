@@ -6,15 +6,14 @@ namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Dn
- */
+#[Group("Laminas_Ldap")]
+#[Group("Laminas_Ldap_Dn")]
 class CreationTest extends TestCase
 {
-    public function testDnCreation()
+    public function testDnCreation(): void
     {
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
@@ -108,7 +107,7 @@ class CreationTest extends TestCase
         }
     }
 
-    public function testDnCreationWithDifferentCaseFoldings()
+    public function testDnCreationWithDifferentCaseFoldings(): void
     {
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
@@ -150,7 +149,7 @@ class CreationTest extends TestCase
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
     }
 
-    public function testGetRdn()
+    public function testGetRdn(): void
     {
         Ldap\Dn::setDefaultCaseFold(Ldap\Dn::ATTR_CASEFOLD_NONE);
 
@@ -169,7 +168,7 @@ class CreationTest extends TestCase
         $this->assertEquals('Cn=Users+Ou=Lab', $dn->getRdnString());
     }
 
-    public function testGetParentDn()
+    public function testGetParentDn(): void
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
         $dn       = Ldap\Dn::fromString($dnString);
@@ -193,7 +192,7 @@ class CreationTest extends TestCase
         }
     }
 
-    public function testEmptyStringDn()
+    public function testEmptyStringDn(): void
     {
         $dnString = '';
         $dn       = Ldap\Dn::fromString($dnString);

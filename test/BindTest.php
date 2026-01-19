@@ -8,6 +8,8 @@ use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Exception\LdapException;
 use LDAP\Connection;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 use PHPUnit\Framework\TestCase;
 
 use function getenv;
@@ -20,9 +22,7 @@ use function strstr;
  * was successful.
  */
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class BindTest extends TestCase
 {
     /**
@@ -263,18 +263,14 @@ class BindTest extends TestCase
         }
     }
 
-    /**
-     * @group Laminas-8259
-     */
+    #[Group("Laminas-8259")]
     public function testBoundUserIsFalseIfNotBoundToLDAP()
     {
         $ldap = new Ldap\Ldap($this->options);
         $this->assertFalse($ldap->getBoundUser());
     }
 
-    /**
-     * @group Laminas-8259
-     */
+    #[Group("Laminas-8259")]
     public function testBoundUserIsReturnedAfterBinding()
     {
         $ldap = new Ldap\Ldap($this->options);
@@ -282,9 +278,7 @@ class BindTest extends TestCase
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_USERNAME'), $ldap->getBoundUser());
     }
 
-    /**
-     * @group Laminas-8259
-     */
+    #[Group("Laminas-8259")]
     public function testResourceIsAlwaysReturned()
     {
         $ldap = new Ldap\Ldap($this->options);
@@ -304,7 +298,7 @@ class BindTest extends TestCase
         return new Ldap\Ldap($options);
     }
 
-    /** @runInSeparateProcess */
+    #[RunInSeparateProcess]
     public function testSaslBind()
     {
         // The certificate seems not to be "good enough" for SASL-bind
@@ -323,7 +317,7 @@ class BindTest extends TestCase
         );
     }
 
-    /** @runInSeparateProcess */
+    #[RunInSeparateProcess]
     public function testSaslBindNoExplicitUsername()
     {
         // The certificate seems not to be "good enough" for SASL-bind
@@ -349,7 +343,7 @@ class BindTest extends TestCase
     /**
      * @see https://net.educause.edu/ir/library/pdf/csd4875.pdf
      */
-    public function testBindWithNullPassword()
+    public function testBindWithNullPassword(): void
     {
         $ldap = new Ldap\Ldap($this->options);
         $this->expectException(LdapException::class);
