@@ -7,11 +7,11 @@ namespace LaminasTest\Ldap;
 use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
 
+use PHPUnit\Framework\Attributes\Group;
+
 use function getenv;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class CopyRenameTest extends AbstractOnlineTestCase
 {
     private string $orgDn;

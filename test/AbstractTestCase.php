@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\Node;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 abstract class AbstractTestCase extends TestCase
 {
     /**

@@ -7,16 +7,15 @@ namespace LaminasTest\Ldap;
 use InvalidArgumentException;
 use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
+use PHPUnit\Framework\Attributes\Group;
 use stdClass;
 
 use function array_merge;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class CrudTest extends AbstractOnlineTestCase
 {
-    public function testAddAndDelete()
+    public function testAddAndDelete(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -36,7 +35,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testUpdate()
+    public function testUpdate(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -61,7 +60,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testIllegalAdd()
+    public function testIllegalAdd(): void
     {
         $dn   = $this->createDn('ou=TestCreated,ou=Node2,');
         $data = [
@@ -72,7 +71,7 @@ class CrudTest extends AbstractOnlineTestCase
         $this->getLDAP()->add($dn, $data);
     }
 
-    public function testIllegalUpdate()
+    public function testIllegalUpdate(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -105,14 +104,14 @@ class CrudTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $this->getLDAP()->getLastErrorCode());
     }
 
-    public function testIllegalDelete()
+    public function testIllegalDelete(): void
     {
         $dn = $this->createDn('ou=TestCreated,');
         $this->expectException(LdapException::class);
         $this->getLDAP()->delete($dn);
     }
 
-    public function testDeleteRecursively()
+    public function testDeleteRecursively(): void
     {
         $topDn = $this->createDn('ou=RecursiveTest,');
         $dn    = $topDn;
@@ -154,7 +153,7 @@ class CrudTest extends AbstractOnlineTestCase
         $this->assertFalse($this->getLDAP()->exists($topDn));
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -178,7 +177,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testPrepareLDAPEntryArray()
+    public function testPrepareLDAPEntryArray(): void
     {
         $data = [
             'a1' => 'TestCreated',
@@ -206,10 +205,8 @@ class CrudTest extends AbstractOnlineTestCase
         $this->assertEquals($expected, $data);
     }
 
-    /**
-     * @group Laminas-7888
-     */
-    public function testZeroValueMakesItThroughSanitationProcess()
+    #[Group("Laminas-7888")]
+    public function testZeroValueMakesItThroughSanitationProcess(): void
     {
         $data = [
             'string'       => '0',
@@ -235,7 +232,7 @@ class CrudTest extends AbstractOnlineTestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testPrepareLDAPEntryArrayArrayData()
+    public function testPrepareLDAPEntryArrayArrayData(): void
     {
         $data = [
             'a1' => [['account']],
@@ -244,7 +241,7 @@ class CrudTest extends AbstractOnlineTestCase
         Ldap\Ldap::prepareLDAPEntryArray($data);
     }
 
-    public function testPrepareLDAPEntryArrayObjectData()
+    public function testPrepareLDAPEntryArrayObjectData(): void
     {
         $class    = new stdClass();
         $class->a = 'b';
@@ -255,7 +252,7 @@ class CrudTest extends AbstractOnlineTestCase
         Ldap\Ldap::prepareLDAPEntryArray($data);
     }
 
-    public function testAddWithDnObject()
+    public function testAddWithDnObject(): void
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=TestCreated,'));
         $data = [
@@ -271,7 +268,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testUpdateWithDnObject()
+    public function testUpdateWithDnObject(): void
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=TestCreated,'));
         $data = [
@@ -293,7 +290,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testSaveWithDnObject()
+    public function testSaveWithDnObject(): void
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=TestCreated,'));
         $data = [
@@ -317,7 +314,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testAddObjectClass()
+    public function testAddObjectClass(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -345,7 +342,7 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testRemoveObjectClass()
+    public function testRemoveObjectClass(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -374,10 +371,8 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-9564
-     */
-    public function testAddingEntryWithMissingRdnAttribute()
+    #[Group("Laminas-9564")]
+    public function testAddingEntryWithMissingRdnAttribute(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -396,10 +391,8 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-9564
-     */
-    public function testAddingEntryWithMissingRdnAttributeValue()
+    #[Group("Laminas-9564")]
+    public function testAddingEntryWithMissingRdnAttributeValue(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -419,10 +412,8 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-9564
-     */
-    public function testAddingEntryThatHasMultipleValuesOnRdnAttribute()
+    #[Group("Laminas-9564")]
+    public function testAddingEntryThatHasMultipleValuesOnRdnAttribute(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -442,10 +433,8 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-9564
-     */
-    public function testUpdatingEntryWithAttributeThatIsAnRdnAttribute()
+    #[Group("Laminas-9564")]
+    public function testUpdatingEntryWithAttributeThatIsAnRdnAttribute(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [
@@ -469,10 +458,8 @@ class CrudTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-9564
-     */
-    public function testUpdatingEntryWithRdnAttributeValueMissingInData()
+    #[Group("Laminas-9564")]
+    public function testUpdatingEntryWithRdnAttributeValueMissingInData(): void
     {
         $dn   = $this->createDn('ou=TestCreated,');
         $data = [

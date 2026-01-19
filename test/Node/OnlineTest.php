@@ -10,15 +10,15 @@ use Laminas\Ldap\Node;
 use Laminas\Ldap\Node\Collection;
 use LaminasTest\Ldap as TestLdap;
 
+use PHPUnit\Framework\Attributes\Group;
+
 use function getenv;
 use function key;
 use function serialize;
 use function unserialize;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class OnlineTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp(): void
@@ -33,7 +33,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         parent::tearDown();
     }
 
-    public function testLoadFromLDAP()
+    public function testLoadFromLDAP(): void
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
@@ -41,7 +41,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertTrue($node->isAttached());
     }
 
-    public function testChangeReadOnlySystemAttributes()
+    public function testChangeReadOnlySystemAttributes(): void
     {
         $node = $this->getLDAP()->getBaseNode();
 
@@ -79,14 +79,14 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         }
     }
 
-    public function testLoadFromLDAPIllegalEntry()
+    public function testLoadFromLDAPIllegalEntry(): void
     {
         $dn = $this->createDn('ou=Test99,');
         $this->expectException(ExceptionInterface::class);
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
     }
 
-    public function testDetachAndReattach()
+    public function testDetachAndReattach(): void
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
@@ -98,7 +98,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertTrue($node->isAttached());
     }
 
-    public function testSerialize()
+    public function testSerialize(): void
     {
         $dn        = $this->createDn('ou=Test1,');
         $node      = Ldap\Node::fromLDAP($dn, $this->getLDAP());
@@ -109,7 +109,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals($sdata, serialize($newObject));
     }
 
-    public function testAttachToInvalidLDAP()
+    public function testAttachToInvalidLDAP(): void
     {
         $data = [
             'dn'          => 'ou=name,dc=example,dc=org',
@@ -123,7 +123,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $node->attachLDAP($this->getLDAP());
     }
 
-    public function testAttachToValidLDAP()
+    public function testAttachToValidLDAP(): void
     {
         $data = [
             'dn'          => $this->createDn('ou=name,'),
@@ -137,7 +137,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertTrue($node->isAttached());
     }
 
-    public function testExistsDn()
+    public function testExistsDn(): void
     {
         $data  = [
             'dn'          => $this->createDn('ou=name,'),
@@ -153,7 +153,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertTrue($node2->exists());
     }
 
-    public function testReload()
+    public function testReload(): void
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());
@@ -162,7 +162,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals('ou=Test1', $node->getRdnString());
     }
 
-    public function testGetNode()
+    public function testGetNode(): void
     {
         $dn   = $this->createDn('ou=Test1,');
         $node = $this->getLDAP()->getNode($dn);
@@ -170,14 +170,14 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals("Test1", $node->getAttribute('ou', 0));
     }
 
-    public function testGetIllegalNode()
+    public function testGetIllegalNode(): void
     {
         $dn = $this->createDn('ou=Test99,');
         $this->expectException(ExceptionInterface::class);
         $node = $this->getLDAP()->getNode($dn);
     }
 
-    public function testGetBaseNode()
+    public function testGetBaseNode(): void
     {
         $node = $this->getLDAP()->getBaseNode();
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $node->getDnString());
@@ -189,7 +189,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals($dn[0]['ou'], $node->getAttribute('ou', 0));
     }
 
-    public function testSearchSubtree()
+    public function testSearchSubtree(): void
     {
         $node  = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $items = $node->searchSubtree(
@@ -221,7 +221,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(3, $i);
     }
 
-    public function testCountSubtree()
+    public function testCountSubtree(): void
     {
         $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->assertEquals(9, $node->countSubtree(
@@ -230,7 +230,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         ));
     }
 
-    public function testCountChildren()
+    public function testCountChildren(): void
     {
         $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->assertEquals(6, $node->countChildren());
@@ -238,7 +238,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(2, $node->countChildren());
     }
 
-    public function testSearchChildren()
+    public function testSearchChildren(): void
     {
         $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $this->assertEquals(2, $node->searchChildren('(objectClass=*)', [], 'ou')->count());
@@ -246,7 +246,7 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(6, $node->searchChildren('(objectClass=*)', [], 'ou')->count());
     }
 
-    public function testGetParent()
+    public function testGetParent(): void
     {
         $node  = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
         $pnode = $node->getParent();
@@ -257,14 +257,14 @@ class OnlineTest extends TestLdap\AbstractOnlineTestCase
         );
     }
 
-    public function testGetNonexistentParent()
+    public function testGetNonexistentParent(): void
     {
         $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->expectException(ExceptionInterface::class);
         $pnode = $node->getParent();
     }
 
-    public function testLoadFromLDAPWithDnObject()
+    public function testLoadFromLDAPWithDnObject(): void
     {
         $dn   = Ldap\Dn::fromString($this->createDn('ou=Test1,'));
         $node = Ldap\Node::fromLDAP($dn, $this->getLDAP());

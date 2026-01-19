@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap\Attribute;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -23,9 +24,7 @@ use function strpos;
 use function strtotime;
 use function substr;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group('Laminas_Ldap')]
 class AttributeTest extends TestCase
 {
     protected function assertLocalDateTimeString(int $timestamp, string $value): void

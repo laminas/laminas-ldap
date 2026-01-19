@@ -6,12 +6,11 @@ namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Dn
- */
+#[Group("Laminas_Ldap_Dn")]
+#[Group("Laminas_Ldap")]
 class ImplodingTest extends TestCase
 {
     public function testDnWithMultiValuedRdnRoundTrip()

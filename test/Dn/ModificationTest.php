@@ -6,15 +6,14 @@ namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Dn
- */
+#[Group("Laminas_Ldap_Dn")]
+#[Group("Laminas_Ldap")]
 class ModificationTest extends TestCase
 {
-    public function testDnManipulationGet()
+    public function testDnManipulationGet(): void
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
         $dn       = Ldap\Dn::fromString($dnString);
@@ -117,7 +116,7 @@ class ModificationTest extends TestCase
         ], $dn->get(3, 2));
     }
 
-    public function testDnManipulationSet()
+    public function testDnManipulationSet(): void
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
         $dn       = Ldap\Dn::fromString($dnString);
@@ -156,7 +155,7 @@ class ModificationTest extends TestCase
         }
     }
 
-    public function testDnManipulationRemove()
+    public function testDnManipulationRemove(): void
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users+ou=Lab,dc=example,dc=com';
 
@@ -202,7 +201,7 @@ class ModificationTest extends TestCase
         );
     }
 
-    public function testDnManipulationAppendAndPrepend()
+    public function testDnManipulationAppendAndPrepend(): void
     {
         $dnString = 'OU=Sales,DC=example';
         $dn       = Ldap\Dn::fromString($dnString);
@@ -231,7 +230,7 @@ class ModificationTest extends TestCase
         }
     }
 
-    public function testDnManipulationInsert()
+    public function testDnManipulationInsert(): void
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
 
@@ -275,7 +274,7 @@ class ModificationTest extends TestCase
         }
     }
 
-    public function testArrayAccessImplementation()
+    public function testArrayAccessImplementation(): void
     {
         $dnString = 'cn=Baker\\, Alice,cn=Users,dc=example,dc=com';
         $dn       = Ldap\Dn::fromString($dnString);

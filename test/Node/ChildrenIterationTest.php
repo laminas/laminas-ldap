@@ -7,14 +7,13 @@ namespace LaminasTest\Ldap\Node;
 use Laminas\Ldap;
 use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 use RecursiveIteratorIterator;
 
 use function getenv;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp(): void
@@ -29,7 +28,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
         parent::tearDown();
     }
 
-    public function testSimpleIteration()
+    public function testSimpleIteration(): void
     {
         $node     = $this->getLDAP()->getBaseNode();
         $children = $node->getChildren();
@@ -50,7 +49,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(6, $i - 1);
     }
 
-    public function testSimpleRecursiveIteration()
+    public function testSimpleRecursiveIteration(): void
     {
         $node = $this->getLDAP()->getBaseNode();
         $ri   = new RecursiveIteratorIterator($node, RecursiveIteratorIterator::SELF_FIRST);
@@ -86,7 +85,7 @@ class ChildrenIterationTest extends TestLdap\AbstractOnlineTestCase
      * https://getlaminas.org/wiki/display/LaminasPROP/Laminas_Ldap+-+Extended+support+-+Stefan+Gehrig?
      *      focusedCommentId=13107431#comment-13107431
      */
-    public function testCallingNextAfterIterationShouldNotThrowException()
+    public function testCallingNextAfterIterationShouldNotThrowException(): void
     {
         $node  = $this->getLDAP()->getBaseNode();
         $nodes = $node->searchChildren('(objectClass=*)');

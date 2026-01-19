@@ -6,6 +6,7 @@ namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function getenv;
@@ -17,9 +18,7 @@ use function strstr;
  * was successful.
  */
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class CanonTest extends TestCase
 {
     /** @var array */
