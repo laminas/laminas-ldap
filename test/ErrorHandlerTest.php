@@ -41,6 +41,7 @@ class ErrorHandlerTest extends TestCase
 
         restore_error_handler();
         restore_error_handler();
+        restore_error_handler();
     }
 
     public function testErrorHandlerRemovalWorks(): void
