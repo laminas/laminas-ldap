@@ -7,14 +7,13 @@ namespace LaminasTest\Ldap\Node;
 use BadMethodCallException;
 use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class RootDseTest extends TestLdap\AbstractOnlineTestCase
 {
-    public function testLoadRootDseNode()
+    public function testLoadRootDseNode(): void
     {
         $root1 = $this->getLDAP()->getRootDse();
         $root2 = $this->getLDAP()->getRootDse();
@@ -23,7 +22,7 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
         $this->assertSame($root1, $root2);
     }
 
-    public function testSupportCheckMethods()
+    public function testSupportCheckMethods(): void
     {
         $root = $this->getLDAP()->getRootDse();
 
@@ -76,7 +75,7 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
         }
     }
 
-    public function testGetters()
+    public function testGetters(): void
     {
         $root = $this->getLDAP()->getRootDse();
 
@@ -130,28 +129,28 @@ class RootDseTest extends TestLdap\AbstractOnlineTestCase
         }
     }
 
-    public function testSetterWillThrowException()
+    public function testSetterWillThrowException(): void
     {
         $root = $this->getLDAP()->getRootDse();
         $this->expectException(BadMethodCallException::class);
         $root->objectClass = 'illegal';
     }
 
-    public function testOffsetSetWillThrowException()
+    public function testOffsetSetWillThrowException(): void
     {
         $root = $this->getLDAP()->getRootDse();
         $this->expectException(BadMethodCallException::class);
         $root['objectClass'] = 'illegal';
     }
 
-    public function testUnsetterWillThrowException()
+    public function testUnsetterWillThrowException(): void
     {
         $root = $this->getLDAP()->getRootDse();
         $this->expectException(BadMethodCallException::class);
         unset($root->objectClass);
     }
 
-    public function testOffsetUnsetWillThrowException()
+    public function testOffsetUnsetWillThrowException(): void
     {
         $root = $this->getLDAP()->getRootDse();
         $this->expectException(BadMethodCallException::class);

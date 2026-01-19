@@ -6,14 +6,13 @@ namespace LaminasTest\Ldap;
 
 use Closure;
 use Laminas\Ldap\ErrorHandler;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function restore_error_handler;
 use function set_error_handler;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class ErrorHandlerTest extends TestCase
 {
     /** @var callable */

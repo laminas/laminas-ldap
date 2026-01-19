@@ -9,6 +9,7 @@ use DateTimeZone;
 use InvalidArgumentException;
 use Laminas\Ldap\Converter\Converter;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use UnexpectedValueException;
@@ -19,9 +20,7 @@ use function fopen;
 use function serialize;
 use function stream_get_contents;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class ConverterTest extends TestCase
 {
     public function testAsc2hex32(): void

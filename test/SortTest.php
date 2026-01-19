@@ -32,7 +32,7 @@ class SortTest extends AbstractOnlineTestCase
     /**
      * Test whether a callable is set correctly
      */
-    public function testSettingCallable()
+    public function testSettingCallable(): void
     {
         $search = ldap_search(
             $this->getLDAP()->getResource(),
@@ -54,7 +54,7 @@ class SortTest extends AbstractOnlineTestCase
     /**
      * Test whether sorting works as expected out of the box
      */
-    public function testSorting()
+    public function testSorting(): void
     {
         $lSorted = ['a', 'b', 'c', 'd', 'e'];
 
@@ -84,7 +84,7 @@ class SortTest extends AbstractOnlineTestCase
     /**
      * Test sorting with custom sort-function
      */
-    public function testCustomSorting()
+    public function testCustomSorting(): void
     {
         $lSorted = ['a', 'b', 'd', 'c', 'e'];
 

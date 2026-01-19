@@ -6,6 +6,8 @@ namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function array_key_exists;
@@ -20,9 +22,7 @@ use function strpos;
  * was successful.
  */
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class ConnectTest extends TestCase
 {
     /**
@@ -246,9 +246,7 @@ class ConnectTest extends TestCase
         }
     }
 
-    /**
-     * @group Laminas-8274
-     */
+    #[Group("Laminas-8274")]
     public function testConnectWithUri(): void
     {
         $host = getenv('TESTS_LAMINAS_LDAP_HOST');
@@ -281,9 +279,8 @@ class ConnectTest extends TestCase
 
     /**
      * @see https://github.com/zendframework/zend-ldap/issues/19
-     *
-     * @dataProvider connectionWithoutPortInOptionsArrayProvider
      */
+    #[DataProvider('connectionWithoutPortInOptionsArrayProvider')]
     public function testConnectionWithoutPortInOptionsArray(string $host, bool $ssl, string $connectUri): void
     {
         $options = [
