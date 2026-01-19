@@ -6,11 +6,12 @@ namespace LaminasTest\Ldap\Exception;
 
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Ldap;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class LdapExceptionTest extends TestCase
 {
-    /** @dataProvider constructorArgumentsProvider */
+    #[DataProvider('constructorArgumentsProvider')]
     public function testException(?Ldap $ldap, string $message, int $code, string $expectedMessage, int $expectedCode)
     {
         $e = new LdapException($ldap, $message, $code);
@@ -20,7 +21,7 @@ class LdapExceptionTest extends TestCase
     }
 
     /** @return non-empty-array<string, array{null, '', int, non-empty-string, int}> */
-    public function constructorArgumentsProvider(): array
+    public static function constructorArgumentsProvider(): array
     {
         return [
             // Description => [LDAP object, message, code, expected message, expected code]

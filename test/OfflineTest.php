@@ -9,6 +9,7 @@ use Laminas\Ldap;
 use Laminas\Ldap\Dn;
 use Laminas\Ldap\Exception\LdapException;
 use phpmock\phpunit\PHPMock;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function getenv;
@@ -112,11 +113,11 @@ class OfflineTest extends TestCase
     }
 
     /**
-     * @dataProvider removingAttributesProvider
      * @param string|Dn $dn
      * @param array<string, mixed> $attributes
      * @param array<string, mixed> $expectedAttributesToRemove
      */
+    #[DataProvider('removingAttributesProvider')]
     public function testRemovingAttributes(
         $dn,
         array $attributes,
@@ -143,7 +144,7 @@ class OfflineTest extends TestCase
      *     array{string|Dn, array<string, mixed>, bool, string, array<string, mixed>}
      * >
      */
-    public function removingAttributesProvider(): array
+    public static function removingAttributesProvider(): array
     {
         return [
             // Description => [dn, attributes, allow empty attributes, expected dn, expected attributes to remove]
