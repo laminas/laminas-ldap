@@ -336,12 +336,6 @@ class ConverterTest extends TestCase
         ];
     }
 
-    /**
-     * @param mixed $expect
-     * @param mixed $value
-     * @param int $type
-     * @param bool $dateTimeAsUtc
-     */
     #[DataProvider('fromLdapProvider')]
     public function testFromLdap(mixed $expect, mixed $value, int $type, bool $dateTimeAsUtc): void
     {

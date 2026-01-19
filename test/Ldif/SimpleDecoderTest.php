@@ -6,7 +6,6 @@ namespace LaminasTest\Ldap\Ldif;
 
 use Laminas\Ldap\Ldif;
 use LaminasTest\Ldap as TestLdap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function array_merge;

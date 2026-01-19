@@ -8,7 +8,6 @@ use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function date;
