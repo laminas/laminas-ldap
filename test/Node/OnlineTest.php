@@ -9,7 +9,6 @@ use Laminas\Ldap\Exception\ExceptionInterface;
 use Laminas\Ldap\Node;
 use Laminas\Ldap\Node\Collection;
 use LaminasTest\Ldap as TestLdap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function getenv;

@@ -7,7 +7,6 @@ namespace LaminasTest\Ldap\Node;
 use Laminas\Ldap\Node;
 use Laminas\Ldap\Node\ChildrenIterator;
 use LaminasTest\Ldap as TestLdap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function getenv;

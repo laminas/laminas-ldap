@@ -9,7 +9,6 @@ use Laminas\Ldap\Node;
 use Laminas\Ldap\Node\Schema;
 use Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap;
 use LaminasTest\Ldap as TestLdap;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function array_key_exists;

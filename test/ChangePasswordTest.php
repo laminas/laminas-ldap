@@ -7,7 +7,6 @@ namespace LaminasTest\Ldap;
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Node;
-
 use PHPUnit\Framework\Attributes\Group;
 
 use function strstr;
