@@ -68,8 +68,9 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "conflict": {
-        "amphp/dns": "<2.4.0",
         "amphp/amp":"<2.6.4",
+        "amphp/dns": "<2.4.0",
+        "amphp/socket": "<2.3.1",
         "zendframework/zend-ldap": "*"
     }
 }
