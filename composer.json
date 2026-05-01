@@ -38,7 +38,7 @@
         "php-mock/php-mock-phpunit": "^2.14.0",
         "phpunit/phpunit": "^11.0",
         "psalm/plugin-phpunit": "^0.19.5",
-        "vimeo/psalm": "^6.14"
+        "vimeo/psalm": "^6.16"
     },
     "suggest": {
         "laminas/laminas-eventmanager": "Laminas\\EventManager component"
