@@ -8,6 +8,7 @@ use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
 use Laminas\Ldap\Node;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
 use function date;
 use function ksort;
@@ -19,10 +20,8 @@ use function unserialize;
 
 use const SORT_STRING;
 
-/**
- * @group      Laminas_Ldap
- * @group      Ldap\Node
- */
+#[Group("Ldap\Node")]
+#[Group("Laminas_Ldap")]
 class OfflineTest extends TestLdap\AbstractTestCase
 {
     /** @param mixed $value */

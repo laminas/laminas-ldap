@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace LaminasTest\Ldap;
 
 use Laminas\Ldap;
+use PHPUnit\Framework\Attributes\Group;
 
 use function array_reverse;
 use function getenv;
 use function substr;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 abstract class AbstractOnlineTestCase extends AbstractTestCase
 {
     private static ?Ldap\Ldap $ldap;

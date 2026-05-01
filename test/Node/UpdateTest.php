@@ -6,16 +6,15 @@ namespace LaminasTest\Ldap\Node;
 
 use Laminas\Ldap;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
 use function array_key_exists;
 use function array_merge;
 use function count;
 use function getenv;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class UpdateTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp(): void

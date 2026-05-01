@@ -7,23 +7,22 @@ namespace LaminasTest\Ldap;
 use Laminas\Ldap;
 use Laminas\Ldap\Filter;
 use Laminas\Ldap\Filter\Exception\FilterException;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function chr;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class FilterTest extends TestCase
 {
-    public function testFilterEscapeBasicOperation()
+    public function testFilterEscapeBasicOperation(): void
     {
         $input    = 'a*b(b)d\e/f';
         $expected = 'a\2ab\28b\29d\5ce/f';
         $this->assertEquals($expected, Ldap\Filter::escapeValue($input));
     }
 
-    public function testEscapeValues()
+    public function testEscapeValues(): void
     {
         $expected  = 't\28e,s\29t\2av\5cal\1eue';
         $filterval = 't(e,s)t*v\\al' . chr(30) . 'ue';
@@ -35,7 +34,7 @@ class FilterTest extends TestCase
         );
     }
 
-    public function testUnescapeValues()
+    public function testUnescapeValues(): void
     {
         $expected  = 't(e,s)t*v\\al' . chr(30) . 'ue';
         $filterval = 't\28e,s\29t\2av\5cal\1eue';
@@ -47,7 +46,7 @@ class FilterTest extends TestCase
         );
     }
 
-    public function testFilterValueUtf8()
+    public function testFilterValueUtf8(): void
     {
         $filter    = 'ÄÖÜäöüß€';
         $escaped   = Ldap\Filter::escapeValue($filter);
@@ -55,7 +54,7 @@ class FilterTest extends TestCase
         $this->assertEquals($filter, $unescaped);
     }
 
-    public function testFilterCreation()
+    public function testFilterCreation(): void
     {
         $f1 = Ldap\Filter::equals('name', 'value');
         $this->assertEquals('(name=value)', $f1->toString());
@@ -83,13 +82,13 @@ class FilterTest extends TestCase
         $this->assertEquals('(&(objectClass=account)(uid=a\2ab\28b\29d\5ce/f))', $f12->toString());
     }
 
-    public function testToStringImplementation()
+    public function testToStringImplementation(): void
     {
         $f1 = Ldap\Filter::ends('name', 'value');
         $this->assertEquals($f1->toString(), (string) $f1);
     }
 
-    public function testNegate()
+    public function testNegate(): void
     {
         $f1 = Ldap\Filter::ends('name', 'value');
         $this->assertEquals('(name=*value)', $f1->toString());
@@ -99,14 +98,14 @@ class FilterTest extends TestCase
         $this->assertEquals('(name=*value)', $f1->toString());
     }
 
-    public function testIllegalGroupingFilter()
+    public function testIllegalGroupingFilter(): void
     {
         $data = ['a', 'b', 5];
         $this->expectException(FilterException::class);
         $f = new Filter\AndFilter($data);
     }
 
-    public function testGroupingFilter()
+    public function testGroupingFilter(): void
     {
         $f1 = Ldap\Filter::equals('name', 'value');
         $f2 = Ldap\Filter::begins('name', 'value');
@@ -122,7 +121,7 @@ class FilterTest extends TestCase
         $this->assertEquals('(&(name=value)(name=value*)(name=*value)(name=value))', $f4->toString());
     }
 
-    public function testComplexFilter()
+    public function testComplexFilter(): void
     {
         $f1 = Ldap\Filter::equals('name1', 'value1');
         $f2 = Ldap\Filter::equals('name1', 'value2');
@@ -141,7 +140,7 @@ class FilterTest extends TestCase
         );
     }
 
-    public function testChaining()
+    public function testChaining(): void
     {
         $f = Ldap\Filter::equals('a1', 'v1')
             ->addAnd(Ldap\Filter::approx('a2', 'v2'));
@@ -171,7 +170,7 @@ class FilterTest extends TestCase
         $this->assertEquals('(!(&(!(a1=v1))(!(a2~=v2))))', $f->toString());
     }
 
-    public function testRealFilterString()
+    public function testRealFilterString(): void
     {
         $f1 = Ldap\Filter::orFilter(
             Ldap\Filter::equals('sn', 'Gehrig'),

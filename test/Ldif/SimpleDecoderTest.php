@@ -6,16 +6,15 @@ namespace LaminasTest\Ldap\Ldif;
 
 use Laminas\Ldap\Ldif;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
 use function array_merge;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Ldif
- */
+#[Group("Laminas_Ldap_Ldif")]
+#[Group("Laminas_Ldap")]
 class SimpleDecoderTest extends TestLdap\AbstractTestCase
 {
-    public function testDecodeSimpleSingleItem()
+    public function testDecodeSimpleSingleItem(): void
     {
         $data     =
         "version: 1
@@ -31,7 +30,7 @@ attr3: foo";
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeSingleItemWithFoldedAttribute()
+    public function testDecodeSingleItemWithFoldedAttribute(): void
     {
         $data     =
         "dn: cn=test blabla,ou=example,dc=cno
@@ -62,7 +61,7 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeSingleItemWithBase64Attributes()
+    public function testDecodeSingleItemWithBase64Attributes(): void
     {
         $data     =
         "dn:: Y249dGVzdCBibGFibGEsb3U9ZXhhbXBsZSxkYz1jbm8=
@@ -92,7 +91,7 @@ cn:: dGVzdCDDtsOkw7w=";
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeSingleItemWithFoldedBase64Attribute()
+    public function testDecodeSingleItemWithFoldedBase64Attribute(): void
     {
         $data     =
         "dn:: Y249dGVzdCBibGFibGEsb
@@ -114,7 +113,7 @@ attr3: bar";
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeTwoItems()
+    public function testDecodeTwoItems(): void
     {
         $data     =
         "version: 1
@@ -159,7 +158,7 @@ telephonenumber: +1 408 555 1212";
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeStringContainingEntryWithFoldedAttributeValue()
+    public function testDecodeStringContainingEntryWithFoldedAttributeValue(): void
     {
         $data     =
         "version: 1
@@ -193,7 +192,7 @@ title:Product Manager, Rod and Reel Division";
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeStringContainingBase64EncodedValue()
+    public function testDecodeStringContainingBase64EncodedValue(): void
     {
         $data     =
         "version: 1
@@ -228,7 +227,7 @@ description:: V2hhdCBhIGNhcmVmdWwgcmVhZGVyIHlvdSBhcmUhICBUaGlzIHZhbHVl
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeStringContainingEntriesWithUtf8EncodedAttributeValues()
+    public function testDecodeStringContainingEntriesWithUtf8EncodedAttributeValues(): void
     {
         $data =
         "version: 1
@@ -322,7 +321,7 @@ title;lang-en: Sales, Director";
         $this->assertEquals('Sales, Director', $actual[1]['title;lang-en'][0]);
     }
 
-    public function testDecodeSingleItemWithFoldedAttributesAndEmptyLinesBetween()
+    public function testDecodeSingleItemWithFoldedAttributesAndEmptyLinesBetween(): void
     {
         $data     =
         "dn: cn=test blabla,ou=example,dc=cno
@@ -367,7 +366,7 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
         $this->assertEquals($expected, $actual);
     }
 
-    public function testRoundtripEncoding()
+    public function testRoundtripEncoding(): void
     {
         $node     = $this->createTestNode();
         $ldif     = $node->toLdif();
@@ -376,7 +375,7 @@ verylong: fhu08rhvt7b478vt5hv78h45nfgt45h78t34hhhhhhhhhv5bg8
         $this->assertEquals($expected, $data);
     }
 
-    public function testDecodeSimpleSingleItemWithUri()
+    public function testDecodeSimpleSingleItemWithUri(): void
     {
         $data     =
         "version: 1
@@ -392,7 +391,7 @@ memberurl: ldap:///(&(cn=myName)(uid=something))";
         $this->assertEquals($expected, $actual);
     }
 
-    public function testDecodeSimpleSingleItemWithMultilineComment()
+    public function testDecodeSimpleSingleItemWithMultilineComment(): void
     {
         $data =
         "version: 1

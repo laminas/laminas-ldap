@@ -10,14 +10,13 @@ use Laminas\Ldap\Collection\DefaultIterator;
 use Laminas\Ldap\Exception\LdapException;
 use LaminasTest\Ldap\TestAsset\CollectionClassNotSubclassingLaminasLDAPCollection;
 use LaminasTest\Ldap\TestAsset\CustomNaming;
+use PHPUnit\Framework\Attributes\Group;
 
 use function getenv;
 use function strrev;
 use function strtoupper;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class SearchTest extends AbstractOnlineTestCase
 {
     protected function setUp(): void
@@ -32,7 +31,7 @@ class SearchTest extends AbstractOnlineTestCase
         parent::tearDown();
     }
 
-    public function testGetSingleEntry()
+    public function testGetSingleEntry(): void
     {
         $dn    = $this->createDn('ou=Test1,');
         $entry = $this->getLDAP()->getEntry($dn);
@@ -42,28 +41,28 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertCount(1, $entry['ou']);
     }
 
-    public function testGetSingleIllegalEntry()
+    public function testGetSingleIllegalEntry(): void
     {
         $dn    = $this->createDn('ou=Test99,');
         $entry = $this->getLDAP()->getEntry($dn);
         $this->assertNull($entry);
     }
 
-    public function testGetSingleIllegalEntryWithException()
+    public function testGetSingleIllegalEntryWithException(): void
     {
         $dn = $this->createDn('ou=Test99,');
         $this->expectException(LdapException::class);
         $entry = $this->getLDAP()->getEntry($dn, [], true);
     }
 
-    public function testCountBase()
+    public function testCountBase(): void
     {
         $dn    = $this->createDn('ou=Node,');
         $count = $this->getLDAP()->count('(objectClass=*)', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
         $this->assertEquals(1, $count);
     }
 
-    public function testCountOne()
+    public function testCountOne(): void
     {
         $dn1    = $this->createDn('ou=Node,');
         $count1 = $this->getLDAP()->count('(objectClass=*)', $dn1, Ldap\Ldap::SEARCH_SCOPE_ONE);
@@ -73,7 +72,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(6, $count2);
     }
 
-    public function testCountSub()
+    public function testCountSub(): void
     {
         $dn1    = $this->createDn('ou=Node,');
         $count1 = $this->getLDAP()->count('(objectClass=*)', $dn1, Ldap\Ldap::SEARCH_SCOPE_SUB);
@@ -83,7 +82,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, $count2);
     }
 
-    public function testResultIteration()
+    public function testResultIteration(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -106,7 +105,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals($i, $j);
     }
 
-    public function testSearchNoResult()
+    public function testSearchNoResult(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=account)',
@@ -116,7 +115,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $items->count());
     }
 
-    public function testSearchEntriesShortcut()
+    public function testSearchEntriesShortcut(): void
     {
         $entries = $this->getLDAP()->searchEntries(
             '(objectClass=organizationalUnit)',
@@ -127,14 +126,14 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertCount(9, $entries);
     }
 
-    public function testIllegalSearch()
+    public function testIllegalSearch(): void
     {
         $dn = $this->createDn('ou=Node2,');
         $this->expectException(LdapException::class);
         $items = $this->getLDAP()->search('(objectClass=account)', $dn, Ldap\Ldap::SEARCH_SCOPE_SUB);
     }
 
-    public function testSearchNothingGetFirst()
+    public function testSearchNothingGetFirst(): void
     {
         $entries = $this->getLDAP()->search(
             '(objectClass=account)',
@@ -145,7 +144,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertNull($entries->getFirst());
     }
 
-    public function testSorting()
+    public function testSorting(): void
     {
         $lSorted = ['a', 'b', 'c', 'd', 'e'];
         $items   = $this->getLDAP()->search(
@@ -161,7 +160,7 @@ class SearchTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testCountChildren()
+    public function testCountChildren(): void
     {
         $dn1    = $this->createDn('ou=Node,');
         $count1 = $this->getLDAP()->countChildren($dn1);
@@ -171,7 +170,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(6, $count2);
     }
 
-    public function testExistsDn()
+    public function testExistsDn(): void
     {
         $dn1 = $this->createDn('ou=Test2,');
         $dn2 = $this->createDn('ou=Test99,');
@@ -179,7 +178,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertFalse($this->getLDAP()->exists($dn2));
     }
 
-    public function testSearchWithDnObjectAndFilterObject()
+    public function testSearchWithDnObjectAndFilterObject(): void
     {
         $dn     = Ldap\Dn::fromString(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $filter = Ldap\Filter::equals('objectClass', 'organizationalUnit');
@@ -188,7 +187,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, $items->count());
     }
 
-    public function testCountSubWithDnObjectAndFilterObject()
+    public function testCountSubWithDnObjectAndFilterObject(): void
     {
         $dn1    = Ldap\Dn::fromString($this->createDn('ou=Node,'));
         $filter = Ldap\Filter::any('objectClass');
@@ -201,7 +200,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, $count2);
     }
 
-    public function testCountChildrenWithDnObject()
+    public function testCountChildrenWithDnObject(): void
     {
         $dn1    = Ldap\Dn::fromString($this->createDn('ou=Node,'));
         $count1 = $this->getLDAP()->countChildren($dn1);
@@ -212,7 +211,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(6, $count2);
     }
 
-    public function testExistsDnWithDnObject()
+    public function testExistsDnWithDnObject(): void
     {
         $dn1 = Ldap\Dn::fromString($this->createDn('ou=Test2,'));
         $dn2 = Ldap\Dn::fromString($this->createDn('ou=Test99,'));
@@ -221,7 +220,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertFalse($this->getLDAP()->exists($dn2));
     }
 
-    public function testSearchEntriesShortcutWithDnObjectAndFilterObject()
+    public function testSearchEntriesShortcutWithDnObjectAndFilterObject(): void
     {
         $dn     = Ldap\Dn::fromString(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $filter = Ldap\Filter::equals('objectClass', 'organizationalUnit');
@@ -231,14 +230,14 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertCount(9, $entries);
     }
 
-    public function testGetSingleEntryWithDnObject()
+    public function testGetSingleEntryWithDnObject(): void
     {
         $dn    = Ldap\Dn::fromString($this->createDn('ou=Test1,'));
         $entry = $this->getLDAP()->getEntry($dn);
         $this->assertEquals($dn->toString(), $entry["dn"]);
     }
 
-    public function testMultipleResultIteration()
+    public function testMultipleResultIteration(): void
     {
         $items   = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -281,7 +280,7 @@ class SearchTest extends AbstractOnlineTestCase
      * https://getlaminas.org/wiki/display/LaminasPROP/Laminas_Ldap+-+Extended+support+-+Stefan+Gehrig?
      *      focusedCommentId=13107431#comment-13107431
      */
-    public function testCallingNextAfterIterationShouldNotThrowException()
+    public function testCallingNextAfterIterationShouldNotThrowException(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -295,7 +294,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertIsArray($items->current());
     }
 
-    public function testUnknownCollectionClassThrowsException()
+    public function testUnknownCollectionClassThrowsException(): void
     {
         try {
             $items = $this->getLDAP()->search(
@@ -315,7 +314,7 @@ class SearchTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testCollectionClassNotSubclassingLaminasLDAPCollectionThrowsException()
+    public function testCollectionClassNotSubclassingLaminasLDAPCollectionThrowsException(): void
     {
         try {
             $items = $this->getLDAP()->search(
@@ -336,10 +335,8 @@ class SearchTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-8233
-     */
-    public function testSearchWithOptionsArray()
+    #[Group("Laminas-8233")]
+    public function testSearchWithOptionsArray(): void
     {
         $items = $this
             ->getLDAP()
@@ -351,10 +348,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(9, $items->count());
     }
 
-    /**
-     * @group Laminas-8233
-     */
-    public function testSearchEntriesShortcutWithOptionsArray()
+    #[Group("Laminas-8233")]
+    public function testSearchEntriesShortcutWithOptionsArray(): void
     {
         $items = $this
             ->getLDAP()
@@ -366,10 +361,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertCount(9, $items);
     }
 
-    /**
-     * @group Laminas-8233
-     */
-    public function testReverseSortingWithSearchEntriesShortcut()
+    #[Group("Laminas-8233")]
+    public function testReverseSortingWithSearchEntriesShortcut(): void
     {
         $lSorted = ['e', 'd', 'c', 'b', 'a'];
         $items   = $this->getLDAP()->searchEntries(
@@ -385,10 +378,8 @@ class SearchTest extends AbstractOnlineTestCase
         }
     }
 
-    /**
-     * @group Laminas-8233
-     */
-    public function testReverseSortingWithSearchEntriesShortcutWithOptionsArray()
+    #[Group("Laminas-8233")]
+    public function testReverseSortingWithSearchEntriesShortcutWithOptionsArray(): void
     {
         $lSorted = ['e', 'd', 'c', 'b', 'a'];
         $items   = $this
@@ -405,7 +396,7 @@ class SearchTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testSearchNothingIteration()
+    public function testSearchNothingIteration(): void
     {
         $entries = $this->getLDAP()->search(
             '(objectClass=account)',
@@ -422,7 +413,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $i);
     }
 
-    public function testSearchNothingToArray()
+    public function testSearchNothingToArray(): void
     {
         $entries = $this->getLDAP()->search(
             '(objectClass=account)',
@@ -440,10 +431,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(0, $i);
     }
 
-    /**
-     * @group Laminas-8259
-     */
-    public function testUserIsAutomaticallyBoundOnOperationInDisconnectedState()
+    #[Group("Laminas-8259")]
+    public function testUserIsAutomaticallyBoundOnOperationInDisconnectedState(): void
     {
         $ldap = $this->getLDAP();
         $ldap->disconnect();
@@ -452,10 +441,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals($dn, $entry['dn']);
     }
 
-    /**
-     * @group Laminas-8259
-     */
-    public function testUserIsAutomaticallyBoundOnOperationInUnboundState()
+    #[Group("Laminas-8259")]
+    public function testUserIsAutomaticallyBoundOnOperationInUnboundState(): void
     {
         $ldap = $this->getLDAP();
         $ldap->disconnect();
@@ -465,7 +452,7 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals($dn, $entry['dn']);
     }
 
-    public function testInnerIteratorIsOfRequiredType()
+    public function testInnerIteratorIsOfRequiredType(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -475,10 +462,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertInstanceOf(DefaultIterator::class, $items->getInnerIterator());
     }
 
-    /**
-     * @group Laminas-8262
-     */
-    public function testCallingCurrentOnIteratorReturnsFirstElement()
+    #[Group("Laminas-8262")]
+    public function testCallingCurrentOnIteratorReturnsFirstElement(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -491,10 +476,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $current['dn']);
     }
 
-    /**
-     * @group Laminas-8262
-     */
-    public function testCallingCurrentOnCollectionReturnsFirstElement()
+    #[Group("Laminas-8262")]
+    public function testCallingCurrentOnCollectionReturnsFirstElement(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -508,10 +491,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'), $current['dn']);
     }
 
-    /**
-     * @group Laminas-8262
-     */
-    public function testCallingCurrentOnEmptyIteratorReturnsNull()
+    #[Group("Laminas-8262")]
+    public function testCallingCurrentOnEmptyIteratorReturnsNull(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=account)',
@@ -522,10 +503,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertNull($items->getInnerIterator()->current());
     }
 
-    /**
-     * @group Laminas-8262
-     */
-    public function testCallingCurrentOnEmptyCollectionReturnsNull()
+    #[Group("Laminas-8262")]
+    public function testCallingCurrentOnEmptyCollectionReturnsNull(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=account)',
@@ -537,10 +516,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertNull($items->current());
     }
 
-    /**
-     * @group Laminas-8262
-     */
-    public function testResultIterationAfterCallingCurrent()
+    #[Group("Laminas-8262")]
+    public function testResultIterationAfterCallingCurrent(): void
     {
         $items = $this->getLDAP()->search(
             '(objectClass=organizationalUnit)',
@@ -566,10 +543,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertEquals($i, $j);
     }
 
-    /**
-     * @group Laminas-8263
-     */
-    public function testAttributeNameTreatmentToLower()
+    #[Group("Laminas-8263")]
+    public function testAttributeNameTreatmentToLower(): void
     {
         $dn   = $this->createDn('ou=Node,');
         $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
@@ -577,10 +552,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertArrayHasKey('postalcode', $list->current());
     }
 
-    /**
-     * @group Laminas-8263
-     */
-    public function testAttributeNameTreatmentToUpper()
+    #[Group("Laminas-8263")]
+    public function testAttributeNameTreatmentToUpper(): void
     {
         $dn   = $this->createDn('ou=Node,');
         $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
@@ -588,10 +561,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertArrayHasKey('POSTALCODE', $list->current());
     }
 
-    /**
-     * @group Laminas-8263
-     */
-    public function testAttributeNameTreatmentNative()
+    #[Group("Laminas-8263")]
+    public function testAttributeNameTreatmentNative(): void
     {
         $dn   = $this->createDn('ou=Node,');
         $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
@@ -599,10 +570,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertArrayHasKey('postalCode', $list->current());
     }
 
-    /**
-     * @group Laminas-8263
-     */
-    public function testAttributeNameTreatmentCustomFunction()
+    #[Group("Laminas-8263")]
+    public function testAttributeNameTreatmentCustomFunction(): void
     {
         $dn   = $this->createDn('ou=Node,');
         $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
@@ -610,10 +579,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertArrayHasKey('EDOCLATSOP', $list->current());
     }
 
-    /**
-     * @group Laminas-8263
-     */
-    public function testAttributeNameTreatmentCustomStaticMethod()
+    #[Group("Laminas-8263")]
+    public function testAttributeNameTreatmentCustomStaticMethod(): void
     {
         $dn   = $this->createDn('ou=Node,');
         $list = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);
@@ -621,10 +588,8 @@ class SearchTest extends AbstractOnlineTestCase
         $this->assertArrayHasKey('edoclatsop', $list->current());
     }
 
-    /**
-     * @group Laminas-8263
-     */
-    public function testAttributeNameTreatmentCustomInstanceMethod()
+    #[Group("Laminas-8263")]
+    public function testAttributeNameTreatmentCustomInstanceMethod(): void
     {
         $dn    = $this->createDn('ou=Node,');
         $list  = $this->getLDAP()->search('objectClass=*', $dn, Ldap\Ldap::SEARCH_SCOPE_BASE);

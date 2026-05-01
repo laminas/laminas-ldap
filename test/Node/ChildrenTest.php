@@ -7,15 +7,14 @@ namespace LaminasTest\Ldap\Node;
 use Laminas\Ldap\Node;
 use Laminas\Ldap\Node\ChildrenIterator;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
 use function getenv;
 use function serialize;
 use function unserialize;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class ChildrenTest extends TestLdap\AbstractOnlineTestCase
 {
     protected function setUp(): void
@@ -30,7 +29,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         parent::tearDown();
     }
 
-    public function testGetChildrenOnAttachedNode()
+    public function testGetChildrenOnAttachedNode(): void
     {
         $node     = $this->getLDAP()->getBaseNode();
         $children = $node->getChildren();
@@ -39,7 +38,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertInstanceOf(Node::class, $children['ou=Node']);
     }
 
-    public function testGetChildrenOnDetachedNode()
+    public function testGetChildrenOnDetachedNode(): void
     {
         $node = $this->getLDAP()->getBaseNode();
         $node->detachLDAP();
@@ -56,7 +55,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertInstanceOf(Node::class, $children['ou=Node']);
     }
 
-    public function testHasChildrenOnAttachedNode()
+    public function testHasChildrenOnAttachedNode(): void
     {
         $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $this->assertTrue($node->hasChildren());
@@ -75,7 +74,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($node->hasChildren());
     }
 
-    public function testHasChildrenOnDetachedNodeWithoutPriorGetChildren()
+    public function testHasChildrenOnDetachedNodeWithoutPriorGetChildren(): void
     {
         $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $node->detachLDAP();
@@ -95,7 +94,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($node->hasChildren());
     }
 
-    public function testHasChildrenOnDetachedNodeWithPriorGetChildren()
+    public function testHasChildrenOnDetachedNodeWithPriorGetChildren(): void
     {
         $node = $this->getLDAP()->getNode(getenv('TESTS_LAMINAS_LDAP_WRITEABLE_SUBTREE'));
         $node->getChildren();
@@ -118,7 +117,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertFalse($node->hasChildren());
     }
 
-    public function testChildrenCollectionSerialization()
+    public function testChildrenCollectionSerialization(): void
     {
         $node = $this->getLDAP()->getNode($this->createDn('ou=Node,'));
 
@@ -148,7 +147,7 @@ class ChildrenTest extends TestLdap\AbstractOnlineTestCase
         $this->assertTrue($node2->hasChildren());
     }
 
-    public function testCascadingAttachAndDetach()
+    public function testCascadingAttachAndDetach(): void
     {
         $node         = $this->getLDAP()->getBaseNode();
         $baseChildren = $node->getChildren();

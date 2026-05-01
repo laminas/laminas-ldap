@@ -7,16 +7,14 @@ namespace LaminasTest\Ldap;
 use Laminas\Ldap;
 use Laminas\Ldap\Exception;
 use Laminas\Ldap\Node;
+use PHPUnit\Framework\Attributes\Group;
 
 use function strstr;
 
-/**
- * @group      Laminas_Ldap
- */
-
+#[Group("Laminas_Ldap")]
 class ChangePasswordTest extends AbstractOnlineTestCase
 {
-    public function testAddNewUserWithPasswordOpenLDAP()
+    public function testAddNewUserWithPasswordOpenLDAP(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -54,7 +52,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testChangePasswordWithUserAccountOpenLDAP()
+    public function testChangePasswordWithUserAccountOpenLDAP(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -113,7 +111,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testAddNewUserWithPasswordActiveDirectory()
+    public function testAddNewUserWithPasswordActiveDirectory(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -159,7 +157,7 @@ class ChangePasswordTest extends AbstractOnlineTestCase
         }
     }
 
-    public function testChangePasswordWithUserAccountActiveDirectory()
+    public function testChangePasswordWithUserAccountActiveDirectory(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==

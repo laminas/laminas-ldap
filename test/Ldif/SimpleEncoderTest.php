@@ -6,16 +6,16 @@ namespace LaminasTest\Ldap\Ldif;
 
 use Laminas\Ldap\Ldif;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use stdClass;
 
 use function base64_encode;
 
 use const PHP_EOL;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Ldif
- */
+#[Group("Laminas_Ldap_Ldif")]
+#[Group("Laminas_Ldap")]
 class SimpleEncoderTest extends TestLdap\AbstractTestCase
 {
     /** @return non-empty-list<array{string, string}> */
@@ -47,9 +47,7 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
         ];
     }
 
-    /**
-     * @dataProvider stringEncodingProvider
-     */
+    #[DataProvider('stringEncodingProvider')]
     public function testStringEncoding(string $string, string $expected): void
     {
         $this->assertEquals($expected, Ldif\Encoder::encode($string));
@@ -86,9 +84,9 @@ class SimpleEncoderTest extends TestLdap\AbstractTestCase
     }
 
     /**
-     * @dataProvider attributeEncodingProvider
      * @param array<string, mixed> $array
      */
+    #[DataProvider('attributeEncodingProvider')]
     public function testAttributeEncoding(array $array, string $expected): void
     {
         $actual = Ldif\Encoder::encode($array);

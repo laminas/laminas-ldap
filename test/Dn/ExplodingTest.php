@@ -6,12 +6,12 @@ namespace LaminasTest\Ldap\Dn;
 
 use Laminas\Ldap;
 use Laminas\Ldap\Exception\LdapException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Dn
- */
+#[Group("Laminas_Ldap_Dn")]
+#[Group("Laminas_Ldap")]
 class ExplodingTest extends TestCase
 {
     /** @return non-empty-list<array{string, bool}> */
@@ -50,9 +50,7 @@ class ExplodingTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider explodeDnOperationProvider
-     */
+    #[DataProvider('explodeDnOperationProvider')]
     public function testExplodeDnOperation(string $input, bool $expected): void
     {
         $ret = Ldap\Dn::checkDn($input);
@@ -249,9 +247,9 @@ class ExplodingTest extends TestCase
     }
 
     /**
-     * @dataProvider rfc2253DnProvider
      * @param list<array<string, string>> $expected
      */
+    #[DataProvider('rfc2253DnProvider')]
     public function testExplodeDnsProvidedByRFC2253(string $input, array $expected): void
     {
         $dnArray = Ldap\Dn::explodeDn($input);

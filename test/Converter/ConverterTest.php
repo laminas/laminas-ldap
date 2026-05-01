@@ -8,6 +8,8 @@ use DateTime;
 use DateTimeZone;
 use InvalidArgumentException;
 use Laminas\Ldap\Converter\Converter;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use UnexpectedValueException;
@@ -18,9 +20,7 @@ use function fopen;
 use function serialize;
 use function stream_get_contents;
 
-/**
- * @group      Laminas_Ldap
- */
+#[Group("Laminas_Ldap")]
 class ConverterTest extends TestCase
 {
     public function testAsc2hex32(): void
@@ -49,9 +49,9 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @dataProvider toLdapDateTimeProvider
      * @param array{date: DateTime|int|string|bool, utc: bool} $convert
      */
+    #[DataProvider('toLdapDateTimeProvider')]
     public function testToLdapDateTime(array $convert, string $expect): void
     {
         $result = Converter::toLdapDatetime($convert['date'], $convert['utc']);
@@ -59,7 +59,7 @@ class ConverterTest extends TestCase
     }
 
     /** @return non-empty-list<array{array{date: DateTime|int|string|bool, utc: bool}, string}> */
-    public function toLdapDateTimeProvider(): array
+    public static function toLdapDateTimeProvider(): array
     {
         $tz = new DateTimeZone('UTC');
         return [
@@ -123,17 +123,17 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @dataProvider toLdapBooleanProvider
      * @param  'TRUE'|'FALSE' $expect
      * @param mixed           $convert
      */
+    #[DataProvider('toLdapBooleanProvider')]
     public function testToLdapBoolean(string $expect, $convert): void
     {
         $this->assertEquals($expect, Converter::toLdapBoolean($convert));
     }
 
     /** @return non-empty-list<array{'TRUE'|'FALSE', mixed}> */
-    public function toLdapBooleanProvider(): array
+    public static function toLdapBooleanProvider(): array
     {
         return [
             ['TRUE', true],
@@ -147,16 +147,16 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @dataProvider toLdapSerializeProvider
      * @param mixed $convert
      */
+    #[DataProvider('toLdapSerializeProvider')]
     public function testToLdapSerialize(string $expect, $convert): void
     {
         $this->assertEquals($expect, Converter::toLdapSerialize($convert));
     }
 
     /** @return non-empty-list<array{string, mixed}> */
-    public function toLdapSerializeProvider(): array
+    public static function toLdapSerializeProvider(): array
     {
         return [
             ['N;', null],
@@ -174,16 +174,16 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @dataProvider toLdapProvider
      * @param array{value: mixed, type: int} $expect
      */
+    #[DataProvider('toLdapProvider')]
     public function testToLdap($expect, array $convert): void
     {
         $this->assertEquals($expect, Converter::toLdap($convert['value'], $convert['type']));
     }
 
     /** @return non-empty-list<array{mixed, array{value: mixed, type: int}}> */
-    public function toLdapProvider(): array
+    public static function toLdapProvider(): array
     {
         return [
             [
@@ -253,9 +253,9 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @dataProvider fromLdapUnserializeProvider
      * @param mixed $expect
      */
+    #[DataProvider('fromLdapUnserializeProvider')]
     public function testFromLdapUnserialize($expect, string $convert): void
     {
         $this->assertEquals($expect, Converter::fromLdapUnserialize($convert));
@@ -268,7 +268,7 @@ class ConverterTest extends TestCase
     }
 
     /** @return non-empty-list<array{mixed, non-empty-string}> */
-    public function fromLdapUnserializeProvider(): array
+    public static function fromLdapUnserializeProvider(): array
     {
         return [
             [null, 'N;'],
@@ -285,7 +285,7 @@ class ConverterTest extends TestCase
         Converter::fromLdapBoolean('test');
     }
 
-    /** @dataProvider fromLdapDateTimeProvider */
+    #[DataProvider('fromLdapDateTimeProvider')]
     public function testFromLdapDateTime(DateTime $expected, string $convert, bool $utc): void
     {
         if (true === $utc) {
@@ -295,7 +295,7 @@ class ConverterTest extends TestCase
     }
 
     /** @return non-empty-list<array{DateTime, string, bool}> */
-    public function fromLdapDateTimeProvider(): array
+    public static function fromLdapDateTimeProvider(): array
     {
         return [
             [new DateTime('2010-12-24 08:00:23+0300'), '20101224080023+0300', false],
@@ -311,10 +311,10 @@ class ConverterTest extends TestCase
     }
 
     /**
-     * @dataProvider         fromLdapDateTimeException
      * @param mixed $value
      */
-    public function testFromLdapDateTimeThrowsException($value)
+    #[DataProvider('fromLdapDateTimeException')]
+    public function testFromLdapDateTimeThrowsException(string $value): void
     {
         $this->expectException(InvalidArgumentException::class);
         Converter::fromLdapDatetime($value);
@@ -336,18 +336,14 @@ class ConverterTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider fromLdapProvider
-     * @param mixed $expect
-     * @param mixed $value
-     */
-    public function testFromLdap($expect, $value, int $type, bool $dateTimeAsUtc): void
+    #[DataProvider('fromLdapProvider')]
+    public function testFromLdap(mixed $expect, mixed $value, int $type, bool $dateTimeAsUtc): void
     {
         $this->assertSame($expect, Converter::fromLdap($value, $type, $dateTimeAsUtc));
     }
 
     /** @return non-empty-list<array{mixed, mixed, int, true}> */
-    public function fromLdapProvider(): array
+    public static function fromLdapProvider(): array
     {
         return [
             ['1', '1', 0, true],

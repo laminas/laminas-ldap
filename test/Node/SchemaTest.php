@@ -9,15 +9,14 @@ use Laminas\Ldap\Node;
 use Laminas\Ldap\Node\Schema;
 use Laminas\Ldap\Node\Schema\ObjectClass\OpenLdap;
 use LaminasTest\Ldap as TestLdap;
+use PHPUnit\Framework\Attributes\Group;
 
 use function array_key_exists;
 use function serialize;
 use function unserialize;
 
-/**
- * @group      Laminas_Ldap
- * @group      Laminas_Ldap_Node
- */
+#[Group("Laminas_Ldap_Node")]
+#[Group("Laminas_Ldap")]
 class SchemaTest extends TestLdap\AbstractOnlineTestCase
 {
     private Schema $schema;
@@ -28,7 +27,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->schema = $this->getLDAP()->getSchema();
     }
 
-    public function testSchemaNode()
+    public function testSchemaNode(): void
     {
         $schema = $this->getLDAP()->getSchema();
 
@@ -41,7 +40,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertNotSame($this->schema, $schemaUn);
     }
 
-    public function testGetters()
+    public function testGetters(): void
     {
         $this->assertIsArray($this->schema->getAttributeTypes());
         $this->assertIsArray($this->schema->getObjectClasses());
@@ -59,31 +58,31 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         }
     }
 
-    public function testSetterWillThrowException()
+    public function testSetterWillThrowException(): void
     {
         $this->expectException(BadMethodCallException::class);
         $this->schema->objectClass = 'illegal';
     }
 
-    public function testOffsetSetWillThrowException()
+    public function testOffsetSetWillThrowException(): void
     {
         $this->expectException(BadMethodCallException::class);
         $this->schema['objectClass'] = 'illegal';
     }
 
-    public function testUnsetterWillThrowException()
+    public function testUnsetterWillThrowException(): void
     {
         $this->expectException(BadMethodCallException::class);
         unset($this->schema->objectClass);
     }
 
-    public function testOffsetUnsetWillThrowException()
+    public function testOffsetUnsetWillThrowException(): void
     {
         $this->expectException(BadMethodCallException::class);
         unset($this->schema['objectClass']);
     }
 
-    public function testOpenLDAPSchema()
+    public function testOpenLDAPSchema(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -201,7 +200,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertSame($attributeTypes['name'], $ou->_parents[0]);
     }
 
-    public function testActiveDirectorySchema()
+    public function testActiveDirectorySchema(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -214,7 +213,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $attributeTypes = $this->schema->getAttributeTypes();
     }
 
-    public function testeDirectorySchema()
+    public function testeDirectorySchema(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -225,7 +224,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->markTestIncomplete("Novell eDirectory schema parsing is incomplete");
     }
 
-    public function testOpenLDAPSchemaAttributeTypeInheritance()
+    public function testOpenLDAPSchemaAttributeTypeInheritance(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -261,7 +260,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertEquals(32768, $cn->getMaxLength());
     }
 
-    public function testOpenLDAPSchemaObjectClassInheritance()
+    public function testOpenLDAPSchemaObjectClassInheritance(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -315,7 +314,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         );
     }
 
-    public function testOpenLDAPSchemaAttributeTypeAliases()
+    public function testOpenLDAPSchemaAttributeTypeAliases(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
@@ -332,7 +331,7 @@ class SchemaTest extends TestLdap\AbstractOnlineTestCase
         $this->assertSame($ob1, $ob2);
     }
 
-    public function testOpenLDAPSchemaObjectClassAliases()
+    public function testOpenLDAPSchemaObjectClassAliases(): void
     {
         if (
             $this->getLDAP()->getRootDse()->getServerType() !==
