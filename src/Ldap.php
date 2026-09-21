@@ -1073,7 +1073,7 @@ class Ldap
     protected function reconnectSleep()
     {
         $duration = min((pow(2, min($this->reconnectCount - 1, 0)) - 1) / 4, 10);
-        usleep($duration * 1000000);
+        usleep($duration * 1_000_000);
     }
 
     /**
