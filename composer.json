@@ -31,6 +31,7 @@
         "ext-ldap": "*"
     },
     "require-dev": {
+        "boundwize/structarmed": "^0.17.12",
         "laminas/laminas-coding-standard": "~3.1.0",
         "laminas/laminas-config": "^3.8.0",
         "laminas/laminas-eventmanager": "^3.6.0",

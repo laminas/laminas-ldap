@@ -422,12 +422,6 @@
       <code><![CDATA[array]]></code>
       <code><![CDATA[array]]></code>
     </InvalidNullableReturnType>
-    <InvalidOperand>
-      <code><![CDATA[$duration * 1000000]]></code>
-    </InvalidOperand>
-    <InvalidScalarArgument>
-      <code><![CDATA[$duration * 1000000]]></code>
-    </InvalidScalarArgument>
     <MissingReturnType>
       <code><![CDATA[reconnectSleep]]></code>
     </MissingReturnType>
